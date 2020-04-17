@@ -6,11 +6,7 @@ import com.wd.tech.R;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.base.mvp.BasePresenter;
 
-/**
- * 时间 :2020/4/17  13:57
- * 作者 :苗恒
- * 功能 :
- */
+
 public class CommunityFragment extends BaseFragment {
     @Override
     protected int bindLayoutid() {
