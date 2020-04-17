@@ -2,14 +2,7 @@ package com.wd.tech.base.mvp;
 
 import java.lang.ref.WeakReference;
 
-/**
- * ProjectName: wdmovie
- * PackageName: com.bw.movie.base.mvp
- * ClassName:   BasePresenter
- * Description: Java类的作用
- * Author: wyq
- * CreateDate: 2020/03/19_下午 07:03
- */
+
 public abstract class BasePresenter<M extends IBaseModel,V extends IBaseView> {
 
     protected M model;

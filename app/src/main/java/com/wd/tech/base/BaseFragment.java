@@ -15,14 +15,7 @@ import com.wd.tech.base.mvp.IBaseView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * ProjectName: wdmovie
- * PackageName: com.bw.movie.base.base
- * ClassName:   BaseFragment
- * Description: Java类的作用
- * Author: wyq
- * CreateDate: 2020/03/19_下午 07:07
- */
+
 public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IBaseView {
 
     protected P presenter;
