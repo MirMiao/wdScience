@@ -1,11 +1,8 @@
 package com.wd.tech.view.fragment;
-
 import android.view.View;
-
 import com.wd.tech.R;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.base.mvp.BasePresenter;
-
 /**
  * 时间 :2020/4/17  13:56
  * 作者 :苗恒
