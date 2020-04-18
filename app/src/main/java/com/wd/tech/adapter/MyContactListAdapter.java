@@ -1,16 +1,29 @@
 package com.wd.tech.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.viewpager.widget.ViewPager;
+
+import com.wd.tech.App;
 import com.wd.tech.R;
 import com.wd.tech.bean.UserFriendListBean;
 import com.wd.tech.util.RetrofitUtil;
+import com.wd.tech.view.messageactivity.AddActivity;
+import com.wd.tech.view.messageactivity.FriendMessageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +35,11 @@ import java.util.List;
  * @date :2020/4/18 12:10
  * @classname :
  */
-public class MyContactListAdapter  extends BaseExpandableListAdapter {
+public class MyContactListAdapter  extends BaseExpandableListAdapter implements View.OnClickListener {
     private List<UserFriendListBean.ResultBean> userfriendlistresult=new ArrayList<>();
     private Context context;
+    private PopupWindow popupWindow;
+
     public MyContactListAdapter(List<UserFriendListBean.ResultBean> userfriendlistresult, Context context) {
         this.userfriendlistresult.addAll(userfriendlistresult);
         this.context = context;
@@ -97,6 +112,7 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter {
             childholder.child_img=view.findViewById(R.id.child_img);
             childholder.child_name=view.findViewById(R.id.child_name);
             childholder.child_remarkName=view.findViewById(R.id.child_remarkName);
+            childholder.friend_remove=view.findViewById(R.id.friend_remove);
             view.setTag(childholder);
         }else {
             childholder= (ChildViewHolder) view.getTag();
@@ -105,7 +121,40 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter {
         childholder.child_name.setText(friendInfoList.get(i1).getNickName());
         childholder.child_remarkName.setText(friendInfoList.get(i1).getRemarkName());
         RetrofitUtil.getInstance().getRoundphoto(friendInfoList.get(i1).getHeadPic(),childholder.child_img);
+        childholder.friend_remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, FriendMessageActivity.class);
+                context.startActivity(intent);
+            }
+        });
+        childholder.friend_remove.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                childholder.friend_remove.setBackgroundColor(Color.GRAY);
+                showPopupWindow();
+                return true;
+            }
+
+
+        });
         return view;
+    }
+    private void showPopupWindow() {
+        //设置contentView
+        View contentView = LayoutInflater.from(context).inflate(R.layout.popupwindow_removefriendcrowd_item, null);
+        popupWindow = new PopupWindow(contentView,
+                ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setContentView(contentView);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0));
+        //设置各个控件的点击响应
+        TextView btn_deletefrrend = (TextView)contentView.findViewById(R.id.btn_deletefrrend);
+        TextView btn_heifrrend = (TextView)contentView.findViewById(R.id.btn_heifrrend);
+        btn_deletefrrend.setOnClickListener(this);
+        btn_heifrrend.setOnClickListener(this);
+        //显示PopupWindow
+        View rootview = LayoutInflater.from(context).inflate(R.layout.fragment_message, null);
+        popupWindow.showAtLocation(rootview, Gravity.BOTTOM, 0, 500);
     }
 
     @Override
@@ -113,7 +162,24 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter {
         return true;
     }
 
- //父容器
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.add_friend_crowd:{
+                Toast.makeText(App.context,"clicked financial+删除好友",Toast.LENGTH_SHORT).show();
+                popupWindow.dismiss();
+            }
+            break;
+            case R.id.add_crowd:{
+                Toast.makeText(App.context,"clicked financial+拉黑好友",Toast.LENGTH_SHORT).show();
+                popupWindow.dismiss();
+            }
+            break;
+        }
+    }
+
+    //父容器
 class  GroupViewHolder {
         TextView group_name,group_count;
  }
@@ -122,5 +188,6 @@ class  GroupViewHolder {
     class  ChildViewHolder {
         ImageView child_img;
         TextView child_name,child_remarkName;
+        LinearLayout  friend_remove;
     }
 }

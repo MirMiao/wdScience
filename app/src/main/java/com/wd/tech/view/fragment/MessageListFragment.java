@@ -1,21 +1,14 @@
 package com.wd.tech.view.fragment;
-
 import android.view.View;
-import android.widget.Toast;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.wd.tech.App;
 import com.wd.tech.R;
 import com.wd.tech.adapter.MyMessageListAdapter;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
-
 import java.util.List;
-
 import butterknife.BindView;
 
 /**

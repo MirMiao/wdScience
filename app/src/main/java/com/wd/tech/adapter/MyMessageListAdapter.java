@@ -1,6 +1,7 @@
 package com.wd.tech.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import com.wd.tech.R;
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.util.TimeformatUtil;
+import com.wd.tech.view.messageactivity.FriendInformActivity;
+import com.wd.tech.view.messageactivity.FriendMessageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +55,13 @@ public class MyMessageListAdapter extends  RecyclerView.Adapter<MyMessageListAda
          myMessageListViewHolder.message_contentcount.setText(userfriendinfromrecordresult.get(position).getStatus());
      }
         RetrofitUtil.getInstance().getRectphoto(userfriendinfromrecordresult.get(position).getFromHeadPic(),myMessageListViewHolder.message_userimg);
-
+        myMessageListViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, FriendInformActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

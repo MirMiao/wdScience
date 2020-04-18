@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     android:background="#FFFFFF"
+    android:id="@+id/friend_remove"
     >
     <ImageView
         android:layout_width="60dp"
