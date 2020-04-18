@@ -54,8 +54,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
 
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         //销毁布局
         if (presenter != null) {
             presenter.detachView();
@@ -65,6 +65,5 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         if (mBind != null) {
             mBind.unbind();
         }
-
     }
 }

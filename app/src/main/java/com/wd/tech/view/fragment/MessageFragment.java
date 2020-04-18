@@ -1,10 +1,18 @@
 package com.wd.tech.view.fragment;
 
 import android.view.View;
+import android.widget.ImageView;
 
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 import com.wd.tech.R;
+import com.wd.tech.adapter.MyMessageAdapter;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.base.mvp.BasePresenter;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 
 /**
@@ -13,6 +21,15 @@ import com.wd.tech.base.mvp.BasePresenter;
  * 功能 :
  */
 public class MessageFragment extends BaseFragment {
+
+    @BindView(R.id.tabmessage)
+    TabLayout tabmessage;
+    @BindView(R.id.btn_add)
+    ImageView btnAdd;
+    @BindView(R.id.vpmessage)
+    ViewPager vpmessage;
+    private MyMessageAdapter myMessageAdapter;
+
     @Override
     protected int bindLayoutid() {
         return R.layout.fragment_message;
@@ -20,7 +37,10 @@ public class MessageFragment extends BaseFragment {
 
     @Override
     protected void initView(View inflate) {
-
+        myMessageAdapter = new MyMessageAdapter(getChildFragmentManager());
+        tabmessage.setupWithViewPager(vpmessage);
+        vpmessage.setAdapter(myMessageAdapter);
+        vpmessage.setOffscreenPageLimit(2);
     }
 
     @Override
@@ -31,5 +51,9 @@ public class MessageFragment extends BaseFragment {
     @Override
     protected void initData() {
 
+    }
+
+    @OnClick(R.id.btn_add)
+    public void onViewClicked() {
     }
 }
