@@ -124,7 +124,10 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter implements 
         childholder.friend_remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //跳转传值
                 Intent intent=new Intent(context, FriendMessageActivity.class);
+                int friendUid = friendInfoList.get(i1).getFriendUid();
+                intent.putExtra("friendUid",friendUid);
                 context.startActivity(intent);
             }
         });

@@ -12,14 +12,25 @@ public interface IContract {
     interface IModel extends IBaseModel {
      void  getUserFriendInfromRecorddata(int page,int count,ModelCallBack modelCallBack);////查询用户的好友通知记录
      void  getUserFriendListdata(ModelCallBack modelCallBack);//初始化我的好友列表全量信息
+     void  getFriendMessagedata(int friend,ModelCallBack modelCallBack);//查询好友信息
+     void  getExisisMyFrienddata(int friendUid,ModelCallBack modelCallBack);//检测是否为我的好友
+     void  getCheckFriendApplydata(int noticeId,int flag,ModelCallBack modelCallBack);//审核好友申请
+     void  getSendMessageBeandata(int receiveUid,String content,ModelCallBack modelCallBack);//发送消息
+     void  getFriendChatDialogueRecordBeandata(int friendUid,int page,int count,ModelCallBack modelCallBack);//查询好友对话记录
+
         interface ModelCallBack{
             void success(Object o);
             void failur(Throwable throwable);
         }
     }
     interface IPresenter{
-        void  getUserFriendInfromRecorddata(int page, int count);////查询用户的好友通知记录
+        void  getUserFriendInfromRecorddata(int page, int count);//查询用户的好友通知记录
         void  getUserFriendListdata();//初始化我的好友列表全量信息
+        void  getFriendMessagedata(int friend);//查询好友信息
+        void  getExisisMyFrienddata(int friendUid);//检测是否为我的好友
+        void  getCheckFriendApplydata(int noticeId,int flag);//审核好友申请
+        void  getSendMessageBeandata(int receiveUid,String content);//发送消息
+        void  getFriendChatDialogueRecordBeandata(int friendUid,int page,int count);//查询好友对话记录
 
     }
     interface IView extends IBaseView {
