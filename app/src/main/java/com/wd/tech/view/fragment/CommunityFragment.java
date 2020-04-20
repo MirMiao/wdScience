@@ -4,10 +4,11 @@ import android.view.View;
 
 import com.wd.tech.R;
 import com.wd.tech.base.BaseFragment;
-import com.wd.tech.base.mvp.BasePresenter;
+import com.wd.tech.base.mvp.IContract;
+import com.wd.tech.base.mvp.Presenter;
 
 
-public class CommunityFragment extends BaseFragment {
+public class CommunityFragment extends BaseFragment<Presenter> implements IContract.IView {
     @Override
     protected int bindLayoutid() {
         return R.layout.fragment_community;
@@ -19,12 +20,22 @@ public class CommunityFragment extends BaseFragment {
     }
 
     @Override
-    protected BasePresenter initPresenter() {
-        return null;
+    protected Presenter initPresenter() {
+        return new Presenter();
     }
 
     @Override
     protected void initData() {
+        presenter.ShequList(1,10);
+    }
+
+    @Override
+    public void seccess(Object object) {
+
+    }
+
+    @Override
+    public void failur(Throwable throwable) {
 
     }
 }
