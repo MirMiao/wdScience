@@ -68,6 +68,7 @@ public class MyFriendChatDialogueRecordadapter  extends RecyclerView.Adapter<Rec
          RetrofitUtil.getInstance().getRoundphoto(FriendChatDialogueRecordresult.get(position).getHeadPic(),myChatDialogueminViewHolder.mine_head);
          try {
              String content=RsaCoder.decryptByPublicKey(FriendChatDialogueRecordresult.get(position).getContent());
+             //解密好友发送的信息
              myChatDialogueminViewHolder.mine_content.setText(content);
              notifyDataSetChanged();
          } catch (Exception e) {

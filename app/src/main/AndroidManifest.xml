@@ -9,12 +9,13 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/weidulogo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.messageactivity.SelectGroupingActivity"></activity>
+        <activity android:name=".view.messageactivity.FriendchatRecordActivity"></activity>
+        <activity android:name=".view.messageactivity.SelectGroupingActivity" />
         <activity android:name=".view.messageactivity.CrowdHomePageActivity" />
         <activity android:name=".view.messageactivity.CrowdChatActivity" />
         <activity android:name=".view.messageactivity.SreachActivity" />

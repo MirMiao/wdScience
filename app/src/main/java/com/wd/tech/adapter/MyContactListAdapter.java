@@ -126,8 +126,10 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter implements 
             public void onClick(View view) {
                 //跳转传值
                 Intent intent=new Intent(context, FriendMessageActivity.class);
+                String remarkName = friendInfoList.get(i1).getRemarkName();
                 int friendUid = friendInfoList.get(i1).getFriendUid();
                 intent.putExtra("friendUid",friendUid);
+                intent.putExtra("remark",remarkName);
                 context.startActivity(intent);
             }
         });

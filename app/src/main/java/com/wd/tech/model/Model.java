@@ -1,10 +1,16 @@
 package com.wd.tech.model;
 
 import com.wd.tech.api.ApiService;
+import com.wd.tech.bean.AddFriendBean;
+import com.wd.tech.bean.AlterFriendRemarkBean;
 import com.wd.tech.bean.CheckFriendApplyBean;
+import com.wd.tech.bean.DeleteFriendBean;
+import com.wd.tech.bean.DeleteFriendChatRrecordBean;
 import com.wd.tech.bean.ExisisMyFriendBean;
 import com.wd.tech.bean.FriendChatDialogueRecordBean;
+import com.wd.tech.bean.FriendChatRrecordBean;
 import com.wd.tech.bean.FriendMessageBean;
+import com.wd.tech.bean.PhoneUserMessangeBean;
 import com.wd.tech.bean.SendMessageBean;
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.UserFriendListBean;
@@ -142,6 +148,114 @@ public class Model implements IContract.IModel {
                     @Override
                     public void accept(FriendChatDialogueRecordBean friendChatDialogueRecordBean) throws Exception {
                       modelCallBack.success(friendChatDialogueRecordBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+   //修改好友备注
+    @Override
+    public void getAlterFriendRemarkBeandata(int friendUid, String remarkName, ModelCallBack modelCallBack) {
+        Observable<AlterFriendRemarkBean>  alterFriendRemarkBeandata = apiService.getAlterFriendRemarkBeandata(friendUid, remarkName);
+         alterFriendRemarkBeandata.subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(new Consumer<AlterFriendRemarkBean>() {
+                     @Override
+                     public void accept(AlterFriendRemarkBean alterFriendRemarkBean) throws Exception {
+                        modelCallBack.success(alterFriendRemarkBean);
+                     }
+                 }, new Consumer<Throwable>() {
+                     @Override
+                     public void accept(Throwable throwable) throws Exception {
+                          modelCallBack.failur(throwable);
+                     }
+                 });
+    }
+    //查询好友聊天记录
+    @Override
+    public void getFriendChatRrecordBeandata(int friendUid, int page, int count, ModelCallBack modelCallBack) {
+        Observable<FriendChatRrecordBean>    friendChatRrecordBeandata = apiService.getFriendChatRrecordBeandata(friendUid, page, count);
+         friendChatRrecordBeandata.subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(new Consumer<FriendChatRrecordBean>() {
+                     @Override
+                     public void accept(FriendChatRrecordBean friendChatRrecordBean) throws Exception {
+                      modelCallBack.success(friendChatRrecordBean);
+                     }
+                 }, new Consumer<Throwable>() {
+                     @Override
+                     public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                     }
+                 });
+    }
+    //删除好友聊天记录
+    @Override
+    public void getDeleteFriendChatRrecordBeandata(int friendUid, ModelCallBack modelCallBack) {
+        Observable<DeleteFriendChatRrecordBean>  deleteFriendChatRrecordBeandata = apiService.getDeleteFriendChatRrecordBeandata(friendUid);
+        deleteFriendChatRrecordBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<DeleteFriendChatRrecordBean>() {
+                    @Override
+                    public void accept(DeleteFriendChatRrecordBean deleteFriendChatRrecordBean) throws Exception {
+                        modelCallBack.success(deleteFriendChatRrecordBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                       modelCallBack.failur(throwable);
+                    }
+                });
+    }
+    //删除好友
+    @Override
+    public void getDeleteFriendBeandata(int friendUid, ModelCallBack modelCallBack) {
+        Observable<DeleteFriendBean>  deleteFriendBeandata = apiService.getDeleteFriendBeandata(friendUid);
+        deleteFriendBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<DeleteFriendBean>() {
+                    @Override
+                    public void accept(DeleteFriendBean deleteFriendBean) throws Exception {
+                        modelCallBack.success(deleteFriendBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+ //根据手机号查询用户信息
+    @Override
+    public void getPhoneUserMessangeBeanata(String phone, ModelCallBack modelCallBack) {
+        Observable<PhoneUserMessangeBean>     phoneUserMessangeBeandata = apiService.getPhoneUserMessangeBeandata(phone);
+        phoneUserMessangeBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<PhoneUserMessangeBean>() {
+                    @Override
+                    public void accept(PhoneUserMessangeBean phoneUserMessangeBean) throws Exception {
+                      modelCallBack.success(phoneUserMessangeBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+     //添加好友
+    @Override
+    public void getAddFriendBeanata(int friendUid, String remark, ModelCallBack modelCallBack) {
+        Observable<AddFriendBean>     addFriendBeandata = apiService.getAddFriendBeandata(friendUid, remark);
+        addFriendBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<AddFriendBean>() {
+                    @Override
+                    public void accept(AddFriendBean addFriendBean) throws Exception {
+                     modelCallBack.success(addFriendBean);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

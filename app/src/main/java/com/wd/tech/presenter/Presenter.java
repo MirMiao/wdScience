@@ -120,4 +120,94 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
         }
     });
     }
+    //修改好友备注
+    @Override
+    public void getAlterFriendRemarkBeandata(int friendUid, String remarkName) {
+        model.getAlterFriendRemarkBeandata(friendUid, remarkName, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+              getView().failur(throwable);
+            }
+        });
+    }
+    //查询好友聊天记录
+    @Override
+    public void getFriendChatRrecordBeandata(int friendUid, int page, int count) {
+       model.getFriendChatRrecordBeandata(friendUid, page, count, new IContract.IModel.ModelCallBack() {
+           @Override
+           public void success(Object o) {
+               getView().success(o);
+           }
+
+           @Override
+           public void failur(Throwable throwable) {
+               getView().failur(throwable);
+           }
+       });
+    }
+    //删除好友聊天记录
+    @Override
+    public void getDeleteFriendChatRrecordBeandata(int friendUid) {
+             model.getDeleteFriendChatRrecordBeandata(friendUid, new IContract.IModel.ModelCallBack() {
+                 @Override
+                 public void success(Object o) {
+                     getView().success(o);
+                 }
+
+                 @Override
+                 public void failur(Throwable throwable) {
+                   getView().failur(throwable);
+                 }
+             });
+    }
+    //删除好友
+    @Override
+    public void getDeleteFriendBeandata(int friendUid) {
+     model.getDeleteFriendBeandata(friendUid, new IContract.IModel.ModelCallBack() {
+         @Override
+         public void success(Object o) {
+             getView().success(o);
+         }
+
+         @Override
+         public void failur(Throwable throwable) {
+             getView().failur(throwable);
+         }
+     });
+    }
+//根据手机号查询用户信息
+    @Override
+    public void getPhoneUserMessangeBeanata(String phone) {
+        model.getPhoneUserMessangeBeanata(phone, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                   getView().failur(throwable);
+            }
+        });
+    }
+  //添加好友
+    @Override
+    public void getAddFriendBeanata(int friendUid, String remark) {
+        model.getAddFriendBeanata(friendUid, remark, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+             getView().failur(throwable);
+            }
+        });
+    }
 }

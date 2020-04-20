@@ -11,6 +11,9 @@ import com.wd.tech.adapter.MyAddHomeAdapter;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.base.mvp.BasePresenter;
 import com.wd.tech.myview.Mysearchview;
+import com.wd.tech.util.UserEntroty;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +46,15 @@ public class AddActivity extends BaseActivity {
         vpadd.setAdapter(myAddHomeAdapter);
         tabadd.setupWithViewPager(vpadd);
         vpadd.setOffscreenPageLimit(2);
+        mysearchview.setSetContext(new Mysearchview.setContext() {
+            @Override
+            public void onContent(String text) {
+                boolean  isphone = UserEntroty.isphone(text);
+                if (isphone==true){
+                    EventBus.getDefault().postSticky(text);
+                }
+            }
+        });
     }
 
     @Override

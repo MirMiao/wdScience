@@ -17,6 +17,12 @@ public interface IContract {
      void  getCheckFriendApplydata(int noticeId,int flag,ModelCallBack modelCallBack);//审核好友申请
      void  getSendMessageBeandata(int receiveUid,String content,ModelCallBack modelCallBack);//发送消息
      void  getFriendChatDialogueRecordBeandata(int friendUid,int page,int count,ModelCallBack modelCallBack);//查询好友对话记录
+     void  getAlterFriendRemarkBeandata(int friendUid,String remarkName,ModelCallBack modelCallBack);//修改好友备注
+     void  getFriendChatRrecordBeandata(int friendUid, int page,int count,ModelCallBack modelCallBack);//查询好友聊天记录
+     void  getDeleteFriendChatRrecordBeandata(int friendUid,ModelCallBack modelCallBack);//删除好友聊天记录
+     void  getDeleteFriendBeandata(int friendUid,ModelCallBack modelCallBack);//删除好友
+     void  getPhoneUserMessangeBeanata(String phone,ModelCallBack modelCallBack);//根据手机号查询用户信息
+     void  getAddFriendBeanata(int friendUid,String remark,ModelCallBack modelCallBack);//添加好友
 
         interface ModelCallBack{
             void success(Object o);
@@ -31,7 +37,12 @@ public interface IContract {
         void  getCheckFriendApplydata(int noticeId,int flag);//审核好友申请
         void  getSendMessageBeandata(int receiveUid,String content);//发送消息
         void  getFriendChatDialogueRecordBeandata(int friendUid,int page,int count);//查询好友对话记录
-
+        void  getAlterFriendRemarkBeandata(int friendUid,String remarkName);//修改好友备注
+        void  getFriendChatRrecordBeandata(int friendUid, int page,int count);//查询好友聊天记录
+        void  getDeleteFriendChatRrecordBeandata(int friendUid);//删除好友聊天记录
+        void  getDeleteFriendBeandata(int friendUid);//删除好友
+        void  getPhoneUserMessangeBeanata(String phone);//根据手机号查询用户信息
+        void  getAddFriendBeanata(int friendUid,String remark);//添加好友
     }
     interface IView extends IBaseView {
         void success(Object o);

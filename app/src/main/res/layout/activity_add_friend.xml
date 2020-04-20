@@ -96,5 +96,6 @@
         android:textSize="14sp"
         android:textColor="#333"
         android:background="#fff"
+        android:id="@+id/apply_content"
         ></EditText>
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.wd.tech.view.messageactivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
@@ -29,5 +30,9 @@ public class SelectGroupingActivity extends BaseActivity {
     @Override
     protected void initView() {
 
+    }
+
+    public void back(View view) {
+        finish();
     }
 }

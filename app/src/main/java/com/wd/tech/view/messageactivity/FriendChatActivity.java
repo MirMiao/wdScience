@@ -48,6 +48,10 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
     private String nickName;
     private MyFriendChatDialogueRecordadapter myFriendChatDialogueRecordadapter;
     private List<FriendChatDialogueRecordBean.ResultBean> FriendChatDialogueRecordresult;
+    private String userName;
+    private String headPic;
+    private String remark1;
+    private String userName1;
 
     @Override
     protected Presenter initPresenter() {
@@ -63,7 +67,10 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
     protected void initData() {
         userId = getIntent().getIntExtra("userId", 0);
         nickName = getIntent().getStringExtra("nickName");
-        friendName.setText(nickName);
+        userName1 = getIntent().getStringExtra("userName");
+        remark1 = getIntent().getStringExtra("remark1");
+        headPic = getIntent().getStringExtra("headPic");
+        friendName.setText(userName1);
         presenter.getFriendChatDialogueRecordBeandata(userId, 1, 10);
         refresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
@@ -94,12 +101,17 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
         switch (view.getId()) {
             case R.id.btn_friendchatsetting:
                 Intent intentcs = new Intent(FriendChatActivity.this, ChatSettingActivity.class);
+                    intentcs.putExtra("userId1",userId);
+                    intentcs.putExtra("nickName1",nickName);
+                    intentcs.putExtra("remark2",remark1);
+                    intentcs.putExtra("headPic",headPic);
                 startActivity(intentcs);
                 break;
             case R.id.btn_send:
                 String infrommain = friendContent.getText().toString().trim();
                 if (!"".equals(infrommain)) {
                     try {
+                        //加密好友发送的信息
                         String content = RsaCoder.encryptByPublicKey(infrommain);
                         presenter.getSendMessageBeandata(userId, content);
                     } catch (Exception e) {

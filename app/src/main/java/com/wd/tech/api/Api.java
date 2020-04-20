@@ -28,6 +28,7 @@ public interface Api {
     String FRIENDCHATDIALOGUERECORD_URL="chat/verify/v1/findDialogueRecordPageList";//查询好友对话记录
     String DELETEFRRIENDCHATRECORD_URL="chat/verify/v1/deleteChatRecord";//删除好友聊天记录
     String RRIENDMYLIST_URL="chat/verify/v1/searchFriend";//查询我的好友列表
+    String PHONEUSERMESSSAGE_URL="user/verify/v1/findUserByPhone";//根据手机号查询用户信息
 
     //群组相关
     String SETCROWD_URL="group/verify/v1/createGroup";//创建群

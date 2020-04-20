@@ -35,7 +35,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initData() {
    /*     try {
-            string = RsaCoder.encryptByPublicKey("在吗？宝贝");
+            string = RsaCoder.encryptByPublicKey("密码");
             Log.i("ddd", "initData: "+string);
         } catch (Exception e) {
             e.printStackTrace();

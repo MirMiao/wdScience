@@ -1,12 +1,19 @@
 package com.wd.tech.api;
+import com.wd.tech.bean.AddFriendBean;
+import com.wd.tech.bean.AlterFriendRemarkBean;
 import com.wd.tech.bean.CheckFriendApplyBean;
+import com.wd.tech.bean.DeleteFriendBean;
+import com.wd.tech.bean.DeleteFriendChatRrecordBean;
 import com.wd.tech.bean.ExisisMyFriendBean;
 import com.wd.tech.bean.FriendChatDialogueRecordBean;
+import com.wd.tech.bean.FriendChatRrecordBean;
 import com.wd.tech.bean.FriendMessageBean;
+import com.wd.tech.bean.PhoneUserMessangeBean;
 import com.wd.tech.bean.SendMessageBean;
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.UserFriendListBean;
 import io.reactivex.Observable;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -38,7 +45,6 @@ public interface ApiService {
     @PUT(Api.CHECKFRIENDAPPLY_URL)//审核好友申请
     Observable<CheckFriendApplyBean>getCheckFriendApplyBeandata(@Query("noticeId")int noticeId,@Query("flag")int flag);
 
-
     @POST(Api.SENDMESSAGE_URL)//发送消息
     @FormUrlEncoded
     Observable<SendMessageBean>getSendMessageBeandata(@Field("receiveUid") int receiveUid, @Field("content") String content);
@@ -46,5 +52,23 @@ public interface ApiService {
     @GET(Api.FRIENDCHATDIALOGUERECORD_URL)//查询好友对话记录
     Observable<FriendChatDialogueRecordBean>getFriendChatDialogueRecordBeandata(@Query("friendUid")int friendUid, @Query("page")int page, @Query("count")int count);
 
+    @PUT(Api.ALTERFRIENDREMARK_URL)//修改好友备注
+    Observable<AlterFriendRemarkBean>getAlterFriendRemarkBeandata(@Query("friendUid")int friendUid, @Query("remarkName")String remarkName);
+
+    @GET(Api.FRRIENDCHATRECORD_URL)//查询好友聊天记录
+    Observable<FriendChatRrecordBean>getFriendChatRrecordBeandata(@Query("friendUid")int friendUid, @Query("page")int page, @Query("count") int count);
+
+    @DELETE(Api.DELETEFRRIENDCHATRECORD_URL)//删除好友聊天记录
+    Observable<DeleteFriendChatRrecordBean>getDeleteFriendChatRrecordBeandata(@Query("friendUid")int friendUid);
+
+    @DELETE(Api.DELETEFRIEND_URL)//删除好友
+    Observable<DeleteFriendBean>getDeleteFriendBeandata(@Query("friendUid")int friendUid);
+
+    @GET(Api.PHONEUSERMESSSAGE_URL)//根据手机号查询用户信息
+    Observable<PhoneUserMessangeBean>getPhoneUserMessangeBeandata(@Query("phone")String phone);
+
+    @POST(Api.ADDFRIEND_URL)//添加好友
+    @FormUrlEncoded
+    Observable<AddFriendBean>getAddFriendBeandata(@Field("friendUid") int friendUid, @Field("remark") String remark);
 
 }

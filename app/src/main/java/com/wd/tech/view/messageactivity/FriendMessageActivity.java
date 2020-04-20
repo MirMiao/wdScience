@@ -44,6 +44,9 @@ public class FriendMessageActivity extends BaseActivity<Presenter> implements IC
     TextView userBirthday;
     private int friendUid;
     private FriendMessageBean.ResultBean friendmessageresult;
+    private String remark;
+    private int souserId;
+
     @Override
     protected Presenter initPresenter() {
         return new Presenter();
@@ -58,8 +61,12 @@ public class FriendMessageActivity extends BaseActivity<Presenter> implements IC
     protected void initData() {
         //接收传值
         friendUid = getIntent().getIntExtra("friendUid", 0);
+        souserId = getIntent().getIntExtra("souserId", 0);
+        remark = getIntent().getStringExtra("remark");
         presenter.getFriendMessagedata(friendUid);
+        presenter.getFriendMessagedata(souserId);
         presenter.getExisisMyFrienddata(friendUid);
+        presenter.getExisisMyFrienddata(souserId);
     }
 
     @Override
@@ -84,7 +91,7 @@ public class FriendMessageActivity extends BaseActivity<Presenter> implements IC
                 Bitmap bitmap = BitmapFactory.decodeResource(resources, R.drawable.vip);
                 userVippic.setImageBitmap(bitmap);
             }
-            userRemarkName.setText(friendmessageresult.getNickName());
+            userRemarkName.setText("无");
             userPhone.setText(friendmessageresult.getPhone());
             userEmail.setText("884923222@qq.com");
             userBirthday.setText("1998-04-20");
@@ -105,8 +112,13 @@ public class FriendMessageActivity extends BaseActivity<Presenter> implements IC
                        Intent intentfc=new Intent(FriendMessageActivity.this, FriendChatActivity.class);
                        int userId = friendmessageresult.getUserId();
                        String nickName = friendmessageresult.getNickName();
+                       String userName = friendmessageresult.getUserName();
+                       String headPic = friendmessageresult.getHeadPic();
                        intentfc.putExtra("userId",userId);
                        intentfc.putExtra("nickName",nickName);
+                       intentfc.putExtra("userName",userName);
+                       intentfc.putExtra("remark1",remark);
+                       intentfc.putExtra("headPic",headPic);
                        startActivity(intentfc);
                    }
                });
@@ -117,6 +129,15 @@ public class FriendMessageActivity extends BaseActivity<Presenter> implements IC
                     @Override
                     public void onClick(View view) {
                         Intent intentaf=new Intent(FriendMessageActivity.this, AddFriendActivity.class);
+                        int userId = friendmessageresult.getUserId();
+                        String nickName = friendmessageresult.getNickName();
+                        String userName = friendmessageresult.getUserName();
+                        String headPic = friendmessageresult.getHeadPic();
+                        intentaf.putExtra("userIdaf",userId);
+                        intentaf.putExtra("nickNameaf",nickName);
+                        intentaf.putExtra("userNameaf",userName);
+                        intentaf.putExtra("remarkaf",remark);
+                        intentaf.putExtra("headPicaf",headPic);
                         startActivity(intentaf);
                     }
                 });
