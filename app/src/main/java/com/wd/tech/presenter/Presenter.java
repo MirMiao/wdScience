@@ -285,4 +285,19 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
            }
        });
     }
+//创建群
+    @Override
+    public void getSetCrowdBeandata(String name, String description) {
+       model.getSetCrowdBeandata(name, description, new IContract.IModel.ModelCallBack() {
+           @Override
+           public void success(Object o) {
+               getView().success(o);
+           }
+
+           @Override
+           public void failur(Throwable throwable) {
+             getView().failur(throwable);
+           }
+       });
+    }
 }

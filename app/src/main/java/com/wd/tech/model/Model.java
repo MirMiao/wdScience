@@ -14,6 +14,7 @@ import com.wd.tech.bean.FriendChatRrecordBean;
 import com.wd.tech.bean.FriendMessageBean;
 import com.wd.tech.bean.PhoneUserMessangeBean;
 import com.wd.tech.bean.SendMessageBean;
+import com.wd.tech.bean.SetCrowdBean;
 import com.wd.tech.bean.SetCustomFriendGroupingBean;
 import com.wd.tech.bean.ShiftFriendGroupingBean;
 import com.wd.tech.bean.UserAllGroupingBean;
@@ -358,5 +359,23 @@ public class Model implements IContract.IModel {
                       modelCallBack.failur(throwable);
                      }
                  });
+    }
+//创建群
+    @Override
+    public void getSetCrowdBeandata(String name, String description, ModelCallBack modelCallBack) {
+        Observable<SetCrowdBean>    setCrowdBeandata = apiService.getSetCrowdBeandata(name, description);
+        setCrowdBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<SetCrowdBean>() {
+                    @Override
+                    public void accept(SetCrowdBean setCrowdBean) throws Exception {
+                     modelCallBack.success(setCrowdBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
     }
 }

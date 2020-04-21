@@ -12,6 +12,7 @@ import com.wd.tech.bean.FriendChatRrecordBean;
 import com.wd.tech.bean.FriendMessageBean;
 import com.wd.tech.bean.PhoneUserMessangeBean;
 import com.wd.tech.bean.SendMessageBean;
+import com.wd.tech.bean.SetCrowdBean;
 import com.wd.tech.bean.SetCustomFriendGroupingBean;
 import com.wd.tech.bean.ShiftFriendGroupingBean;
 import com.wd.tech.bean.UserAllGroupingBean;
@@ -91,5 +92,10 @@ public interface ApiService {
 
     @DELETE(Api.DELETEFRIENDGROUPING_URL)//删除用户好友分组
     Observable<DeleteFriendGroupingBean>getDeleteFriendGroupingBeandata(@Query("groupId") int groupId);
+
+    //群组相关
+    @POST(Api.SETCROWD_URL)//创建群
+    @FormUrlEncoded
+    Observable<SetCrowdBean>getSetCrowdBeandata(@Field("name") String name,@Field("description") String description);
 
 }

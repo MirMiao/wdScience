@@ -30,7 +30,8 @@ public interface IContract {
      void  getAlterFriendGroupingNameBeandata(int groupId,String groupName,ModelCallBack modelCallBack);//修改好友分组名称
      void  getShiftFriendGroupingBeandata(int newGroupId,int friendUid,ModelCallBack modelCallBack);//转移好友到其他分组
      void  getDeleteFriendGroupingBeandata(int groupId,ModelCallBack modelCallBack);//删除用户好友分组
-
+      //群组相关
+      void  getSetCrowdBeandata(String name,String description,ModelCallBack modelCallBack);//创建群
         interface ModelCallBack{
             void success(Object o);
             void failur(Throwable throwable);
@@ -55,6 +56,8 @@ public interface IContract {
         void  getAlterFriendGroupingNameBeandata(int groupId,String groupName);//修改好友分组名称
         void  getShiftFriendGroupingBeandata(int newGroupId,int friendUid);//转移好友到其他分组
         void  getDeleteFriendGroupingBeandata(int groupId);//删除用户好友分组
+        void  getSetCrowdBeandata(String name,String description);//创建群
+
     }
     interface IView extends IBaseView {
         void success(Object o);
