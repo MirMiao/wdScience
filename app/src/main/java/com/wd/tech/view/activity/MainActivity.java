@@ -6,10 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.base.mvp.BasePresenter;
-import com.wd.tech.util.RsaCoder;
 import com.wd.tech.view.fragment.CommunityFragment;
 import com.wd.tech.view.fragment.InformationFragment;
 import com.wd.tech.view.fragment.MessageFragment;
@@ -34,12 +34,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        try {
-            string = RsaCoder.encryptByPublicKey("密码");
-            Log.i("ddd", "initData: "+string);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override

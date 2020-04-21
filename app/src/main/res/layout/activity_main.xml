@@ -7,49 +7,4 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.MainActivity">
 
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:id="@+id/viewpager"
-        android:layout_weight="10"
-        android:layout_height="0dp"/>
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:padding="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/radioGroup"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_weight="0.8">
-        <RadioButton
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:checked="true"
-             android:button="@null"
-            android:id="@+id/rb_information"
-             android:background="@drawable/information_selecter"
-             android:layout_marginRight="50dp"
-            android:layout_height="match_parent"/>
-        <RadioButton
-            android:layout_width="0dp"
-            android:background="@drawable/message_selecter"
-            android:layout_weight="1"
-            android:layout_marginRight="50dp"
-            android:id="@+id/rb_message"
-            android:layout_marginLeft="80dp"
-             android:button="@null"
-            android:layout_height="match_parent"/>
-        <RadioButton
-            android:layout_width="0dp"
-            android:background="@drawable/community_selecter"
-            android:layout_weight="1"
-            android:layout_marginLeft="80dp"
-            android:id="@+id/rb_community"
-            android:layout_marginRight="20dp"
-             android:button="@null"
-            android:layout_height="match_parent"/>
-
-    </RadioGroup>
 </LinearLayout>
