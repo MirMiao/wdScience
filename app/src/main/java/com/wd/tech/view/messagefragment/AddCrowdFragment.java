@@ -1,24 +1,22 @@
-package com.wd.tech.view.fragment;
+package com.wd.tech.view.messagefragment;
 
 import android.view.View;
-
-import androidx.fragment.app.Fragment;
 
 import com.wd.tech.R;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.base.mvp.BasePresenter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class CommunityFragment extends BaseFragment {
-
-
-
+/**
+ * @author 吴健
+ * Class :1708A
+ * @description:
+ * @date :2020/4/18 19:29
+ * @classname :加群
+ */
+public class AddCrowdFragment extends BaseFragment {
     @Override
     protected int bindLayoutid() {
-        return R.layout.fragment_community;
+        return R.layout.fragment_addcrowd;
     }
 
     @Override
