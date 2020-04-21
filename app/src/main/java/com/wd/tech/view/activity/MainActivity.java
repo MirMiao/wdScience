@@ -47,6 +47,7 @@ public class MainActivity extends BaseActivity {
             @NonNull
             @Override
             public Fragment getItem(int position) {
+                //sdsds
                 return list.get(position);
             }
 
