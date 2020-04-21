@@ -1,15 +1,20 @@
 package com.wd.tech.api;
 import com.wd.tech.bean.AddFriendBean;
+import com.wd.tech.bean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.AlterFriendRemarkBean;
 import com.wd.tech.bean.CheckFriendApplyBean;
 import com.wd.tech.bean.DeleteFriendBean;
 import com.wd.tech.bean.DeleteFriendChatRrecordBean;
+import com.wd.tech.bean.DeleteFriendGroupingBean;
 import com.wd.tech.bean.ExisisMyFriendBean;
 import com.wd.tech.bean.FriendChatDialogueRecordBean;
 import com.wd.tech.bean.FriendChatRrecordBean;
 import com.wd.tech.bean.FriendMessageBean;
 import com.wd.tech.bean.PhoneUserMessangeBean;
 import com.wd.tech.bean.SendMessageBean;
+import com.wd.tech.bean.SetCustomFriendGroupingBean;
+import com.wd.tech.bean.ShiftFriendGroupingBean;
+import com.wd.tech.bean.UserAllGroupingBean;
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.UserFriendListBean;
 import io.reactivex.Observable;
@@ -70,5 +75,21 @@ public interface ApiService {
     @POST(Api.ADDFRIEND_URL)//添加好友
     @FormUrlEncoded
     Observable<AddFriendBean>getAddFriendBeandata(@Field("friendUid") int friendUid, @Field("remark") String remark);
+
+    @POST(Api.SETCUSTOMFRIENDGROUPING_URL)//创建自定义好友分组
+    @FormUrlEncoded
+    Observable<SetCustomFriendGroupingBean>getSetCustomFriendGroupingBeandata(@Field("groupName") String groupName);
+
+    @GET(Api.USERALLGROUPING_URL)//查询用户所有分组
+    Observable<UserAllGroupingBean>getUserAllGroupingBeandata();
+
+    @PUT(Api.ALTERFRIENDGROUPINGNAME_URL)//修改好友分组名称
+    Observable<AlterFriendGroupingNameBean>getAlterFriendGroupingNameBeandata(@Query("groupId") int groupId, @Query("groupName") String groupName);
+
+    @PUT(Api.SHIFTFRIENDGROUPING_URL)//转移好友到其他分组
+    Observable<ShiftFriendGroupingBean>getShiftFriendGroupingBeandata(@Query("newGroupId") int newGroupId, @Query("friendUid") int friendUid);
+
+    @DELETE(Api.DELETEFRIENDGROUPING_URL)//删除用户好友分组
+    Observable<DeleteFriendGroupingBean>getDeleteFriendGroupingBeandata(@Query("groupId") int groupId);
 
 }

@@ -210,4 +210,79 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
             }
         });
     }
+//创建自定义好友分组
+    @Override
+    public void getSetCustomFriendGroupingBeandata(String groupName) {
+       model.getSetCustomFriendGroupingBeandata(groupName, new IContract.IModel.ModelCallBack() {
+           @Override
+           public void success(Object o) {
+               getView().success(o);
+           }
+
+           @Override
+           public void failur(Throwable throwable) {
+          getView().failur(throwable);
+           }
+       });
+    }
+//查询用户所有分组
+    @Override
+    public void getUserAllGroupingBeandata() {
+   model.getUserAllGroupingBeandata(new IContract.IModel.ModelCallBack() {
+       @Override
+       public void success(Object o) {
+           getView().success(o);
+       }
+
+       @Override
+       public void failur(Throwable throwable) {
+          getView().failur(throwable);
+       }
+   });
+    }
+//修改好友分组名称
+    @Override
+    public void getAlterFriendGroupingNameBeandata(int groupId, String groupName) {
+        model.getAlterFriendGroupingNameBeandata(groupId, groupName, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+             getView().failur(throwable);
+            }
+        });
+    }
+//转移好友到其他分组
+    @Override
+    public void getShiftFriendGroupingBeandata(int newGroupId, int friendUid) {
+      model.getShiftFriendGroupingBeandata(newGroupId, friendUid, new IContract.IModel.ModelCallBack() {
+          @Override
+          public void success(Object o) {
+              getView().success(o);
+          }
+
+          @Override
+          public void failur(Throwable throwable) {
+           getView().failur(throwable);
+          }
+      });
+    }
+//删除用户好友分组
+    @Override
+    public void getDeleteFriendGroupingBeandata(int groupId) {
+       model.getDeleteFriendGroupingBeandata(groupId, new IContract.IModel.ModelCallBack() {
+           @Override
+           public void success(Object o) {
+               getView().success(o);
+           }
+
+           @Override
+           public void failur(Throwable throwable) {
+              getView().failur(throwable);
+           }
+       });
+    }
 }

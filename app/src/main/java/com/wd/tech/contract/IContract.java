@@ -10,6 +10,8 @@ import com.wd.tech.base.mvp.IBaseView;
  */
 public interface IContract {
     interface IModel extends IBaseModel {
+        //消息模块
+        //好友相关
      void  getUserFriendInfromRecorddata(int page,int count,ModelCallBack modelCallBack);////查询用户的好友通知记录
      void  getUserFriendListdata(ModelCallBack modelCallBack);//初始化我的好友列表全量信息
      void  getFriendMessagedata(int friend,ModelCallBack modelCallBack);//查询好友信息
@@ -23,6 +25,11 @@ public interface IContract {
      void  getDeleteFriendBeandata(int friendUid,ModelCallBack modelCallBack);//删除好友
      void  getPhoneUserMessangeBeanata(String phone,ModelCallBack modelCallBack);//根据手机号查询用户信息
      void  getAddFriendBeanata(int friendUid,String remark,ModelCallBack modelCallBack);//添加好友
+     void  getSetCustomFriendGroupingBeandata(String groupName,ModelCallBack modelCallBack);//创建自定义好友分组
+     void  getUserAllGroupingBeandata(ModelCallBack modelCallBack);//查询用户所有分组
+     void  getAlterFriendGroupingNameBeandata(int groupId,String groupName,ModelCallBack modelCallBack);//修改好友分组名称
+     void  getShiftFriendGroupingBeandata(int newGroupId,int friendUid,ModelCallBack modelCallBack);//转移好友到其他分组
+     void  getDeleteFriendGroupingBeandata(int groupId,ModelCallBack modelCallBack);//删除用户好友分组
 
         interface ModelCallBack{
             void success(Object o);
@@ -43,6 +50,11 @@ public interface IContract {
         void  getDeleteFriendBeandata(int friendUid);//删除好友
         void  getPhoneUserMessangeBeanata(String phone);//根据手机号查询用户信息
         void  getAddFriendBeanata(int friendUid,String remark);//添加好友
+        void  getSetCustomFriendGroupingBeandata(String groupName);//创建自定义好友分组
+        void  getUserAllGroupingBeandata();//查询用户所有分组
+        void  getAlterFriendGroupingNameBeandata(int groupId,String groupName);//修改好友分组名称
+        void  getShiftFriendGroupingBeandata(int newGroupId,int friendUid);//转移好友到其他分组
+        void  getDeleteFriendGroupingBeandata(int groupId);//删除用户好友分组
     }
     interface IView extends IBaseView {
         void success(Object o);

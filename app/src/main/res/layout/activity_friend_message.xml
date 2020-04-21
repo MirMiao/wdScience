@@ -12,10 +12,18 @@
         android:layout_height="wrap_content"
         >
         <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:background="#020202"
+            android:src="@drawable/common_nav_btn_back_n_xhdpi"
+            android:onClick="back"
+            ></ImageView>
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="256dp"
-            android:src="@mipmap/ic_launcher"
-            android:id="@+id/user_background"
+            android:background="@mipmap/bn"
             ></ImageView>
         <ImageView
             android:layout_width="80dp"
@@ -65,7 +73,7 @@
         android:layout_height="wrap_content"
         android:text="用户个性签名"
         android:gravity="center"
-        android:textSize="14sp"
+        android:textSize="20sp"
         android:textColor="#999"
         android:id="@+id/user_remarkName"
         android:layout_marginTop="20dp"
@@ -75,14 +83,14 @@
         android:layout_height="wrap_content"
         android:text="个人资料"
         android:gravity="center"
-        android:textSize="12sp"
+        android:textSize="20sp"
         android:textColor="#333"
         android:layout_marginTop="50dp"
         ></TextView>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="===========                        ============"
+        android:text="=========================                        ========================="
         android:gravity="center"
         android:textSize="12sp"
         android:textColor="#333"
@@ -98,7 +106,7 @@
         android:layout_height="wrap_content"
         android:text="性别"
         android:gravity="center"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textColor="#333"
         android:layout_marginTop="20dp"
         android:id="@+id/user_sex"
@@ -108,7 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="生日"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textColor="#333"
         android:gravity="center"
         android:layout_marginTop="20dp"
@@ -120,7 +128,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="手机号"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textColor="#333"
         android:layout_marginTop="20dp"
         android:gravity="center"
@@ -130,7 +138,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="邮箱"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textColor="#333"
         android:layout_marginTop="20dp"
         android:gravity="center"
@@ -145,7 +153,18 @@
         android:textColor="#fff"
         android:textSize="20sp"
         android:layout_gravity="center"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="@dimen/dp_90"
         android:id="@+id/btn_sendmessage"
+        ></Button>
+    <Button
+        android:layout_width="336dp"
+        android:layout_height="40dp"
+        android:background="#20affa"
+        android:text="申请添加好友"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_addfriend"
         ></Button>
 </LinearLayout>

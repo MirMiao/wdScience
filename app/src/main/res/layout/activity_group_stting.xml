@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.messageactivity.SelectGroupingActivity"
-    android:orientation="vertical"
+    tools:context=".view.messageactivity.GroupSttingActivity"
+     android:orientation="vertical"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,29 +23,27 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="选择分组"
+            android:text="分组设置"
             android:gravity="center"
             android:textSize="24sp"
             ></TextView>
     </LinearLayout>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:background="#fff"
-        android:text="添加到新分组"
-        android:layout_marginTop="30dp"
-        android:id="@+id/btn_addgroup"
-        ></Button>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入要修改的分组名称"
+            android:id="@+id/updategroupname"
+            ></EditText>
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/refresh"
         >
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_10"
-        android:id="@+id/grouplist"
-        ></androidx.recyclerview.widget.RecyclerView>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/group_sttingRecyclerView"
+            ></androidx.recyclerview.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 </LinearLayout>

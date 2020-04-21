@@ -2,16 +2,21 @@ package com.wd.tech.model;
 
 import com.wd.tech.api.ApiService;
 import com.wd.tech.bean.AddFriendBean;
+import com.wd.tech.bean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.AlterFriendRemarkBean;
 import com.wd.tech.bean.CheckFriendApplyBean;
 import com.wd.tech.bean.DeleteFriendBean;
 import com.wd.tech.bean.DeleteFriendChatRrecordBean;
+import com.wd.tech.bean.DeleteFriendGroupingBean;
 import com.wd.tech.bean.ExisisMyFriendBean;
 import com.wd.tech.bean.FriendChatDialogueRecordBean;
 import com.wd.tech.bean.FriendChatRrecordBean;
 import com.wd.tech.bean.FriendMessageBean;
 import com.wd.tech.bean.PhoneUserMessangeBean;
 import com.wd.tech.bean.SendMessageBean;
+import com.wd.tech.bean.SetCustomFriendGroupingBean;
+import com.wd.tech.bean.ShiftFriendGroupingBean;
+import com.wd.tech.bean.UserAllGroupingBean;
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.UserFriendListBean;
 import com.wd.tech.contract.IContract;
@@ -263,5 +268,95 @@ public class Model implements IContract.IModel {
                         modelCallBack.failur(throwable);
                     }
                 });
+    }
+//创建自定义好友分组
+    @Override
+    public void getSetCustomFriendGroupingBeandata(String groupName, ModelCallBack modelCallBack) {
+    Observable<SetCustomFriendGroupingBean>   setCustomFriendGroupingBeandata = apiService.getSetCustomFriendGroupingBeandata(groupName);
+     setCustomFriendGroupingBeandata.subscribeOn(Schedulers.io())
+             .observeOn(AndroidSchedulers.mainThread())
+             .subscribe(new Consumer<SetCustomFriendGroupingBean>() {
+                 @Override
+                 public void accept(SetCustomFriendGroupingBean setCustomFriendGroupingBean) throws Exception {
+                 modelCallBack.success(setCustomFriendGroupingBean);
+                 }
+             }, new Consumer<Throwable>() {
+                 @Override
+                 public void accept(Throwable throwable) throws Exception {
+                     modelCallBack.failur(throwable);
+                 }
+             });
+    }
+//查询用户所有分组
+    @Override
+    public void getUserAllGroupingBeandata(ModelCallBack modelCallBack) {
+        Observable<UserAllGroupingBean>  userAllGroupingBeandata = apiService.getUserAllGroupingBeandata();
+        userAllGroupingBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<UserAllGroupingBean>() {
+                    @Override
+                    public void accept(UserAllGroupingBean userAllGroupingBean) throws Exception {
+                     modelCallBack.success(userAllGroupingBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+//修改好友分组名称
+    @Override
+    public void getAlterFriendGroupingNameBeandata(int groupId, String groupName, ModelCallBack modelCallBack) {
+        Observable<AlterFriendGroupingNameBean>     alterFriendGroupingNameBeandata = apiService.getAlterFriendGroupingNameBeandata(groupId, groupName);
+        alterFriendGroupingNameBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<AlterFriendGroupingNameBean>() {
+                    @Override
+                    public void accept(AlterFriendGroupingNameBean alterFriendGroupingNameBean) throws Exception {
+                     modelCallBack.success(alterFriendGroupingNameBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                      modelCallBack.failur(throwable);
+                    }
+                });
+    }
+//转移好友到其他分组
+    @Override
+    public void getShiftFriendGroupingBeandata(int newGroupId, int friendUid, ModelCallBack modelCallBack) {
+        Observable<ShiftFriendGroupingBean>    shiftFriendGroupingBeandata = apiService.getShiftFriendGroupingBeandata(newGroupId, friendUid);
+         shiftFriendGroupingBeandata.subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(new Consumer<ShiftFriendGroupingBean>() {
+                     @Override
+                     public void accept(ShiftFriendGroupingBean shiftFriendGroupingBean) throws Exception {
+                       modelCallBack.success(shiftFriendGroupingBean);
+                     }
+                 }, new Consumer<Throwable>() {
+                     @Override
+                     public void accept(Throwable throwable) throws Exception {
+                      modelCallBack.failur(throwable);
+                     }
+                 });
+    }
+//删除用户好友分组
+    @Override
+    public void getDeleteFriendGroupingBeandata(int groupId, ModelCallBack modelCallBack) {
+        Observable<DeleteFriendGroupingBean>  deleteFriendGroupingBeandata = apiService.getDeleteFriendGroupingBeandata(groupId);
+         deleteFriendGroupingBeandata.subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(new Consumer<DeleteFriendGroupingBean>() {
+                     @Override
+                     public void accept(DeleteFriendGroupingBean deleteFriendGroupingBean) throws Exception {
+                      modelCallBack.success(deleteFriendGroupingBean);
+                     }
+                 }, new Consumer<Throwable>() {
+                     @Override
+                     public void accept(Throwable throwable) throws Exception {
+                      modelCallBack.failur(throwable);
+                     }
+                 });
     }
 }

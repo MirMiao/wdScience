@@ -48,7 +48,6 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
     private String nickName;
     private MyFriendChatDialogueRecordadapter myFriendChatDialogueRecordadapter;
     private List<FriendChatDialogueRecordBean.ResultBean> FriendChatDialogueRecordresult;
-    private String userName;
     private String headPic;
     private String remark1;
     private String userName1;

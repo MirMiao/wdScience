@@ -98,6 +98,7 @@ public class ChatSettingActivity extends BaseActivity<Presenter> implements ICon
                 break;
             case R.id.friend_gruoping:
                 Intent intent=new Intent(ChatSettingActivity.this,SelectGroupingActivity.class);
+                intent.putExtra("userId3",userId);
                 startActivity(intent);
                 break;
             case R.id.friend_chatmessage:

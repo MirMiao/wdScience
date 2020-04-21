@@ -20,8 +20,6 @@ import butterknife.ButterKnife;
 
 //好友聊天记录
 public class FriendchatRecordActivity extends BaseActivity<Presenter> implements IContract.IView {
-
-
     @BindView(R.id.friend_chatRecyclerView)
     RecyclerView friendChatRecyclerView;
     private int userId2;
