@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
-import com.wd.tech.bean.UserAllGroupingBean;
 import com.wd.tech.event.Eventgroupdeleteid;
 import com.wd.tech.bean.messagebean.UserAllGroupingBean;
 import com.wd.tech.event.Eventgroupupdateid;

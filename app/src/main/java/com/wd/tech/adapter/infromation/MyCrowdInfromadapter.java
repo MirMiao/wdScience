@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
-import com.wd.tech.bean.CrowdInfromBean;
+import com.wd.tech.bean.messagebean.CrowdInfromBean;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.util.TimeformatUtil;
 import com.wd.tech.view.messageactivity.CrowdInformActivity;
