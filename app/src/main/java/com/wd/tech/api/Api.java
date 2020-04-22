@@ -6,7 +6,7 @@ package com.wd.tech.api;
  * 功能 :
  */
 public interface Api {
-    String BASE_URL="https://mobile.bwstudent.com/techApi/";//根路径
+    String BASE_URL="https://mobile.bwstudent.com/";//根路径
 
 
 }
