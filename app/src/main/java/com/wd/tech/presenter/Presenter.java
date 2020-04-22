@@ -300,4 +300,19 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
            }
        });
     }
+    //查询群通知记录
+    @Override
+    public void getCrowdInfromBeandata(int page, int count) {
+       model.getCrowdInfromBeandata(page, count, new IContract.IModel.ModelCallBack() {
+           @Override
+           public void success(Object o) {
+               getView().success(o);
+           }
+
+           @Override
+           public void failur(Throwable throwable) {
+            getView().failur(throwable);
+           }
+       });
+    }
 }

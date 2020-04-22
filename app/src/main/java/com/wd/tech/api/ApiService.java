@@ -3,6 +3,7 @@ import com.wd.tech.bean.AddFriendBean;
 import com.wd.tech.bean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.AlterFriendRemarkBean;
 import com.wd.tech.bean.CheckFriendApplyBean;
+import com.wd.tech.bean.CrowdInfromBean;
 import com.wd.tech.bean.DeleteFriendBean;
 import com.wd.tech.bean.DeleteFriendChatRrecordBean;
 import com.wd.tech.bean.DeleteFriendGroupingBean;
@@ -98,4 +99,6 @@ public interface ApiService {
     @FormUrlEncoded
     Observable<SetCrowdBean>getSetCrowdBeandata(@Field("name") String name,@Field("description") String description);
 
+    @GET(Api.CROWDINFROM_URL)//查询群通知记录
+    Observable<CrowdInfromBean>getCrowdInfromBeandata(@Query("page") int page, @Query("count") int count);
 }

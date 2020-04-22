@@ -5,9 +5,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.wd.tech.R;
 import com.wd.tech.adapter.MyMessageListAdapter;
 import com.wd.tech.base.BaseFragment;
+import com.wd.tech.bean.CrowdInfromBean;
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
+
+import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 
@@ -22,6 +25,8 @@ public class MessageListFragment extends BaseFragment<Presenter> implements ICon
     @BindView(R.id.MessageList_RecyclerView)
     RecyclerView MessageListRecyclerView;
     private MyMessageListAdapter myMessageListAdapter;
+    //private List<CrowdInfromBean.ResultBean> crowdinfromresult;
+    private List<UserFriendInfromRecordBean.ResultBean>  userfriendinfromrecordresult;
     @Override
     protected int bindLayoutid() {
         return R.layout.fragment_messagelist;
@@ -39,17 +44,24 @@ public class MessageListFragment extends BaseFragment<Presenter> implements ICon
 
     @Override
     protected void initData() {
+     //好友通知
      presenter.getUserFriendInfromRecorddata(1,5);
+     //群通知
+     presenter.getCrowdInfromBeandata(1,5);
     }
 
     @Override
     public void success(Object o) {
         if (o instanceof UserFriendInfromRecordBean) {
-            List<UserFriendInfromRecordBean.ResultBean>  userfriendinfromrecordresult =((UserFriendInfromRecordBean) o).getResult();
-            myMessageListAdapter = new MyMessageListAdapter(userfriendinfromrecordresult,getActivity());
-            MessageListRecyclerView.setAdapter(myMessageListAdapter);
-            MessageListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        userfriendinfromrecordresult =((UserFriendInfromRecordBean) o).getResult();
         }
+        if (o instanceof CrowdInfromBean){
+           // crowdinfromresult = ((CrowdInfromBean) o).getResult();
+        }
+      // userfriendinfromrecordresult.addAll(crowdinfromresult);
+        myMessageListAdapter = new MyMessageListAdapter(userfriendinfromrecordresult,getActivity());
+        MessageListRecyclerView.setAdapter(myMessageListAdapter);
+        MessageListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override

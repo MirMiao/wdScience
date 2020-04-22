@@ -17,4 +17,10 @@ public class TimeformatUtil  {
         String s=     simpleDateFormat.format(date);
         return  s;
     }
+    public  static  String  gettimehear(long time){
+        SimpleDateFormat simpleDateFormat=new   SimpleDateFormat("HH:mm");
+        Date date= new Date();
+        String s=     simpleDateFormat.format(date);
+        return  s;
+    }
 }

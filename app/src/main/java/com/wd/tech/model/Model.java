@@ -5,6 +5,7 @@ import com.wd.tech.bean.AddFriendBean;
 import com.wd.tech.bean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.AlterFriendRemarkBean;
 import com.wd.tech.bean.CheckFriendApplyBean;
+import com.wd.tech.bean.CrowdInfromBean;
 import com.wd.tech.bean.DeleteFriendBean;
 import com.wd.tech.bean.DeleteFriendChatRrecordBean;
 import com.wd.tech.bean.DeleteFriendGroupingBean;
@@ -375,6 +376,24 @@ public class Model implements IContract.IModel {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         modelCallBack.failur(throwable);
+                    }
+                });
+    }
+//查询群通知记录
+    @Override
+    public void getCrowdInfromBeandata(int page, int count, ModelCallBack modelCallBack) {
+        Observable<CrowdInfromBean>   crowdInfromBeandata = apiService.getCrowdInfromBeandata(page, count);
+        crowdInfromBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CrowdInfromBean>() {
+                    @Override
+                    public void accept(CrowdInfromBean crowdInfromBean) throws Exception {
+                      modelCallBack.success(crowdInfromBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                    modelCallBack.failur(throwable);
                     }
                 });
     }

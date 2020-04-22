@@ -32,6 +32,7 @@ public interface IContract {
      void  getDeleteFriendGroupingBeandata(int groupId,ModelCallBack modelCallBack);//删除用户好友分组
       //群组相关
       void  getSetCrowdBeandata(String name,String description,ModelCallBack modelCallBack);//创建群
+      void  getCrowdInfromBeandata(int page,int count,ModelCallBack modelCallBack);//查询群通知记录
         interface ModelCallBack{
             void success(Object o);
             void failur(Throwable throwable);
@@ -57,7 +58,7 @@ public interface IContract {
         void  getShiftFriendGroupingBeandata(int newGroupId,int friendUid);//转移好友到其他分组
         void  getDeleteFriendGroupingBeandata(int groupId);//删除用户好友分组
         void  getSetCrowdBeandata(String name,String description);//创建群
-
+        void  getCrowdInfromBeandata(int page,int count);//查询群通知记录
     }
     interface IView extends IBaseView {
         void success(Object o);
