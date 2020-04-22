@@ -1,5 +1,6 @@
 package com.wd.tech.view.fragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
+import com.wd.tech.view.information.PlateActivity;
+import com.wd.tech.view.information.SerchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,9 +129,11 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
     @OnClick({R.id.iv_menu, R.id.iv_serch})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_menu:
+            case R.id.iv_menu:  //跳转到菜单的atcitivy
+                 startActivity(new Intent(getContext(), PlateActivity.class));
                 break;
             case R.id.iv_serch:
+                 startActivity(new Intent(getContext(), SerchActivity.class));
                 break;
         }
     }

@@ -1,6 +1,7 @@
 package com.wd.tech.model;
 
 import com.wd.tech.api.ApiService;
+import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 import com.wd.tech.bean.messagebean.AddFriendBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
@@ -475,5 +476,23 @@ public class Model implements IContract.IModel {
                            modelCallBack.failur(throwable);
                        }
                    });
+    }
+
+    @Override
+    public void getPlateData(ModelCallBack modelCallBack) {
+          apiService.getAllPlate()
+                  .subscribeOn(Schedulers.io())
+                  .observeOn(AndroidSchedulers.mainThread())
+                  .subscribe(new Consumer<FindAllInfoPlate>() {
+                      @Override
+                      public void accept(FindAllInfoPlate findAllInfoPlate) throws Exception {
+                        modelCallBack.success(findAllInfoPlate);
+                      }
+                  }, new Consumer<Throwable>() {
+                      @Override
+                      public void accept(Throwable throwable) throws Exception {
+                            modelCallBack.failur(throwable);
+                      }
+                  });
     }
 }

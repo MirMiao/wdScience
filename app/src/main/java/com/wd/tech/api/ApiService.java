@@ -1,4 +1,5 @@
 package com.wd.tech.api;
+import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.messagebean.AddFriendBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
@@ -123,4 +124,7 @@ public interface ApiService {
     @GET("information/v1/infoRecommendList")
     Observable<InfoRecommendListEntity> getInfoRecommendListData(@Query("plateId") int plateId,@Query("page")int page,@Query("count")int count);
 
+    //展示点击菜单按钮展示数据
+    @GET("information/v1/findAllInfoPlate")
+    Observable<FindAllInfoPlate> getAllPlate();
 }

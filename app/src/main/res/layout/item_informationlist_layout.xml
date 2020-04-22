@@ -40,11 +40,12 @@
          <LinearLayout
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:layout_marginTop="@dimen/dp_8"
+
              android:orientation="horizontal">
              <LinearLayout
                  android:layout_width="@dimen/dp_70"
                  android:layout_height="match_parent"
+                 android:layout_marginTop="@dimen/dp_8"
                  android:orientation="vertical">
                  <TextView
                      android:layout_width="wrap_content"
@@ -62,12 +63,35 @@
                      android:id="@+id/tv_time"
                      android:layout_height="wrap_content"/>
              </LinearLayout>
-               <CheckBox
-                   android:layout_width="wrap_content"
-                   android:button="@null"
-                   android:layout_marginLeft="@dimen/dp_50"
-                   android:drawableTop="@drawable/aixin"
-                   android:layout_height="wrap_content"/>
+             <CheckBox
+                 android:layout_width="wrap_content"
+                 android:drawableTop="@drawable/aixin"
+                 android:layout_marginTop="@dimen/dp_10"
+                 android:button="@null"
+                 android:id="@+id/cb_aixin"
+                 android:layout_marginLeft="@dimen/dp_20"
+                 android:layout_height="wrap_content"/>
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_marginTop="-10dp"
+                  android:id="@+id/tv_aixinNum"
+                  android:layout_marginLeft="@dimen/dp_5"
+                  android:layout_height="wrap_content"/>
+             <CheckBox
+                 android:layout_width="wrap_content"
+                 android:drawableTop="@drawable/shar"
+                 android:layout_marginTop="@dimen/dp_10"
+                 android:button="@null"
+                 android:id="@+id/cb_shar"
+                 android:layout_marginLeft="@dimen/dp_20"
+                 android:layout_height="wrap_content"/>
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_marginTop="-10dp"
+                  android:id="@+id/tv_sharNum"
+                  android:layout_marginLeft="@dimen/dp_5"
+                  android:layout_height="wrap_content"/>
          </LinearLayout>
+
      </LinearLayout>
 </LinearLayout>

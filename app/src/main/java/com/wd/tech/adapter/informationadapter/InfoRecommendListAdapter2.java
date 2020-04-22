@@ -4,11 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -49,8 +49,8 @@ public class InfoRecommendListAdapter2 extends RecyclerView.Adapter<InfoRecommen
     @Override
     public void onBindViewHolder(@NonNull MyViewholder holder, int position) {
         Glide.with(context).load(result.get(position).getThumbnail())
-            //    .placeholder(R.mipmap.ic_launcher_round)
-               // .error(R.mipmap.ic_launcher)
+                //    .placeholder(R.mipmap.ic_launcher_round)
+                // .error(R.mipmap.ic_launcher)
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(8)))
                 .into(holder.ivImage);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
@@ -60,6 +60,8 @@ public class InfoRecommendListAdapter2 extends RecyclerView.Adapter<InfoRecommen
         holder.tvSummary.setText(result.get(position).getSummary());
         holder.tvTime.setText(format);
         holder.tvSource.setText(result.get(position).getSource());
+        holder.tvAixinNum.setText(result.get(position).getCollection()+"");
+        holder.tvSharNum.setText(result.get(position).getShare()+"");
     }
 
     @Override
@@ -78,6 +80,14 @@ public class InfoRecommendListAdapter2 extends RecyclerView.Adapter<InfoRecommen
         TextView tvSource;
         @BindView(R.id.tv_time)
         TextView tvTime;
+        @BindView(R.id.cb_aixin)
+        CheckBox cbAixin;
+        @BindView(R.id.tv_aixinNum)
+        TextView tvAixinNum;
+        @BindView(R.id.cb_shar)
+        CheckBox cbShar;
+        @BindView(R.id.tv_sharNum)
+        TextView tvSharNum;
 
         public MyViewholder(@NonNull View itemView) {
             super(itemView);
