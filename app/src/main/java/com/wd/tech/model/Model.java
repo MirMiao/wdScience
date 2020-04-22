@@ -3,6 +3,7 @@ package com.wd.tech.model;
 import com.wd.tech.api.ApiService;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
+import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
 import com.wd.tech.bean.messagebean.AddFriendBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
@@ -494,5 +495,23 @@ public class Model implements IContract.IModel {
                             modelCallBack.failur(throwable);
                       }
                   });
+    }
+
+    @Override
+    public void serchByKeyWord(String title, int page, int count, ModelCallBack modelCallBack) {
+        apiService.serchByKeyWord(title,page,count)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<SerchInfoByKeyWordEntity>() {
+                    @Override
+                    public void accept(SerchInfoByKeyWordEntity serchInfoByKeyWordEntity) throws Exception {
+                        modelCallBack.success(serchInfoByKeyWordEntity);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
     }
 }

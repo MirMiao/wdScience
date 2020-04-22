@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
     android:layout_height="match_parent">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_marginLeft="@dimen/dp_12"
+       android:layout_marginRight="@dimen/dp_12"
+       android:layout_marginTop="@dimen/dp_15"
+       android:layout_height="@dimen/dp_33">
+       <EditText
+           android:layout_width="@dimen/dp_285"
+           android:paddingLeft="@dimen/dp_40"
+           android:hint="搜索文章"
+           android:id="@+id/et_name"
+           android:textSize="@dimen/sp_14"
+           android:background="@drawable/et_serchshape"
+           android:layout_height="@dimen/dp_33"/>
+        <ImageView
+            android:layout_width="@dimen/dp_24"
+            android:background="@drawable/iv_serch"
+            android:id="@+id/iv_serch"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_height="@dimen/dp_24"/>
+         <TextView
+             android:layout_width="wrap_content"
+             android:text="取消"
+             android:textSize="@dimen/sp_18"
+             android:id="@+id/tv_finish"
+              android:layout_marginTop="@dimen/dp_5"
+             android:layout_alignParentRight="true"
+             android:layout_height="wrap_content"/>
+   </RelativeLayout>
+     <com.scwang.smartrefresh.layout.SmartRefreshLayout
+         android:layout_width="match_parent"
+         android:id="@+id/smart"
+         android:layout_height="match_parent">
+         <androidx.recyclerview.widget.RecyclerView
+             android:layout_width="match_parent"
+             android:layout_marginLeft="@dimen/dp_12"
+             android:id="@+id/rv_serch"
+             android:layout_marginRight="@dimen/dp_12"
+             android:layout_height="match_parent"/>
+     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

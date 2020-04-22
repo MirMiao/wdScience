@@ -11,13 +11,11 @@
        <WebView
            android:layout_width="match_parent"
            android:layout_height="match_parent"/>
-       <TextView
+
+       <ImageView
            android:layout_width="@dimen/dp_40"
-           android:layout_height="@dimen/dp_18"
-           android:gravity="center"
-           android:background="#E2E91E63"
-           android:textColor="#ffffff"
-           android:text="广告" />
+            android:background="@drawable/guanggao"
+           android:layout_height="@dimen/dp_18"/>
    </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

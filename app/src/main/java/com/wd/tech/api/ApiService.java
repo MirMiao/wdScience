@@ -1,5 +1,6 @@
 package com.wd.tech.api;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
+import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
 import com.wd.tech.bean.messagebean.AddFriendBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
@@ -127,4 +128,8 @@ public interface ApiService {
     //展示点击菜单按钮展示数据
     @GET("information/v1/findAllInfoPlate")
     Observable<FindAllInfoPlate> getAllPlate();
+
+    //根据关键字模糊查询
+    @GET("information/v1/findInformationByTitle")
+    Observable<SerchInfoByKeyWordEntity> serchByKeyWord(@Query("title") String title,@Query("page") int page,@Query("count")int count);
 }

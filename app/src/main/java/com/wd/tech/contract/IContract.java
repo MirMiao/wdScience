@@ -39,6 +39,7 @@ public interface IContract {
         void getBannerData(ModelCallBack modelCallBack);//banner展示列表
         void getInfoRecommendListData(int plateId,int page,int count,ModelCallBack modelCallBack); //展示首页数据
         void getPlateData(ModelCallBack modelCallBack);  //展示菜单
+         void serchByKeyWord(String title,int page,int count,ModelCallBack modelCallBack); //根据关键字模糊查询
 
         interface ModelCallBack{
             void success(Object o);
@@ -75,6 +76,7 @@ public interface IContract {
         void getBannerData();  //展示banner列表
         void getInfoRecommendListData(int plateId,int page,int count);//展示首页数据
         void getPlateData(); //展示菜单
+        void serchByKeyWord(String title,int page,int count); //根据关键字模糊查询
     }
     interface IView extends IBaseView {
         void success(Object o);
