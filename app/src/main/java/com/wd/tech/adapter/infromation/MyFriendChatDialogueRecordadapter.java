@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
-import com.wd.tech.bean.FriendChatDialogueRecordBean;
+import com.wd.tech.bean.messagebean.FriendChatDialogueRecordBean;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.util.RsaCoder;
 

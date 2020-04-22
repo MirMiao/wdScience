@@ -1,4 +1,4 @@
-package com.wd.tech.bean;
+package com.wd.tech.bean.messagebean;
 
 import java.io.Serializable;
 
@@ -6,13 +6,13 @@ import java.io.Serializable;
  * @author 吴健
  * Class :1708A
  * @description:
- * @date :2020/4/21 9:07
+ * @date :2020/4/21 9:00
  * @classname :
  */
-public class ShiftFriendGroupingBean implements Serializable {
+public class AlterFriendGroupingNameBean implements Serializable {
 
     /**
-     * message : 转移成功
+     * message : 修改成功
      * status : 0000
      */
 

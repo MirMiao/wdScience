@@ -1,4 +1,4 @@
-package com.wd.tech.bean;
+package com.wd.tech.bean.messagebean;
 
 import java.io.Serializable;
 
@@ -6,20 +6,18 @@ import java.io.Serializable;
  * @author 吴健
  * Class :1708A
  * @description:
- * @date :2020/4/21 8:42
+ * @date :2020/4/19 15:36
  * @classname :
  */
-public class SetCustomFriendGroupingBean  implements Serializable {
+public class SendMessageBean implements Serializable {
 
     /**
-     * message : 创建分组成功
+     * message : 发送成功
      * status : 0000
-     * groupId : 1111
      */
 
     private String message;
     private String status;
-    private int groupId;
 
     public String getMessage() {
         return message;
@@ -35,13 +33,5 @@ public class SetCustomFriendGroupingBean  implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
     }
 }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.wd.tech.R;
 import com.wd.tech.adapter.infromation.MyFriendchatRecordadapter;
 import com.wd.tech.base.BaseActivity;
-import com.wd.tech.bean.FriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.FriendChatRrecordBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 

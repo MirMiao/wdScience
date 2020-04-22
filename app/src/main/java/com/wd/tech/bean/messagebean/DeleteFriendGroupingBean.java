@@ -1,4 +1,4 @@
-package com.wd.tech.bean;
+package com.wd.tech.bean.messagebean;
 
 import java.io.Serializable;
 
@@ -6,13 +6,13 @@ import java.io.Serializable;
  * @author 吴健
  * Class :1708A
  * @description:
- * @date :2020/4/19 15:36
+ * @date :2020/4/21 9:10
  * @classname :
  */
-public class SendMessageBean implements Serializable {
+public class DeleteFriendGroupingBean implements Serializable {
 
     /**
-     * message : 发送成功
+     * message : 删除分组成功
      * status : 0000
      */
 

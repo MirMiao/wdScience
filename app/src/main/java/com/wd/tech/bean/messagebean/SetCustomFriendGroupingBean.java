@@ -1,4 +1,4 @@
-package com.wd.tech.bean;
+package com.wd.tech.bean.messagebean;
 
 import java.io.Serializable;
 
@@ -6,18 +6,20 @@ import java.io.Serializable;
  * @author 吴健
  * Class :1708A
  * @description:
- * @date :2020/4/21 9:10
+ * @date :2020/4/21 8:42
  * @classname :
  */
-public class DeleteFriendGroupingBean implements Serializable {
+public class SetCustomFriendGroupingBean  implements Serializable {
 
     /**
-     * message : 删除分组成功
+     * message : 创建分组成功
      * status : 0000
+     * groupId : 1111
      */
 
     private String message;
     private String status;
+    private int groupId;
 
     public String getMessage() {
         return message;
@@ -33,5 +35,13 @@ public class DeleteFriendGroupingBean implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 }

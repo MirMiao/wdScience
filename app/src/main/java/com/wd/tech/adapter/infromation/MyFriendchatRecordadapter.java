@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
-import com.wd.tech.bean.FriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.FriendChatRrecordBean;
 import com.wd.tech.util.RsaCoder;
 import com.wd.tech.util.TimeformatUtil;
 

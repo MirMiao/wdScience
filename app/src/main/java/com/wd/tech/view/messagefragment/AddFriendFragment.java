@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.wd.tech.R;
 import com.wd.tech.base.BaseFragment;
-import com.wd.tech.bean.PhoneUserMessangeBean;
+import com.wd.tech.bean.messagebean.PhoneUserMessangeBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RetrofitUtil;

@@ -1,26 +1,27 @@
 package com.wd.tech.model;
 
 import com.wd.tech.api.ApiService;
-import com.wd.tech.bean.AddFriendBean;
-import com.wd.tech.bean.AlterFriendGroupingNameBean;
-import com.wd.tech.bean.AlterFriendRemarkBean;
-import com.wd.tech.bean.CheckFriendApplyBean;
-import com.wd.tech.bean.CrowdInfromBean;
-import com.wd.tech.bean.DeleteFriendBean;
-import com.wd.tech.bean.DeleteFriendChatRrecordBean;
-import com.wd.tech.bean.DeleteFriendGroupingBean;
-import com.wd.tech.bean.ExisisMyFriendBean;
-import com.wd.tech.bean.FriendChatDialogueRecordBean;
-import com.wd.tech.bean.FriendChatRrecordBean;
-import com.wd.tech.bean.FriendMessageBean;
-import com.wd.tech.bean.PhoneUserMessangeBean;
-import com.wd.tech.bean.SendMessageBean;
-import com.wd.tech.bean.SetCrowdBean;
-import com.wd.tech.bean.SetCustomFriendGroupingBean;
-import com.wd.tech.bean.ShiftFriendGroupingBean;
-import com.wd.tech.bean.UserAllGroupingBean;
-import com.wd.tech.bean.UserFriendInfromRecordBean;
-import com.wd.tech.bean.UserFriendListBean;
+import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
+import com.wd.tech.bean.messagebean.AddFriendBean;
+import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
+import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
+import com.wd.tech.bean.messagebean.CheckFriendApplyBean;
+import com.wd.tech.bean.messagebean.CrowdInfromBean;
+import com.wd.tech.bean.messagebean.DeleteFriendBean;
+import com.wd.tech.bean.messagebean.DeleteFriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.DeleteFriendGroupingBean;
+import com.wd.tech.bean.messagebean.ExisisMyFriendBean;
+import com.wd.tech.bean.messagebean.FriendChatDialogueRecordBean;
+import com.wd.tech.bean.messagebean.FriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.FriendMessageBean;
+import com.wd.tech.bean.messagebean.PhoneUserMessangeBean;
+import com.wd.tech.bean.messagebean.SendMessageBean;
+import com.wd.tech.bean.messagebean.SetCrowdBean;
+import com.wd.tech.bean.messagebean.SetCustomFriendGroupingBean;
+import com.wd.tech.bean.messagebean.ShiftFriendGroupingBean;
+import com.wd.tech.bean.messagebean.UserAllGroupingBean;
+import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
+import com.wd.tech.bean.messagebean.UserFriendListBean;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
 import com.wd.tech.bean.informationentity.BannerEntity;
@@ -456,5 +457,23 @@ public class Model implements IContract.IModel {
                                 modelCallBack.failur(throwable);
                             }
                         });
+    }
+    //展示首页数据列表
+    @Override
+    public void getInfoRecommendListData(int plateId, int page, int count, ModelCallBack modelCallBack) {
+           apiService.getInfoRecommendListData(plateId,page,count)
+                   .subscribeOn(Schedulers.io())
+                   .observeOn(AndroidSchedulers.mainThread())
+                   .subscribe(new Consumer<InfoRecommendListEntity>() {
+                       @Override
+                       public void accept(InfoRecommendListEntity infoRecommendListEntity) throws Exception {
+                            modelCallBack.success(infoRecommendListEntity);
+                       }
+                   }, new Consumer<Throwable>() {
+                       @Override
+                       public void accept(Throwable throwable) throws Exception {
+                           modelCallBack.failur(throwable);
+                       }
+                   });
     }
 }

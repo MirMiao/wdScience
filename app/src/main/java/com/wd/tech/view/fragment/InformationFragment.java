@@ -3,25 +3,35 @@ package com.wd.tech.view.fragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.stx.xhb.androidx.XBanner;
 import com.wd.tech.R;
+import com.wd.tech.adapter.informationadapter.InfoRecommendListAdapter;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.informationentity.BannerEntity;
+import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class InformationFragment extends BaseFragment<Presenter> implements IContract.IView {
+    List<InfoRecommendListEntity.ResultBean> list=new ArrayList<>();
     @BindView(R.id.iv_menu)
     ImageView ivMenu;
     @BindView(R.id.iv_serch)
@@ -30,7 +40,11 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
     XBanner xbaner;
     @BindView(R.id.tv_xbannerHint)
     TextView tvXbannerHint;
-
+    @BindView(R.id.rv_information)
+    RecyclerView rvInformation;
+    @BindView(R.id.smartRefresh)
+    SmartRefreshLayout smartRefresh;
+    int i=1;
     @Override
     protected int bindLayoutid() {
         return R.layout.fragment_information;
@@ -38,7 +52,31 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
 
     @Override
     protected void initView(View inflate) {
-
+        rvInformation.setLayoutManager(new LinearLayoutManager(getContext()));
+        //设置允许为可上拉加载
+        smartRefresh.setEnableLoadMore(true);
+        smartRefresh.setEnableRefresh(true);
+        //下拉刷新
+        smartRefresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                  i=1;
+                  list.clear();
+                  presenter.getInfoRecommendListData(i,1,10);
+                  //刷新完毕
+                  smartRefresh.finishRefresh();
+            }
+        });
+        //上拉加载
+        smartRefresh.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                  i++;
+                  presenter.getInfoRecommendListData(i,1,10);
+                  //加载完毕
+                 smartRefresh.finishLoadMore();
+            }
+        });
     }
 
     @Override
@@ -50,6 +88,7 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
     @Override
     protected void initData() {
         presenter.getBannerData(); //请求banner数据
+        presenter.getInfoRecommendListData(i,1,10);
     }
 
     @Override
@@ -67,11 +106,15 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
                             .error(R.mipmap.ic_launcher)
                             .placeholder(R.mipmap.ic_launcher_round)
                             .into((ImageView) view);
-                        tvXbannerHint.setText(result.get(position).getTitle());
-
+                    tvXbannerHint.setText(result.get(position).getTitle());
                 }
             });
 
+        }else if(o instanceof InfoRecommendListEntity){
+            InfoRecommendListEntity o1 = (InfoRecommendListEntity) o;
+            list.addAll(o1.getResult());
+            InfoRecommendListAdapter infoRecommendListAdapter = new InfoRecommendListAdapter(getContext(), list);
+            rvInformation.setAdapter(infoRecommendListAdapter);
         }
     }
 

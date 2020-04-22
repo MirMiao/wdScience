@@ -1,18 +1,19 @@
-package com.wd.tech.bean;
+package com.wd.tech.bean.messagebean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author 吴健
  * Class :1708A
  * @description:
- * @date :2020/4/20 17:46
+ * @date :2020/4/19 9:12
  * @classname :
  */
-public class PhoneUserMessangeBean implements Serializable {
+public class FriendMessageBean implements Serializable {
 
     /**
-     * result : {"headPic":"http://mobile.bwstudent.com/images/tech/default/tech.jpg","integral":0,"nickName":"心心","phone":"13555278077","sex":1,"userId":1389,"userName":"G3Yd0q13555278077","whetherFaceId":2,"whetherVip":2}
+     * result : {"headPic":"http://mobile.bwstudent.com/images/tech/default/tech.jpg","integral":0,"myGroupList":[],"nickName":"心心","phone":"13555278077","sex":1,"userId":1389,"userName":"G3Yd0q13555278077","whetherFaceId":2,"whetherVip":2}
      * message : 查询成功
      * status : 0000
      */
@@ -49,6 +50,7 @@ public class PhoneUserMessangeBean implements Serializable {
         /**
          * headPic : http://mobile.bwstudent.com/images/tech/default/tech.jpg
          * integral : 0
+         * myGroupList : []
          * nickName : 心心
          * phone : 13555278077
          * sex : 1
@@ -67,6 +69,7 @@ public class PhoneUserMessangeBean implements Serializable {
         private String userName;
         private int whetherFaceId;
         private int whetherVip;
+        private List<?> myGroupList;
 
         public String getHeadPic() {
             return headPic;
@@ -138,6 +141,14 @@ public class PhoneUserMessangeBean implements Serializable {
 
         public void setWhetherVip(int whetherVip) {
             this.whetherVip = whetherVip;
+        }
+
+        public List<?> getMyGroupList() {
+            return myGroupList;
+        }
+
+        public void setMyGroupList(List<?> myGroupList) {
+            this.myGroupList = myGroupList;
         }
     }
 }

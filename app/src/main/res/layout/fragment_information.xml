@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -36,29 +37,46 @@
         android:background="#33666666"
         android:layout_marginTop="@dimen/dp_14"
         android:layout_height="2dp"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_height="@dimen/dp_160"
-        >
-        <com.stx.xhb.androidx.XBanner
-            android:layout_width="match_parent"
-            android:id="@+id/xbaner"
-            app:clipChildrenLeftRightMargin="@dimen/dp_40"
-            android:layout_height="@dimen/dp_160"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:id="@+id/tv_xbannerHint"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:maxEms="20"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/dp_15"
-            android:layout_alignParentBottom="true"
-            android:text="sdsdsd"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
+
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_marginTop="@dimen/dp_5"
+                       android:layout_height="@dimen/dp_160"
+                       >
+                       <com.stx.xhb.androidx.XBanner
+                           android:layout_width="match_parent"
+                           android:id="@+id/xbaner"
+                           app:clipChildrenLeftRightMargin="@dimen/dp_40"
+                           android:layout_height="@dimen/dp_160"/>
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:id="@+id/tv_xbannerHint"
+                           android:gravity="center"
+                           android:textColor="#ffffff"
+                           android:maxEms="20"
+                           android:singleLine="true"
+                           android:ellipsize="end"
+                           android:layout_centerHorizontal="true"
+                           android:layout_marginBottom="@dimen/dp_15"
+                           android:layout_alignParentBottom="true"
+                           android:text="sdsdsd"
+                           android:layout_height="wrap_content"/>
+                   </RelativeLayout>
+
+                   <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                       android:layout_width="match_parent"
+                       android:id="@+id/smartRefresh"
+                       android:layout_height="match_parent">
+                       <androidx.recyclerview.widget.RecyclerView
+                           android:layout_width="match_parent"
+                           android:id="@+id/rv_information"
+                           android:layout_height="match_parent"/>
+                   </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+
+
+
+
 
 </LinearLayout>

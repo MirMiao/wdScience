@@ -37,6 +37,7 @@ public interface IContract {
         void  getCommunitydata(int page,int count,ModelCallBack modelCallBack);//社区列表
         void  getCommentary(int communityId,int page,int count,ModelCallBack modelCallBack);//社区用户评论
         void getBannerData(ModelCallBack modelCallBack);//banner展示列表
+        void getInfoRecommendListData(int plateId,int page,int count,ModelCallBack modelCallBack); //展示首页数据
         interface ModelCallBack{
             void success(Object o);
             void failur(Throwable throwable);
@@ -70,6 +71,7 @@ public interface IContract {
         void  getCommentary(int communityId, int page, int count);//社区用户评论
 
         void getBannerData();  //展示banner列表
+        void getInfoRecommendListData(int plateId,int page,int count);//展示首页数据
     }
     interface IView extends IBaseView {
         void success(Object o);

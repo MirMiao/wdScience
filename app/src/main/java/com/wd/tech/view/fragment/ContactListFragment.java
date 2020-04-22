@@ -5,7 +5,7 @@ import android.widget.LinearLayout;
 import com.wd.tech.R;
 import com.wd.tech.adapter.infromation.MyContactListAdapter;
 import com.wd.tech.base.BaseFragment;
-import com.wd.tech.bean.UserFriendListBean;
+import com.wd.tech.bean.messagebean.UserFriendListBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.myview.Mysearchview;
 import com.wd.tech.presenter.Presenter;

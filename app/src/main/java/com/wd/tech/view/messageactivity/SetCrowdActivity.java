@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.wd.tech.App;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
-import com.wd.tech.bean.SetCrowdBean;
+import com.wd.tech.bean.messagebean.SetCrowdBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 
