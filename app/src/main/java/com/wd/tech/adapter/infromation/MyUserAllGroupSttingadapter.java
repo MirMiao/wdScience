@@ -13,15 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.wd.tech.R;
 import com.wd.tech.bean.UserAllGroupingBean;
 import com.wd.tech.event.Eventgroupdeleteid;
-import com.wd.tech.event.Eventgroupid;
+import com.wd.tech.bean.messagebean.UserAllGroupingBean;
 import com.wd.tech.event.Eventgroupupdateid;
-import com.wd.tech.event.Eventstuast;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * @author 吴健
  * Class :1708A

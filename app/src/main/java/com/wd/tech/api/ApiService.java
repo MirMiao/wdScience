@@ -1,26 +1,30 @@
 package com.wd.tech.api;
-import com.wd.tech.bean.AddFriendBean;
-import com.wd.tech.bean.AlterFriendGroupingNameBean;
-import com.wd.tech.bean.AlterFriendRemarkBean;
-import com.wd.tech.bean.CheckFriendApplyBean;
-import com.wd.tech.bean.CrowdInfromBean;
-import com.wd.tech.bean.DeleteFriendBean;
-import com.wd.tech.bean.DeleteFriendChatRrecordBean;
-import com.wd.tech.bean.DeleteFriendGroupingBean;
-import com.wd.tech.bean.ExisisMyFriendBean;
-import com.wd.tech.bean.FriendChatDialogueRecordBean;
-import com.wd.tech.bean.FriendChatRrecordBean;
-import com.wd.tech.bean.FriendMessageBean;
-import com.wd.tech.bean.PhoneUserMessangeBean;
-import com.wd.tech.bean.SendMessageBean;
-import com.wd.tech.bean.SetCrowdBean;
-import com.wd.tech.bean.SetCustomFriendGroupingBean;
-import com.wd.tech.bean.ShiftFriendGroupingBean;
-import com.wd.tech.bean.UserAllGroupingBean;
-import com.wd.tech.bean.UserFriendInfromRecordBean;
-import com.wd.tech.bean.UserFriendListBean;
+import com.wd.tech.bean.informationentity.FindAllInfoPlate;
+import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
+import com.wd.tech.bean.messagebean.AddFriendBean;
+import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
+import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
+import com.wd.tech.bean.messagebean.CheckFriendApplyBean;
+import com.wd.tech.bean.messagebean.CrowdInfromBean;
+import com.wd.tech.bean.messagebean.DeleteFriendBean;
+import com.wd.tech.bean.messagebean.DeleteFriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.DeleteFriendGroupingBean;
+import com.wd.tech.bean.messagebean.ExisisMyFriendBean;
+import com.wd.tech.bean.messagebean.FriendChatDialogueRecordBean;
+import com.wd.tech.bean.messagebean.FriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.FriendMessageBean;
+import com.wd.tech.bean.messagebean.PhoneUserMessangeBean;
+import com.wd.tech.bean.messagebean.SendMessageBean;
+import com.wd.tech.bean.messagebean.SetCrowdBean;
+import com.wd.tech.bean.messagebean.SetCustomFriendGroupingBean;
+import com.wd.tech.bean.messagebean.ShiftFriendGroupingBean;
+import com.wd.tech.bean.messagebean.UserAllGroupingBean;
+import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
+import com.wd.tech.bean.messagebean.UserFriendListBean;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
+import com.wd.tech.bean.informationentity.BannerEntity;
+import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 
 import io.reactivex.Observable;
 import retrofit2.http.DELETE;
@@ -111,4 +115,21 @@ public interface ApiService {
 
     @GET(Api.COMMUNITY_Commentary)
     Observable<CommentaryData> getCommentary(@Query("communityId")int communityId, @Query("page")int page, @Query("count")int count);
+
+
+    //展示banner数据
+    @GET("information/v1/bannerShow")
+    Observable<BannerEntity> getBannerData();
+
+    //展示首页数据
+    @GET("information/v1/infoRecommendList")
+    Observable<InfoRecommendListEntity> getInfoRecommendListData(@Query("plateId") int plateId,@Query("page")int page,@Query("count")int count);
+
+    //展示点击菜单按钮展示数据
+    @GET("information/v1/findAllInfoPlate")
+    Observable<FindAllInfoPlate> getAllPlate();
+
+    //根据关键字模糊查询
+    @GET("information/v1/findInformationByTitle")
+    Observable<SerchInfoByKeyWordEntity> serchByKeyWord(@Query("title") String title,@Query("page") int page,@Query("count")int count);
 }

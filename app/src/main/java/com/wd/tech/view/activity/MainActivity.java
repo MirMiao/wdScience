@@ -1,6 +1,5 @@
 package com.wd.tech.view.activity;
 
-import android.util.Log;
 import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -9,7 +8,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.base.mvp.BasePresenter;
-import com.wd.tech.util.RsaCoder;
 import com.wd.tech.view.fragment.CommunityFragment;
 import com.wd.tech.view.fragment.InformationFragment;
 import com.wd.tech.view.fragment.MessageFragment;

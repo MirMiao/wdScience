@@ -9,8 +9,8 @@ import com.wd.tech.R;
 import com.wd.tech.adapter.infromation.MyCrowdInfromadapter;
 import com.wd.tech.adapter.infromation.MyMessageListAdapter;
 import com.wd.tech.base.BaseFragment;
-import com.wd.tech.bean.CrowdInfromBean;
-import com.wd.tech.bean.UserFriendInfromRecordBean;
+import com.wd.tech.bean.messagebean.CrowdInfromBean;
+import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 
