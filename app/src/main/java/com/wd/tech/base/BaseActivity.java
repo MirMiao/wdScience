@@ -1,12 +1,16 @@
 package com.wd.tech.base;
 
+import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.wd.tech.base.mvp.BasePresenter;
 import com.wd.tech.base.mvp.IBaseView;
+import com.wd.tech.util.StatusBarUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -51,4 +55,5 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             mBind.unbind();
         }
     }
+
 }

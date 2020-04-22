@@ -11,6 +11,7 @@ import retrofit2.http.GET;
  * 功能 :
  */
 public interface IInformationApiService {
+    //展示banner数据
     @GET("techApi/information/v1/bannerShow")
-    Observable<BannerEntity> getBannerData();   //展示banner数据
+    Observable<BannerEntity> getBannerData();
 }
