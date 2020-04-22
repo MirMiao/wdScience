@@ -38,8 +38,8 @@ public class MyMessageListAdapter extends  RecyclerView.Adapter<MyMessageListAda
     @NonNull
     @Override
     public MyMessageListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.fragment_messagelist_item,parent,false);
-        myMessageListViewHolder = new MyMessageListViewHolder(view);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.fragment_messagelist_item, parent, false);
+        myMessageListViewHolder = new MyMessageListViewHolder(inflate);
         return myMessageListViewHolder;
     }
 
@@ -52,7 +52,7 @@ public class MyMessageListAdapter extends  RecyclerView.Adapter<MyMessageListAda
          myMessageListViewHolder.message_contentcount.setVisibility(View.GONE);
      }
      else {
-         myMessageListViewHolder.message_contentcount.setText(userfriendinfromrecordresult.get(position).getStatus());
+         myMessageListViewHolder.message_contentcount.setText(userfriendinfromrecordresult.get(position).getStatus()+"");
      }
         RetrofitUtil.getInstance().getRectphoto(userfriendinfromrecordresult.get(position).getFromHeadPic(),myMessageListViewHolder.message_userimg);
         myMessageListViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

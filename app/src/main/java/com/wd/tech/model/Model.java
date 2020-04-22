@@ -3,6 +3,8 @@ package com.wd.tech.model;
 import com.wd.tech.api.ApiService;
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.UserFriendListBean;
+import com.wd.tech.beancommunity.CommentaryData;
+import com.wd.tech.beancommunity.CommunityData;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.util.RetrofitUtil;
 
@@ -54,4 +56,46 @@ public class Model implements IContract.IModel {
                 }
             });
     }
+    //社区列表
+    @Override
+    public void getCommunitydata(int page, int count, ModelCallBack modelCallBack) {
+        Observable<CommunityData> communitylist = apiService.getCommunitylist(page, count);
+        communitylist.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CommunityData>() {
+                    @Override
+                    public void accept(CommunityData communityData) throws Exception {
+                        modelCallBack.success(communityData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+
+    //社区用户评论
+    @Override
+    public void getCommentary(int communityId, int page, int count, ModelCallBack modelCallBack) {
+        Observable<CommentaryData> commentary = apiService.getCommentary(communityId, page, count);
+        commentary.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CommentaryData>() {
+                    @Override
+                    public void accept(CommentaryData commentaryData) throws Exception {
+                        modelCallBack.success(commentaryData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+
+
+
 }

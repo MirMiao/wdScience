@@ -2,6 +2,8 @@ package com.wd.tech.api;
 
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.UserFriendListBean;
+import com.wd.tech.beancommunity.CommentaryData;
+import com.wd.tech.beancommunity.CommunityData;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -21,5 +23,11 @@ public interface ApiService {
 
     @GET(Api.USERFRIENDLIST_URL)//初始化我的好友列表全量信息
     Observable<UserFriendListBean>getUserFriendListBeanndata();
+
+    @GET(Api.COMMUNITY_LIST)
+    Observable<CommunityData> getCommunitylist(@Query("page")int page,@Query("count")int count);
+
+    @GET(Api.COMMUNITY_Commentary)
+    Observable<CommentaryData> getCommentary(@Query("communityId")int communityId, @Query("page")int page, @Query("count")int count);
 
 }

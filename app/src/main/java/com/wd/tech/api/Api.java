@@ -9,5 +9,7 @@ public interface Api {
     String BASE_URL="https://mobile.bwstudent.com/techApi/";//根路径
     String USERFRIENDINFROMRECORD_URL="chat/verify/v1/findFriendNoticePageList";//查询用户的好友通知记录
     String USERFRIENDLIST_URL="chat/verify/v1/initFriendList";//初始化我的好友列表全量信息
+    String COMMUNITY_LIST="community/v1/findCommunityList";//社区列表
+    String COMMUNITY_Commentary="community/v1/findCommunityUserCommentList";//社区用户评论
 
 }
