@@ -1,6 +1,8 @@
 package com.wd.tech.view.messageactivity;
 
+import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,8 +21,8 @@ import com.wd.tech.bean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.DeleteFriendGroupingBean;
 import com.wd.tech.bean.UserAllGroupingBean;
 import com.wd.tech.contract.IContract;
-import com.wd.tech.event.Eventgroupid;
-import com.wd.tech.event.Eventstuast;
+import com.wd.tech.event.Eventgroupdeleteid;
+import com.wd.tech.event.Eventgroupupdateid;
 import com.wd.tech.presenter.Presenter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,6 +32,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class GroupSttingActivity extends BaseActivity<Presenter> implements IContract.IView {
     @BindView(R.id.group_sttingRecyclerView)
@@ -38,9 +42,12 @@ public class GroupSttingActivity extends BaseActivity<Presenter> implements ICon
     EditText updategroupname;
     @BindView(R.id.refresh)
     SmartRefreshLayout refresh;
+    @BindView(R.id.btn_update)
+    Button btnUpdate;
     private List<UserAllGroupingBean.ResultBean> userallgroupresult;
     private MyUserAllGroupSttingadapter myUserAllGroupStting;
     private String trim;
+    private int groupupdateid;
 
     @Override
     protected Presenter initPresenter() {
@@ -69,28 +76,24 @@ public class GroupSttingActivity extends BaseActivity<Presenter> implements ICon
         });
     }
 
+
     @Override
     protected void initView() {
         EventBus.getDefault().register(this);
-    }
-
-    @Subscribe(threadMode = ThreadMode.POSTING, sticky = true)
-    public void onEventgroupid(Eventgroupid eventgroupid) {
-        trim = updategroupname.getText().toString().trim();
-        if (trim != null) {
-            presenter.getAlterFriendGroupingNameBeandata(eventgroupid.groupid, trim);
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.BACKGROUND, sticky = true)
-    public void onEventid(Eventstuast eventstuast) {
-        presenter.getDeleteFriendGroupingBeandata(eventstuast.id);
     }
 
     public void back(View view) {
         finish();
     }
 
+    @Subscribe(threadMode = ThreadMode.POSTING, sticky = true)
+    public void onEventgroupid(Eventgroupupdateid eventgroupupdateid) {
+        groupupdateid = eventgroupupdateid.groupupdateid;
+    }
+    @Subscribe(threadMode = ThreadMode.BACKGROUND, sticky = true)
+    public void onEventid(Eventgroupdeleteid eventgroupdeleteid) {
+        presenter.getDeleteFriendGroupingBeandata(eventgroupdeleteid.groupdeleteid);
+    }
     @Override
     public void success(Object o) {
         if (o instanceof UserAllGroupingBean) {
@@ -119,4 +122,12 @@ public class GroupSttingActivity extends BaseActivity<Presenter> implements ICon
         EventBus.getDefault().unregister(this);
     }
 
+
+    @OnClick(R.id.btn_update)
+    public void onViewClicked() {
+        trim = updategroupname.getText().toString().trim();
+        if (trim != null) {
+            presenter.getAlterFriendGroupingNameBeandata(groupupdateid, trim);
+        }
+    }
 }

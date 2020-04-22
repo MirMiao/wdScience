@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,7 +48,7 @@ public class MyUserAllGroupingadapter extends RecyclerView.Adapter<MyUserAllGrou
     public void onBindViewHolder(@NonNull MyUserAllGroupingViewHolder holder, int position) {
       myUserAllGroupingViewHolder.group_name.setText(userallgroupingresult.get(position).getGroupName());
         int groupId = userallgroupingresult.get(position).getGroupId();
-      myUserAllGroupingViewHolder.group_name.setOnClickListener(new View.OnClickListener() {
+      myUserAllGroupingViewHolder.group.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
               Eventgroupid eventgroupid=new Eventgroupid();
@@ -68,9 +69,11 @@ public  void  update(List<UserAllGroupingBean.ResultBean> userallgroupingresult)
 
     class  MyUserAllGroupingViewHolder extends RecyclerView.ViewHolder {
      TextView group_name;
+     LinearLayout group;
         public MyUserAllGroupingViewHolder(@NonNull View itemView) {
          super(itemView);
             group_name= itemView.findViewById(R.id.group_name);
+            group= itemView.findViewById(R.id.group);
      }
  }
 

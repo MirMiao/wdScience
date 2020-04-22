@@ -99,7 +99,7 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter implements 
             groupholder= (GroupViewHolder) view.getTag();
         }
         groupholder.group_name.setText(userfriendlistresult.get(i).getGroupName());
-        groupholder.group_count.setText(userfriendlistresult.get(i).getCurrentNumber()+"");
+        groupholder.group_count.setText(userfriendlistresult.get(i).getCurrentNumber()+"/10");
         groupholder.group_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,10 +148,14 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter implements 
                 showPopupWindow();
                 return true;
             }
-
-
         });
         return view;
+    }
+    //刷新
+    public  void updade(List<UserFriendListBean.ResultBean> userfriendlistresult){
+      this.userfriendlistresult.clear();
+      this.userfriendlistresult.addAll(userfriendlistresult);
+      notifyDataSetChanged();
     }
     private void showPopupWindow() {
         //设置contentView
