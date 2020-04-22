@@ -1,4 +1,4 @@
-package com.wd.tech.adapter;
+package com.wd.tech.adapter.infromation;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +24,7 @@ import com.wd.tech.bean.UserFriendListBean;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.view.messageactivity.AddActivity;
 import com.wd.tech.view.messageactivity.FriendMessageActivity;
+import com.wd.tech.view.messageactivity.GroupSttingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +100,13 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter implements 
         }
         groupholder.group_name.setText(userfriendlistresult.get(i).getGroupName());
         groupholder.group_count.setText(userfriendlistresult.get(i).getCurrentNumber()+"");
+        groupholder.group_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentgsa=new Intent(context, GroupSttingActivity.class);
+                context.startActivity(intentgsa);
+            }
+        });
         return view;
     }
 
@@ -124,7 +132,12 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter implements 
         childholder.friend_remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //跳转传值
                 Intent intent=new Intent(context, FriendMessageActivity.class);
+                String remarkName = friendInfoList.get(i1).getRemarkName();
+                int friendUid = friendInfoList.get(i1).getFriendUid();
+                intent.putExtra("friendUid",friendUid);
+                intent.putExtra("remark",remarkName);
                 context.startActivity(intent);
             }
         });

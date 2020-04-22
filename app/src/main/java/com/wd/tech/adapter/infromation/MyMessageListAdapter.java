@@ -1,5 +1,4 @@
-package com.wd.tech.adapter;
-
+package com.wd.tech.adapter.infromation;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.util.TimeformatUtil;
 import com.wd.tech.view.messageactivity.FriendInformActivity;
-import com.wd.tech.view.messageactivity.FriendMessageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +23,8 @@ import java.util.List;
  * @date :2020/4/18 9:29
  * @classname :
  */
-public class MyMessageListAdapter extends  RecyclerView.Adapter<MyMessageListAdapter.MyMessageListViewHolder>{
-    private List<UserFriendInfromRecordBean.ResultBean> userfriendinfromrecordresult=new ArrayList<>();
+public class MyMessageListAdapter extends  RecyclerView.Adapter<MyMessageListAdapter.MyMessageListViewHolder> {
+    private List<UserFriendInfromRecordBean.ResultBean> userfriendinfromrecordresult = new ArrayList<>();
     private Context context;
     private MyMessageListViewHolder myMessageListViewHolder;
 
@@ -52,13 +50,15 @@ public class MyMessageListAdapter extends  RecyclerView.Adapter<MyMessageListAda
          myMessageListViewHolder.message_contentcount.setVisibility(View.GONE);
      }
      else {
-         myMessageListViewHolder.message_contentcount.setText(userfriendinfromrecordresult.get(position).getStatus());
+         myMessageListViewHolder.message_contentcount.setText("1");
      }
         RetrofitUtil.getInstance().getRectphoto(userfriendinfromrecordresult.get(position).getFromHeadPic(),myMessageListViewHolder.message_userimg);
         myMessageListViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int noticeId = userfriendinfromrecordresult.get(position).getNoticeId();
                 Intent intent=new Intent(context, FriendInformActivity.class);
+                intent.putExtra("noticeId",noticeId);
                 context.startActivity(intent);
             }
         });
@@ -68,18 +68,17 @@ public class MyMessageListAdapter extends  RecyclerView.Adapter<MyMessageListAda
     public int getItemCount() {
         return userfriendinfromrecordresult.size();
     }
-
-    class  MyMessageListViewHolder extends RecyclerView.ViewHolder {
+    class MyMessageListViewHolder extends RecyclerView.ViewHolder {
         ImageView message_userimg;
-        TextView message_username,message_usertime,message_usercontent,message_contentcount;
+        TextView message_username, message_usertime, message_usercontent, message_contentcount;
+
         public MyMessageListViewHolder(@NonNull View itemView) {
             super(itemView);
-            message_userimg=itemView.findViewById(R.id.message_userimg);
-            message_username=itemView.findViewById(R.id.message_username);
-            message_usertime=itemView.findViewById(R.id.message_usertime);
-            message_usercontent=itemView.findViewById(R.id.message_usercontent);
-            message_contentcount=itemView.findViewById(R.id.message_contentcount);
-
+            message_userimg = itemView.findViewById(R.id.message_userimg);
+            message_username = itemView.findViewById(R.id.message_username);
+            message_usertime = itemView.findViewById(R.id.message_usertime);
+            message_usercontent = itemView.findViewById(R.id.message_usercontent);
+            message_contentcount = itemView.findViewById(R.id.message_contentcount);
         }
 
     }

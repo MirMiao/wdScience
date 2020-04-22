@@ -9,12 +9,14 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/weidulogo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.messageactivity.SelectGroupingActivity"></activity>
+        <activity android:name=".view.messageactivity.GroupSttingActivity"></activity>
+        <activity android:name=".view.messageactivity.FriendchatRecordActivity" />
+        <activity android:name=".view.messageactivity.SelectGroupingActivity" />
         <activity android:name=".view.messageactivity.CrowdHomePageActivity" />
         <activity android:name=".view.messageactivity.CrowdChatActivity" />
         <activity android:name=".view.messageactivity.SreachActivity" />
@@ -32,6 +34,8 @@
         <activity android:name=".view.messageactivity.FriendInformActivity" />
         <activity android:name=".view.messageactivity.FriendMessageActivity" />
         <activity android:name=".view.messageactivity.SetCrowdActivity" />
+        <activity android:name=".view.communityactivity.PingLunActivity"></activity>
+        <activity android:name=".view.communityactivity.QuanbupinglunActivity" />
         <activity android:name=".view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

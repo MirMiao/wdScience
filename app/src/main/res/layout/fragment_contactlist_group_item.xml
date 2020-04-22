@@ -8,7 +8,7 @@
     android:id="@+id/group_name"
     android:text="sss"
     android:textSize="20sp"
-    android:layout_marginLeft="20dp"
+    android:layout_marginLeft="@dimen/dp_30"
     android:layout_gravity="center"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"

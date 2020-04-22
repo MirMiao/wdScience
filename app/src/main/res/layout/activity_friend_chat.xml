@@ -27,20 +27,29 @@
             android:gravity="center"
             android:textSize="24sp"
             android:layout_weight="1"
+            android:id="@+id/friend_name"
             ></TextView>
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/nav_btn_settingdan_n_xhdpi"
-            android:id="@+id/btn_friendmessage"
+            android:id="@+id/btn_friendchatsetting"
             android:layout_marginRight="12dp"
             ></ImageView>
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        ></androidx.recyclerview.widget.RecyclerView>
+        android:id="@+id/refresh"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/friendchat_RecyclerView"
+            ></androidx.recyclerview.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

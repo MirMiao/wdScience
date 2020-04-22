@@ -1,9 +1,7 @@
 package com.wd.tech.view.fragment;
 
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,7 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.wd.tech.R;
-import com.wd.tech.adapter.MyMessageAdapter;
+import com.wd.tech.adapter.infromation.MyMessageAdapter;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.base.mvp.BasePresenter;
 import com.wd.tech.view.messageactivity.AddActivity;
