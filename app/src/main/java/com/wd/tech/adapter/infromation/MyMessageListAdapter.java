@@ -1,4 +1,4 @@
-package com.wd.tech.adapter;
+package com.wd.tech.adapter.infromation;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,12 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.wd.tech.R;
-import com.wd.tech.bean.CrowdInfromBean;
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.util.TimeformatUtil;
 import com.wd.tech.view.messageactivity.FriendInformActivity;
-import com.wd.tech.view.messageactivity.FriendMessageActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 /**

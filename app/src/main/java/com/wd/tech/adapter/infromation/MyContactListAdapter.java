@@ -1,4 +1,4 @@
-package com.wd.tech.adapter;
+package com.wd.tech.adapter.infromation;
 
 import android.content.Context;
 import android.content.Intent;

@@ -51,4 +51,8 @@ public interface Api {
     String CHECKCROWDAPPLY_URL="group/verify/v1/reviewGroupApply";//审核群申请
     String UPLOADCROWDHEADPIC_URL="group/verify/v1/uploadGroupHeadPic";//上传群头像
     String AUITCROWD_URL="group/verify/v1/retreat";//退群
+
+    //社区
+    String COMMUNITY_LIST="community/v1/findCommunityList";//社区列表
+    String COMMUNITY_Commentary="community/v1/findCommunityUserCommentList";//社区用户评论
 }

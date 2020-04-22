@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.App;
 import com.wd.tech.R;
-import com.wd.tech.adapter.MyUserFriendInfromRecordadapter;
+import com.wd.tech.adapter.infromation.MyUserFriendInfromRecordadapter;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.CheckFriendApplyBean;
 import com.wd.tech.bean.UserFriendInfromRecordBean;

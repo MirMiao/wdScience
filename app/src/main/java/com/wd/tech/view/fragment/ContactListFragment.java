@@ -3,7 +3,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import com.wd.tech.R;
-import com.wd.tech.adapter.MyContactListAdapter;
+import com.wd.tech.adapter.infromation.MyContactListAdapter;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.UserFriendListBean;
 import com.wd.tech.contract.IContract;

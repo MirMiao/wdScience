@@ -1,13 +1,12 @@
 package com.wd.tech.view.messageactivity;
 
-import android.os.Bundle;
 import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.wd.tech.R;
-import com.wd.tech.adapter.MyAddHomeAdapter;
+import com.wd.tech.adapter.infromation.MyAddHomeAdapter;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.base.mvp.BasePresenter;
 import com.wd.tech.myview.Mysearchview;
@@ -16,7 +15,6 @@ import com.wd.tech.util.UserEntroty;
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 //添加人或群
 public class AddActivity extends BaseActivity {

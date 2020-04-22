@@ -315,4 +315,35 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
            }
        });
     }
+    //社区列表
+    @Override
+    public void getCommunitydata(int page, int count) {
+        model.getCommunitydata(page, count, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+    //社区用户评论
+    @Override
+    public void getCommentary(int communityId, int page, int count) {
+        model.getCommentary(communityId, page, count, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
 }

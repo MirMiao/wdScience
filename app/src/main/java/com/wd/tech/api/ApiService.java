@@ -19,6 +19,9 @@ import com.wd.tech.bean.ShiftFriendGroupingBean;
 import com.wd.tech.bean.UserAllGroupingBean;
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.UserFriendListBean;
+import com.wd.tech.bean.beancommunity.CommentaryData;
+import com.wd.tech.bean.beancommunity.CommunityData;
+
 import io.reactivex.Observable;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
@@ -101,4 +104,11 @@ public interface ApiService {
 
     @GET(Api.CROWDINFROM_URL)//查询群通知记录
     Observable<CrowdInfromBean>getCrowdInfromBeandata(@Query("page") int page, @Query("count") int count);
+
+    //社区
+    @GET(Api.COMMUNITY_LIST)
+    Observable<CommunityData> getCommunitylist(@Query("page")int page, @Query("count")int count);
+
+    @GET(Api.COMMUNITY_Commentary)
+    Observable<CommentaryData> getCommentary(@Query("communityId")int communityId, @Query("page")int page, @Query("count")int count);
 }

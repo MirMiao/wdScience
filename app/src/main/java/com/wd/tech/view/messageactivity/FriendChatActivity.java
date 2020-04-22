@@ -1,7 +1,6 @@
 package com.wd.tech.view.messageactivity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -16,7 +15,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.wd.tech.R;
-import com.wd.tech.adapter.MyFriendChatDialogueRecordadapter;
+import com.wd.tech.adapter.infromation.MyFriendChatDialogueRecordadapter;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.FriendChatDialogueRecordBean;
 import com.wd.tech.bean.SendMessageBean;
@@ -27,7 +26,6 @@ import com.wd.tech.util.RsaCoder;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 //好友聊天

@@ -1,7 +1,6 @@
 package com.wd.tech.view.messageactivity;
 
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.wd.tech.App;
 import com.wd.tech.R;
-import com.wd.tech.adapter.MyUserAllGroupingadapter;
+import com.wd.tech.adapter.infromation.MyUserAllGroupingadapter;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.SetCustomFriendGroupingBean;
 import com.wd.tech.bean.ShiftFriendGroupingBean;
@@ -36,7 +35,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 //选择分组

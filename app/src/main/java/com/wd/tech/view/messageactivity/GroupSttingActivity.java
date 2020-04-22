@@ -1,6 +1,5 @@
 package com.wd.tech.view.messageactivity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,7 +13,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.wd.tech.App;
 import com.wd.tech.R;
-import com.wd.tech.adapter.MyUserAllGroupSttingadapter;
+import com.wd.tech.adapter.infromation.MyUserAllGroupSttingadapter;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.DeleteFriendGroupingBean;
@@ -31,7 +30,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class GroupSttingActivity extends BaseActivity<Presenter> implements IContract.IView {
     @BindView(R.id.group_sttingRecyclerView)

@@ -1,4 +1,4 @@
-package com.wd.tech.adapter;
+package com.wd.tech.adapter.infromation;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
