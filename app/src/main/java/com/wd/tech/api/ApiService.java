@@ -1,5 +1,7 @@
 package com.wd.tech.api;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
+import com.wd.tech.bean.informationentity.LoginEntity;
+import com.wd.tech.bean.informationentity.RegEntity;
 import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
 import com.wd.tech.bean.messagebean.AddFriendBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
@@ -132,4 +134,13 @@ public interface ApiService {
     //根据关键字模糊查询
     @GET("information/v1/findInformationByTitle")
     Observable<SerchInfoByKeyWordEntity> serchByKeyWord(@Query("title") String title,@Query("page") int page,@Query("count")int count);
+
+    //登陆
+    @FormUrlEncoded
+    @POST("user/v1/login")
+     Observable<LoginEntity> login(@Field("phone") String phone,@Field("pwd") String pwd);
+    //注册
+    @FormUrlEncoded
+    @POST("user/v1/register")
+    Observable<RegEntity> reg(@Field("nickName") String nickName,@Field("phone")String phone,@Field("pwd")String pwd );
 }

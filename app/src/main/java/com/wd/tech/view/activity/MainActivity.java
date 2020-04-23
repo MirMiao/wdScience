@@ -1,13 +1,17 @@
 package com.wd.tech.view.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -15,8 +19,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.base.mvp.BasePresenter;
+import com.wd.tech.contract.IContract;
+import com.wd.tech.presenter.Presenter;
 import com.wd.tech.view.fragment.CommunityFragment;
 import com.wd.tech.view.fragment.InformationFragment;
+import com.wd.tech.view.fragment.LoginActivity;
 import com.wd.tech.view.fragment.MessageFragment;
 
 import java.util.ArrayList;
@@ -25,7 +32,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity<Presenter> implements IContract.IView {
 
     @BindView(R.id.vp)
     ViewPager vp;
@@ -37,11 +44,16 @@ public class MainActivity extends BaseActivity {
     RadioButton rb3;
     @BindView(R.id.rg)
     RadioGroup rg;
+    @BindView(R.id.draw)
+    DrawerLayout draw;
+    @BindView(R.id.tv_login)
+    TextView tvLogin;
     private String string;
 
+
     @Override
-    protected BasePresenter initPresenter() {
-        return null;
+    protected Presenter initPresenter() {
+        return new Presenter();
     }
 
     @Override
@@ -51,17 +63,43 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-   /*     try {
-            string = RsaCoder.encryptByPublicKey("密码");
-            Log.i("ddd", "initData: "+string);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
     protected void initView() {
+        tvLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+        });
+        draw.setScrimColor(Color.TRANSPARENT);
+        View mContentView = draw.getChildAt(0);
+        draw.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+                mContentView.setTranslationX(drawerView.getMeasuredWidth() * (slideOffset));
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
+
+
         List<Fragment> list = new ArrayList<>();
         list.add(new InformationFragment());
         list.add(new MessageFragment());
@@ -151,10 +189,15 @@ public class MainActivity extends BaseActivity {
         radioButton.setCompoundDrawables(null, drawable_news, null, null);
     }
 
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public void success(Object o) {
+
+    }
+
+    @Override
+    public void failur(Throwable throwable) {
+
     }
 }

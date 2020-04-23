@@ -3,6 +3,8 @@ package com.wd.tech.model;
 import com.wd.tech.api.ApiService;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
+import com.wd.tech.bean.informationentity.LoginEntity;
+import com.wd.tech.bean.informationentity.RegEntity;
 import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
 import com.wd.tech.bean.messagebean.AddFriendBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
@@ -506,6 +508,42 @@ public class Model implements IContract.IModel {
                     @Override
                     public void accept(SerchInfoByKeyWordEntity serchInfoByKeyWordEntity) throws Exception {
                         modelCallBack.success(serchInfoByKeyWordEntity);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+    @Override
+    public void login(String phone, String pwd, ModelCallBack modelCallBack) {
+        apiService.login(phone,pwd)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<LoginEntity>() {
+                    @Override
+                    public void accept(LoginEntity loginEntity) throws Exception {
+                    modelCallBack.success(loginEntity);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+    @Override
+    public void reg(String nickName, String phone, String pwd, ModelCallBack modelCallBack) {
+        apiService.reg(nickName,phone,pwd)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<RegEntity>() {
+                    @Override
+                    public void accept(RegEntity regEntity) throws Exception {
+                        modelCallBack.success(regEntity);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
