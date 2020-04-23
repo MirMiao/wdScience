@@ -24,10 +24,9 @@ import com.wd.tech.bean.UserFriendListBean;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
 import com.wd.tech.bean.beancommunity.ReleasepostData;
+import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.util.RetrofitUtil;
-
-import java.io.File;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -433,6 +432,78 @@ public class Model implements IContract.IModel {
                     @Override
                     public void accept(CommentaryData commentaryData) throws Exception {
                         modelCallBack.success(commentaryData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+    @Override
+    public void getBannerData(ModelCallBack modelCallBack) {
+                apiService.getBannerData()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<BannerEntity>() {
+                            @Override
+                            public void accept(BannerEntity bannerEntity) throws Exception {
+                                modelCallBack.success(bannerEntity);
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                modelCallBack.failur(throwable);
+                            }
+                        });
+    }
+    //展示首页数据列表
+    @Override
+    public void getInfoRecommendListData(int plateId, int page, int count, ModelCallBack modelCallBack) {
+           apiService.getInfoRecommendListData(plateId,page,count)
+                   .subscribeOn(Schedulers.io())
+                   .observeOn(AndroidSchedulers.mainThread())
+                   .subscribe(new Consumer<InfoRecommendListEntity>() {
+                       @Override
+                       public void accept(InfoRecommendListEntity infoRecommendListEntity) throws Exception {
+                            modelCallBack.success(infoRecommendListEntity);
+                       }
+                   }, new Consumer<Throwable>() {
+                       @Override
+                       public void accept(Throwable throwable) throws Exception {
+                           modelCallBack.failur(throwable);
+                       }
+                   });
+    }
+
+    @Override
+    public void getPlateData(ModelCallBack modelCallBack) {
+          apiService.getAllPlate()
+                  .subscribeOn(Schedulers.io())
+                  .observeOn(AndroidSchedulers.mainThread())
+                  .subscribe(new Consumer<FindAllInfoPlate>() {
+                      @Override
+                      public void accept(FindAllInfoPlate findAllInfoPlate) throws Exception {
+                        modelCallBack.success(findAllInfoPlate);
+                      }
+                  }, new Consumer<Throwable>() {
+                      @Override
+                      public void accept(Throwable throwable) throws Exception {
+                            modelCallBack.failur(throwable);
+                      }
+                  });
+    }
+
+    @Override
+    public void serchByKeyWord(String title, int page, int count, ModelCallBack modelCallBack) {
+        apiService.serchByKeyWord(title,page,count)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<SerchInfoByKeyWordEntity>() {
+                    @Override
+                    public void accept(SerchInfoByKeyWordEntity serchInfoByKeyWordEntity) throws Exception {
+                        modelCallBack.success(serchInfoByKeyWordEntity);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

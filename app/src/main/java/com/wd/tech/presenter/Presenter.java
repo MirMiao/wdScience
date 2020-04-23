@@ -347,6 +347,66 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
             }
         });
     }
+     //展示banner列表
+    @Override
+    public void getBannerData() {
+        model.getBannerData( new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
+    @Override
+    public void getInfoRecommendListData(int plateId, int page, int count) {
+        model.getInfoRecommendListData(plateId,page,count, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
+    @Override
+    public void getPlateData() {
+        model.getPlateData( new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
+    @Override
+    public void serchByKeyWord(String title, int page, int count) {
+        model.serchByKeyWord(title,page,count, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
 
     //发布帖子
     @Override

@@ -2,7 +2,6 @@ package com.wd.tech.view.messageactivity;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +18,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.wd.tech.App;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
-import com.wd.tech.base.mvp.BasePresenter;
-import com.wd.tech.bean.AlterFriendRemarkBean;
-import com.wd.tech.bean.DeleteFriendChatRrecordBean;
-import com.wd.tech.bean.FriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
+import com.wd.tech.bean.messagebean.DeleteFriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.FriendChatRrecordBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RetrofitUtil;
@@ -30,7 +28,6 @@ import com.wd.tech.util.RetrofitUtil;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 //聊天设置

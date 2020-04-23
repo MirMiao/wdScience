@@ -1,6 +1,5 @@
 package com.wd.tech.view.messageactivity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,14 +9,12 @@ import android.widget.Toast;
 import com.wd.tech.App;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
-import com.wd.tech.base.mvp.BasePresenter;
-import com.wd.tech.bean.AddFriendBean;
+import com.wd.tech.bean.messagebean.AddFriendBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RetrofitUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 //添加好友

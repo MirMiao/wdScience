@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
-import com.wd.tech.bean.UserFriendInfromRecordBean;
+import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
 import com.wd.tech.event.Eventstuast;
 import com.wd.tech.util.RetrofitUtil;
 

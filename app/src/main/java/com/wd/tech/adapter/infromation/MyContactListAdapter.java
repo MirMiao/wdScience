@@ -3,7 +3,6 @@ package com.wd.tech.adapter.infromation;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,9 +19,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.wd.tech.App;
 import com.wd.tech.R;
-import com.wd.tech.bean.UserFriendListBean;
+import com.wd.tech.bean.messagebean.UserFriendListBean;
 import com.wd.tech.util.RetrofitUtil;
-import com.wd.tech.view.messageactivity.AddActivity;
 import com.wd.tech.view.messageactivity.FriendMessageActivity;
 import com.wd.tech.view.messageactivity.GroupSttingActivity;
 

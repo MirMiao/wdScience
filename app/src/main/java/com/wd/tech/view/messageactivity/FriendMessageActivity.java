@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,15 +11,13 @@ import android.widget.TextView;
 
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
-import com.wd.tech.bean.ExisisMyFriendBean;
-import com.wd.tech.bean.FriendMessageBean;
+import com.wd.tech.bean.messagebean.ExisisMyFriendBean;
+import com.wd.tech.bean.messagebean.FriendMessageBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RetrofitUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 //好友信息
 public class FriendMessageActivity extends BaseActivity<Presenter> implements IContract.IView {

@@ -20,11 +20,35 @@ import com.wd.tech.bean.UserAllGroupingBean;
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.UserFriendListBean;
 import com.wd.tech.bean.beancommunity.CommentData;
+import com.wd.tech.bean.informationentity.FindAllInfoPlate;
+import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
+import com.wd.tech.bean.messagebean.AddFriendBean;
+import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
+import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
+import com.wd.tech.bean.messagebean.CheckFriendApplyBean;
+import com.wd.tech.bean.messagebean.CrowdInfromBean;
+import com.wd.tech.bean.messagebean.DeleteFriendBean;
+import com.wd.tech.bean.messagebean.DeleteFriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.DeleteFriendGroupingBean;
+import com.wd.tech.bean.messagebean.ExisisMyFriendBean;
+import com.wd.tech.bean.messagebean.FriendChatDialogueRecordBean;
+import com.wd.tech.bean.messagebean.FriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.FriendMessageBean;
+import com.wd.tech.bean.messagebean.PhoneUserMessangeBean;
+import com.wd.tech.bean.messagebean.SendMessageBean;
+import com.wd.tech.bean.messagebean.SetCrowdBean;
+import com.wd.tech.bean.messagebean.SetCustomFriendGroupingBean;
+import com.wd.tech.bean.messagebean.ShiftFriendGroupingBean;
+import com.wd.tech.bean.messagebean.UserAllGroupingBean;
+import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
+import com.wd.tech.bean.messagebean.UserFriendListBean;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
 import com.wd.tech.bean.beancommunity.ReleasepostData;
 
 import java.io.File;
+import com.wd.tech.bean.informationentity.BannerEntity;
+import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 
 import io.reactivex.Observable;
 import retrofit2.http.DELETE;
@@ -116,6 +140,23 @@ public interface ApiService {
     //社区用户评论
     @GET(Api.COMMUNITY_Commentary)
     Observable<CommentaryData> getCommentary(@Query("communityId")int communityId, @Query("page")int page, @Query("count")int count);
+
+
+    //展示banner数据
+    @GET("information/v1/bannerShow")
+    Observable<BannerEntity> getBannerData();
+
+    //展示首页数据
+    @GET("information/v1/infoRecommendList")
+    Observable<InfoRecommendListEntity> getInfoRecommendListData(@Query("plateId") int plateId,@Query("page")int page,@Query("count")int count);
+
+    //展示点击菜单按钮展示数据
+    @GET("information/v1/findAllInfoPlate")
+    Observable<FindAllInfoPlate> getAllPlate();
+
+    //根据关键字模糊查询
+    @GET("information/v1/findInformationByTitle")
+    Observable<SerchInfoByKeyWordEntity> serchByKeyWord(@Query("title") String title,@Query("page") int page,@Query("count")int count);
     //社区评论
     @POST(Api.COMMUNITY_Comment)
     @FormUrlEncoded
@@ -124,6 +165,6 @@ public interface ApiService {
     @POST(Api.COMMUNITY_ReleasePost)
     @FormUrlEncoded
     Observable<ReleasepostData> getReleasepost(@Field("content") String content,@Field("file") File file);
-    
+
 
 }
