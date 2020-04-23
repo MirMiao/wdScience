@@ -5,6 +5,8 @@ import com.wd.tech.base.mvp.BasePresenter;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.model.Model;
 
+import java.io.File;
+
 /**
  * 时间 :2020/3/27  12:04
  * 作者 :苗恒
@@ -334,6 +336,22 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
     @Override
     public void getCommentary(int communityId, int page, int count) {
         model.getCommentary(communityId, page, count, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
+    //发布帖子
+    @Override
+    public void getReleasepostdata(String content, File file) {
+        model.getReleasepostdata(content, file, new IContract.IModel.ModelCallBack() {
             @Override
             public void success(Object o) {
                 getView().success(o);

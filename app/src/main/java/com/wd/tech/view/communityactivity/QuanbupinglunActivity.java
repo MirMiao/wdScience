@@ -46,7 +46,7 @@ public class QuanbupinglunActivity extends BaseActivity<Presenter> implements IC
 
         recycommentary.setLayoutManager(new LinearLayoutManager(this));
 
-
+        presenter.getCommentary(1892,1,5);
 
     }
 
@@ -71,7 +71,6 @@ public class QuanbupinglunActivity extends BaseActivity<Presenter> implements IC
         int id=communityEvent.id;
         headpic = communityEvent.headPic;
         name = communityEvent.nickName;
-        presenter.getCommentary(id,1,5);
     }
 
     @Override

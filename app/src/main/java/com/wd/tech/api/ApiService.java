@@ -19,8 +19,12 @@ import com.wd.tech.bean.ShiftFriendGroupingBean;
 import com.wd.tech.bean.UserAllGroupingBean;
 import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.UserFriendListBean;
+import com.wd.tech.bean.beancommunity.CommentData;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
+import com.wd.tech.bean.beancommunity.ReleasepostData;
+
+import java.io.File;
 
 import io.reactivex.Observable;
 import retrofit2.http.DELETE;
@@ -106,9 +110,20 @@ public interface ApiService {
     Observable<CrowdInfromBean>getCrowdInfromBeandata(@Query("page") int page, @Query("count") int count);
 
     //社区
+    //社区列表
     @GET(Api.COMMUNITY_LIST)
     Observable<CommunityData> getCommunitylist(@Query("page")int page, @Query("count")int count);
-
+    //社区用户评论
     @GET(Api.COMMUNITY_Commentary)
     Observable<CommentaryData> getCommentary(@Query("communityId")int communityId, @Query("page")int page, @Query("count")int count);
+    //社区评论
+    @POST(Api.COMMUNITY_Comment)
+    @FormUrlEncoded
+    Observable<CommentData> getComment(@Field("communityId") int communityId, @Field("content") String content);
+    //发布帖子
+    @POST(Api.COMMUNITY_ReleasePost)
+    @FormUrlEncoded
+    Observable<ReleasepostData> getReleasepost(@Field("content") String content,@Field("file") File file);
+    
+
 }

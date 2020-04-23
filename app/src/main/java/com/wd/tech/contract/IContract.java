@@ -3,6 +3,8 @@ package com.wd.tech.contract;
 import com.wd.tech.base.mvp.IBaseModel;
 import com.wd.tech.base.mvp.IBaseView;
 
+import java.io.File;
+
 /*
  * 时间 :2020/3/27  12:01
  * 作者 :苗恒
@@ -36,6 +38,7 @@ public interface IContract {
         //社区
         void  getCommunitydata(int page,int count,ModelCallBack modelCallBack);//社区列表
         void  getCommentary(int communityId,int page,int count,ModelCallBack modelCallBack);//社区用户评论
+        void  getReleasepostdata(String content,File file,ModelCallBack modelCallBack);//发布帖子
         interface ModelCallBack{
             void success(Object o);
             void failur(Throwable throwable);
@@ -67,6 +70,7 @@ public interface IContract {
         //社区
         void  getCommunitydata(int page, int count);//社区列表
         void  getCommentary(int communityId, int page, int count);//社区用户评论
+        void  getReleasepostdata(String content, File file);//发布帖子
     }
     interface IView extends IBaseView {
         void success(Object o);

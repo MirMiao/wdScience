@@ -23,8 +23,11 @@ import com.wd.tech.bean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.UserFriendListBean;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
+import com.wd.tech.bean.beancommunity.ReleasepostData;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.util.RetrofitUtil;
+
+import java.io.File;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -438,4 +441,27 @@ public class Model implements IContract.IModel {
                     }
                 });
     }
+
+    //发布帖子
+    @Override
+    public void getReleasepostdata(String content, File file, ModelCallBack modelCallBack) {
+        Observable<ReleasepostData> releasepost = apiService.getReleasepost(content, file);
+        releasepost.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ReleasepostData>() {
+                    @Override
+                    public void accept(ReleasepostData releasepostData) throws Exception {
+                        modelCallBack.success(releasepost);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+
+
+
 }
