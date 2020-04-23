@@ -12,8 +12,9 @@ import java.util.List;
  */
 public class FriendMessageBean implements Serializable {
 
+
     /**
-     * result : {"headPic":"http://mobile.bwstudent.com/images/tech/default/tech.jpg","integral":0,"myGroupList":[],"nickName":"心心","phone":"13555278077","sex":1,"userId":1389,"userName":"G3Yd0q13555278077","whetherFaceId":2,"whetherVip":2}
+     * result : {"birthday":883670400000,"email":"9999999989@qq.com","headPic":"http://mobile.bwstudent.com/images/tech/default/tech.jpg","integral":0,"myGroupList":[],"nickName":"玉盏","phone":"13555278077","sex":2,"signature":"金戈峥嵘归 玉盏琉璃杯","userId":1389,"userName":"G3Yd0q13555278077","whetherFaceId":2,"whetherVip":2}
      * message : 查询成功
      * status : 0000
      */
@@ -48,28 +49,50 @@ public class FriendMessageBean implements Serializable {
 
     public static class ResultBean {
         /**
+         * birthday : 883670400000
+         * email : 9999999989@qq.com
          * headPic : http://mobile.bwstudent.com/images/tech/default/tech.jpg
          * integral : 0
          * myGroupList : []
-         * nickName : 心心
+         * nickName : 玉盏
          * phone : 13555278077
-         * sex : 1
+         * sex : 2
+         * signature : 金戈峥嵘归 玉盏琉璃杯
          * userId : 1389
          * userName : G3Yd0q13555278077
          * whetherFaceId : 2
          * whetherVip : 2
          */
 
+        private long birthday;
+        private String email;
         private String headPic;
         private int integral;
         private String nickName;
         private String phone;
         private int sex;
+        private String signature;
         private int userId;
         private String userName;
         private int whetherFaceId;
         private int whetherVip;
         private List<?> myGroupList;
+
+        public long getBirthday() {
+            return birthday;
+        }
+
+        public void setBirthday(long birthday) {
+            this.birthday = birthday;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
 
         public String getHeadPic() {
             return headPic;
@@ -109,6 +132,14 @@ public class FriendMessageBean implements Serializable {
 
         public void setSex(int sex) {
             this.sex = sex;
+        }
+
+        public String getSignature() {
+            return signature;
+        }
+
+        public void setSignature(String signature) {
+            this.signature = signature;
         }
 
         public int getUserId() {

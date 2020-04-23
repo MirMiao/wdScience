@@ -4,7 +4,9 @@ import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
 import com.wd.tech.bean.messagebean.AddFriendBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
+import com.wd.tech.bean.messagebean.CheckCrowdApplyBean;
 import com.wd.tech.bean.messagebean.CheckFriendApplyBean;
+import com.wd.tech.bean.messagebean.CrowGroupDetailMessageBean;
 import com.wd.tech.bean.messagebean.CrowdInfromBean;
 import com.wd.tech.bean.messagebean.DeleteFriendBean;
 import com.wd.tech.bean.messagebean.DeleteFriendChatRrecordBean;
@@ -12,13 +14,17 @@ import com.wd.tech.bean.messagebean.DeleteFriendGroupingBean;
 import com.wd.tech.bean.messagebean.ExisisMyFriendBean;
 import com.wd.tech.bean.messagebean.FriendChatDialogueRecordBean;
 import com.wd.tech.bean.messagebean.FriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.FriendListBean;
 import com.wd.tech.bean.messagebean.FriendMessageBean;
+import com.wd.tech.bean.messagebean.MyAllAddCrowdGroupBean;
+import com.wd.tech.bean.messagebean.MySetCrowGroupBean;
 import com.wd.tech.bean.messagebean.PhoneUserMessangeBean;
 import com.wd.tech.bean.messagebean.SendMessageBean;
 import com.wd.tech.bean.messagebean.SetCrowdBean;
 import com.wd.tech.bean.messagebean.SetCustomFriendGroupingBean;
 import com.wd.tech.bean.messagebean.ShiftFriendGroupingBean;
 import com.wd.tech.bean.messagebean.UserAllGroupingBean;
+import com.wd.tech.bean.messagebean.UserExisisCrowdBean;
 import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.messagebean.UserFriendListBean;
 import com.wd.tech.bean.beancommunity.CommentaryData;
@@ -33,6 +39,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 /**
  * @author 吴健
@@ -101,6 +108,9 @@ public interface ApiService {
     @DELETE(Api.DELETEFRIENDGROUPING_URL)//删除用户好友分组
     Observable<DeleteFriendGroupingBean>getDeleteFriendGroupingBeandata(@Query("groupId") int groupId);
 
+    @GET(Api.RRIENDMYLIST_URL)//查询我的好友列表
+    Observable<FriendListBean>getFriendListBeandata(@Query("searchName") String searchName);
+
     //群组相关
     @POST(Api.SETCROWD_URL)//创建群
     @FormUrlEncoded
@@ -108,6 +118,23 @@ public interface ApiService {
 
     @GET(Api.CROWDINFROM_URL)//查询群通知记录
     Observable<CrowdInfromBean>getCrowdInfromBeandata(@Query("page") int page, @Query("count") int count);
+
+
+    @GET(Api.MYSETCROWDGROUP_URL)//查询我创建的群组
+    Observable<MySetCrowGroupBean>getMySetCrowGroupBeandata();
+
+    @GET(Api.MYALLADDCROWDGROUP_URL)//查询我所有加入的群组
+    Observable<MyAllAddCrowdGroupBean>getMyAllAddCrowdGroupBeandata();
+
+    @GET(Api.USEREXISISCROWD_URL)//判断用户是否已在群内
+    Observable<UserExisisCrowdBean>getUserExisisCrowdBeandata(@Query("groupId") int groupId);
+
+    @PUT(Api.CHECKCROWDAPPLY_URL)//审核群申请
+    Observable<CheckCrowdApplyBean>getCheckCrowdApplyBeandata(@Query("noticeId") int noticeId, @Query("flag") int flag);
+
+    @GET(Api.CROWDGROUPDETAILMESSAGE_URL)//查询群组详细信息
+    Observable<CrowGroupDetailMessageBean>getCrowGroupDetailMessageBeandata(@Query("groupId") int groupId);
+
 
     //社区
     @GET(Api.COMMUNITY_LIST)

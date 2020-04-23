@@ -7,7 +7,9 @@ import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
 import com.wd.tech.bean.messagebean.AddFriendBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
+import com.wd.tech.bean.messagebean.CheckCrowdApplyBean;
 import com.wd.tech.bean.messagebean.CheckFriendApplyBean;
+import com.wd.tech.bean.messagebean.CrowGroupDetailMessageBean;
 import com.wd.tech.bean.messagebean.CrowdInfromBean;
 import com.wd.tech.bean.messagebean.DeleteFriendBean;
 import com.wd.tech.bean.messagebean.DeleteFriendChatRrecordBean;
@@ -15,13 +17,17 @@ import com.wd.tech.bean.messagebean.DeleteFriendGroupingBean;
 import com.wd.tech.bean.messagebean.ExisisMyFriendBean;
 import com.wd.tech.bean.messagebean.FriendChatDialogueRecordBean;
 import com.wd.tech.bean.messagebean.FriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.FriendListBean;
 import com.wd.tech.bean.messagebean.FriendMessageBean;
+import com.wd.tech.bean.messagebean.MyAllAddCrowdGroupBean;
+import com.wd.tech.bean.messagebean.MySetCrowGroupBean;
 import com.wd.tech.bean.messagebean.PhoneUserMessangeBean;
 import com.wd.tech.bean.messagebean.SendMessageBean;
 import com.wd.tech.bean.messagebean.SetCrowdBean;
 import com.wd.tech.bean.messagebean.SetCustomFriendGroupingBean;
 import com.wd.tech.bean.messagebean.ShiftFriendGroupingBean;
 import com.wd.tech.bean.messagebean.UserAllGroupingBean;
+import com.wd.tech.bean.messagebean.UserExisisCrowdBean;
 import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.messagebean.UserFriendListBean;
 import com.wd.tech.bean.beancommunity.CommentaryData;
@@ -367,7 +373,26 @@ public class Model implements IContract.IModel {
                      }
                  });
     }
-//创建群
+//查询我的好友列表
+    @Override
+    public void getFriendListBeandata(String searchName, ModelCallBack modelCallBack) {
+        Observable<FriendListBean>   friendListBeandata = apiService.getFriendListBeandata(searchName);
+         friendListBeandata.subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(new Consumer<FriendListBean>() {
+                     @Override
+                     public void accept(FriendListBean friendListBean) throws Exception {
+                      modelCallBack.success(friendListBean);
+                     }
+                 }, new Consumer<Throwable>() {
+                     @Override
+                     public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                     }
+                 });
+    }
+
+    //创建群
     @Override
     public void getSetCrowdBeandata(String name, String description, ModelCallBack modelCallBack) {
         Observable<SetCrowdBean>    setCrowdBeandata = apiService.getSetCrowdBeandata(name, description);
@@ -402,6 +427,96 @@ public class Model implements IContract.IModel {
                     modelCallBack.failur(throwable);
                     }
                 });
+    }
+    //查询我创建的群组
+    @Override
+    public void getMySetCrowGroupBeandata(ModelCallBack modelCallBack) {
+        Observable<MySetCrowGroupBean>    mySetCrowGroupBeandata = apiService.getMySetCrowGroupBeandata();
+        mySetCrowGroupBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MySetCrowGroupBean>() {
+                    @Override
+                    public void accept(MySetCrowGroupBean mySetCrowGroupBean) throws Exception {
+                      modelCallBack.success(mySetCrowGroupBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+    //查询我所有加入的群组
+    @Override
+    public void getMyAllAddCrowdGroupBeandata(ModelCallBack modelCallBack) {
+        Observable<MyAllAddCrowdGroupBean>    myAllAddCrowdGroupBeandata = apiService.getMyAllAddCrowdGroupBeandata();
+        myAllAddCrowdGroupBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MyAllAddCrowdGroupBean>() {
+                    @Override
+                    public void accept(MyAllAddCrowdGroupBean myAllAddCrowdGroupBean) throws Exception {
+                      modelCallBack.success(myAllAddCrowdGroupBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                         modelCallBack.failur(throwable);
+                    }
+                });
+    }
+    //判断用户是否已在群内
+    @Override
+    public void getUserExisisCrowdBeandata(int groupId, ModelCallBack modelCallBack) {
+        Observable<UserExisisCrowdBean>  userExisisCrowdBeandata = apiService.getUserExisisCrowdBeandata(groupId);
+        userExisisCrowdBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<UserExisisCrowdBean>() {
+                    @Override
+                    public void accept(UserExisisCrowdBean userExisisCrowdBean) throws Exception {
+                    modelCallBack.success(userExisisCrowdBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                     modelCallBack.failur(throwable);
+                    }
+                });
+    }
+    //审核群申请
+    @Override
+    public void getCheckCrowdApplyBeandata(int noticeId, int flag, ModelCallBack modelCallBack) {
+    Observable<CheckCrowdApplyBean>     checkCrowdApplyBeandata = apiService.getCheckCrowdApplyBeandata(noticeId, flag);
+    checkCrowdApplyBeandata.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<CheckCrowdApplyBean>() {
+                @Override
+                public void accept(CheckCrowdApplyBean checkCrowdApplyBean) throws Exception {
+                 modelCallBack.success(checkCrowdApplyBean);
+                }
+            }, new Consumer<Throwable>() {
+                @Override
+                public void accept(Throwable throwable) throws Exception {
+                   modelCallBack.failur(throwable);
+                }
+            });
+    }
+    //查询群组详细信息
+    @Override
+    public void getCrowGroupDetailMessageBeandata(int groupId, ModelCallBack modelCallBack) {
+    Observable<CrowGroupDetailMessageBean>    crowGroupDetailMessageBeandata = apiService.getCrowGroupDetailMessageBeandata(groupId);
+     crowGroupDetailMessageBeandata.subscribeOn(Schedulers.io())
+             .observeOn(AndroidSchedulers.mainThread())
+             .subscribe(new Consumer<CrowGroupDetailMessageBean>() {
+                 @Override
+                 public void accept(CrowGroupDetailMessageBean crowGroupDetailMessageBean) throws Exception {
+                     modelCallBack.success(crowGroupDetailMessageBean);
+                 }
+             }, new Consumer<Throwable>() {
+                 @Override
+                 public void accept(Throwable throwable) throws Exception {
+                     modelCallBack.failur(throwable);
+                 }
+             });
     }
 
     //社区列表

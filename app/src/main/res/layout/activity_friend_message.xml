@@ -7,62 +7,78 @@
     tools:context=".view.messageactivity.FriendMessageActivity"
     android:orientation="vertical"
     >
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            android:background="@mipmap/xxhdpi"
+            android:id="@+id/bj"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            ></ImageView>
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginTop="@dimen/dp_20"
             android:layout_marginLeft="@dimen/dp_20"
-            android:background="#020202"
             android:src="@drawable/common_nav_btn_back_n_xhdpi"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/bj"
             android:onClick="back"
-            ></ImageView>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="256dp"
-            android:background="@mipmap/bn"
             ></ImageView>
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@mipmap/ic_launcher"
-            android:layout_marginTop="200dp"
-            android:layout_marginLeft="150dp"
             android:id="@+id/user_head"
+            app:layout_constraintBottom_toBottomOf="@id/bj"
+            app:layout_constraintLeft_toLeftOf="@id/bj"
+            app:layout_constraintRight_toRightOf="@+id/bj"
             ></ImageView>
          <TextView
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="名字"
-             android:textSize="20sp"
-             android:layout_marginTop="200dp"
+             android:textSize="15sp"
              android:textColor="#666"
-             android:layout_marginLeft="230dp"
              android:id="@+id/user_name"
+             app:layout_constraintLeft_toLeftOf="@id/bj"
+             app:layout_constraintRight_toRightOf="@+id/bj"
+             android:layout_marginLeft="@dimen/dp_120"
+             android:layout_marginBottom="@dimen/dp_30"
+             app:layout_constraintBottom_toBottomOf="@id/bj"
              ></TextView>
          <TextView
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="积分"
-             android:textSize="13sp"
+             android:textSize="10sp"
              android:layout_marginTop="230dp"
              android:textColor="#ff5552"
-             android:layout_marginLeft="276dp"
              android:id="@+id/user_scroce"
+             app:layout_constraintLeft_toLeftOf="@id/bj"
+             app:layout_constraintRight_toRightOf="@+id/bj"
+             android:layout_marginLeft="@dimen/dp_200"
+             android:layout_marginBottom="@dimen/dp_30"
+             app:layout_constraintBottom_toBottomOf="@id/bj"
              ></TextView>
 
         <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@mipmap/ic_launcher"
-            android:layout_marginTop="250dp"
-            android:layout_marginLeft="250dp"
+            android:layout_marginTop="270dp"
+            android:layout_marginLeft="200dp"
             android:id="@+id/user_vippic"
+            app:layout_constraintLeft_toLeftOf="@id/bj"
+            app:layout_constraintRight_toRightOf="@+id/bj"
+            app:layout_constraintBottom_toBottomOf="@id/bj"
             ></ImageView>
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

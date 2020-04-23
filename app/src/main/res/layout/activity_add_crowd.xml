@@ -13,8 +13,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:src="@mipmap/ic_launcher"
-        android:id="@+id/crowd_background"
+        android:src="@mipmap/crowdbj"
+        android:scaleType="fitXY"
         ></ImageView>
     <ImageView
         android:layout_width="25dp"
@@ -35,39 +35,89 @@
         ></ImageView>
         ></RelativeLayout>
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#fff"
+        android:layout_marginTop="33dp"
+        >
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="#fff"
+            android:layout_height="wrap_content"
+            android:text="群成员"
+            android:layout_gravity="center"
+            android:textSize="14sp"
+            android:textColor="#333"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            ></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="群人数"
+            android:layout_gravity="center"
+            android:textSize="14sp"
+            android:textColor="#333"
+            android:layout_margin="10dp"
+            android:id="@+id/crowd_member_count"
+            ></TextView>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="#000"
+            android:layout_margin="10dp"
             android:id="@+id/btn_crowd_member"
-            android:layout_marginTop="33dp"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="群成员"
-                android:layout_gravity="center"
-                android:textSize="14sp"
-                android:textColor="#333"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                ></TextView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="群人数"
-                android:layout_gravity="center"
-                android:textSize="14sp"
-                android:textColor="#333"
-                android:layout_margin="10dp"
-                android:id="@+id/crowd_member_count"
-                ></TextView>
-        </LinearLayout>
+            android:src="@drawable/common_icon_next_n_xhdpi"></ImageView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#fff"
+        android:layout_marginTop="5dp"
+        android:id="@+id/btn_infrom"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="群通知"
+            android:layout_gravity="center"
+            android:textSize="14sp"
+            android:textColor="#333"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            ></TextView>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="#000"
+            android:layout_margin="10dp"
+            android:id="@+id/btn_crowd_infrom"
+            android:src="@drawable/common_icon_next_n_xhdpi"></ImageView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#fff"
+        android:layout_marginTop="5dp"
+        android:id="@+id/btn_crowd_chatrecord"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="查询聊天记录"
+            android:layout_gravity="center"
+            android:textSize="14sp"
+            android:textColor="#333"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            ></TextView>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="82dp"
         android:background="#fff"
         android:orientation="vertical"
+        android:id="@+id/crowd_introduce"
         >
         <TextView
             android:layout_width="match_parent"
@@ -86,18 +136,30 @@
             android:textSize="14sp"
             android:textColor="#333"
             android:layout_margin="10dp"
+            android:id="@+id/introduce_content"
             ></TextView>
     </LinearLayout>
 
     <Button
+    android:layout_width="336dp"
+    android:layout_height="40dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="90dp"
+    android:textColor="#fff"
+    android:background="#20affa"
+    android:text="申请加群"
+    android:textSize="20sp"
+    android:id="@+id/btn_applycrowd"
+    ></Button>
+    <Button
         android:layout_width="336dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="90dp"
         android:textColor="#fff"
-        android:background="#20affa"
-        android:text="申请加群"
+        android:background="#ff2727"
+        android:text="退出群组"
         android:textSize="20sp"
-        android:id="@+id/btn_applycrowd"
+        android:id="@+id/btn_quitcrowd"
         ></Button>
 </LinearLayout>

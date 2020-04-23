@@ -3,6 +3,7 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
+    android:background="@drawable/shape"
     >
     <ImageView
         android:layout_width="24dp"
@@ -19,4 +20,12 @@
         android:hint=" 请输入要输入的内容:"
         android:id="@+id/sou_content"
         ></EditText>
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/common_nav_btn_delete_n_xhdpi"
+        android:id="@+id/btn_delete"
+        ></ImageView>
 </LinearLayout>

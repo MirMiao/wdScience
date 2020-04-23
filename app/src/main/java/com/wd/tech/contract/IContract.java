@@ -30,9 +30,17 @@ public interface IContract {
      void  getAlterFriendGroupingNameBeandata(int groupId,String groupName,ModelCallBack modelCallBack);//修改好友分组名称
      void  getShiftFriendGroupingBeandata(int newGroupId,int friendUid,ModelCallBack modelCallBack);//转移好友到其他分组
      void  getDeleteFriendGroupingBeandata(int groupId,ModelCallBack modelCallBack);//删除用户好友分组
+     void  getFriendListBeandata(String searchName,ModelCallBack modelCallBack);//查询我的好友列表
       //群组相关
       void  getSetCrowdBeandata(String name,String description,ModelCallBack modelCallBack);//创建群
       void  getCrowdInfromBeandata(int page,int count,ModelCallBack modelCallBack);//查询群通知记录
+      void  getMySetCrowGroupBeandata(ModelCallBack modelCallBack);//查询我创建的群组
+      void  getMyAllAddCrowdGroupBeandata(ModelCallBack modelCallBack);//查询我所有加入的群组
+      void  getUserExisisCrowdBeandata(int groupId,ModelCallBack modelCallBack);//判断用户是否已在群内
+      void  getCheckCrowdApplyBeandata(int noticeId,int flag,ModelCallBack modelCallBack);//审核群申请
+      void  getCrowGroupDetailMessageBeandata(int groupId,ModelCallBack modelCallBack);//查询群组详细信息
+
+
         //社区
         void  getCommunitydata(int page,int count,ModelCallBack modelCallBack);//社区列表
         void  getCommentary(int communityId,int page,int count,ModelCallBack modelCallBack);//社区用户评论
@@ -65,10 +73,15 @@ public interface IContract {
         void  getAlterFriendGroupingNameBeandata(int groupId,String groupName);//修改好友分组名称
         void  getShiftFriendGroupingBeandata(int newGroupId,int friendUid);//转移好友到其他分组
         void  getDeleteFriendGroupingBeandata(int groupId);//删除用户好友分组
+        void  getFriendListBeandata(String searchName);//查询我的好友列表
         //群组相关
         void  getSetCrowdBeandata(String name,String description);//创建群
         void  getCrowdInfromBeandata(int page,int count);//查询群通知记录
-
+        void  getMySetCrowGroupBeandata();//查询我创建的群组
+        void  getMyAllAddCrowdGroupBeandata();//查询我所有加入的群组
+        void  getUserExisisCrowdBeandata(int groupId);//判断用户是否已在群内
+        void  getCheckCrowdApplyBeandata(int noticeId,int flag);//审核群申请
+        void  getCrowGroupDetailMessageBeandata(int groupId);//查询群组详细信息
         //社区
         void  getCommunitydata(int page, int count);//社区列表
         void  getCommentary(int communityId, int page, int count);//社区用户评论

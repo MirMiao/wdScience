@@ -13,7 +13,8 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:src="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
+            android:background="@mipmap/crowdbj"
             android:id="@+id/crowd_background"
             ></ImageView>
         <ImageView
@@ -96,7 +97,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="群成员"
+            android:text="群简介"
             android:layout_gravity="center"
             android:textSize="14sp"
             android:textColor="#333"
@@ -186,6 +187,6 @@
         android:background="#FF5722"
         android:text="解散群组"
         android:textSize="20sp"
-        android:id="@+id/btn_applycrowd"
+        android:id="@+id/btn_quitcrowd"
         ></Button>
 </LinearLayout>

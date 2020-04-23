@@ -7,17 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.wd.tech.R;
 import com.wd.tech.bean.messagebean.CrowdInfromBean;
-import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.util.TimeformatUtil;
 import com.wd.tech.view.messageactivity.CrowdInformActivity;
-import com.wd.tech.view.messageactivity.FriendInformActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +46,7 @@ public class MyCrowdInfromadapter  extends  RecyclerView.Adapter<MyCrowdInfromad
         mycrowdinfromViewHolder.message_username.setText("群通知");
         mycrowdinfromViewHolder.message_usertime.setText(TimeformatUtil.gettime(crowdinfromresult.get(position).getNoticeTime()));
         mycrowdinfromViewHolder.message_usercontent.setText(crowdinfromresult.get(position).getNickName()+"申请加入你的群");
+        crowdinfromresult.get(position).getNoticeId();
         if(crowdinfromresult.get(position).getStatus()==2){
             mycrowdinfromViewHolder.message_contentcount.setVisibility(View.GONE);
         }

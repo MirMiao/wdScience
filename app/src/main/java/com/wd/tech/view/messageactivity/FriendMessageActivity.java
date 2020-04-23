@@ -16,6 +16,7 @@ import com.wd.tech.bean.messagebean.FriendMessageBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RetrofitUtil;
+import com.wd.tech.util.TimeformatUtil;
 
 import butterknife.BindView;
 
@@ -87,7 +88,7 @@ public class FriendMessageActivity extends BaseActivity<Presenter> implements IC
         if (o instanceof FriendMessageBean) {
             friendmessageresult = ((FriendMessageBean) o).getResult();
             RetrofitUtil.getInstance().getRoundphoto(friendmessageresult.getHeadPic(), userHead);
-            userName.setText(friendmessageresult.getUserName());
+            userName.setText(friendmessageresult.getNickName());
             userScroce.setText(friendmessageresult.getIntegral() + "积分");
             //如果为二则不是vip
             if (friendmessageresult.getWhetherVip() == 2) {
@@ -99,10 +100,10 @@ public class FriendMessageActivity extends BaseActivity<Presenter> implements IC
                 Bitmap bitmap = BitmapFactory.decodeResource(resources, R.drawable.vip);
                 userVippic.setImageBitmap(bitmap);
             }
-            userRemarkName.setText("无");
+            userRemarkName.setText(friendmessageresult.getSignature());
             userPhone.setText(friendmessageresult.getPhone());
-            userEmail.setText("884923222@qq.com");
-            userBirthday.setText("1998-04-20");
+            userEmail.setText(friendmessageresult.getEmail());
+            userBirthday.setText(TimeformatUtil.gettimeyy(friendmessageresult.getBirthday()));
             int sex = friendmessageresult.getSex();
             if (sex == 1) {
                 userSex.setText("男");
@@ -122,11 +123,13 @@ public class FriendMessageActivity extends BaseActivity<Presenter> implements IC
                         String nickName = friendmessageresult.getNickName();
                         String userName = friendmessageresult.getUserName();
                         String headPic = friendmessageresult.getHeadPic();
+                        String signature = friendmessageresult.getSignature();
                         intentfc.putExtra("userId", userId);
                         intentfc.putExtra("nickName", nickName);
                         intentfc.putExtra("userName", userName);
                         intentfc.putExtra("remark1", remark);
                         intentfc.putExtra("headPic", headPic);
+                        intentfc.putExtra("signature", signature);
                         startActivity(intentfc);
                     }
                 });
@@ -140,11 +143,13 @@ public class FriendMessageActivity extends BaseActivity<Presenter> implements IC
                         String nickName = friendmessageresult.getNickName();
                         String userName = friendmessageresult.getUserName();
                         String headPic = friendmessageresult.getHeadPic();
+                        String signature = friendmessageresult.getSignature();
                         intentaf.putExtra("userIdaf", userId);
                         intentaf.putExtra("nickNameaf", nickName);
                         intentaf.putExtra("userNameaf", userName);
                         intentaf.putExtra("remarkaf", remark);
                         intentaf.putExtra("headPicaf", headPic);
+                        intentaf.putExtra("signature", signature);
                         startActivity(intentaf);
                     }
                 });

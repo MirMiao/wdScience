@@ -49,6 +49,7 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
     private String headPic;
     private String remark1;
     private String userName1;
+    private String signature;
 
     @Override
     protected Presenter initPresenter() {
@@ -67,6 +68,7 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
         userName1 = getIntent().getStringExtra("userName");
         remark1 = getIntent().getStringExtra("remark1");
         headPic = getIntent().getStringExtra("headPic");
+        signature = getIntent().getStringExtra("signature");
         friendName.setText(userName1);
         presenter.getFriendChatDialogueRecordBeandata(userId, 1, 10);
         refresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {

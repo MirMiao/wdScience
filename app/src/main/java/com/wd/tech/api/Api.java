@@ -46,7 +46,7 @@ public interface Api {
     String USEREXISISCROWD_URL="group/verify/v1/whetherInGroup";//判断用户是否已在群内
     String APPLYADDCROWD_URL="group/verify/v1/applyAddGroup";//申请进群
     String ANVITEADDCROWD_URL="group/verify/v1/inviteAddGroup";//邀请加群
-    String BATCHANVITEADDCROWD_URL="group/verify/v1/batchInviteAddGroup";//邀请加群
+    String BATCHANVITEADDCROWD_URL="group/verify/v1/batchInviteAddGroup";//批量邀请加群
     String CROWDINFROM_URL="group/verify/v1/findGroupNoticePageList";//查询群通知记录
     String CHECKCROWDAPPLY_URL="group/verify/v1/reviewGroupApply";//审核群申请
     String UPLOADCROWDHEADPIC_URL="group/verify/v1/uploadGroupHeadPic";//上传群头像
