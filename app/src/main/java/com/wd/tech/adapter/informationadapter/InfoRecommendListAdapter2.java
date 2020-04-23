@@ -49,11 +49,11 @@ public class InfoRecommendListAdapter2 extends RecyclerView.Adapter<InfoRecommen
     @Override
     public void onBindViewHolder(@NonNull MyViewholder holder, int position) {
         Glide.with(context).load(result.get(position).getThumbnail())
-                //    .placeholder(R.mipmap.ic_launcher_round)
-                // .error(R.mipmap.ic_launcher)
+                    .placeholder(R.drawable.placeholder)
+                     .error(R.drawable.placeholder)
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(8)))
                 .into(holder.ivImage);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         long releaseTime = result.get(position).getReleaseTime();
         String format = simpleDateFormat.format(releaseTime);
         holder.tvTitle.setText(result.get(position).getTitle());

@@ -115,7 +115,12 @@ public class SerchActivity extends BaseActivity<Presenter> implements IContract.
             SerchAdapter serchAdapter = new SerchAdapter(SerchActivity.this, list);
             rvSerch.setAdapter(serchAdapter);}
             else{
-                Toast.makeText(this, "没有找到响应的内容", Toast.LENGTH_SHORT).show();
+                 if(i!=1){
+                     Toast.makeText(this, "已经到底了哦亲", Toast.LENGTH_SHORT).show();
+                 }else{
+                     Toast.makeText(this, "没有找到响应的内容", Toast.LENGTH_SHORT).show();
+                 }
+              
             }
         }
     }

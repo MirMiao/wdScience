@@ -21,7 +21,7 @@
            android:layout_height="@dimen/dp_33"/>
         <ImageView
             android:layout_width="@dimen/dp_24"
-            android:background="@drawable/iv_serch"
+            android:src="@drawable/iv_serch"
             android:id="@+id/iv_serch"
             android:layout_marginTop="@dimen/dp_5"
             android:layout_marginLeft="@dimen/dp_10"
