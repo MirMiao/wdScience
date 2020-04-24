@@ -32,6 +32,8 @@
         <activity android:name=".view.messageactivity.SetCrowdActivity" />
         <activity android:name=".view.information.PlateActivity"/>
         <activity android:name=".view.information.SerchActivity"/>
+        <activity android:name=".view.fragment.LoginActivity"/>
+        <activity android:name=".view.fragment.RegActivity"/>
         <activity android:name=".view.communityactivity.PingLunActivity"></activity>
         <activity android:name=".view.communityactivity.QuanbupinglunActivity" />
         <activity android:name=".view.communityactivity.MyPostActivity"/>

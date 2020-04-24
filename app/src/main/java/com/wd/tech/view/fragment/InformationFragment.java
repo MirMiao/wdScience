@@ -1,11 +1,13 @@
 package com.wd.tech.view.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +36,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class InformationFragment extends BaseFragment<Presenter> implements IContract.IView {
-    List<InfoRecommendListEntity.ResultBean> list=new ArrayList<>();
+    List<InfoRecommendListEntity.ResultBean> list = new ArrayList<>();
     @BindView(R.id.iv_menu)
     ImageView ivMenu;
     @BindView(R.id.iv_serch)
@@ -47,7 +49,7 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
     RecyclerView rvInformation;
     @BindView(R.id.smartRefresh)
     SmartRefreshLayout smartRefresh;
-    int i=1;
+    int i = 1;
     @Override
     protected int bindLayoutid() {
         return R.layout.fragment_information;
@@ -55,6 +57,7 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
 
     @Override
     protected void initView(View inflate) {
+
         rvInformation.setLayoutManager(new LinearLayoutManager(getContext()));
         //设置允许为可上拉加载
         smartRefresh.setEnableLoadMore(true);
@@ -63,21 +66,21 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
         smartRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                  i=1;
-                  list.clear();
-                  presenter.getInfoRecommendListData(i,1,10);
-                  //刷新完毕
-                  smartRefresh.finishRefresh();
+                i = 1;
+                list.clear();
+                presenter.getInfoRecommendListData(i, 1, 10);
+                //刷新完毕
+                smartRefresh.finishRefresh();
             }
         });
         //上拉加载
         smartRefresh.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                  i++;
-                  presenter.getInfoRecommendListData(i,1,10);
-                  //加载完毕
-                 smartRefresh.finishLoadMore();
+                i++;
+                presenter.getInfoRecommendListData(i, 1, 10);
+                //加载完毕
+                smartRefresh.finishLoadMore();
             }
         });
     }
@@ -91,7 +94,7 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
     @Override
     protected void initData() {
         presenter.getBannerData(); //请求banner数据
-        presenter.getInfoRecommendListData(i,1,10);
+        presenter.getInfoRecommendListData(i, 1, 10);
     }
 
     @Override
@@ -113,7 +116,7 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
                 }
             });
 
-        }else if(o instanceof InfoRecommendListEntity){
+        } else if (o instanceof InfoRecommendListEntity) {
             InfoRecommendListEntity o1 = (InfoRecommendListEntity) o;
             list.addAll(o1.getResult());
             InfoRecommendListAdapter infoRecommendListAdapter = new InfoRecommendListAdapter(getContext(), list);
@@ -130,10 +133,10 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_menu:  //跳转到菜单的atcitivy
-                 startActivity(new Intent(getContext(), PlateActivity.class));
+                startActivity(new Intent(getContext(), PlateActivity.class));
                 break;
             case R.id.iv_serch:
-                 startActivity(new Intent(getContext(), SerchActivity.class));
+                startActivity(new Intent(getContext(), SerchActivity.class));
                 break;
         }
     }

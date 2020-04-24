@@ -8,6 +8,8 @@ import com.wd.tech.bean.beancommunity.ReleasepostData;
 import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
+import com.wd.tech.bean.informationentity.LoginEntity;
+import com.wd.tech.bean.informationentity.RegEntity;
 import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
 import com.wd.tech.bean.messagebean.AddFriendBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
@@ -29,10 +31,11 @@ import com.wd.tech.bean.messagebean.ShiftFriendGroupingBean;
 import com.wd.tech.bean.messagebean.UserAllGroupingBean;
 import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.messagebean.UserFriendListBean;
+import com.wd.tech.bean.beancommunity.CommentaryData;
+import com.wd.tech.bean.beancommunity.CommunityData;
+import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.util.RetrofitUtil;
-
-import java.io.File;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -558,4 +561,40 @@ public class Model implements IContract.IModel {
     }
 
 
+
+    @Override
+    public void login(String phone, String pwd, ModelCallBack modelCallBack) {
+        apiService.login(phone,pwd)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<LoginEntity>() {
+                    @Override
+                    public void accept(LoginEntity loginEntity) throws Exception {
+                    modelCallBack.success(loginEntity);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+    @Override
+    public void reg(String nickName, String phone, String pwd, ModelCallBack modelCallBack) {
+        apiService.reg(nickName,phone,pwd)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<RegEntity>() {
+                    @Override
+                    public void accept(RegEntity regEntity) throws Exception {
+                        modelCallBack.success(regEntity);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
 }

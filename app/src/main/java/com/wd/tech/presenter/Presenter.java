@@ -440,4 +440,34 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
         });
     }
 
+    @Override
+    public void login(String phone, String pwd) {
+        model.login(phone,pwd, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
+    @Override
+    public void reg(String nickName, String phone, String pwd) {
+        model.reg(nickName,phone,pwd, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
 }
