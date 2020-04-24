@@ -5,12 +5,17 @@ import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
 import com.wd.tech.bean.messagebean.AddFriendBean;
+import com.wd.tech.bean.messagebean.AlterCrowdGroupIntroBean;
+import com.wd.tech.bean.messagebean.AlterCrowdGroupNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
 import com.wd.tech.bean.messagebean.CheckCrowdApplyBean;
 import com.wd.tech.bean.messagebean.CheckFriendApplyBean;
 import com.wd.tech.bean.messagebean.CrowGroupDetailMessageBean;
+import com.wd.tech.bean.messagebean.CrowdChatContentBean;
+import com.wd.tech.bean.messagebean.CrowdGroupAllUserMessageBean;
 import com.wd.tech.bean.messagebean.CrowdInfromBean;
+import com.wd.tech.bean.messagebean.DeleteCrowdGroupBean;
 import com.wd.tech.bean.messagebean.DeleteFriendBean;
 import com.wd.tech.bean.messagebean.DeleteFriendChatRrecordBean;
 import com.wd.tech.bean.messagebean.DeleteFriendGroupingBean;
@@ -22,6 +27,8 @@ import com.wd.tech.bean.messagebean.FriendMessageBean;
 import com.wd.tech.bean.messagebean.MyAllAddCrowdGroupBean;
 import com.wd.tech.bean.messagebean.MySetCrowGroupBean;
 import com.wd.tech.bean.messagebean.PhoneUserMessangeBean;
+import com.wd.tech.bean.messagebean.QuitCrowdBean;
+import com.wd.tech.bean.messagebean.SendCrowdMessageBean;
 import com.wd.tech.bean.messagebean.SendMessageBean;
 import com.wd.tech.bean.messagebean.SetCrowdBean;
 import com.wd.tech.bean.messagebean.SetCustomFriendGroupingBean;
@@ -517,6 +524,132 @@ public class Model implements IContract.IModel {
                      modelCallBack.failur(throwable);
                  }
              });
+    }
+   //修改群组名
+    @Override
+    public void getAlterCrowdGroupNameBeandata(int groupId, String groupName, ModelCallBack modelCallBack) {
+    Observable<AlterCrowdGroupNameBean>     alterCrowdGroupNameBeandata = apiService.getAlterCrowdGroupNameBeandata(groupId, groupName);
+     alterCrowdGroupNameBeandata.subscribeOn(Schedulers.io())
+             .observeOn(AndroidSchedulers.mainThread())
+             .subscribe(new Consumer<AlterCrowdGroupNameBean>() {
+                 @Override
+                 public void accept(AlterCrowdGroupNameBean alterCrowdGroupNameBean) throws Exception {
+                   modelCallBack.success(alterCrowdGroupNameBean);
+                 }
+             }, new Consumer<Throwable>() {
+                 @Override
+                 public void accept(Throwable throwable) throws Exception {
+                      modelCallBack.failur(throwable);
+                 }
+             });
+    }
+    //修改群简介
+    @Override
+    public void getAlterCrowdGroupIntroBeandata(int groupId, String description, ModelCallBack modelCallBack) {
+    Observable<AlterCrowdGroupIntroBean>   alterCrowdGroupIntroBeandata = apiService.getAlterCrowdGroupIntroBeandata(groupId, description);
+    alterCrowdGroupIntroBeandata.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<AlterCrowdGroupIntroBean>() {
+                @Override
+                public void accept(AlterCrowdGroupIntroBean alterCrowdGroupIntroBean) throws Exception {
+                    modelCallBack.success(alterCrowdGroupIntroBean);
+                }
+            }, new Consumer<Throwable>() {
+                @Override
+                public void accept(Throwable throwable) throws Exception {
+                     modelCallBack.failur(throwable);
+                }
+            });
+    }
+    //解散群组
+    @Override
+    public void getDeleteCrowdGroupBeandata(int groupId, ModelCallBack modelCallBack) {
+     Observable<DeleteCrowdGroupBean>   deleteCrowdGroupBeandata = apiService.getDeleteCrowdGroupBeandata(groupId);
+      deleteCrowdGroupBeandata.subscribeOn(Schedulers.io())
+              .observeOn(AndroidSchedulers.mainThread())
+              .subscribe(new Consumer<DeleteCrowdGroupBean>() {
+                  @Override
+                  public void accept(DeleteCrowdGroupBean deleteCrowdGroupBean) throws Exception {
+                   modelCallBack.success(deleteCrowdGroupBean);
+                  }
+              }, new Consumer<Throwable>() {
+                  @Override
+                  public void accept(Throwable throwable) throws Exception {
+                      modelCallBack.failur(throwable);
+                  }
+              });
+    }
+    //退群
+    @Override
+    public void getQuitCrowdBeandata(int groupId, ModelCallBack modelCallBack) {
+    Observable<QuitCrowdBean>    quitCrowdBeandata = apiService.getQuitCrowdBeandata(groupId);
+    quitCrowdBeandata.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<QuitCrowdBean>() {
+                @Override
+                public void accept(QuitCrowdBean quitCrowdBean) throws Exception {
+                modelCallBack.success(quitCrowdBean);
+                }
+            }, new Consumer<Throwable>() {
+                @Override
+                public void accept(Throwable throwable) throws Exception {
+                    modelCallBack.failur(throwable);
+                }
+            });
+    }
+    //查询群组内所有用户信息
+    @Override
+    public void getCrowdGroupAllUserMessageBeandata(int groupId, ModelCallBack modelCallBack) {
+    Observable<CrowdGroupAllUserMessageBean>    crowdGroupAllUserMessageBeandata = apiService.getCrowdGroupAllUserMessageBeandata(groupId);
+    crowdGroupAllUserMessageBeandata.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<CrowdGroupAllUserMessageBean>() {
+                @Override
+                public void accept(CrowdGroupAllUserMessageBean crowdGroupAllUserMessageBean) throws Exception {
+                   modelCallBack.success(crowdGroupAllUserMessageBean);
+                }
+            }, new Consumer<Throwable>() {
+                @Override
+                public void accept(Throwable throwable) throws Exception {
+                    modelCallBack.failur(throwable);
+                }
+            });
+    }
+    //发送群信息
+    @Override
+    public void getSendCrowdMessageBeandata(int groupId, String content, ModelCallBack modelCallBack) {
+        Observable<SendCrowdMessageBean>   sendCrowdMessageBeandata = apiService.getSendCrowdMessageBeandata(groupId, content);
+        sendCrowdMessageBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<SendCrowdMessageBean>() {
+                    @Override
+                    public void accept(SendCrowdMessageBean sendCrowdMessageBean) throws Exception {
+                     modelCallBack.success(sendCrowdMessageBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+    //查询群聊天内
+    @Override
+    public void getCrowdChatContentBeandata(int groupId, int page, int count, ModelCallBack modelCallBack) {
+    Observable<CrowdChatContentBean>   crowdChatContentBeandata = apiService.getCrowdChatContentBeandata(groupId, page, count);
+    crowdChatContentBeandata.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<CrowdChatContentBean>() {
+                @Override
+                public void accept(CrowdChatContentBean crowdChatContentBean) throws Exception {
+                 modelCallBack.success(crowdChatContentBean);
+                }
+            }, new Consumer<Throwable>() {
+                @Override
+                public void accept(Throwable throwable) throws Exception {
+                   modelCallBack.failur(throwable);
+                }
+            });
     }
 
     //社区列表

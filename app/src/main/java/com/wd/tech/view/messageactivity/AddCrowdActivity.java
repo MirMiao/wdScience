@@ -5,17 +5,17 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import androidx.viewpager.widget.ViewPager;
-
+import com.wd.tech.App;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.messagebean.CrowGroupDetailMessageBean;
+import com.wd.tech.bean.messagebean.QuitCrowdBean;
 import com.wd.tech.bean.messagebean.UserExisisCrowdBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
@@ -137,6 +137,10 @@ public class AddCrowdActivity extends BaseActivity<Presenter> implements IContra
             crowdMemberCount.setText("共"+crowgroupdetailmessageresult.getCurrentCount()+"人");
             introduceContent.setText(crowgroupdetailmessageresult.getDescription());
         }
+
+        if (o instanceof QuitCrowdBean){
+            Toast.makeText(App.context,((QuitCrowdBean) o).getMessage(),Toast.LENGTH_LONG).show();
+        }
     }
       //退群
     private void showquitPopupWindow() {
@@ -165,7 +169,7 @@ public class AddCrowdActivity extends BaseActivity<Presenter> implements IContra
         int id = v.getId();
         switch (id) {
             case R.id.btn_yes: {
-
+                presenter.getQuitCrowdBeandata(groupId);
                 popupWindow.dismiss();
             }
             break;

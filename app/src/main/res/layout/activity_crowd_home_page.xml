@@ -7,15 +7,15 @@
     tools:context=".view.messageactivity.CrowdHomePageActivity"
     android:orientation="vertical"
     >
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="250dp"
+            android:src="@mipmap/crowdbj"
             android:scaleType="fitXY"
-            android:background="@mipmap/crowdbj"
-            android:id="@+id/crowd_background"
+            android:id="@+id/bj"
             ></ImageView>
         <ImageView
             android:layout_width="25dp"
@@ -24,17 +24,20 @@
             android:onClick="back"
             android:layout_marginTop="36dp"
             android:layout_marginLeft="12dp"
+            app:layout_constraintLeft_toLeftOf="@id/bj"
+            app:layout_constraintTop_toTopOf="@id/bj"
             ></ImageView>
+
         <ImageView
+            android:id="@+id/crowd_head"
             android:layout_width="58dp"
             android:layout_height="58dp"
+            android:layout_marginRight="36dp"
             android:src="@mipmap/ic_launcher"
-            android:layout_marginTop="220dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="290dp"
-            android:id="@+id/crowd_head"
+            app:layout_constraintRight_toRightOf="@id/bj"
+            app:layout_constraintBottom_toBottomOf="@id/bj"
             ></ImageView>
-        ></RelativeLayout>
+        ></androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

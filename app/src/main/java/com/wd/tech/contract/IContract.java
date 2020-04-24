@@ -39,6 +39,13 @@ public interface IContract {
       void  getUserExisisCrowdBeandata(int groupId,ModelCallBack modelCallBack);//判断用户是否已在群内
       void  getCheckCrowdApplyBeandata(int noticeId,int flag,ModelCallBack modelCallBack);//审核群申请
       void  getCrowGroupDetailMessageBeandata(int groupId,ModelCallBack modelCallBack);//查询群组详细信息
+      void  getAlterCrowdGroupNameBeandata(int groupId,String groupName,ModelCallBack modelCallBack);//修改群组名
+      void  getAlterCrowdGroupIntroBeandata(int groupId,String description,ModelCallBack modelCallBack);//修改群简介
+      void  getDeleteCrowdGroupBeandata(int groupId,ModelCallBack modelCallBack);//解散群组
+      void  getQuitCrowdBeandata(int groupId,ModelCallBack modelCallBack);//退群
+      void  getCrowdGroupAllUserMessageBeandata(int groupId,ModelCallBack modelCallBack);//查询群组内所有用户信息
+      void  getSendCrowdMessageBeandata(int groupId,String content,ModelCallBack modelCallBack);//发送群信息
+      void  getCrowdChatContentBeandata(int groupId,int page,int count,ModelCallBack modelCallBack);//查询群聊天内容
 
 
         //社区
@@ -82,6 +89,13 @@ public interface IContract {
         void  getUserExisisCrowdBeandata(int groupId);//判断用户是否已在群内
         void  getCheckCrowdApplyBeandata(int noticeId,int flag);//审核群申请
         void  getCrowGroupDetailMessageBeandata(int groupId);//查询群组详细信息
+        void  getAlterCrowdGroupNameBeandata(int groupId,String groupName);//修改群组名
+        void  getAlterCrowdGroupIntroBeandata(int groupId,String description);//修改群简介
+        void  getDeleteCrowdGroupBeandata(int groupId);//解散群组
+        void  getQuitCrowdBeandata(int groupId);//退群
+        void  getCrowdGroupAllUserMessageBeandata(int groupId);//查询群组内所有用户信息
+        void  getSendCrowdMessageBeandata(int groupId,String content);//发送群信息
+        void  getCrowdChatContentBeandata(int groupId,int page,int count);//查询群聊天内
         //社区
         void  getCommunitydata(int page, int count);//社区列表
         void  getCommentary(int communityId, int page, int count);//社区用户评论

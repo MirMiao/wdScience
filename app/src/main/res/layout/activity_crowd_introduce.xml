@@ -43,6 +43,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:hint="快完善你的群介绍吧"
+        android:id="@+id/crowd_content"
         android:textSize="12sp"
         ></EditText>
 </LinearLayout>

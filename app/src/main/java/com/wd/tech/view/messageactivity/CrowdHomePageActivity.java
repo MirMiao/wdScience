@@ -7,29 +7,28 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.wd.tech.App;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
+import com.wd.tech.bean.messagebean.AlterCrowdGroupNameBean;
 import com.wd.tech.bean.messagebean.CrowGroupDetailMessageBean;
+import com.wd.tech.bean.messagebean.DeleteCrowdGroupBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RetrofitUtil;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 //自己的群
-
 public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IContract.IView, View.OnClickListener {
-    @BindView(R.id.crowd_background)
-    ImageView crowdBackground;
     @BindView(R.id.crowd_head)
     ImageView crowdHead;
     @BindView(R.id.crowd_member_count)
@@ -52,6 +51,7 @@ public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IC
     private int groupId;
     private PopupWindow popupWindow;
     private TextView group_name;
+    private EditText update_friendmessage;
 
     @Override
     protected Presenter initPresenter() {
@@ -89,6 +89,7 @@ public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IC
                 @Override
                 public void onClick(View v) {
                     Intent intentchatintroduce = new Intent(CrowdHomePageActivity.this, CrowdIntroduceActivity.class);
+                      intentchatintroduce.putExtra("groupId1",groupId);
                     startActivity(intentchatintroduce);
                 }
             });
@@ -100,8 +101,38 @@ public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IC
 
 
             });
+        }
+
+        if (o instanceof AlterCrowdGroupNameBean){
+            Toast.makeText(App.context,((AlterCrowdGroupNameBean) o).getMessage(),Toast.LENGTH_LONG).show();
+        }
+        if (o instanceof DeleteCrowdGroupBean){
+            Toast.makeText(App.context,((DeleteCrowdGroupBean) o).getMessage(),Toast.LENGTH_LONG).show();
 
         }
+        crowdName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              updatePopupWindow();
+            }
+        });
+    }
+    //修改群名
+    private void updatePopupWindow() {
+        View contentView = LayoutInflater.from(CrowdHomePageActivity.this).inflate(R.layout.update_crowd_name, null);
+        popupWindow = new PopupWindow(contentView, ViewPager.LayoutParams.MATCH_PARENT, ViewPager.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setContentView(contentView);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0));
+        //设置各个控件的点击响应
+        Button btn_update = (Button) contentView.findViewById(R.id.btn_update);
+        Button btn_updateno = (Button) contentView.findViewById(R.id.btn_updateno);
+        update_friendmessage = (EditText) contentView.findViewById(R.id.update_friendmessage);
+
+        btn_update.setOnClickListener(this);
+        btn_updateno.setOnClickListener(this);
+        //显示PopupWindow
+        View rootview = LayoutInflater.from(CrowdHomePageActivity.this).inflate(R.layout.fragment_message, null);
+        popupWindow.showAtLocation(rootview, Gravity.BOTTOM, 0, 0);
     }
 
     @Override
@@ -132,6 +163,7 @@ public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IC
         switch (view.getId()) {
             case R.id.btn_crowd_member:
                 Intent intentmember = new Intent(CrowdHomePageActivity.this, CrowdMemberActivity.class);
+                intentmember.putExtra("groupIdmember",groupId);
                 startActivity(intentmember);
                 break;
             case R.id.btn_crowd_infrom:
@@ -154,10 +186,24 @@ public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IC
         int id = v.getId();
         switch (id) {
             case R.id.btn_yes: {
+                presenter.getDeleteCrowdGroupBeandata(groupId);
                 popupWindow.dismiss();
             }
             break;
             case R.id.btn_no: {
+                popupWindow.dismiss();
+            }
+            break;
+            case R.id.btn_update: {
+                String name=update_friendmessage.getText().toString().trim();
+                if(name!=null){
+                    presenter.getAlterCrowdGroupNameBeandata(groupId,name);
+                }
+                popupWindow.dismiss();
+
+            }
+            break;
+            case R.id.btn_updateno: {
                 popupWindow.dismiss();
             }
             break;

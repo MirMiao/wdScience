@@ -10,6 +10,7 @@
         android:layout_height="24dp"
         android:layout_marginRight="12dp"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/dp_10"
         android:src="@drawable/common_nav_btn_search_n_xhdpi"
         android:id="@+id/btn_sou"
         ></ImageView>

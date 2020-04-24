@@ -406,6 +406,111 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
            }
        });
     }
+    //修改群组名
+    @Override
+    public void getAlterCrowdGroupNameBeandata(int groupId, String groupName) {
+  model.getAlterCrowdGroupNameBeandata(groupId, groupName, new IContract.IModel.ModelCallBack() {
+      @Override
+      public void success(Object o) {
+          getView().success(o);
+      }
+
+      @Override
+      public void failur(Throwable throwable) {
+        getView().failur(throwable);
+      }
+  });
+    }
+    //修改群简介
+    @Override
+    public void getAlterCrowdGroupIntroBeandata(int groupId, String description) {
+   model.getAlterCrowdGroupIntroBeandata(groupId, description, new IContract.IModel.ModelCallBack() {
+       @Override
+       public void success(Object o) {
+           getView().success(o);
+       }
+
+       @Override
+       public void failur(Throwable throwable) {
+        getView().failur(throwable);
+       }
+   });
+    }
+    //解散群组
+    @Override
+    public void getDeleteCrowdGroupBeandata(int groupId) {
+      model.getDeleteCrowdGroupBeandata(groupId, new IContract.IModel.ModelCallBack() {
+          @Override
+          public void success(Object o) {
+              getView().success(o);
+          }
+
+          @Override
+          public void failur(Throwable throwable) {
+            getView().failur(throwable);
+          }
+      });
+    }
+    //退群
+    @Override
+    public void getQuitCrowdBeandata(int groupId) {
+     model.getQuitCrowdBeandata(groupId, new IContract.IModel.ModelCallBack() {
+         @Override
+         public void success(Object o) {
+             getView().success(o);
+         }
+
+         @Override
+         public void failur(Throwable throwable) {
+            getView().failur(throwable);
+         }
+     });
+    }
+//查询群组内所有用户信息
+    @Override
+    public void getCrowdGroupAllUserMessageBeandata(int groupId) {
+        model.getCrowdGroupAllUserMessageBeandata(groupId, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+               getView().failur(throwable);
+            }
+        });
+    }
+    //发送群信息
+    @Override
+    public void getSendCrowdMessageBeandata(int groupId, String content) {
+     model.getSendCrowdMessageBeandata(groupId, content, new IContract.IModel.ModelCallBack() {
+         @Override
+         public void success(Object o) {
+             getView().success(o);
+         }
+
+         @Override
+         public void failur(Throwable throwable) {
+            getView().failur(throwable);
+         }
+     });
+    }
+    //查询群聊天内
+    @Override
+    public void getCrowdChatContentBeandata(int groupId, int page, int count) {
+       model.getCrowdChatContentBeandata(groupId, page, count, new IContract.IModel.ModelCallBack() {
+           @Override
+           public void success(Object o) {
+               getView().success(o);
+           }
+
+           @Override
+           public void failur(Throwable throwable) {
+               getView().failur(throwable);
+           }
+       });
+    }
 
     //社区列表
     @Override
