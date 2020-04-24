@@ -44,6 +44,7 @@ public interface IContract {
          void serchByKeyWord(String title,int page,int count,ModelCallBack modelCallBack); //根据关键字模糊查询
 
         void  getReleasepostdata(String content,File file,ModelCallBack modelCallBack);//发布帖子
+        void  getMyPostdata(int page,int count,ModelCallBack modelCallBack);//我的帖子
         interface ModelCallBack{
             void success(Object o);
             void failur(Throwable throwable);
@@ -81,6 +82,7 @@ public interface IContract {
         void getPlateData(); //展示菜单
         void serchByKeyWord(String title,int page,int count); //根据关键字模糊查询
         void  getReleasepostdata(String content, File file);//发布帖子
+        void  getMyPostdata(int page, int count);//我的帖子
     }
     interface IView extends IBaseView {
         void success(Object o);

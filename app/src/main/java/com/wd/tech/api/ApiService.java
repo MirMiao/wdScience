@@ -1,24 +1,4 @@
 package com.wd.tech.api;
-import com.wd.tech.bean.AddFriendBean;
-import com.wd.tech.bean.AlterFriendGroupingNameBean;
-import com.wd.tech.bean.AlterFriendRemarkBean;
-import com.wd.tech.bean.CheckFriendApplyBean;
-import com.wd.tech.bean.CrowdInfromBean;
-import com.wd.tech.bean.DeleteFriendBean;
-import com.wd.tech.bean.DeleteFriendChatRrecordBean;
-import com.wd.tech.bean.DeleteFriendGroupingBean;
-import com.wd.tech.bean.ExisisMyFriendBean;
-import com.wd.tech.bean.FriendChatDialogueRecordBean;
-import com.wd.tech.bean.FriendChatRrecordBean;
-import com.wd.tech.bean.FriendMessageBean;
-import com.wd.tech.bean.PhoneUserMessangeBean;
-import com.wd.tech.bean.SendMessageBean;
-import com.wd.tech.bean.SetCrowdBean;
-import com.wd.tech.bean.SetCustomFriendGroupingBean;
-import com.wd.tech.bean.ShiftFriendGroupingBean;
-import com.wd.tech.bean.UserAllGroupingBean;
-import com.wd.tech.bean.UserFriendInfromRecordBean;
-import com.wd.tech.bean.UserFriendListBean;
 import com.wd.tech.bean.beancommunity.CommentData;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
@@ -44,6 +24,7 @@ import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.messagebean.UserFriendListBean;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
+import com.wd.tech.bean.beancommunity.MyPostData;
 import com.wd.tech.bean.beancommunity.ReleasepostData;
 
 import java.io.File;
@@ -165,6 +146,9 @@ public interface ApiService {
     @POST(Api.COMMUNITY_ReleasePost)
     @FormUrlEncoded
     Observable<ReleasepostData> getReleasepost(@Field("content") String content,@Field("file") File file);
+    //我的帖子
+    @GET(Api.COMMUNITY_MyPostById)
+    Observable<MyPostData> getMyPostIdData(@Query("page")int page, @Query("count")int count);
 
 
 }
