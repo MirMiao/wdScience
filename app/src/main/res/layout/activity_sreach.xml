@@ -4,6 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.messageactivity.SreachActivity">
-
+    tools:context=".view.messageactivity.SreachActivity"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#fff"
+        >
+        <com.wd.tech.myview.Mysearchview
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mysearchview"
+            android:layout_weight="1"
+            ></com.wd.tech.myview.Mysearchview>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:layout_marginLeft="10dp"
+           android:layout_gravity="center"
+            android:layout_marginRight="12dp"
+            android:textSize="14sp"
+            android:textColor="#666"
+             android:id="@+id/btn_quxiao"
+            ></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:background="#fff"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="好友"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="@dimen/dp_5"
+            android:textSize="14sp"
+            android:textColor="#666"
+            ></TextView>
+    </LinearLayout>
+  <androidx.recyclerview.widget.RecyclerView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/friendlist_RecyclerView"
+      ></androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="搜索无结果"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="#2196F3"
+        android:textSize="30sp"
+        android:id="@+id/wudata"
+        ></TextView>
 </LinearLayout>

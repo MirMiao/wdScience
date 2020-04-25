@@ -4,17 +4,11 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.TextView;
-
 import androidx.annotation.Nullable;
-
 import com.wd.tech.R;
-
 /**
  * @author 吴健
  * Class :1708A
@@ -23,9 +17,10 @@ import com.wd.tech.R;
  * @classname :
  */
 public class Mysearchview  extends LinearLayout {
-    private ImageView btn_sou;
+    private ImageView btn_sou,btn_delete;
     private EditText sou_content;
     private setContext setContext;
+    private setDelete setDelete;
     public Mysearchview(Context context) {
         super(context);addview(context);
     }
@@ -36,11 +31,21 @@ public class Mysearchview  extends LinearLayout {
         View view= LayoutInflater.from(context).inflate(R.layout.searchview_item,this,true);
         btn_sou= view.findViewById(R.id.btn_sou);
         sou_content=view.findViewById(R.id.sou_content);
+        btn_delete=view.findViewById(R.id.btn_delete);
         btn_sou.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (setContext != null) {
                     setContext.onContent(sou_content.getText().toString());
+                }
+            }
+        });
+        btn_delete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (setDelete != null) {
+                    sou_content.setText("");
+                    setDelete.ondelete(sou_content.getText().toString());
                 }
             }
         });
@@ -50,7 +55,15 @@ public class Mysearchview  extends LinearLayout {
         this.setContext = setContext;
     }
 
+    public void setSetDelete(Mysearchview.setDelete setDelete) {
+        this.setDelete = setDelete;
+    }
+
     public  interface  setContext{
         void  onContent(String text);
+    }
+
+    public  interface  setDelete{
+        void  ondelete(String text);
     }
 }

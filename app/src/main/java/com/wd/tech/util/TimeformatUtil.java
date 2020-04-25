@@ -11,14 +11,23 @@ import java.util.Date;
  * @classname :
  */
 public class TimeformatUtil  {
+    //月日
     public  static  String  gettime(long time){
         SimpleDateFormat simpleDateFormat=new   SimpleDateFormat("MM-dd");
         Date date= new Date();
         String s=     simpleDateFormat.format(date);
         return  s;
     }
+    //时分
     public  static  String  gettimehear(long time){
         SimpleDateFormat simpleDateFormat=new   SimpleDateFormat("HH:mm");
+        Date date= new Date();
+        String s=     simpleDateFormat.format(date);
+        return  s;
+    }
+    //年月日
+    public  static  String  gettimeyy(long time){
+        SimpleDateFormat simpleDateFormat=new   SimpleDateFormat("yy-MM-dd");
         Date date= new Date();
         String s=     simpleDateFormat.format(date);
         return  s;

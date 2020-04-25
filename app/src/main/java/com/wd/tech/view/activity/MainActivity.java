@@ -63,7 +63,12 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
 
     @Override
     protected void initData() {
-
+   /*     try {
+            string = RsaCoder.encryptByPublicKey("密码");
+            Log.i("ddd", "initData: "+string);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
     }
 
     @SuppressLint("ResourceAsColor")
