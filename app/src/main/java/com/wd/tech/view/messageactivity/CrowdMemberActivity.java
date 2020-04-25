@@ -1,9 +1,13 @@
 package com.wd.tech.view.messageactivity;
+
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.wd.tech.R;
 import com.wd.tech.adapter.infromation.MyCrowdGroupAllUserMessageadapter;
 import com.wd.tech.base.BaseActivity;
@@ -14,6 +18,9 @@ import com.wd.tech.presenter.Presenter;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 //群成员
 public class CrowdMemberActivity extends BaseActivity<Presenter> implements IContract.IView {
 
@@ -52,12 +59,12 @@ public class CrowdMemberActivity extends BaseActivity<Presenter> implements ICon
 
     @Override
     public void success(Object o) {
-      if(o instanceof CrowdGroupAllUserMessageBean){
-          crowdgroupallusermessageresult = ((CrowdGroupAllUserMessageBean) o).getResult();
-          myCrowdGroupAllUserMessageadapter = new MyCrowdGroupAllUserMessageadapter(crowdgroupallusermessageresult,this);
-          crowdMemberExpandableListView.setAdapter(myCrowdGroupAllUserMessageadapter);
-          crowdMemberExpandableListView.setLayoutManager(new LinearLayoutManager(this));
-      }
+        if (o instanceof CrowdGroupAllUserMessageBean) {
+            crowdgroupallusermessageresult = ((CrowdGroupAllUserMessageBean) o).getResult();
+            myCrowdGroupAllUserMessageadapter = new MyCrowdGroupAllUserMessageadapter(crowdgroupallusermessageresult, this);
+            crowdMemberExpandableListView.setAdapter(myCrowdGroupAllUserMessageadapter);
+            crowdMemberExpandableListView.setLayoutManager(new LinearLayoutManager(this));
+        }
     }
 
     @Override
@@ -65,4 +72,12 @@ public class CrowdMemberActivity extends BaseActivity<Presenter> implements ICon
 
     }
 
+
+
+    @OnClick(R.id.btn_applyfriend)
+    public void onViewClicked() {
+        Intent intentmanage = new Intent(CrowdMemberActivity.this,    SreachActivity.class);
+        startActivity(intentmanage);
+
+    }
 }

@@ -172,10 +172,14 @@ public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IC
                 break;
             case R.id.btn_crowd_manage:
                 Intent intentmanage = new Intent(CrowdHomePageActivity.this, CrowdManageActivity.class);
+                intentmanage.putExtra("groupIdmanage",groupId);
                 startActivity(intentmanage);
                 break;
             case R.id.btn_crowd_chatrecord:
                 Intent  intentcc=new Intent(CrowdHomePageActivity.this,CrowdChatActivity.class);
+                intentcc.putExtra("groupIdcc",groupId);
+                intentcc.putExtra("groupname",crowgroupdetailmessageresult.getGroupName());
+                intentcc.putExtra("crowdhead",crowgroupdetailmessageresult.getGroupImage());
                 startActivity(intentcc);
                 break;
 

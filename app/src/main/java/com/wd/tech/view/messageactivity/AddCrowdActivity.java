@@ -106,7 +106,6 @@ public class AddCrowdActivity extends BaseActivity<Presenter> implements IContra
                     public void onClick(View v) {
                         Intent  intentcc=new Intent(AddCrowdActivity.this,CrowdChatActivity.class);
                         startActivity(intentcc);
-
                     }
                 });
                 //退群

@@ -513,6 +513,81 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
            }
        });
     }
+    //移出群成员(管理员与群主才有的权限)
+    @Override
+    public void getDeleteCrowdMemberBeandata(int groupId, int groupUserId) {
+        model.getDeleteCrowdMemberBeandata(groupId, groupUserId, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+              getView().failur(throwable);
+            }
+        });
+    }
+    //调整群成员角色(群主才有的权限)
+    @Override
+    public void getAdjustCrowdMemberBeandata(int groupId, int groupUserId, int role) {
+    model.getAdjustCrowdMemberBeandata(groupId, groupUserId, role, new IContract.IModel.ModelCallBack() {
+        @Override
+        public void success(Object o) {
+            getView().success(o);
+        }
+
+        @Override
+        public void failur(Throwable throwable) {
+          getView().failur(throwable);
+        }
+    });
+    }
+    //申请进群
+    @Override
+    public void getApplyAddCrowdBeandata(int groupId, String remark) {
+     model.getApplyAddCrowdBeandata(groupId, remark, new IContract.IModel.ModelCallBack() {
+         @Override
+         public void success(Object o) {
+             getView().success(o);
+         }
+
+         @Override
+         public void failur(Throwable throwable) {
+           getView().failur(throwable);
+         }
+     });
+    }
+    //邀请加群
+    @Override
+    public void getAnviteAddCrowdBeandata(int groupId, int receiverUid) {
+     model.getAnviteAddCrowdBeandata(groupId, receiverUid, new IContract.IModel.ModelCallBack() {
+         @Override
+         public void success(Object o) {
+             getView().success(o);
+         }
+
+         @Override
+         public void failur(Throwable throwable) {
+         getView().failur(throwable);
+         }
+     });
+    }
+    //批量邀请加群
+    @Override
+    public void getBatchAnviteAddCrowdBeandata(int groupId, int[] receiverUids) {
+      model.getBatchAnviteAddCrowdBeandata(groupId, receiverUids, new IContract.IModel.ModelCallBack() {
+          @Override
+          public void success(Object o) {
+              getView().success(o);
+          }
+
+          @Override
+          public void failur(Throwable throwable) {
+           getView().failur(throwable);
+          }
+      });
+    }
 
     //社区列表
     @Override

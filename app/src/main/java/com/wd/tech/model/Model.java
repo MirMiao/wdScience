@@ -13,10 +13,14 @@ import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.bean.informationentity.RegEntity;
 import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
 import com.wd.tech.bean.messagebean.AddFriendBean;
+import com.wd.tech.bean.messagebean.AdjustCrowdMemberBean;
 import com.wd.tech.bean.messagebean.AlterCrowdGroupIntroBean;
 import com.wd.tech.bean.messagebean.AlterCrowdGroupNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
+import com.wd.tech.bean.messagebean.AnviteAddCrowdBean;
+import com.wd.tech.bean.messagebean.ApplyAddCrowdBean;
+import com.wd.tech.bean.messagebean.BatchAnviteAddCrowdBean;
 import com.wd.tech.bean.messagebean.CheckCrowdApplyBean;
 import com.wd.tech.bean.messagebean.CheckFriendApplyBean;
 import com.wd.tech.bean.messagebean.CrowGroupDetailMessageBean;
@@ -24,6 +28,7 @@ import com.wd.tech.bean.messagebean.CrowdChatContentBean;
 import com.wd.tech.bean.messagebean.CrowdGroupAllUserMessageBean;
 import com.wd.tech.bean.messagebean.CrowdInfromBean;
 import com.wd.tech.bean.messagebean.DeleteCrowdGroupBean;
+import com.wd.tech.bean.messagebean.DeleteCrowdMemberBean;
 import com.wd.tech.bean.messagebean.DeleteFriendBean;
 import com.wd.tech.bean.messagebean.DeleteFriendChatRrecordBean;
 import com.wd.tech.bean.messagebean.DeleteFriendGroupingBean;
@@ -45,9 +50,6 @@ import com.wd.tech.bean.messagebean.UserAllGroupingBean;
 import com.wd.tech.bean.messagebean.UserExisisCrowdBean;
 import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.messagebean.UserFriendListBean;
-import com.wd.tech.bean.beancommunity.CommentaryData;
-import com.wd.tech.bean.beancommunity.CommunityData;
-import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.util.RetrofitUtil;
 
@@ -658,6 +660,97 @@ public class Model implements IContract.IModel {
                 @Override
                 public void accept(Throwable throwable) throws Exception {
                    modelCallBack.failur(throwable);
+                }
+            });
+    }
+    //移出群成员(管理员与群主才有的权限)
+    @Override
+    public void getDeleteCrowdMemberBeandata(int groupId, int groupUserId, ModelCallBack modelCallBack) {
+    Observable<DeleteCrowdMemberBean>    deleteCrowdMemberBeandata = apiService.getDeleteCrowdMemberBeandata(groupId, groupUserId);
+        deleteCrowdMemberBeandata.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<DeleteCrowdMemberBean>() {
+                    @Override
+                    public void accept(DeleteCrowdMemberBean deleteCrowdMemberBean) throws Exception {
+                      modelCallBack.success(deleteCrowdMemberBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                         modelCallBack.failur(throwable);
+                    }
+                });
+    }
+    //调整群成员角色(群主才有的权限)
+    @Override
+    public void getAdjustCrowdMemberBeandata(int groupId, int groupUserId, int role, ModelCallBack modelCallBack) {
+    Observable<AdjustCrowdMemberBean>    adjustCrowdMemberBeandata = apiService.getAdjustCrowdMemberBeandata(groupId, groupUserId, role);
+    adjustCrowdMemberBeandata.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<AdjustCrowdMemberBean>() {
+                @Override
+                public void accept(AdjustCrowdMemberBean adjustCrowdMemberBean) throws Exception {
+               modelCallBack.success(adjustCrowdMemberBean);
+                }
+            }, new Consumer<Throwable>() {
+                @Override
+                public void accept(Throwable throwable) throws Exception {
+                 modelCallBack.failur(throwable);
+                }
+            });
+    }
+//申请进群
+    @Override
+    public void getApplyAddCrowdBeandata(int groupId, String remark, ModelCallBack modelCallBack) {
+     Observable<ApplyAddCrowdBean>    applyAddCrowdBeandata = apiService.getApplyAddCrowdBeandata(groupId, remark);
+     applyAddCrowdBeandata.subscribeOn(Schedulers.io())
+             .observeOn(AndroidSchedulers.mainThread())
+             .subscribe(new Consumer<ApplyAddCrowdBean>() {
+                 @Override
+                 public void accept(ApplyAddCrowdBean applyAddCrowdBean) throws Exception {
+                  modelCallBack.success(applyAddCrowdBean);
+                 }
+             }, new Consumer<Throwable>() {
+                 @Override
+                 public void accept(Throwable throwable) throws Exception {
+                   modelCallBack.failur(throwable);
+                 }
+             });
+
+    }
+    //邀请加群
+    @Override
+    public void getAnviteAddCrowdBeandata(int groupId, int receiverUid, ModelCallBack modelCallBack) {
+    Observable<AnviteAddCrowdBean>   anviteAddCrowdBeandata = apiService.getAnviteAddCrowdBeandata(groupId, receiverUid);
+     anviteAddCrowdBeandata.subscribeOn(Schedulers.io())
+             .observeOn(AndroidSchedulers.mainThread())
+             .subscribe(new Consumer<AnviteAddCrowdBean>() {
+                 @Override
+                 public void accept(AnviteAddCrowdBean anviteAddCrowdBean) throws Exception {
+                   modelCallBack.success(anviteAddCrowdBean);
+                 }
+             }, new Consumer<Throwable>() {
+                 @Override
+                 public void accept(Throwable throwable) throws Exception {
+                    modelCallBack.failur(throwable);
+                 }
+             });
+    }
+    //批量邀请加群
+    @Override
+    public void getBatchAnviteAddCrowdBeandata(int groupId, int[] receiverUids, ModelCallBack modelCallBack) {
+   Observable<BatchAnviteAddCrowdBean>     batchAnviteAddCrowdBeandata = apiService.getBatchAnviteAddCrowdBeandata(groupId, receiverUids);
+    batchAnviteAddCrowdBeandata.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<BatchAnviteAddCrowdBean>() {
+                @Override
+                public void accept(BatchAnviteAddCrowdBean batchAnviteAddCrowdBean) throws Exception {
+                 modelCallBack.success(batchAnviteAddCrowdBean);
+                }
+            }, new Consumer<Throwable>() {
+                @Override
+                public void accept(Throwable throwable) throws Exception {
+                    modelCallBack.failur(throwable);
                 }
             });
     }

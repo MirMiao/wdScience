@@ -20,8 +20,11 @@ import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.messagebean.FriendChatDialogueRecordBean;
 import com.wd.tech.bean.messagebean.SendMessageBean;
 import com.wd.tech.contract.IContract;
+import com.wd.tech.event.EventMeassage;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RsaCoder;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -50,7 +53,7 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
     private String remark1;
     private String userName1;
     private String signature;
-
+    private String headPic1;
     @Override
     protected Presenter initPresenter() {
         return new Presenter();
@@ -108,15 +111,18 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
                 break;
             case R.id.btn_send:
                 String infrommain = friendContent.getText().toString().trim();
-                if (!"".equals(infrommain)) {
                     try {
                         //加密好友发送的信息
                         String content = RsaCoder.encryptByPublicKey(infrommain);
                         presenter.getSendMessageBeandata(userId, content);
+                        EventMeassage eventMeassage=new EventMeassage();
+                        eventMeassage.headpic=headPic1;
+                        eventMeassage.content=content;
+                        eventMeassage.name=nickName;
+                        EventBus.getDefault().postSticky(eventMeassage);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
                 break;
         }
     }
@@ -125,11 +131,21 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
     public void success(Object o) {
         if (o instanceof FriendChatDialogueRecordBean) {
             FriendChatDialogueRecordresult = ((FriendChatDialogueRecordBean) o).getResult();
+            for (int i = 0; i < FriendChatDialogueRecordresult.size(); i++) {
+                if (FriendChatDialogueRecordresult.get(i).getDirection()==2) {
+                    headPic1 = FriendChatDialogueRecordresult.get(i).getHeadPic();
+                }
+            }
             myFriendChatDialogueRecordadapter = new MyFriendChatDialogueRecordadapter(FriendChatDialogueRecordresult, this);
             friendchatRecyclerView.setAdapter(myFriendChatDialogueRecordadapter);
             friendchatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         }
         if (o instanceof SendMessageBean) {
+            if (((SendMessageBean) o).getStatus().equals("0000")){
+                presenter.getFriendChatDialogueRecordBeandata(userId, 1, 10);
+                myFriendChatDialogueRecordadapter.update(FriendChatDialogueRecordresult);
+                friendContent.setText("");
+            }
             Log.d("sendmessage", "success: " + ((SendMessageBean) o).getMessage());
         }
     }

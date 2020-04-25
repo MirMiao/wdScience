@@ -125,7 +125,7 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter implements 
         }
         List<UserFriendListBean.ResultBean.FriendInfoListBean>   friendInfoList = userfriendlistresult.get(i).getFriendInfoList();
         childholder.child_name.setText(friendInfoList.get(i1).getNickName());
-        childholder.child_remarkName.setText(friendInfoList.get(i1).getRemarkName());
+        childholder.child_remarkName.setText(friendInfoList.get(i1).getSignature());
         RetrofitUtil.getInstance().getRoundphoto(friendInfoList.get(i1).getHeadPic(),childholder.child_img);
         childholder.friend_remove.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -70,7 +70,7 @@ public class MyFriendChatDialogueRecordadapter  extends RecyclerView.Adapter<Rec
              String content=RsaCoder.decryptByPublicKey(FriendChatDialogueRecordresult.get(position).getContent());
              //解密好友发送的信息
              myChatDialogueminViewHolder.mine_content.setText(content);
-             notifyDataSetChanged();
+
          } catch (Exception e) {
              e.printStackTrace();
          }

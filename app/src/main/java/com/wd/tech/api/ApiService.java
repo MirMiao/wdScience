@@ -6,10 +6,14 @@ import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.bean.informationentity.RegEntity;
 import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
 import com.wd.tech.bean.messagebean.AddFriendBean;
+import com.wd.tech.bean.messagebean.AdjustCrowdMemberBean;
 import com.wd.tech.bean.messagebean.AlterCrowdGroupIntroBean;
 import com.wd.tech.bean.messagebean.AlterCrowdGroupNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
+import com.wd.tech.bean.messagebean.AnviteAddCrowdBean;
+import com.wd.tech.bean.messagebean.ApplyAddCrowdBean;
+import com.wd.tech.bean.messagebean.BatchAnviteAddCrowdBean;
 import com.wd.tech.bean.messagebean.CheckCrowdApplyBean;
 import com.wd.tech.bean.messagebean.CheckFriendApplyBean;
 import com.wd.tech.bean.messagebean.CrowGroupDetailMessageBean;
@@ -17,6 +21,7 @@ import com.wd.tech.bean.messagebean.CrowdChatContentBean;
 import com.wd.tech.bean.messagebean.CrowdGroupAllUserMessageBean;
 import com.wd.tech.bean.messagebean.CrowdInfromBean;
 import com.wd.tech.bean.messagebean.DeleteCrowdGroupBean;
+import com.wd.tech.bean.messagebean.DeleteCrowdMemberBean;
 import com.wd.tech.bean.messagebean.DeleteFriendBean;
 import com.wd.tech.bean.messagebean.DeleteFriendChatRrecordBean;
 import com.wd.tech.bean.messagebean.DeleteFriendGroupingBean;
@@ -173,12 +178,30 @@ public interface ApiService {
     Observable<CrowdGroupAllUserMessageBean>getCrowdGroupAllUserMessageBeandata(@Query("groupId") int groupId);
 
     @POST(Api.SENDCROWDMESSAGE_URL)//发送群信息
-    @Multipart
+    @FormUrlEncoded
     Observable<SendCrowdMessageBean>getSendCrowdMessageBeandata(@Field("groupId") int groupId, @Field("content") String content);
 
     @GET(Api.CROWDCHATCONTENT_URL)//查询群聊天内容
     Observable<CrowdChatContentBean>getCrowdChatContentBeandata(@Query("groupId") int groupId, @Query("page")int page, @Query("count") int count);
 
+
+    @DELETE(Api.DELETECROWDMEMBER_URL)//移出群成员(管理员与群主才有的权限)
+    Observable<DeleteCrowdMemberBean>getDeleteCrowdMemberBeandata(@Query("groupId") int groupId, @Query("groupUserId") int groupUserId);
+
+    @PUT(Api.ADJUSTCROWDMEMBER_URL)//调整群成员角色(群主才有的权限)
+    Observable<AdjustCrowdMemberBean>getAdjustCrowdMemberBeandata(@Query("groupId") int groupId, @Query("groupUserId") int groupUserId, @Query("role") int role);
+
+    @POST(Api.APPLYADDCROWD_URL)//申请进群
+    @FormUrlEncoded
+    Observable<ApplyAddCrowdBean> getApplyAddCrowdBeandata(@Field("groupId") int groupId, @Field("remark") String remark);
+
+    @POST(Api.ANVITEADDCROWD_URL)//邀请加群
+    @FormUrlEncoded
+    Observable<AnviteAddCrowdBean> getAnviteAddCrowdBeandata(@Field("groupId") int groupId, @Field("receiverUid") int receiverUid);
+
+    @POST(Api.BATCHANVITEADDCROWD_URL)//批量邀请加群
+    @FormUrlEncoded
+    Observable<BatchAnviteAddCrowdBean> getBatchAnviteAddCrowdBeandata(@Field("groupId") int groupId, @Field("receiverUids") int[] receiverUids);
 
     //社区
     //社区列表
