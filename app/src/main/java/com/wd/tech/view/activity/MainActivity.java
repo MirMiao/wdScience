@@ -2,13 +2,17 @@ package com.wd.tech.view.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -16,9 +20,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
-import com.wd.tech.base.mvp.BasePresenter;
+import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.view.fragment.CommunityFragment;
@@ -26,11 +32,13 @@ import com.wd.tech.view.fragment.InformationFragment;
 import com.wd.tech.view.fragment.LoginActivity;
 import com.wd.tech.view.fragment.MessageFragment;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity<Presenter> implements IContract.IView {
 
@@ -48,6 +56,29 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
     DrawerLayout draw;
     @BindView(R.id.tv_login)
     TextView tvLogin;
+    @BindView(R.id.iv_toLogin)
+    ImageView ivToLogin;
+    @BindView(R.id.ll1)
+    LinearLayout ll1;
+    @BindView(R.id.ll2)
+    LinearLayout ll2;
+    @BindView(R.id.ll3)
+    LinearLayout ll3;
+    @BindView(R.id.ll4)
+    LinearLayout ll4;
+    @BindView(R.id.ll5)
+    LinearLayout ll5;
+    @BindView(R.id.ll6)
+    LinearLayout ll6;
+    @BindView(R.id.ll7)
+    LinearLayout ll7;
+    @BindView(R.id.ll8)
+    LinearLayout ll8;
+    @BindView(R.id.ll9)
+    LinearLayout ll9;
+    @BindView(R.id.ll_user)
+    LinearLayout llUser;
+
     private String string;
 
 
@@ -63,12 +94,31 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
 
     @Override
     protected void initData() {
-   /*     try {
-            string = RsaCoder.encryptByPublicKey("密码");
-            Log.i("ddd", "initData: "+string);
+        try {
+            //看是否已经登录
+            SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
+            String userInfo = sp.getString("userInfo", "");
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<LoginEntity.ResultBean>>() {
+            }.getType();
+            List<LoginEntity.ResultBean> list = gson.fromJson(userInfo, type);
+            if (list != null) {
+                llUser.setBackgroundColor(Color.WHITE);
+                ivToLogin.setVisibility(View.GONE);
+                tvLogin.setVisibility(View.GONE);
+                ll1.setVisibility(View.VISIBLE);
+                ll2.setVisibility(View.VISIBLE);
+                ll3.setVisibility(View.VISIBLE);
+                ll4.setVisibility(View.VISIBLE);
+                ll5.setVisibility(View.VISIBLE);
+                ll6.setVisibility(View.VISIBLE);
+                ll7.setVisibility(View.VISIBLE);
+                ll8.setVisibility(View.VISIBLE);
+                ll9.setVisibility(View.VISIBLE);
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @SuppressLint("ResourceAsColor")
@@ -77,7 +127,7 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
         draw.setScrimColor(Color.TRANSPARENT);
@@ -195,7 +245,6 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
     }
 
 
-
     @Override
     public void success(Object o) {
 
@@ -204,5 +253,19 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
     @Override
     public void failur(Throwable throwable) {
 
+    }
+
+
+    @OnClick(R.id.iv_toLogin)
+    public void onViewClicked() {
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

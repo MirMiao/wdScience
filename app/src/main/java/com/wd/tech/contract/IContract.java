@@ -2,6 +2,7 @@ package com.wd.tech.contract;
 
 import com.wd.tech.base.mvp.IBaseModel;
 import com.wd.tech.base.mvp.IBaseView;
+import com.wd.tech.model.Model;
 
 import java.io.File;
 
@@ -70,7 +71,11 @@ public interface IContract {
 
         //我的
         void getMyHomepageAll(int page,int count,ModelCallBack modelCallBack);//我的收藏
-
+        void getMyFollowUser(int page, int count,ModelCallBack modelCallBack);//我的关注
+        void getMySysNotice(int page, int count,ModelCallBack modelCallBack);//我的通知
+        void getUserIntegral(ModelCallBack modelCallBack);//查询用户积分
+        void getUserIntegralRecord(int page, int count,ModelCallBack modelCallBack);//查询用户积分明细
+        void getSetUp(ModelCallBack modelCallBack);//设置页面（根据用户ID查询用户信息）
 
         interface ModelCallBack{
             void success(Object o);
@@ -133,6 +138,11 @@ public interface IContract {
 
         //我的
         void getMyHomepageAll(int page, int count);//我的收藏
+        void getMyFollowUser(int page, int count);//我的关注
+        void getMySysNotice(int page, int count);//我的通知
+        void getUserIntegral();//查询用户积分
+        void getUserIntegralRecord(int page, int count);//查询用户积分明细
+        void getSetUp();//设置页面（根据用户ID查询用户信息）
 
     }
     interface IView extends IBaseView {

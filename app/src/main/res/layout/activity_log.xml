@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="180dp"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="@dimen/dp_20"
@@ -83,7 +83,7 @@
         android:background="@drawable/logbut"
         android:text="登录"
         android:textSize="18dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="320dp"
         android:id="@+id/bt_login"
         android:textColor="#ffffff"></Button>
 

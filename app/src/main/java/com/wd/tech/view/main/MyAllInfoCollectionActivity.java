@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
+
 import com.wd.tech.adapter.myhomepageadapter.MyAllRecyAdapter;
+
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.beanMyHomePage.MyAllData;
 import com.wd.tech.bean.beanMyHomePage.MyAllResult;
@@ -22,6 +24,10 @@ import java.util.List;
 * push一下
 *
 * */
+
+/*
+ * 收藏
+ * */
 
 
 public class MyAllInfoCollectionActivity extends BaseActivity<Presenter> implements IContract.IView {
@@ -75,8 +81,11 @@ public class MyAllInfoCollectionActivity extends BaseActivity<Presenter> impleme
     public void success(Object o) {
         if(o instanceof MyAllData){
             List<MyAllResult> result = ((MyAllData) o).getResult();
-            MyAllRecyAdapter myAllRecyAdapter=new MyAllRecyAdapter(result,this);
+
+
+    MyAllRecyAdapter myAllRecyAdapter=new MyAllRecyAdapter(result,this);
             allRecy.setAdapter(myAllRecyAdapter);
+
         }
     }
 
