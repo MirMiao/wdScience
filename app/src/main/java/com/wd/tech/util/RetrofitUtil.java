@@ -46,7 +46,7 @@ public class RetrofitUtil {
                         int userid = SpUtil.getInt("userid");
                         String sessionid = SpUtil.getString("sessionid");
                         builder.addHeader("userId",userid+"");
-                     builder.addHeader("sessionId",sessionid);
+                        builder.addHeader("sessionId",sessionid);
                      Request newrequest=builder.build();
                      return chain.proceed(newrequest);
                     }
