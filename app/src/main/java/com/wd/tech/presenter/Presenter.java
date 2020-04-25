@@ -683,4 +683,79 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
         });
     }
 
+    @Override
+    public void getMyFollowUser(int page, int count) {
+        model.getMyFollowUser(page, count, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+    //我的通知
+    @Override
+    public void getMySysNotice(int page, int count) {
+        model.getMySysNotice(page, count, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
+    @Override
+    public void getUserIntegral() {
+        model.getUserIntegral(new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
+    @Override
+    public void getUserIntegralRecord(int page, int count) {
+        model.getUserIntegralRecord(page, count, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
+    @Override
+    public void getSetUp() {
+        model.getSetUp(new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
 }
