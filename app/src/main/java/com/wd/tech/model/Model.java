@@ -2,6 +2,11 @@ package com.wd.tech.model;
 
 import com.wd.tech.api.ApiService;
 import com.wd.tech.bean.beanMyHomePage.MyAllData;
+import com.wd.tech.bean.beanMyHomePage.MyFollowUserData;
+import com.wd.tech.bean.beanMyHomePage.MySetUpData;
+import com.wd.tech.bean.beanMyHomePage.MySysNoticeData;
+import com.wd.tech.bean.beanMyHomePage.MyUserIntegralData;
+import com.wd.tech.bean.beanMyHomePage.MyUserIntegralRecordData;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
 import com.wd.tech.bean.beancommunity.MyPostData;
@@ -869,6 +874,96 @@ public class Model implements IContract.IModel {
                 });
     }
 
+    @Override
+    public void getMyFollowUser(int page, int count, ModelCallBack modelCallBack) {
+        Observable<MyFollowUserData> followUser = apiService.getFollowUser(page, count);
+        followUser.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MyFollowUserData>() {
+                    @Override
+                    public void accept(MyFollowUserData myFollowUserData) throws Exception {
+                        modelCallBack.success(myFollowUserData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+    //我的通知
+    @Override
+    public void getMySysNotice(int page, int count, ModelCallBack modelCallBack) {
+        Observable<MySysNoticeData> sysNotice = apiService.getSysNotice(page, count);
+        sysNotice.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MySysNoticeData>() {
+                    @Override
+                    public void accept(MySysNoticeData mySysNoticeData) throws Exception {
+                        modelCallBack.success(mySysNoticeData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+    //查询用户积分
+    @Override
+    public void getUserIntegral(ModelCallBack modelCallBack) {
+        Observable<MyUserIntegralData> userIntegral = apiService.getUserIntegral();
+        userIntegral.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MyUserIntegralData>() {
+                    @Override
+                    public void accept(MyUserIntegralData myUserIntegralData) throws Exception {
+                        modelCallBack.success(myUserIntegralData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+    //查询用户积分明细
+    @Override
+    public void getUserIntegralRecord(int page, int count, ModelCallBack modelCallBack) {
+        Observable<MyUserIntegralRecordData> userIntegralRecord = apiService.getUserIntegralRecord(page, count);
+        userIntegralRecord.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MyUserIntegralRecordData>() {
+                    @Override
+                    public void accept(MyUserIntegralRecordData myUserIntegralRecordData) throws Exception {
+                        modelCallBack.success(myUserIntegralRecordData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+    //设置页面
+    @Override
+    public void getSetUp(ModelCallBack modelCallBack) {
+        Observable<MySetUpData> setUp = apiService.getSetUp();
+        setUp.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MySetUpData>() {
+                    @Override
+                    public void accept(MySetUpData mySetUpData) throws Exception {
+                        modelCallBack.success(mySetUpData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
 
 
 }

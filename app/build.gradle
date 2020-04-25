@@ -64,5 +64,5 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     //XBanner
     implementation 'com.github.xiaohaibin:XBanner:androidx_v1.0.2'
-    compile 'com.cjj.materialrefeshlayout:library:1.3.0'
+    implementation 'com.cjj.materialrefeshlayout:library:1.3.0'
 }

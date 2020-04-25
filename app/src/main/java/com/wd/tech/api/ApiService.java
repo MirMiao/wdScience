@@ -1,5 +1,10 @@
 package com.wd.tech.api;
 import com.wd.tech.bean.beanMyHomePage.MyAllData;
+import com.wd.tech.bean.beanMyHomePage.MyFollowUserData;
+import com.wd.tech.bean.beanMyHomePage.MySetUpData;
+import com.wd.tech.bean.beanMyHomePage.MySysNoticeData;
+import com.wd.tech.bean.beanMyHomePage.MyUserIntegralData;
+import com.wd.tech.bean.beanMyHomePage.MyUserIntegralRecordData;
 import com.wd.tech.bean.beancommunity.CommentData;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.LoginEntity;
@@ -231,5 +236,21 @@ public interface ApiService {
     //我的收藏
     @GET(Api.HomePage_Allinfor)
     Observable<MyAllData> getAll(@Query("page")int page, @Query("count")int count);
+    //我的关注
+    @GET(Api.HomePage_FollowUser)
+    Observable<MyFollowUserData> getFollowUser(@Query("page")int page, @Query("count")int count);
+    //我的通知
+    @GET(Api.HomePage_SysNotice)
+    Observable<MySysNoticeData> getSysNotice(@Query("page")int page, @Query("count")int count);
+    //查询用户积分
+    @GET(Api.HomePage_UserIntegral)
+    Observable<MyUserIntegralData> getUserIntegral();
+    //查询用户积分明细
+    @GET(Api.HomePage_UserIntegralRecord)
+    Observable<MyUserIntegralRecordData> getUserIntegralRecord(@Query("page")int page, @Query("count")int count);
+
+    @GET(Api.HomePage_UserInfoByUserId)
+    Observable<MySetUpData> getSetUp();
+
 
 }

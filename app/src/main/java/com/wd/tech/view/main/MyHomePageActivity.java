@@ -77,42 +77,46 @@ public class MyHomePageActivity extends BaseActivity {
         quGuanzhu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(MyHomePageActivity.this,MyFollowUserActivity.class);
+                startActivity(intent);
             }
         });
 
         quTiezi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(MyHomePageActivity.this,MyTieziActivity.class);
+                startActivity(intent);
             }
         });
 
         quTongzhi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(MyHomePageActivity.this,MySysNoticeActivity.class);
+                startActivity(intent);
             }
         });
 
         quJifen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(MyHomePageActivity.this,MyUserIntegralActivity.class);
+                startActivity(intent);
             }
         });
 
         quRenwu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
 
         quShezhi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Intent intent=new Intent(MyHomePageActivity.this,MySetUpActivity.class);
+                startActivity(intent);
             }
         });
 

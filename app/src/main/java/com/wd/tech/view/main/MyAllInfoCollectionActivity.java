@@ -23,6 +23,10 @@ import java.util.List;
 *
 * */
 
+/*
+ * 收藏
+ * */
+
 
 public class MyAllInfoCollectionActivity extends BaseActivity<Presenter> implements IContract.IView {
 

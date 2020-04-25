@@ -61,6 +61,10 @@ public interface Api {
 
     //我的
     String HomePage_Allinfor="user/verify/v1/findAllInfoCollection";//我的收藏
-
+    String HomePage_FollowUser="user/verify/v1/findFollowUserList";//我的关注
+    String HomePage_SysNotice="tool/verify/v1/findSysNoticeList";//我的通知
+    String HomePage_UserIntegral="user/verify/v1/findUserIntegral";//查询用户积分
+    String HomePage_UserIntegralRecord="user/verify/v1/findUserIntegralRecord";//查询用户积分明细
+    String HomePage_UserInfoByUserId="user/verify/v1/getUserInfoByUserId";//根据用户ID查询用户信息(设置页面)
 
 }

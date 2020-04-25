@@ -39,8 +39,8 @@ public class MyAllRecyAdapter extends RecyclerView.Adapter<MyAllRecyAdapter.MyAl
         String thumbnail = myAllResult.getThumbnail();
 
         RetrofitUtil instance = RetrofitUtil.getInstance();
-        instance.getRectphoto(title,holder.allIm);
-        holder.allNeirong.setText(thumbnail);
+        instance.getRectphoto(thumbnail,holder.allIm);
+        holder.allNeirong.setText(title);
 
     }
 
