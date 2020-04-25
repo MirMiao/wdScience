@@ -1,6 +1,7 @@
 package com.wd.tech.view.fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.informationentity.LoginEntity;
@@ -18,6 +20,9 @@ import com.wd.tech.util.RsaCoder;
 import com.wd.tech.util.SpUtil;
 import com.wd.tech.view.activity.MainActivity;
 import com.wd.tech.view.main.MyHomePageActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,19 +67,16 @@ public class LoginActivity extends BaseActivity<Presenter> implements IContract.
     public void success(Object o) {
         if(o instanceof LoginEntity){
              if("0000".equals(((LoginEntity) o).getStatus())){
-
+                 List<LoginEntity.ResultBean> list=new ArrayList<>();
+                 Toast.makeText(this, ""+((LoginEntity) o).getMessage(), Toast.LENGTH_SHORT).show();
                  LoginEntity.ResultBean result = ((LoginEntity) o).getResult();
-                 String nickName = result.getNickName();
-                 String headPic = result.getHeadPic();
-                 String signature = result.getSignature();
-                 int userId = result.getUserId();
-                 String sessionId = result.getSessionId();
-                 SpUtil.saveString("nickn",nickName);
-                 SpUtil.saveString("headp",headPic);
-                 SpUtil.saveString("signat",signature);
-                 SpUtil.saveInt("userid",userId);
-                 SpUtil.saveString("sessionid",sessionId);
-                 startActivity(new Intent(LoginActivity.this, MyHomePageActivity.class));
+                 list.add(result);
+                 SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
+                 SharedPreferences.Editor edit = sp.edit();
+                 Gson gson = new Gson();
+                 String s = gson.toJson(list);
+                 edit.putString("userInfo",s).commit();
+                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
              }
         }
     }

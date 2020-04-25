@@ -6,10 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
-<<<<<<< HEAD
-=======
+
 import com.wd.tech.adapter.myhomepageadapter.MyAllRecyAdapter;
->>>>>>> origin/information-module-branch
+
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.beanMyHomePage.MyAllData;
 import com.wd.tech.bean.beanMyHomePage.MyAllResult;
@@ -78,12 +77,11 @@ public class MyAllInfoCollectionActivity extends BaseActivity<Presenter> impleme
     public void success(Object o) {
         if(o instanceof MyAllData){
             List<MyAllResult> result = ((MyAllData) o).getResult();
-<<<<<<< HEAD
 
-=======
-            MyAllRecyAdapter myAllRecyAdapter=new MyAllRecyAdapter(result,this);
+
+    MyAllRecyAdapter myAllRecyAdapter=new MyAllRecyAdapter(result,this);
             allRecy.setAdapter(myAllRecyAdapter);
->>>>>>> origin/information-module-branch
+
         }
     }
 
