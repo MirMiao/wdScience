@@ -15,7 +15,9 @@ import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RsaCoder;
+import com.wd.tech.util.SpUtil;
 import com.wd.tech.view.activity.MainActivity;
+import com.wd.tech.view.main.MyHomePageActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,7 +62,15 @@ public class LoginActivity extends BaseActivity<Presenter> implements IContract.
     public void success(Object o) {
         if(o instanceof LoginEntity){
              if("0000".equals(((LoginEntity) o).getStatus())){
-                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                 LoginEntity.ResultBean result = ((LoginEntity) o).getResult();
+                 String nickName = result.getNickName();
+                 String headPic = result.getHeadPic();
+                 String signature = result.getSignature();
+                 SpUtil.saveString("nickn",nickName);
+                 SpUtil.saveString("headp",headPic);
+                 SpUtil.saveString("signat",signature);
+                 startActivity(new Intent(LoginActivity.this, MyHomePageActivity.class));
              }
         }
     }

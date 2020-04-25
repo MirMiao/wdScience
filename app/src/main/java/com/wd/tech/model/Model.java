@@ -37,6 +37,8 @@ import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.util.RetrofitUtil;
 
+import java.io.File;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
