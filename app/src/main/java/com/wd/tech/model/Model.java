@@ -1,6 +1,7 @@
 package com.wd.tech.model;
 
 import com.wd.tech.api.ApiService;
+import com.wd.tech.bean.beanMyHomePage.MyAllData;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
 import com.wd.tech.bean.beancommunity.MyPostData;
@@ -847,4 +848,27 @@ public class Model implements IContract.IModel {
                     }
                 });
     }
+
+
+    //我的收藏
+    @Override
+    public void getMyHomepageAll(int page, int count, ModelCallBack modelCallBack) {
+        Observable<MyAllData> all = apiService.getAll(page, count);
+        all.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MyAllData>() {
+                    @Override
+                    public void accept(MyAllData myAllData) throws Exception {
+                        modelCallBack.success(myAllData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+
+
 }

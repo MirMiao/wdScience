@@ -667,4 +667,20 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
         });
     }
 
+    //我的收藏
+    @Override
+    public void getMyHomepageAll(int page, int count) {
+        model.getMyHomepageAll(page, count, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
 }

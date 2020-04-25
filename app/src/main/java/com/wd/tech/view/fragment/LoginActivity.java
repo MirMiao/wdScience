@@ -67,9 +67,13 @@ public class LoginActivity extends BaseActivity<Presenter> implements IContract.
                  String nickName = result.getNickName();
                  String headPic = result.getHeadPic();
                  String signature = result.getSignature();
+                 int userId = result.getUserId();
+                 String sessionId = result.getSessionId();
                  SpUtil.saveString("nickn",nickName);
                  SpUtil.saveString("headp",headPic);
                  SpUtil.saveString("signat",signature);
+                 SpUtil.saveInt("userid",userId);
+                 SpUtil.saveString("sessionid",sessionId);
                  startActivity(new Intent(LoginActivity.this, MyHomePageActivity.class));
              }
         }

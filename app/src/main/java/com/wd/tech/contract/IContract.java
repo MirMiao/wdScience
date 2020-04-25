@@ -63,6 +63,9 @@ public interface IContract {
         void login(String phone,String pwd,ModelCallBack modelCallBack); //登陆
          void reg(String nickName,String phone,String pwd,ModelCallBack modelCallBack); //注册
 
+        //我的
+        void getMyHomepageAll(int page,int count,ModelCallBack modelCallBack);//我的收藏
+
 
         interface ModelCallBack{
             void success(Object o);
@@ -117,6 +120,9 @@ public interface IContract {
         void serchByKeyWord(String title,int page,int count); //根据关键字模糊查询
         void login(String phone,String pwd); //登陆
         void reg(String nickName,String phone,String pwd); //注册
+
+        //我的
+        void getMyHomepageAll(int page, int count);//我的收藏
 
     }
     interface IView extends IBaseView {

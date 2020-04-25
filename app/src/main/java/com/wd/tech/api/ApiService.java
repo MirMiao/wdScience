@@ -1,4 +1,5 @@
 package com.wd.tech.api;
+import com.wd.tech.bean.beanMyHomePage.MyAllData;
 import com.wd.tech.bean.beancommunity.CommentData;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.LoginEntity;
@@ -225,4 +226,10 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("user/v1/register")
     Observable<RegEntity> reg(@Field("nickName") String nickName,@Field("phone")String phone,@Field("pwd")String pwd );
+
+
+    //我的收藏
+    @GET(Api.HomePage_Allinfor)
+    Observable<MyAllData> getAll(@Query("page")int page, @Query("count")int count);
+
 }
