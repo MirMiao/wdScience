@@ -175,7 +175,8 @@ public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IC
                 startActivity(intentmanage);
                 break;
             case R.id.btn_crowd_chatrecord:
-
+                Intent  intentcc=new Intent(CrowdHomePageActivity.this,CrowdChatActivity.class);
+                startActivity(intentcc);
                 break;
 
         }

@@ -1,20 +1,14 @@
 package com.wd.tech.view.messageactivity;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.view.View;
-
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
-import com.wd.tech.base.mvp.BasePresenter;
+import com.wd.tech.contract.IContract;
+import com.wd.tech.presenter.Presenter;
 //群聊
-public class CrowdChatActivity extends BaseActivity {
-
-
+public class CrowdChatActivity extends BaseActivity<Presenter> implements IContract.IView {
     @Override
-    protected BasePresenter initPresenter() {
-        return null;
+    protected Presenter initPresenter() {
+        return new Presenter();
     }
 
     @Override
@@ -34,5 +28,15 @@ public class CrowdChatActivity extends BaseActivity {
 
     public void back(View view) {
         finish();
+    }
+
+    @Override
+    public void success(Object o) {
+
+    }
+
+    @Override
+    public void failur(Throwable throwable) {
+
     }
 }
