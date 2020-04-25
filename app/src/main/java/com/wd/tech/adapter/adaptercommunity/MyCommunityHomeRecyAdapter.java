@@ -95,6 +95,14 @@ public class MyCommunityHomeRecyAdapter extends RecyclerView.Adapter<MyCommunity
             }
         });
 
+        holder.communitylistPinglun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
     }
 
     @Override

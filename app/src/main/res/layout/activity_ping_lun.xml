@@ -8,6 +8,43 @@
     android:orientation="vertical"
     >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/quxiao"
+            android:text="取消"
+            android:textColor="@color/hui2"
+            android:textSize="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/queren"
+            android:text="确认"
+            android:textColor="@color/colorB"
+            android:textSize="20dp"
+            android:layout_marginLeft="320dp"
+            />
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:id="@+id/pinglunfabiao"
+        />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/fabutupian"
+        android:background="@mipmap/community_releseapost_add"
+        />
 
 
 </LinearLayout>

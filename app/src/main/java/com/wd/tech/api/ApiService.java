@@ -1,4 +1,6 @@
 package com.wd.tech.api;
+import com.wd.tech.bean.beanMyHomePage.MyAllData;
+import com.wd.tech.bean.beancommunity.CommentData;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.bean.informationentity.RegEntity;
@@ -39,6 +41,10 @@ import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.messagebean.UserFriendListBean;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
+import com.wd.tech.bean.beancommunity.MyPostData;
+import com.wd.tech.bean.beancommunity.ReleasepostData;
+
+import java.io.File;
 import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 
@@ -175,9 +181,10 @@ public interface ApiService {
 
 
     //社区
+    //社区列表
     @GET(Api.COMMUNITY_LIST)
     Observable<CommunityData> getCommunitylist(@Query("page")int page, @Query("count")int count);
-
+    //社区用户评论
     @GET(Api.COMMUNITY_Commentary)
     Observable<CommentaryData> getCommentary(@Query("communityId")int communityId, @Query("page")int page, @Query("count")int count);
 
@@ -197,6 +204,19 @@ public interface ApiService {
     //根据关键字模糊查询
     @GET("information/v1/findInformationByTitle")
     Observable<SerchInfoByKeyWordEntity> serchByKeyWord(@Query("title") String title,@Query("page") int page,@Query("count")int count);
+    //社区评论
+    @POST(Api.COMMUNITY_Comment)
+    @FormUrlEncoded
+    Observable<CommentData> getComment(@Field("communityId") int communityId, @Field("content") String content);
+    //发布帖子
+    @POST(Api.COMMUNITY_ReleasePost)
+    @FormUrlEncoded
+    Observable<ReleasepostData> getReleasepost(@Field("content") String content,@Field("file") File file);
+    //我的帖子
+    @GET(Api.COMMUNITY_MyPostById)
+    Observable<MyPostData> getMyPostIdData(@Query("page")int page, @Query("count")int count);
+
+
 
     //登陆
     @FormUrlEncoded
@@ -206,4 +226,10 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("user/v1/register")
     Observable<RegEntity> reg(@Field("nickName") String nickName,@Field("phone")String phone,@Field("pwd")String pwd );
+
+
+    //我的收藏
+    @GET(Api.HomePage_Allinfor)
+    Observable<MyAllData> getAll(@Query("page")int page, @Query("count")int count);
+
 }

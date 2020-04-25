@@ -3,6 +3,8 @@ package com.wd.tech.contract;
 import com.wd.tech.base.mvp.IBaseModel;
 import com.wd.tech.base.mvp.IBaseView;
 
+import java.io.File;
+
 /*
  * 时间 :2020/3/27  12:01
  * 作者 :苗恒
@@ -51,13 +53,19 @@ public interface IContract {
         //社区
         void  getCommunitydata(int page,int count,ModelCallBack modelCallBack);//社区列表
         void  getCommentary(int communityId,int page,int count,ModelCallBack modelCallBack);//社区用户评论
+        void  getReleasepostdata(String content,File file,ModelCallBack modelCallBack);//发布帖子
+        void  getMyPostdata(int page,int count,ModelCallBack modelCallBack);//我的帖子
+
         void getBannerData(ModelCallBack modelCallBack);//banner展示列表
         void getInfoRecommendListData(int plateId,int page,int count,ModelCallBack modelCallBack); //展示首页数据
         void getPlateData(ModelCallBack modelCallBack);  //展示菜单
          void serchByKeyWord(String title,int page,int count,ModelCallBack modelCallBack); //根据关键字模糊查询
         void login(String phone,String pwd,ModelCallBack modelCallBack); //登陆
-
          void reg(String nickName,String phone,String pwd,ModelCallBack modelCallBack); //注册
+
+        //我的
+        void getMyHomepageAll(int page,int count,ModelCallBack modelCallBack);//我的收藏
+
 
         interface ModelCallBack{
             void success(Object o);
@@ -102,6 +110,9 @@ public interface IContract {
         //社区
         void  getCommunitydata(int page, int count);//社区列表
         void  getCommentary(int communityId, int page, int count);//社区用户评论
+        void  getReleasepostdata(String content, File file);//发布帖子
+        void  getMyPostdata(int page, int count);//我的帖子
+
 
         void getBannerData();  //展示banner列表
         void getInfoRecommendListData(int plateId,int page,int count);//展示首页数据
@@ -109,6 +120,10 @@ public interface IContract {
         void serchByKeyWord(String title,int page,int count); //根据关键字模糊查询
         void login(String phone,String pwd); //登陆
         void reg(String nickName,String phone,String pwd); //注册
+
+        //我的
+        void getMyHomepageAll(int page, int count);//我的收藏
+
     }
     interface IView extends IBaseView {
         void success(Object o);

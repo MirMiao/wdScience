@@ -1,6 +1,7 @@
 package com.wd.tech.adapter.adaptercommunity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.wd.tech.R;
 import com.wd.tech.bean.beancommunity.Commentaryresult;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.util.TimeformatUtil;
+import com.wd.tech.view.communityactivity.MyPostActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +52,15 @@ public class MyCommentaryRecyAdapter extends RecyclerView.Adapter<MyCommentaryRe
 
         holder.commentaryName.setText(nickName);
         holder.commentaryNei.setText(content);
+
+        holder.commentaryIm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, MyPostActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
 
     }
 

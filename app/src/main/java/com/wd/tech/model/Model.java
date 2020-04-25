@@ -1,6 +1,12 @@
 package com.wd.tech.model;
 
 import com.wd.tech.api.ApiService;
+import com.wd.tech.bean.beanMyHomePage.MyAllData;
+import com.wd.tech.bean.beancommunity.CommentaryData;
+import com.wd.tech.bean.beancommunity.CommunityData;
+import com.wd.tech.bean.beancommunity.MyPostData;
+import com.wd.tech.bean.beancommunity.ReleasepostData;
+import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 import com.wd.tech.bean.informationentity.LoginEntity;
@@ -44,6 +50,8 @@ import com.wd.tech.bean.beancommunity.CommunityData;
 import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.util.RetrofitUtil;
+
+import java.io.File;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -765,6 +773,46 @@ public class Model implements IContract.IModel {
                 });
     }
 
+    //发布帖子
+    @Override
+    public void getReleasepostdata(String content, File file, ModelCallBack modelCallBack) {
+        Observable<ReleasepostData> releasepost = apiService.getReleasepost(content, file);
+        releasepost.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ReleasepostData>() {
+                    @Override
+                    public void accept(ReleasepostData releasepostData) throws Exception {
+                        modelCallBack.success(releasepost);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+    //我的帖子
+    @Override
+    public void getMyPostdata(int page, int count, ModelCallBack modelCallBack) {
+        Observable<MyPostData> myPostIdData = apiService.getMyPostIdData(page, count);
+        myPostIdData.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MyPostData>() {
+                    @Override
+                    public void accept(MyPostData myPostData) throws Exception {
+                        modelCallBack.success(myPostData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+
+
     @Override
     public void login(String phone, String pwd, ModelCallBack modelCallBack) {
         apiService.login(phone,pwd)
@@ -800,4 +848,27 @@ public class Model implements IContract.IModel {
                     }
                 });
     }
+
+
+    //我的收藏
+    @Override
+    public void getMyHomepageAll(int page, int count, ModelCallBack modelCallBack) {
+        Observable<MyAllData> all = apiService.getAll(page, count);
+        all.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MyAllData>() {
+                    @Override
+                    public void accept(MyAllData myAllData) throws Exception {
+                        modelCallBack.success(myAllData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+
+
 }
