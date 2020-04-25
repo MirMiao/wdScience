@@ -33,11 +33,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         ></com.wd.tech.myview.Mysearchview>
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="我创建的群"
+    android:layout_marginLeft="@dimen/dp_12"
+    ></TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/crowd_group_RecyclerView"
+        android:id="@+id/mycrowd_group_RecyclerView"
+        android:layout_marginTop="10dp"
+        ></androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="我加入的群"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/dp_12"
+        ></TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/myaddcrowd_group_RecyclerView"
         android:layout_marginTop="10dp"
         ></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

@@ -30,10 +30,6 @@ public class FriendInformActivity extends BaseActivity<Presenter> implements ICo
     TextView time;
     @BindView(R.id.checkfriendapply_RecyclerView)
     RecyclerView checkfriendapplyRecyclerView;
-    @BindView(R.id.time2)
-    TextView time2;
-    @BindView(R.id.userfriendinfrom_RecyclerView)
-    RecyclerView userfriendinfromRecyclerView;
     private int noticeId;
     private MyUserFriendInfromRecordadapter myUserFriendInfromRecordadapter;
 
@@ -71,17 +67,11 @@ public class FriendInformActivity extends BaseActivity<Presenter> implements ICo
     public void success(Object o) {
         if (o instanceof UserFriendInfromRecordBean) {
             List<UserFriendInfromRecordBean.ResultBean> userfriendinfromrecordresult =((UserFriendInfromRecordBean) o).getResult();
-            myUserFriendInfromRecordadapter = new MyUserFriendInfromRecordadapter(userfriendinfromrecordresult,this);
             for (int i = 0; i < userfriendinfromrecordresult.size(); i++) {
-                if (userfriendinfromrecordresult.get(i).getStatus()==1){
+                    myUserFriendInfromRecordadapter = new MyUserFriendInfromRecordadapter(userfriendinfromrecordresult,this);
                     time.setText(TimeformatUtil.gettime(userfriendinfromrecordresult.get(i).getNoticeTime()));
                     checkfriendapplyRecyclerView.setAdapter(myUserFriendInfromRecordadapter);
                     checkfriendapplyRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-                }else {
-                    time2.setText(TimeformatUtil.gettime(userfriendinfromrecordresult.get(i).getNoticeTime()));
-                    userfriendinfromRecyclerView.setAdapter(myUserFriendInfromRecordadapter);
-                    userfriendinfromRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-                }
             }
 
         }

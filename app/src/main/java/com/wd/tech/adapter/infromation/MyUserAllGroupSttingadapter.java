@@ -4,21 +4,19 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
+import com.wd.tech.event.Eventgroupdeleteid;
 import com.wd.tech.bean.messagebean.UserAllGroupingBean;
-import com.wd.tech.event.Eventgroupid;
-import com.wd.tech.event.Eventstuast;
-
+import com.wd.tech.event.Eventgroupupdateid;
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * @author 吴健
  * Class :1708A
@@ -47,23 +45,22 @@ public class MyUserAllGroupSttingadapter  extends  RecyclerView.Adapter<MyUserAl
     @Override
     public void onBindViewHolder(@NonNull MyUserAllGroupsttingViewHolder holder, int position) {
       myUserAllGroupsttingViewHolder.group_name.setText(userallgroupresult.get(position).getGroupName());
-        myUserAllGroupsttingViewHolder.group_name.setOnClickListener(new View.OnClickListener() {
+        int   groupId = userallgroupresult.get(position).getGroupId();
+        myUserAllGroupsttingViewHolder.group.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               Eventgroupid  eventgroupid =new Eventgroupid();
-               int   groupId = userallgroupresult.get(position).getGroupId();
-               eventgroupid.groupid=groupId;
-               EventBus.getDefault().postSticky(eventgroupid);
+               Eventgroupupdateid eventgroupupdateid =new Eventgroupupdateid();
+               eventgroupupdateid.groupupdateid=groupId;
+               EventBus.getDefault().postSticky(eventgroupupdateid);
            }
        });
 
-       myUserAllGroupsttingViewHolder.group_name.setOnLongClickListener(new View.OnLongClickListener() {
+      myUserAllGroupsttingViewHolder.group.setOnLongClickListener(new View.OnLongClickListener() {
            @Override
            public boolean onLongClick(View view) {
-               Eventstuast eventstuast=new Eventstuast();
-               int   groupId2 = userallgroupresult.get(position).getGroupId();
-               eventstuast.id=groupId2;
-               EventBus.getDefault().postSticky(eventstuast);
+               Eventgroupdeleteid eventgroupdeleteid=new Eventgroupdeleteid();
+               eventgroupdeleteid.groupdeleteid=groupId;
+               EventBus.getDefault().postSticky(eventgroupdeleteid);
                return true;
            }
        });
@@ -81,10 +78,12 @@ public class MyUserAllGroupSttingadapter  extends  RecyclerView.Adapter<MyUserAl
 
     class  MyUserAllGroupsttingViewHolder extends RecyclerView.ViewHolder {
         TextView group_name;
+        LinearLayout group;
 
         public MyUserAllGroupsttingViewHolder(@NonNull View itemView) {
             super(itemView);
             group_name = itemView.findViewById(R.id.group_name);
+            group = itemView.findViewById(R.id.group);
         }
     }
 }

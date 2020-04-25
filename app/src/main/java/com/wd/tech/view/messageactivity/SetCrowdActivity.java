@@ -56,7 +56,7 @@ public class SetCrowdActivity extends BaseActivity<Presenter> implements IContra
             case R.id.btn_setcrowd:
                 if(crowdName!=null&&etContent!=null){
                     String name=crowdName.getText().toString().trim();
-                    String content=crowdNameCount.getText().toString().trim();
+                    String content=etContent.getText().toString().trim();
                     presenter.getSetCrowdBeandata(name,content);
                 }else {
                     Toast.makeText(App.context,"群名或群介绍不能为空",Toast.LENGTH_LONG).show();

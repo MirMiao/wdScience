@@ -33,11 +33,17 @@
                 android:layout_marginLeft="20dp"
                 ></TextView>
         </LinearLayout>
-        <ExpandableListView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/expandableListView"
-            android:layout_weight="1"
-            ></ExpandableListView>
+<com.cjj.MaterialRefreshLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/refresh"
+    >
+       <ExpandableListView
+           android:layout_marginTop="10dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/expandableListView"
+           ></ExpandableListView>
+</com.cjj.MaterialRefreshLayout>
+
 </LinearLayout>

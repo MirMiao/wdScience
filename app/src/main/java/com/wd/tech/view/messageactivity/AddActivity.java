@@ -47,10 +47,7 @@ public class AddActivity extends BaseActivity {
         mysearchview.setSetContext(new Mysearchview.setContext() {
             @Override
             public void onContent(String text) {
-                boolean  isphone = UserEntroty.isphone(text);
-                if (isphone==true){
-                    EventBus.getDefault().postSticky(text);
-                }
+             EventBus.getDefault().postSticky(text);
             }
         });
     }

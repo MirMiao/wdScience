@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -18,7 +19,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
-import com.wd.tech.base.mvp.BasePresenter;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.view.fragment.CommunityFragment;
@@ -31,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity<Presenter> implements IContract.IView {
 
@@ -48,6 +49,8 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
     DrawerLayout draw;
     @BindView(R.id.tv_login)
     TextView tvLogin;
+    @BindView(R.id.iv_toLogin)
+    ImageView ivToLogin;
     private String string;
 
 
@@ -63,7 +66,12 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
 
     @Override
     protected void initData() {
-
+   /*     try {
+            string = RsaCoder.encryptByPublicKey("密码");
+            Log.i("ddd", "initData: "+string);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
     }
 
     @SuppressLint("ResourceAsColor")
@@ -72,7 +80,7 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
         draw.setScrimColor(Color.TRANSPARENT);
@@ -190,7 +198,6 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
     }
 
 
-
     @Override
     public void success(Object o) {
 
@@ -199,5 +206,11 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
     @Override
     public void failur(Throwable throwable) {
 
+    }
+
+
+    @OnClick(R.id.iv_toLogin)
+    public void onViewClicked() {
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 }

@@ -63,6 +63,11 @@ public class LoginEntity {
         private String userName;
         private int whetherFaceId;
         private int whetherVip;
+        private String signature;
+
+        public String getSignature() {
+            return signature;
+        }
 
         public String getHeadPic() {
             return headPic;

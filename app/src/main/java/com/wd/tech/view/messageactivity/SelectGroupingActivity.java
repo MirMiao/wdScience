@@ -1,5 +1,4 @@
 package com.wd.tech.view.messageactivity;
-
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -8,12 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -27,16 +24,12 @@ import com.wd.tech.bean.messagebean.UserAllGroupingBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.event.Eventgroupid;
 import com.wd.tech.presenter.Presenter;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-
 //选择分组
 public class SelectGroupingActivity extends BaseActivity<Presenter> implements IContract.IView, View.OnClickListener {
     @BindView(R.id.btn_addgroup)

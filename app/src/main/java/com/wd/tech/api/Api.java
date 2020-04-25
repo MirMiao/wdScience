@@ -46,7 +46,7 @@ public interface Api {
     String USEREXISISCROWD_URL="group/verify/v1/whetherInGroup";//判断用户是否已在群内
     String APPLYADDCROWD_URL="group/verify/v1/applyAddGroup";//申请进群
     String ANVITEADDCROWD_URL="group/verify/v1/inviteAddGroup";//邀请加群
-    String BATCHANVITEADDCROWD_URL="group/verify/v1/batchInviteAddGroup";//邀请加群
+    String BATCHANVITEADDCROWD_URL="group/verify/v1/batchInviteAddGroup";//批量邀请加群
     String CROWDINFROM_URL="group/verify/v1/findGroupNoticePageList";//查询群通知记录
     String CHECKCROWDAPPLY_URL="group/verify/v1/reviewGroupApply";//审核群申请
     String UPLOADCROWDHEADPIC_URL="group/verify/v1/uploadGroupHeadPic";//上传群头像
@@ -55,4 +55,12 @@ public interface Api {
     //社区
     String COMMUNITY_LIST="community/v1/findCommunityList";//社区列表
     String COMMUNITY_Commentary="community/v1/findCommunityUserCommentList";//社区用户评论
+    String COMMUNITY_Comment="community/verify/v1/addCommunityComment";//社区评论
+    String COMMUNITY_ReleasePost="community/verify/v1/releasePost";//发布帖子
+    String COMMUNITY_MyPostById="community/verify/v1/findMyPostById";//我的帖子
+
+    //我的
+    String HomePage_Allinfor="user/verify/v1/findAllInfoCollection";//我的收藏
+
+
 }

@@ -37,6 +37,7 @@ public class AddFriendActivity extends BaseActivity<Presenter> implements IContr
     private String remarkaf;
     private String headPicaf;
     private String string;
+    private String signature;
 
     @Override
     protected Presenter initPresenter() {
@@ -55,9 +56,11 @@ public class AddFriendActivity extends BaseActivity<Presenter> implements IContr
         userNameaf = getIntent().getStringExtra("userNameaf");
         remarkaf = getIntent().getStringExtra("remarkaf");
         headPicaf = getIntent().getStringExtra("headPicaf");
-
+        signature = getIntent().getStringExtra("signature");
+        if (signature!=null){
+            friendRemarkName.setText(signature);
+        }
         friendName.setText(nickNameaf);
-        friendRemarkName.setText(remarkaf);
         RetrofitUtil.getInstance().getRoundphoto(headPicaf,friendHead);
     }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="#fff"
+    android:id="@+id/btn_crowd_dialt"
+    >
+<ImageView
+    android:layout_width="@dimen/dp_24"
+    android:layout_height="@dimen/dp_24"
+    android:id="@+id/crowd_headpic"
+    android:layout_marginLeft="12dp"
+    android:layout_gravity="center"
+    android:src="@mipmap/ic_launcher"
+    ></ImageView>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="群名称"
+    android:id="@+id/crowd_name"
+    android:layout_gravity="center"
+    android:layout_marginLeft="@dimen/dp_10"
+    ></TextView>
+</LinearLayout>

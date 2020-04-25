@@ -7,17 +7,18 @@
     >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_50"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
-
+        android:background="#F3F3F3"
+        android:gravity="center"
         >
         <com.google.android.material.tabs.TabLayout
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="120dp"
             app:tabSelectedTextColor="#FFFFFF"
-            android:background="#fff"
+            android:background="@drawable/shape1"
             app:tabMode="fixed"
             app:tabTextColor="#000000"
             android:id="@+id/tabmessage"
@@ -27,7 +28,6 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:id="@+id/btn_add"
-            android:layout_marginTop="10dp"
             android:src="@drawable/community_btn_add_n_xhdpi"
             android:layout_marginLeft="50dp"
             ></ImageView>

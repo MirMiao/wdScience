@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wd.tech">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -14,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.messageactivity.GroupSttingActivity"></activity>
+        <activity android:name=".view.main.MyAllInfoCollectionActivity"></activity>
+        <activity android:name=".view.main.MyHomePageActivity" />
+        <activity android:name=".view.messageactivity.GroupSttingActivity" />
         <activity android:name=".view.messageactivity.FriendchatRecordActivity" />
         <activity android:name=".view.messageactivity.SelectGroupingActivity" />
         <activity android:name=".view.messageactivity.CrowdHomePageActivity" />
@@ -34,12 +32,13 @@
         <activity android:name=".view.messageactivity.FriendInformActivity" />
         <activity android:name=".view.messageactivity.FriendMessageActivity" />
         <activity android:name=".view.messageactivity.SetCrowdActivity" />
-        <activity android:name=".view.information.PlateActivity"/>
-        <activity android:name=".view.information.SerchActivity"/>
-        <activity android:name=".view.fragment.LoginActivity"/>
-        <activity android:name=".view.fragment.RegActivity"/>
-        <activity android:name=".view.communityactivity.PingLunActivity"></activity>
+        <activity android:name=".view.information.PlateActivity" />
+        <activity android:name=".view.information.SerchActivity" />
+        <activity android:name=".view.fragment.LoginActivity" />
+        <activity android:name=".view.fragment.RegActivity" />
+        <activity android:name=".view.communityactivity.PingLunActivity" />
         <activity android:name=".view.communityactivity.QuanbupinglunActivity" />
+        <activity android:name=".view.communityactivity.MyPostActivity" />
         <activity android:name=".view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,5 +47,9 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

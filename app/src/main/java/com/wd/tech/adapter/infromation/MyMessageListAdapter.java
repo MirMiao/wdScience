@@ -52,7 +52,6 @@ public class MyMessageListAdapter extends  RecyclerView.Adapter<MyMessageListAda
      else {
          myMessageListViewHolder.message_contentcount.setText("1");
      }
-        RetrofitUtil.getInstance().getRectphoto(userfriendinfromrecordresult.get(position).getFromHeadPic(),myMessageListViewHolder.message_userimg);
         myMessageListViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +79,5 @@ public class MyMessageListAdapter extends  RecyclerView.Adapter<MyMessageListAda
             message_usercontent = itemView.findViewById(R.id.message_usercontent);
             message_contentcount = itemView.findViewById(R.id.message_contentcount);
         }
-
     }
 }
