@@ -1,6 +1,7 @@
 package com.wd.tech.view.messageactivity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -29,6 +30,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 //好友聊天
@@ -54,6 +56,7 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
     private String userName1;
     private String signature;
     private String headPic1;
+     private int count =5;
     @Override
     protected Presenter initPresenter() {
         return new Presenter();
@@ -73,18 +76,19 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
         headPic = getIntent().getStringExtra("headPic");
         signature = getIntent().getStringExtra("signature");
         friendName.setText(userName1);
-        presenter.getFriendChatDialogueRecordBeandata(userId, 1, 10);
+        presenter.getFriendChatDialogueRecordBeandata(userId, 1, count);
         refresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+                count++;
+                presenter.getFriendChatDialogueRecordBeandata(userId, 1, count);
+                myFriendChatDialogueRecordadapter.loadmore(FriendChatDialogueRecordresult);
+                refresh.finishLoadMore();
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                presenter.getFriendChatDialogueRecordBeandata(userId, 1, 10);
-                myFriendChatDialogueRecordadapter.update(FriendChatDialogueRecordresult);
-                friendContent.setText("");
+
             }
         });
     }
@@ -103,26 +107,26 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
         switch (view.getId()) {
             case R.id.btn_friendchatsetting:
                 Intent intentcs = new Intent(FriendChatActivity.this, ChatSettingActivity.class);
-                    intentcs.putExtra("userId1",userId);
-                    intentcs.putExtra("nickName1",nickName);
-                    intentcs.putExtra("remark2",remark1);
-                    intentcs.putExtra("headPic",headPic);
+                intentcs.putExtra("userId1", userId);
+                intentcs.putExtra("nickName1", nickName);
+                intentcs.putExtra("remark2", remark1);
+                intentcs.putExtra("headPic", headPic);
                 startActivity(intentcs);
                 break;
             case R.id.btn_send:
                 String infrommain = friendContent.getText().toString().trim();
-                    try {
-                        //加密好友发送的信息
-                        String content = RsaCoder.encryptByPublicKey(infrommain);
-                        presenter.getSendMessageBeandata(userId, content);
-                        EventMeassage eventMeassage=new EventMeassage();
-                        eventMeassage.headpic=headPic1;
-                        eventMeassage.content=content;
-                        eventMeassage.name=nickName;
-                        EventBus.getDefault().postSticky(eventMeassage);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    //加密好友发送的信息
+                    String content = RsaCoder.encryptByPublicKey(infrommain);
+                    presenter.getSendMessageBeandata(userId, content);
+                    EventMeassage eventMeassage = new EventMeassage();
+                    eventMeassage.headpic = headPic1;
+                    eventMeassage.content = content;
+                    eventMeassage.name = nickName;
+                    EventBus.getDefault().postSticky(eventMeassage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
@@ -132,7 +136,7 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
         if (o instanceof FriendChatDialogueRecordBean) {
             FriendChatDialogueRecordresult = ((FriendChatDialogueRecordBean) o).getResult();
             for (int i = 0; i < FriendChatDialogueRecordresult.size(); i++) {
-                if (FriendChatDialogueRecordresult.get(i).getDirection()==2) {
+                if (FriendChatDialogueRecordresult.get(i).getDirection() == 2) {
                     headPic1 = FriendChatDialogueRecordresult.get(i).getHeadPic();
                 }
             }
@@ -141,9 +145,9 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
             friendchatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         }
         if (o instanceof SendMessageBean) {
-            if (((SendMessageBean) o).getStatus().equals("0000")){
-                presenter.getFriendChatDialogueRecordBeandata(userId, 1, 10);
-                myFriendChatDialogueRecordadapter.update(FriendChatDialogueRecordresult);
+            if (((SendMessageBean) o).getStatus().equals("0000")) {
+                presenter.getFriendChatDialogueRecordBeandata(userId, 1, count);
+                myFriendChatDialogueRecordadapter.notifyDataSetChanged();
                 friendContent.setText("");
             }
             Log.d("sendmessage", "success: " + ((SendMessageBean) o).getMessage());
@@ -155,4 +159,10 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
 
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

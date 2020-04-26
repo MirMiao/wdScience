@@ -71,13 +71,11 @@ public class CrowdMemberActivity extends BaseActivity<Presenter> implements ICon
     public void failur(Throwable throwable) {
 
     }
-
-
-
     @OnClick(R.id.btn_applyfriend)
     public void onViewClicked() {
-        Intent intentmanage = new Intent(CrowdMemberActivity.this,    SreachActivity.class);
-        startActivity(intentmanage);
+        Intent intentsreach = new Intent(CrowdMemberActivity.this,    SreachActivity.class);
+        intentsreach.putExtra("groupIdscreach",groupIdmember);
+        startActivity(intentsreach);
 
     }
 }

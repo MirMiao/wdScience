@@ -105,10 +105,16 @@ public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IC
 
         if (o instanceof AlterCrowdGroupNameBean){
             Toast.makeText(App.context,((AlterCrowdGroupNameBean) o).getMessage(),Toast.LENGTH_LONG).show();
+            if (((AlterCrowdGroupNameBean) o).getStatus().equals("0000")){
+                presenter.getCrowGroupDetailMessageBeandata(groupId);
+            }
+
         }
         if (o instanceof DeleteCrowdGroupBean){
             Toast.makeText(App.context,((DeleteCrowdGroupBean) o).getMessage(),Toast.LENGTH_LONG).show();
-
+            if (((DeleteCrowdGroupBean) o).getStatus().equals("0000")){
+                presenter.getCrowGroupDetailMessageBeandata(groupId);
+            }
         }
         crowdName.setOnClickListener(new View.OnClickListener() {
             @Override
