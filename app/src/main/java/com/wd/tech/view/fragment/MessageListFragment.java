@@ -57,7 +57,7 @@ public class MessageListFragment extends BaseFragment<Presenter> implements ICon
     private List<MessageList> list;
     private String format;
     private MyUserMessageListAdapter myUserMessageListAdapter;
-
+    private  int count=5;
     @Override
     protected int bindLayoutid() {
         return R.layout.fragment_messagelist;
@@ -76,24 +76,34 @@ public class MessageListFragment extends BaseFragment<Presenter> implements ICon
     @Override
     protected void initData() {
         //好友通知
-        presenter.getUserFriendInfromRecorddata(1, 5);
+        presenter.getUserFriendInfromRecorddata(1, count);
         //群通知
-        presenter.getCrowdInfromBeandata(1, 5);
+        presenter.getCrowdInfromBeandata(1, count);
 
        refresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
            @Override
            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+           count++;
+               //好友通知
+               presenter.getUserFriendInfromRecorddata(1, count);
+               myMessageListAdapter.loadmore(userfriendinfromrecordresult);
+               //群通知
+               presenter.getCrowdInfromBeandata(1, count);
+               myCrowdInfromadapter.loadmore(crowdinfromresult);
 
+               refresh.finishLoadMore();
            }
-
            @Override
            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+               count=5;
                //好友通知
-               presenter.getUserFriendInfromRecorddata(1, 5);
+               presenter.getUserFriendInfromRecorddata(1, count);
                myMessageListAdapter.update(userfriendinfromrecordresult);
                //群通知
-               presenter.getCrowdInfromBeandata(1, 5);
+               presenter.getCrowdInfromBeandata(1, count);
                myCrowdInfromadapter.update(crowdinfromresult);
+
+               refresh.finishRefresh();
            }
        });
     }

@@ -42,9 +42,10 @@ public class RetrofitUtil {
                     @Override
                     public Response intercept(@NotNull Chain chain) throws IOException {
                      Request request = chain.request();
+                     SpUtil.getInt("");
                      Request.Builder builder = request.newBuilder();
                      builder.addHeader("userId","1387");
-                     builder.addHeader("sessionId","15871281470591387");
+                     builder.addHeader("sessionId","15878272897341387");
                      Request newrequest=builder.build();
                      return chain.proceed(newrequest);
                     }

@@ -743,7 +743,7 @@ public class Model implements IContract.IModel {
     }
     //批量邀请加群
     @Override
-    public void getBatchAnviteAddCrowdBeandata(int groupId, int[] receiverUids, ModelCallBack modelCallBack) {
+    public void getBatchAnviteAddCrowdBeandata(int groupId, String receiverUids, ModelCallBack modelCallBack) {
    Observable<BatchAnviteAddCrowdBean>     batchAnviteAddCrowdBeandata = apiService.getBatchAnviteAddCrowdBeandata(groupId, receiverUids);
     batchAnviteAddCrowdBeandata.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

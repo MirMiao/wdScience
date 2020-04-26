@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:layout_margin="@dimen/dp_15"
-    >
+    android:layout_height="wrap_content">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:text="时间"
         android:layout_gravity="center"
         android:textSize="18sp"
-        android:id="@+id/time"
+        android:id="@+id/time2"
         android:background="#B1B1B1"
         ></TextView>
     <LinearLayout
@@ -28,14 +27,14 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@mipmap/ic_launcher"
-                android:id="@+id/friend_head"
+                android:id="@+id/friend_head2"
                 android:layout_margin="10dp"
                 ></ImageView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="好友名称"
-                android:id="@+id/friend_name"
+                android:id="@+id/friend_name2"
                 android:layout_gravity="center"
                 android:textSize="14sp"
                 android:textColor="#333"
@@ -63,36 +62,11 @@
                 android:textSize="14sp"
                 android:textColor="#333"
                 android:layout_marginRight="10dp"
-                android:id="@+id/user_stuast"
+                android:id="@+id/user_stuast2"
                 android:layout_weight="1"
                 android:gravity="right"
                 ></TextView>
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="12dp"
-        >
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_yes"
-            android:text="同意"
-            android:textColor="#fff"
-            android:background="#20affa"
-            android:layout_weight="1"
-            ></Button>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_no"
-            android:text="拒绝"
-            android:textColor="#fff"
-            android:background="#ff5757"
-            android:layout_weight="1"
-            ></Button>
-    </LinearLayout>
 </LinearLayout>

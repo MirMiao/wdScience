@@ -42,7 +42,7 @@ public interface Api {
     String SENDCROWDMESSAGE_URL="group/verify/v1/sendGroupMessage";//发送群信息
     String CROWDCHATCONTENT_URL="group/verify/v1/findGroupChatRecordPage";//查询群聊天内容
     String DELETECROWDMEMBER_URL="group/verify/v1/removeGroupMember";//移出群成员(管理员与群主才有的权限)
-    String ADJUSTCROWDMEMBER_URL="group/verify/v1/modifyPermissionr";//调整群成员角色(群主才有的权限)
+    String ADJUSTCROWDMEMBER_URL="group/verify/v1/modifyPermission";//调整群成员角色(群主才有的权限)
     String USEREXISISCROWD_URL="group/verify/v1/whetherInGroup";//判断用户是否已在群内
     String APPLYADDCROWD_URL="group/verify/v1/applyAddGroup";//申请进群
     String ANVITEADDCROWD_URL="group/verify/v1/inviteAddGroup";//邀请加群

@@ -53,7 +53,7 @@ public interface IContract {
       void  getAdjustCrowdMemberBeandata(int groupId,int groupUserId,int role,ModelCallBack modelCallBack);//调整群成员角色(群主才有的权限)
       void  getApplyAddCrowdBeandata(int groupId,String remark,ModelCallBack modelCallBack);//申请进群
       void  getAnviteAddCrowdBeandata(int groupId,int receiverUid,ModelCallBack modelCallBack);//邀请加群
-      void  getBatchAnviteAddCrowdBeandata(int groupId,int[] receiverUids,ModelCallBack modelCallBack);//批量邀请加群
+      void  getBatchAnviteAddCrowdBeandata(int groupId,String receiverUids,ModelCallBack modelCallBack);//批量邀请加群
 
 
         //社区
@@ -121,7 +121,7 @@ public interface IContract {
         void  getAdjustCrowdMemberBeandata(int groupId,int groupUserId,int role);//调整群成员角色(群主才有的权限)
         void  getApplyAddCrowdBeandata(int groupId,String remark);//申请进群
         void  getAnviteAddCrowdBeandata(int groupId,int receiverUid);//邀请加群
-        void  getBatchAnviteAddCrowdBeandata(int groupId,int[] receiverUids);//批量邀请加群
+        void  getBatchAnviteAddCrowdBeandata(int groupId,String receiverUids);//批量邀请加群
         //社区
         void  getCommunitydata(int page, int count);//社区列表
         void  getCommentary(int communityId, int page, int count);//社区用户评论

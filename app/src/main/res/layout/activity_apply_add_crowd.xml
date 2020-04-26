@@ -56,5 +56,6 @@
         android:textSize="14sp"
         android:textColor="#333"
         android:background="#fff"
+        android:id="@+id/text_content"
         ></EditText>
 </LinearLayout>
