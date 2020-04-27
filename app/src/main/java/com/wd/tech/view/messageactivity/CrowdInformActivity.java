@@ -92,6 +92,10 @@ public class CrowdInformActivity extends BaseActivity<Presenter> implements ICon
 
         if (o instanceof CheckCrowdApplyBean) {
             Toast.makeText(App.context, ((CheckCrowdApplyBean) o).getMessage(), Toast.LENGTH_LONG).show();
+            if (((CheckCrowdApplyBean) o).getStatus().equals("0000")){
+                presenter.getCrowdInfromBeandata(1, count);
+                myCrowdInfromactadapter.notifyDataSetChanged();
+            }
         }
     }
 

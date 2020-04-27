@@ -71,6 +71,7 @@ public class CrowdManageActivity extends BaseActivity<Presenter> implements ICon
  private     SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
         @Override
         public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int viewType) {
+            if(crowdgroupallusermessageresult.get(viewType).getRole()==2){
             SwipeMenuItem modifyItem = new SwipeMenuItem(CrowdManageActivity.this)
                     .setBackgroundColor(Color.BLUE)
                     .setText("撤销管理员")
@@ -78,9 +79,9 @@ public class CrowdManageActivity extends BaseActivity<Presenter> implements ICon
                     .setTextSize(15) // 文字大小。
                     .setWidth(180)
                     .setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-            if(role==2){
                 rightMenu.addMenuItem(modifyItem);
             }
+            if(crowdgroupallusermessageresult.get(viewType).getRole()==1){
             SwipeMenuItem shezhiItem = new SwipeMenuItem(CrowdManageActivity.this)
                     .setBackgroundColor(Color.BLUE)
                     .setText("设置管理员")
@@ -88,9 +89,9 @@ public class CrowdManageActivity extends BaseActivity<Presenter> implements ICon
                     .setTextSize(15) // 文字大小。
                     .setWidth(180)
                     .setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-            if(role==1){
                 rightMenu.addMenuItem(shezhiItem);
             }
+            if(crowdgroupallusermessageresult.get(viewType).getRole()!=3){
             // 2 删除
             SwipeMenuItem deleteItem = new SwipeMenuItem(CrowdManageActivity.this);
             deleteItem.setText("移除")
@@ -99,7 +100,8 @@ public class CrowdManageActivity extends BaseActivity<Presenter> implements ICon
                     .setTextSize(15) // 文字大小。
                     .setWidth(180)
                     .setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-            rightMenu.addMenuItem(deleteItem);
+                rightMenu.addMenuItem(deleteItem);
+            }
             // 注意：哪边不想要菜单，那么不要添加即可。
         }
     };
@@ -153,9 +155,6 @@ public class CrowdManageActivity extends BaseActivity<Presenter> implements ICon
     public void success(Object o) {
         if (o instanceof CrowdGroupAllUserMessageBean) {
             crowdgroupallusermessageresult = ((CrowdGroupAllUserMessageBean) o).getResult();
-            for (int i = 0; i < crowdgroupallusermessageresult.size(); i++) {
-                role = crowdgroupallusermessageresult.get(i).getRole();
-            }
             myCrowdGroupAllUserMessagea2dapter = new MyCrowdGroupAllUserMessagea2dapter(crowdgroupallusermessageresult, this);
             crowdManagListView.setAdapter(myCrowdGroupAllUserMessagea2dapter);
             crowdManagListView.setLayoutManager(new LinearLayoutManager(this));
