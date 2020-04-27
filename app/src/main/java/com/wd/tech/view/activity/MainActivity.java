@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -27,17 +25,24 @@ import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
+import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.view.fragment.CommunityFragment;
 import com.wd.tech.view.fragment.InformationFragment;
 import com.wd.tech.view.fragment.LoginActivity;
 import com.wd.tech.view.fragment.MessageFragment;
+import com.wd.tech.view.main.MyAllInfoCollectionActivity;
+import com.wd.tech.view.main.MyFollowUserActivity;
+import com.wd.tech.view.main.MySetUpActivity;
+import com.wd.tech.view.main.MySysNoticeActivity;
+import com.wd.tech.view.main.MyTieziActivity;
+import com.wd.tech.view.main.MyUserIntegralActivity;
+import com.wd.tech.view.main.MyUserTaskActivity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity<Presenter> implements IContract.IView {
@@ -78,6 +83,30 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
     LinearLayout ll9;
     @BindView(R.id.ll_user)
     LinearLayout llUser;
+    @BindView(R.id.home_headpic)
+    ImageView homeHeadpic;
+    @BindView(R.id.home_name)
+    TextView homeName;
+    @BindView(R.id.home_qianming)
+    TextView homeQianming;
+    @BindView(R.id.home_vip)
+    ImageView homeVip;
+    @BindView(R.id.home_qiandao)
+    ImageView homeQiandao;
+    @BindView(R.id.qu_shouchang)
+    ImageView quShouchang;
+    @BindView(R.id.qu_guanzhu)
+    ImageView quGuanzhu;
+    @BindView(R.id.qu_tiezi)
+    ImageView quTiezi;
+    @BindView(R.id.qu_tongzhi)
+    ImageView quTongzhi;
+    @BindView(R.id.qu_jifen)
+    ImageView quJifen;
+    @BindView(R.id.qu_renwu)
+    ImageView quRenwu;
+    @BindView(R.id.qu_shezhi)
+    ImageView quShezhi;
 
     private String string;
 
@@ -115,6 +144,18 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
                 ll7.setVisibility(View.VISIBLE);
                 ll8.setVisibility(View.VISIBLE);
                 ll9.setVisibility(View.VISIBLE);
+
+                for(int i=0;i<list.size();i++){
+                    LoginEntity.ResultBean resultBean = list.get(i);
+                    String nickName = resultBean.getNickName();
+                    String headPic = resultBean.getHeadPic();
+                    String signature = resultBean.getSignature();
+                    RetrofitUtil instance = RetrofitUtil.getInstance();
+                    instance.getRoundphoto(headPic,homeHeadpic);
+                    homeName.setText(nickName);
+                    homeQianming.setText(signature);
+                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,6 +165,15 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
     @SuppressLint("ResourceAsColor")
     @Override
     protected void initView() {
+
+        homeHeadpic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -262,10 +312,41 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    @OnClick({R.id.home_vip, R.id.home_qiandao, R.id.qu_shouchang, R.id.qu_guanzhu, R.id.qu_tiezi, R.id.qu_tongzhi, R.id.qu_jifen, R.id.qu_renwu, R.id.qu_shezhi})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.home_vip:
+                break;
+            case R.id.home_qiandao:
+                break;
+            case R.id.qu_shouchang:
+                Intent intent=new Intent(MainActivity.this, MyAllInfoCollectionActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.qu_guanzhu:
+                Intent intent1=new Intent(MainActivity.this, MyFollowUserActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.qu_tiezi:
+                Intent intent3=new Intent(MainActivity.this, MyTieziActivity.class);
+                startActivity(intent3);
+                break;
+            case R.id.qu_tongzhi:
+                Intent intent4=new Intent(MainActivity.this, MySysNoticeActivity.class);
+                startActivity(intent4);
+                break;
+            case R.id.qu_jifen:
+                Intent intent5=new Intent(MainActivity.this, MyUserIntegralActivity.class);
+                startActivity(intent5);
+                break;
+            case R.id.qu_renwu:
+                Intent intent7=new Intent(MainActivity.this, MyUserTaskActivity.class);
+                startActivity(intent7);
+                break;
+            case R.id.qu_shezhi:
+                Intent intent6=new Intent(MainActivity.this, MySetUpActivity.class);
+                startActivity(intent6);
+                break;
+        }
     }
 }

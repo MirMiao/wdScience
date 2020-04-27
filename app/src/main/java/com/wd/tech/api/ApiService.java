@@ -5,6 +5,7 @@ import com.wd.tech.bean.beanMyHomePage.MySetUpData;
 import com.wd.tech.bean.beanMyHomePage.MySysNoticeData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralRecordData;
+import com.wd.tech.bean.beanMyHomePage.MyUserTaskData;
 import com.wd.tech.bean.beancommunity.CommentData;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.LoginEntity;
@@ -271,9 +272,12 @@ public interface ApiService {
     //查询用户积分明细
     @GET(Api.HomePage_UserIntegralRecord)
     Observable<MyUserIntegralRecordData> getUserIntegralRecord(@Query("page")int page, @Query("count")int count);
-
+    //根据用户ID查询用户信息(设置页面)
     @GET(Api.HomePage_UserInfoByUserId)
     Observable<MySetUpData> getSetUp();
+    //查询用户任务列表
+    @GET(Api.HomePage_UserTask)
+    Observable<MyUserTaskData> getUserTask();
 
 
 }

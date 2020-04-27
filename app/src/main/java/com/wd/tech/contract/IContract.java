@@ -76,6 +76,7 @@ public interface IContract {
         void getUserIntegral(ModelCallBack modelCallBack);//查询用户积分
         void getUserIntegralRecord(int page, int count,ModelCallBack modelCallBack);//查询用户积分明细
         void getSetUp(ModelCallBack modelCallBack);//设置页面（根据用户ID查询用户信息）
+        void getUserTask(ModelCallBack modelCallBack);////查询用户任务列表
 
         interface ModelCallBack{
             void success(Object o);
@@ -143,6 +144,7 @@ public interface IContract {
         void getUserIntegral();//查询用户积分
         void getUserIntegralRecord(int page, int count);//查询用户积分明细
         void getSetUp();//设置页面（根据用户ID查询用户信息）
+        void getUserTask();////查询用户任务列表
 
     }
     interface IView extends IBaseView {

@@ -2,7 +2,6 @@ package com.wd.tech.view.fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -19,13 +18,11 @@ import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RsaCoder;
 import com.wd.tech.util.SpUtil;
 import com.wd.tech.view.activity.MainActivity;
-import com.wd.tech.view.main.MyHomePageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -71,6 +68,12 @@ public class LoginActivity extends BaseActivity<Presenter> implements IContract.
                  Toast.makeText(this, ""+((LoginEntity) o).getMessage(), Toast.LENGTH_SHORT).show();
                  LoginEntity.ResultBean result = ((LoginEntity) o).getResult();
                  list.add(result);
+
+                 int userId = result.getUserId();
+                 String sessionId = result.getSessionId();
+                 SpUtil.saveInt("userid",userId);
+                 SpUtil.saveString("sesseion",sessionId);
+
                  SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
                  SharedPreferences.Editor edit = sp.edit();
                  Gson gson = new Gson();
