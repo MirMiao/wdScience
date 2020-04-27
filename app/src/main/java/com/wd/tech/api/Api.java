@@ -66,5 +66,6 @@ public interface Api {
     String HomePage_UserIntegral="user/verify/v1/findUserIntegral";//查询用户积分
     String HomePage_UserIntegralRecord="user/verify/v1/findUserIntegralRecord";//查询用户积分明细
     String HomePage_UserInfoByUserId="user/verify/v1/getUserInfoByUserId";//根据用户ID查询用户信息(设置页面)
+    String HomePage_UserTask="user/verify/v1/findUserTaskList";//查询用户任务列表
 
 }

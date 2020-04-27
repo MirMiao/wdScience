@@ -1,6 +1,8 @@
 package com.wd.tech.view.main;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,13 +28,7 @@ public class MyUserIntegralActivity extends BaseActivity<Presenter> implements I
 
     private TextView integralFen;
     private RecyclerView integralRecy;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_user_integral);
-        initView();
-    }
+    private ImageView integralFanhui;
 
     @Override
     protected Presenter initPresenter() {
@@ -57,21 +53,30 @@ public class MyUserIntegralActivity extends BaseActivity<Presenter> implements I
         integralRecy = (RecyclerView) findViewById(R.id.integral_recy);
         integralRecy.setLayoutManager(new LinearLayoutManager(this));
 
+        integralFanhui = (ImageView) findViewById(R.id.integral_fanhui);
+
+        integralFanhui.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     @Override
     public void success(Object o) {
 
-        if(o instanceof MyUserIntegralData){
+        if (o instanceof MyUserIntegralData) {
             MyUserIntegralResult result = ((MyUserIntegralData) o).getResult();
             int amount = result.getAmount();
-            integralFen.setText(amount+"");
+            integralFen.setText(amount + "");
         }
 
-        if(o instanceof MyUserIntegralRecordData){
+        if (o instanceof MyUserIntegralRecordData) {
 
             List<MyUserIntegralRecordResult> result = ((MyUserIntegralRecordData) o).getResult();
-            MyIntegralRecordRecyAdapter myIntegralRecordRecyAdapter=new MyIntegralRecordRecyAdapter(result,this);
+            MyIntegralRecordRecyAdapter myIntegralRecordRecyAdapter = new MyIntegralRecordRecyAdapter(result, this);
             integralRecy.setAdapter(myIntegralRecordRecyAdapter);
 
         }

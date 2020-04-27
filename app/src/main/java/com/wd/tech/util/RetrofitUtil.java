@@ -1,18 +1,26 @@
 package com.wd.tech.util;
 
+import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.wd.tech.App;
 import com.wd.tech.R;
 import com.wd.tech.api.Api;
+import com.wd.tech.bean.informationentity.LoginEntity;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -23,6 +31,8 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class RetrofitUtil {
 
@@ -42,10 +52,11 @@ public class RetrofitUtil {
                     @Override
                     public Response intercept(@NotNull Chain chain) throws IOException {
                      Request request = chain.request();
-                     SpUtil.getInt("");
                      Request.Builder builder = request.newBuilder();
-                     builder.addHeader("userId","1387");
-                     builder.addHeader("sessionId","15878272897341387");
+                        int userid = SpUtil.getInt("userid");
+                        String sesseion = SpUtil.getString("sesseion");
+                        builder.addHeader("userId",userid+"");
+                        builder.addHeader("sessionId",sesseion);
                      Request newrequest=builder.build();
                      return chain.proceed(newrequest);
                     }

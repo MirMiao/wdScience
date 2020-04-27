@@ -7,6 +7,7 @@ import com.wd.tech.bean.beanMyHomePage.MySetUpData;
 import com.wd.tech.bean.beanMyHomePage.MySysNoticeData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralRecordData;
+import com.wd.tech.bean.beanMyHomePage.MyUserTaskData;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
 import com.wd.tech.bean.beancommunity.MyPostData;
@@ -1049,6 +1050,24 @@ public class Model implements IContract.IModel {
                     @Override
                     public void accept(MySetUpData mySetUpData) throws Exception {
                         modelCallBack.success(mySetUpData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+    //查询用户任务列表
+    @Override
+    public void getUserTask(ModelCallBack modelCallBack) {
+        Observable<MyUserTaskData> userTask = apiService.getUserTask();
+        userTask.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MyUserTaskData>() {
+                    @Override
+                    public void accept(MyUserTaskData myUserTaskData) throws Exception {
+                        modelCallBack.success(myUserTaskData);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

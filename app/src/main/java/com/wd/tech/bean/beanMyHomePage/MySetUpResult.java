@@ -11,6 +11,11 @@ public class MySetUpResult {
     private int whetherVip;
     private int whetherFaceId;
     private int integral;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
 
     public String getHeadPic() {
         return headPic;
