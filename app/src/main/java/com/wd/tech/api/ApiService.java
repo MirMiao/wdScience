@@ -60,6 +60,7 @@ import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -172,9 +173,9 @@ public interface ApiService {
     @DELETE(Api.DELETECROWDGROUP_URL)//解散群组
     Observable<DeleteCrowdGroupBean>getDeleteCrowdGroupBeandata(@Query("groupId") int groupId);
 
-    @POST(Api.UPLOADCROWDHEADPIC_URL)//上传群头像
     @Multipart
-    Observable<UploadCrowdHeadpicBean>getUploadCrowdHeadpicBeandata(@Field("groupId") int groupId, @Part MultipartBody.Part file);
+    @POST(Api.UPLOADCROWDHEADPIC_URL)//上传群头像
+    Observable<UploadCrowdHeadpicBean>getUploadCrowdHeadpicBeandata(@Part("groupId") RequestBody groupId, @Part MultipartBody.Part file);
 
     @DELETE(Api.AUITCROWD_URL)//退群
     Observable<QuitCrowdBean>getQuitCrowdBeandata(@Query("groupId") int groupId);

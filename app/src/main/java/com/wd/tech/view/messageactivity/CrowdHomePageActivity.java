@@ -1,8 +1,12 @@
 package com.wd.tech.view.messageactivity;
-
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,20 +17,37 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
-
 import com.wd.tech.App;
 import com.wd.tech.R;
+import com.wd.tech.api.ApiService;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.messagebean.AlterCrowdGroupNameBean;
 import com.wd.tech.bean.messagebean.CrowGroupDetailMessageBean;
 import com.wd.tech.bean.messagebean.DeleteCrowdGroupBean;
+import com.wd.tech.bean.messagebean.UploadCrowdHeadpicBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RetrofitUtil;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
+
+
 //自己的群
 public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IContract.IView, View.OnClickListener {
     @BindView(R.id.crowd_head)
@@ -52,7 +73,8 @@ public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IC
     private PopupWindow popupWindow;
     private TextView group_name;
     private EditText update_friendmessage;
-
+    private Observable<UploadCrowdHeadpicBean> uploadCrowdHeadpicBeandata;
+    private  int MAX_SIZE = 769;
     @Override
     protected Presenter initPresenter() {
         return new Presenter();
@@ -116,13 +138,42 @@ public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IC
                 presenter.getCrowGroupDetailMessageBeandata(groupId);
             }
         }
+
         crowdName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               updatePopupWindow();
             }
         });
+
+        crowdHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                headpicPopupWindow();
+            }
+        });
     }
+    //上传
+    private void headpicPopupWindow() {
+        View contentView = LayoutInflater.from(CrowdHomePageActivity.this).inflate(R.layout.popwindow, null);
+        popupWindow = new PopupWindow(contentView, ViewPager.LayoutParams.MATCH_PARENT, ViewPager.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setContentView(contentView);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0));
+        //设置各个控件的点击响应
+        Button xj = (Button) contentView.findViewById(R.id.xj);
+        Button xc = (Button) contentView.findViewById(R.id.xc);
+        Button tc = (Button) contentView.findViewById(R.id.tc);
+        Button qx = (Button) contentView.findViewById(R.id.qx);
+
+        xj.setOnClickListener(this);
+        xc.setOnClickListener(this);
+        tc.setOnClickListener(this);
+        qx.setOnClickListener(this);
+        //显示PopupWindow
+        View rootview = LayoutInflater.from(CrowdHomePageActivity.this).inflate(R.layout.fragment_message, null);
+        popupWindow.showAtLocation(rootview, Gravity.BOTTOM, 0, 0);
+    }
+
     //修改群名
     private void updatePopupWindow() {
         View contentView = LayoutInflater.from(CrowdHomePageActivity.this).inflate(R.layout.update_crowd_name, null);
@@ -218,7 +269,99 @@ public class CrowdHomePageActivity extends BaseActivity<Presenter> implements IC
                 popupWindow.dismiss();
             }
             break;
+            case R.id.xj: {
+
+                popupWindow.dismiss();
+            }
+            break;
+            case R.id.xc: {
+                // 打开系统图库选择图片
+                Intent picture = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(picture, 0);
+                popupWindow.dismiss();
+            }
+            break;
+            case R.id.tc: {
+                popupWindow.dismiss();
+            }
+            break;
+            case R.id.qx: {
+                popupWindow.dismiss();
+            }
+            break;
         }
     }
 
-}
+
+    //上传
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            Uri uri = data.getData();
+            String[] arr = {MediaStore.Images.Media.DATA};
+            Cursor cursor = managedQuery(uri, arr, null, null, null);
+            int img_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            String img_path = cursor.getString(img_index);
+            File file = new File(img_path);
+            String path = file.getAbsolutePath();
+            File file1 = new File( path );
+            RetrofitUtil instance = RetrofitUtil.getInstance();
+            ApiService service = instance.creatService(ApiService.class);
+            RequestBody requestBody = RequestBody.create( MediaType.parse( "multipart/form-data"), file );
+            RequestBody requestBody2 = RequestBody.create( MediaType.parse( "multipart/form-data"), groupId+"" );
+            MultipartBody.Part formData = MultipartBody.Part.createFormData( "image", file1.getName(), requestBody );
+            uploadCrowdHeadpicBeandata = service.getUploadCrowdHeadpicBeandata(requestBody2, formData);
+            uploadCrowdHeadpicBeandata.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<UploadCrowdHeadpicBean>() {
+                        @Override
+                        public void accept(UploadCrowdHeadpicBean uploadCrowdHeadpicBean) throws Exception {
+                            Toast.makeText(App.context, uploadCrowdHeadpicBean.getMessage(), Toast.LENGTH_LONG).show();
+                            if (uploadCrowdHeadpicBean.getStatus().equals("0000")) {
+                                presenter.getCrowGroupDetailMessageBeandata(groupId);
+                            }
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            Toast.makeText(App.context,throwable.getMessage() , Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+            BitmapFactory.Options options = new BitmapFactory.Options();
+
+
+            options.inJustDecodeBounds = false;
+            try{
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+                BitmapFactory.decodeStream(inputStream,null,options);
+                inputStream.close();
+                int height = options.outHeight;
+                int width = options.outWidth;
+                int sampleSize = 1;
+                int max = Math.max(height,width);
+                if (max>MAX_SIZE){
+                    int nw = width/2;
+                    int nh = height/2;
+                    while ((nw/sampleSize)> MAX_SIZE || (nh / sampleSize)>MAX_SIZE){
+                        sampleSize *=2;
+                    }
+                }
+                options.inSampleSize = sampleSize;
+                options.inJustDecodeBounds = false;
+                Bitmap bitmap = BitmapFactory.decodeStream( getContentResolver().openInputStream( uri ), null, options );
+                crowdHead.setImageBitmap(bitmap);
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    }
+
