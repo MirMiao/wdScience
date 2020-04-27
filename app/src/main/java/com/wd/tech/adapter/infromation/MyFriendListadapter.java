@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
 import com.wd.tech.bean.messagebean.FriendListBean;
+import com.wd.tech.event.Eventfriend;
 import com.wd.tech.util.RetrofitUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,10 +53,20 @@ public class MyFriendListadapter extends  RecyclerView.Adapter<MyFriendListadapt
      myFriendListViewHolder.frined_name.setText(friendlistresult.get(position).getNickName());
         RetrofitUtil.getInstance().getRectphoto(friendlistresult.get(position).getHeadPic(),myFriendListViewHolder.frined_head);
         myFriendListViewHolder.frined_qianqame.setText(friendlistresult.get(position).getSignature());
+        Eventfriend eventfriend=new Eventfriend();
         myFriendListViewHolder.btn_friendid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              int  friendUid = friendlistresult.get(position).getFriendUid();
+              EventBus.getDefault().postSticky(eventfriend);
+            }
+        });
+        myFriendListViewHolder.check_friend.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    int  friendUid = friendlistresult.get(position).getFriendUid();
+                    eventfriend.friendid=friendUid;
+                }
             }
         });
     }
@@ -65,12 +80,14 @@ public class MyFriendListadapter extends  RecyclerView.Adapter<MyFriendListadapt
         ImageView frined_head;
         TextView frined_name,frined_qianqame;
         Button btn_friendid;
+        CheckBox check_friend;
         public MyFriendListViewHolder(@NonNull View itemView) {
             super(itemView);
             frined_head= itemView.findViewById(R.id.frined_head);
             frined_name= itemView.findViewById(R.id.frined_name);
             frined_qianqame= itemView.findViewById(R.id.frined_qianqame);
             btn_friendid= itemView.findViewById(R.id.btn_friendid);
+            check_friend= itemView.findViewById(R.id.check_friend);
         }
     }
 }

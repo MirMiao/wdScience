@@ -69,6 +69,11 @@ public class MyMessageListAdapter extends  RecyclerView.Adapter<MyMessageListAda
         this.userfriendinfromrecordresult.addAll(userfriendinfromrecordresult);
         notifyDataSetChanged();
     }
+    //上拉加载
+    public  void loadmore(List<UserFriendInfromRecordBean.ResultBean> userfriendinfromrecordresult) {
+        this.userfriendinfromrecordresult.addAll(userfriendinfromrecordresult);
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return userfriendinfromrecordresult.size();

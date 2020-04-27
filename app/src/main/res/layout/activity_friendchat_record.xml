@@ -28,10 +28,17 @@
             android:textSize="24sp"
             ></TextView>
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/friend_chatRecyclerView"
-        android:layout_weight="1"
-        ></androidx.recyclerview.widget.RecyclerView>
+        android:id="@+id/refresh"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/friend_chatRecyclerView"
+            android:layout_weight="1"
+            ></androidx.recyclerview.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 </LinearLayout>

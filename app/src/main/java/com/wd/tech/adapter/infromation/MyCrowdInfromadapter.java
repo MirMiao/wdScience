@@ -68,7 +68,10 @@ public class MyCrowdInfromadapter  extends  RecyclerView.Adapter<MyCrowdInfromad
         this.crowdinfromresult.addAll(crowdinfromresult);
         notifyDataSetChanged();
     }
-
+    public   void loadmore(List<CrowdInfromBean.ResultBean> crowdinfromresult){
+        this.crowdinfromresult.addAll(crowdinfromresult);
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return crowdinfromresult.size();

@@ -7,10 +7,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.wd.tech.R;
 import com.wd.tech.adapter.infromation.MyCrowdChatContentadapter;
 import com.wd.tech.base.BaseActivity;
@@ -50,7 +53,7 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
     private String groupname2;
     private String nickName;
     private String crowdhead;
-
+   private  int count =5;
     @Override
     protected Presenter initPresenter() {
         return new Presenter();
@@ -67,7 +70,21 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
         groupname2 = getIntent().getStringExtra("groupname");
         crowdhead = getIntent().getStringExtra("crowdhead");
         groupname.setText(groupname2);
-        presenter.getCrowdChatContentBeandata(groupIdcc, 1, 5);
+        presenter.getCrowdChatContentBeandata(groupIdcc, 1, count);
+        refresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                count++;
+                presenter.getCrowdChatContentBeandata(groupIdcc, 1, count);
+                myCrowdChatContentadapter.loadmore(result);
+                refresh.finishLoadMore();
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+
+            }
+        });
     }
 
     @Override
@@ -90,8 +107,8 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
         }
         if (o instanceof SendCrowdMessageBean) {
             if (((SendCrowdMessageBean) o).getStatus().equals("0000")) {
-                presenter.getCrowdChatContentBeandata(groupIdcc, 1, 5);
-                myCrowdChatContentadapter.update(result);
+                presenter.getCrowdChatContentBeandata(groupIdcc, 1, count);
+                 myCrowdChatContentadapter.notifyDataSetChanged();
                 crowdContent.setText("");
             }
         }

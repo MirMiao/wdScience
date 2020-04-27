@@ -89,6 +89,7 @@ public class AddCrowdActivity extends BaseActivity<Presenter> implements IContra
                     @Override
                     public void onClick(View v) {
                         Intent  intentmember=new Intent(AddCrowdActivity.this,CrowdMemberActivity.class);
+                        intentmember.putExtra("groupIdmember",groupId);
                         startActivity(intentmember);
                     }
                 });
@@ -105,6 +106,9 @@ public class AddCrowdActivity extends BaseActivity<Presenter> implements IContra
                     @Override
                     public void onClick(View v) {
                         Intent  intentcc=new Intent(AddCrowdActivity.this,CrowdChatActivity.class);
+                        intentcc.putExtra("groupIdcc",groupId);
+                        intentcc.putExtra("groupname",crowgroupdetailmessageresult.getGroupName());
+                        intentcc.putExtra("crowdhead",crowgroupdetailmessageresult.getGroupImage());
                         startActivity(intentcc);
                     }
                 });
@@ -114,8 +118,6 @@ public class AddCrowdActivity extends BaseActivity<Presenter> implements IContra
                     public void onClick(View v) {
                         showquitPopupWindow();
                     }
-
-
                 });
             }
             else {
@@ -128,6 +130,7 @@ public class AddCrowdActivity extends BaseActivity<Presenter> implements IContra
                     @Override
                     public void onClick(View v) {
                         Intent  intentapply=new Intent(AddCrowdActivity.this,ApplyAddCrowdActivity.class);
+                        intentapply.putExtra("groupIdintentapply",groupId);
                         startActivity(intentapply);
                     }
                 });

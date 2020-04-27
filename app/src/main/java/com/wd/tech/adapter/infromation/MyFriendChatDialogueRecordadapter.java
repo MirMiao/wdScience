@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
+import com.wd.tech.bean.messagebean.CrowdChatContentBean;
 import com.wd.tech.bean.messagebean.FriendChatDialogueRecordBean;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.util.RsaCoder;
@@ -80,6 +81,11 @@ public class MyFriendChatDialogueRecordadapter  extends RecyclerView.Adapter<Rec
     //刷新消息接口
     public void update(List<FriendChatDialogueRecordBean.ResultBean> FriendChatDialogueRecordresult) {
         this.FriendChatDialogueRecordresult.clear();
+        this.FriendChatDialogueRecordresult.addAll(FriendChatDialogueRecordresult);
+        notifyDataSetChanged();
+    }
+    //刷新消息接口
+    public void loadmore(List<FriendChatDialogueRecordBean.ResultBean> FriendChatDialogueRecordresult) {
         this.FriendChatDialogueRecordresult.addAll(FriendChatDialogueRecordresult);
         notifyDataSetChanged();
     }

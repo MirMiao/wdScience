@@ -20,14 +20,21 @@ public class TimeformatUtil  {
     }
     //时分
     public  static  String  gettimehear(long time){
-        SimpleDateFormat simpleDateFormat=new   SimpleDateFormat("HH:mm");
+        SimpleDateFormat simpleDateFormat=new   SimpleDateFormat("hh:MM");
         Date date= new Date();
         String s=     simpleDateFormat.format(date);
         return  s;
     }
     //年月日
     public  static  String  gettimeyy(long time){
-        SimpleDateFormat simpleDateFormat=new   SimpleDateFormat("yy-MM-dd");
+        SimpleDateFormat simpleDateFormat=new   SimpleDateFormat("yyyy-MM-dd");
+        Date date= new Date();
+        String s=     simpleDateFormat.format(date);
+        return  s;
+    }
+    //所有
+    public  static  String  getall(long time){
+        SimpleDateFormat simpleDateFormat=new   SimpleDateFormat("yyyy-MM-dd hh:MM:ss");
         Date date= new Date();
         String s=     simpleDateFormat.format(date);
         return  s;

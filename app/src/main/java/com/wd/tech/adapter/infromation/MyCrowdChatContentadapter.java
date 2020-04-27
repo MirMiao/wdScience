@@ -63,8 +63,7 @@ public class MyCrowdChatContentadapter extends  RecyclerView.Adapter<MyCrowdChat
     }
 
     //刷新消息接口
-    public void update(List<CrowdChatContentBean.ResultBean> result) {
-        this.result.clear();
+    public void loadmore(List<CrowdChatContentBean.ResultBean> result) {
         this.result.addAll(result);
         notifyDataSetChanged();
     }

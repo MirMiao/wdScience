@@ -207,7 +207,7 @@ public interface ApiService {
 
     @POST(Api.BATCHANVITEADDCROWD_URL)//批量邀请加群
     @FormUrlEncoded
-    Observable<BatchAnviteAddCrowdBean> getBatchAnviteAddCrowdBeandata(@Field("groupId") int groupId, @Field("receiverUids") int[] receiverUids);
+    Observable<BatchAnviteAddCrowdBean> getBatchAnviteAddCrowdBeandata(@Field("groupId") int groupId, @Field("receiverUids") String receiverUids);
 
     //社区
     //社区列表

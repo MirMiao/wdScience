@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
 import com.wd.tech.bean.messagebean.FriendChatRrecordBean;
+import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
 import com.wd.tech.util.RsaCoder;
 import com.wd.tech.util.TimeformatUtil;
 
@@ -55,6 +56,17 @@ public class MyFriendchatRecordadapter extends  RecyclerView.Adapter<MyFriendcha
         }
     }
 
+    //下拉刷新
+    public  void refresh(List<FriendChatRrecordBean.ResultBean> result){
+        this.result.clear();
+        this.result.addAll(result);
+        notifyDataSetChanged();
+    }
+    //上拉加载
+    public  void loadmore(List<FriendChatRrecordBean.ResultBean> result) {
+        this.result.addAll(result);
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return result.size();

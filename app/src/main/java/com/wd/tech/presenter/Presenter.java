@@ -575,7 +575,7 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
     }
     //批量邀请加群
     @Override
-    public void getBatchAnviteAddCrowdBeandata(int groupId, int[] receiverUids) {
+    public void getBatchAnviteAddCrowdBeandata(int groupId, String receiverUids) {
       model.getBatchAnviteAddCrowdBeandata(groupId, receiverUids, new IContract.IModel.ModelCallBack() {
           @Override
           public void success(Object o) {

@@ -48,16 +48,9 @@
                android:id="@+id/btn_update"
                ></Button>
        </LinearLayout>
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/refresh"
-        >
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/group_sttingRecyclerView"
             ></androidx.recyclerview.widget.RecyclerView>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
 </LinearLayout>
