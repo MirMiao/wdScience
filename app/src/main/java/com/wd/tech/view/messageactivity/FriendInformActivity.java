@@ -105,6 +105,8 @@ public class FriendInformActivity extends BaseActivity<Presenter> implements ICo
         if (o instanceof CheckFriendApplyBean) {
             if (((CheckFriendApplyBean) o).getStatus().equals("0000")) {
                 Toast.makeText(App.context, ((CheckFriendApplyBean) o).getMessage(), Toast.LENGTH_LONG).show();
+                presenter.getUserFriendInfromRecorddata(1, count);
+                myUserFriendInfromRecordadapter.notifyDataSetChanged();
             }
         }
     }

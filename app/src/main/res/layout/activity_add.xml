@@ -33,12 +33,7 @@
        android:id="@+id/tabadd"
        android:layout_marginTop="20dp"
        ></com.google.android.material.tabs.TabLayout>
-    <com.wd.tech.myview.Mysearchview
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/mysearchview"
-        ></com.wd.tech.myview.Mysearchview>
+
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

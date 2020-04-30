@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
- <TextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="管理员"
@@ -23,7 +23,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="14dp"
-            android:id="@+id/guan_head"
+            android:id="@+id/zhu_head"
             android:layout_marginBottom="@dimen/dp_10"
 
             ></ImageView>
@@ -34,7 +34,7 @@
             android:textSize="18sp"
             android:layout_marginLeft="12dp"
             android:layout_gravity="center"
-            android:id="@+id/guan_name"
+            android:id="@+id/zhu_name"
             ></TextView>
     </LinearLayout>
 </LinearLayout>

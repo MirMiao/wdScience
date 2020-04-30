@@ -97,7 +97,8 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter implements 
             groupholder= (GroupViewHolder) view.getTag();
         }
         groupholder.group_name.setText(userfriendlistresult.get(i).getGroupName());
-        groupholder.group_count.setText(userfriendlistresult.get(i).getCurrentNumber()+"/10");
+        List<UserFriendListBean.ResultBean.FriendInfoListBean>   friendInfoList = userfriendlistresult.get(i).getFriendInfoList();
+        groupholder.group_count.setText(friendInfoList.size()+"/10");
         groupholder.group_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

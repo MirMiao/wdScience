@@ -18,12 +18,8 @@ import butterknife.BindView;
 
 //添加人或群
 public class AddActivity extends BaseActivity {
-
-
     @BindView(R.id.tabadd)
     TabLayout tabadd;
-    @BindView(R.id.mysearchview)
-    Mysearchview mysearchview;
     @BindView(R.id.vpadd)
     ViewPager vpadd;
     private MyAddHomeAdapter myAddHomeAdapter;
@@ -44,12 +40,7 @@ public class AddActivity extends BaseActivity {
         vpadd.setAdapter(myAddHomeAdapter);
         tabadd.setupWithViewPager(vpadd);
         vpadd.setOffscreenPageLimit(2);
-        mysearchview.setSetContext(new Mysearchview.setContext() {
-            @Override
-            public void onContent(String text) {
-             EventBus.getDefault().postSticky(text);
-            }
-        });
+
     }
 
     @Override

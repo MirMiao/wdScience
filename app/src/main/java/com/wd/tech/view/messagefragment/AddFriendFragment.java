@@ -10,6 +10,7 @@ import com.wd.tech.R;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.messagebean.PhoneUserMessangeBean;
 import com.wd.tech.contract.IContract;
+import com.wd.tech.myview.Mysearchview;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.view.messageactivity.FriendMessageActivity;
@@ -37,6 +38,8 @@ public class AddFriendFragment extends BaseFragment<Presenter> implements IContr
     LinearLayout btnAddfriend;
     @BindView(R.id.wudata)
     TextView wudata;
+    @BindView(R.id.mysearchview)
+    Mysearchview mysearchview;
     private PhoneUserMessangeBean.ResultBean result;
 
 
@@ -49,7 +52,7 @@ public class AddFriendFragment extends BaseFragment<Presenter> implements IContr
     protected void initView(View inflate) {
         wudata.setVisibility(View.GONE);
         btnAddfriend.setVisibility(View.GONE);
-        EventBus.getDefault().register(this);
+
     }
 
     @Override
@@ -59,23 +62,33 @@ public class AddFriendFragment extends BaseFragment<Presenter> implements IContr
 
     @Override
     protected void initData() {
+        mysearchview.setSetContext(new Mysearchview.setContext() {
+            @Override
+            public void onContent(String text) {
 
+                presenter.getPhoneUserMessangeBeanata(text);
+            }
+        });
+        mysearchview.setSetDelete(new Mysearchview.setDelete() {
+            @Override
+            public void ondelete(String text) {
+                text = "";
+            }
+        });
     }
-    @Subscribe(threadMode = ThreadMode.POSTING,sticky = true)
-    public  void  onEvnet(String text){
-        presenter.getPhoneUserMessangeBeanata(text);
-    }
+
+
     @Override
     public void success(Object o) {
         if (o instanceof PhoneUserMessangeBean) {
             result = ((PhoneUserMessangeBean) o).getResult();
-            if (result==null){
-               wudata.setVisibility(View.VISIBLE);
+            if (result == null) {
+                wudata.setVisibility(View.VISIBLE);
                 btnAddfriend.setVisibility(View.GONE);
-            }else {
+            } else {
                 wudata.setVisibility(View.GONE);
                 btnAddfriend.setVisibility(View.VISIBLE);
-                RetrofitUtil.getInstance().getRoundphoto(result.getHeadPic(),frinedHead);
+                RetrofitUtil.getInstance().getRoundphoto(result.getHeadPic(), frinedHead);
                 frinedName.setText(result.getNickName());
             }
         }
@@ -88,15 +101,10 @@ public class AddFriendFragment extends BaseFragment<Presenter> implements IContr
 
     @OnClick(R.id.btn_addfriend)
     public void onViewClicked() {
-        Intent intent=new Intent(getActivity(), FriendMessageActivity.class);
+        Intent intent = new Intent(getActivity(), FriendMessageActivity.class);
         int souserId = result.getUserId();
-        intent.putExtra("souserId",souserId);
+        intent.putExtra("souserId", souserId);
         startActivity(intent);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-         EventBus.getDefault().unregister(this);
-    }
 }

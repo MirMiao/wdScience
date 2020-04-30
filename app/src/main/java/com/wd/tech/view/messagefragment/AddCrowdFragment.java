@@ -10,14 +10,12 @@ import com.wd.tech.R;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.messagebean.CrowGroupDetailMessageBean;
 import com.wd.tech.contract.IContract;
+import com.wd.tech.myview.Mysearchview;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.view.messageactivity.AddCrowdActivity;
-import com.wd.tech.view.messageactivity.FriendMessageActivity;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -38,6 +36,8 @@ public class AddCrowdFragment extends BaseFragment<Presenter> implements IContra
     TextView wudata;
     @BindView(R.id.btn_addcrowd)
     LinearLayout btnAddcrowd;
+    @BindView(R.id.mysearchview)
+    Mysearchview mysearchview;
     private CrowGroupDetailMessageBean.ResultBean crowgroupdetailmessageresult;
     private Integer integer;
 
@@ -50,7 +50,19 @@ public class AddCrowdFragment extends BaseFragment<Presenter> implements IContra
     protected void initView(View inflate) {
         wudata.setVisibility(View.GONE);
         btnAddcrowd.setVisibility(View.GONE);
-        EventBus.getDefault().register(this);
+        mysearchview.setSetContext(new Mysearchview.setContext() {
+            @Override
+            public void onContent(String text) {
+                integer = Integer.valueOf(text);
+                presenter.getCrowGroupDetailMessageBeandata(integer);
+            }
+        });
+        mysearchview.setSetDelete(new Mysearchview.setDelete() {
+            @Override
+            public void ondelete(String text) {
+                text = "";
+            }
+        });
     }
 
     @Override
@@ -62,25 +74,22 @@ public class AddCrowdFragment extends BaseFragment<Presenter> implements IContra
     protected void initData() {
 
     }
-    @Subscribe(threadMode = ThreadMode.POSTING,sticky = true)
-    public  void  onEvnet(String text){
-        integer = Integer.valueOf(text);
-        presenter.getCrowGroupDetailMessageBeandata(integer);
-    }
+
+
     @Override
     public void success(Object o) {
-   if (o instanceof CrowGroupDetailMessageBean){
-       crowgroupdetailmessageresult = ((CrowGroupDetailMessageBean) o).getResult();
-       if (crowgroupdetailmessageresult==null){
-           wudata.setVisibility(View.VISIBLE);
-           btnAddcrowd.setVisibility(View.GONE);
-       }else {
-           wudata.setVisibility(View.GONE);
-           btnAddcrowd.setVisibility(View.VISIBLE);
-           RetrofitUtil.getInstance().getRoundphoto(crowgroupdetailmessageresult.getGroupImage(),crowdHead);
-           crowdName.setText(crowgroupdetailmessageresult.getGroupName());
-       }
-   }
+        if (o instanceof CrowGroupDetailMessageBean) {
+            crowgroupdetailmessageresult = ((CrowGroupDetailMessageBean) o).getResult();
+            if (crowgroupdetailmessageresult == null) {
+                wudata.setVisibility(View.VISIBLE);
+                btnAddcrowd.setVisibility(View.GONE);
+            } else {
+                wudata.setVisibility(View.GONE);
+                btnAddcrowd.setVisibility(View.VISIBLE);
+                RetrofitUtil.getInstance().getRoundphoto(crowgroupdetailmessageresult.getGroupImage(), crowdHead);
+                crowdName.setText(crowgroupdetailmessageresult.getGroupName());
+            }
+        }
     }
 
     @Override
@@ -88,17 +97,12 @@ public class AddCrowdFragment extends BaseFragment<Presenter> implements IContra
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        EventBus.getDefault().unregister(this);
-    }
 
     @OnClick(R.id.btn_addcrowd)
     public void onViewClicked() {
-        Intent intent=new Intent(getActivity(), AddCrowdActivity.class);
-        int groupId= crowgroupdetailmessageresult.getGroupId();
-         intent.putExtra("groupId",groupId);
+        Intent intent = new Intent(getActivity(), AddCrowdActivity.class);
+        int groupId = crowgroupdetailmessageresult.getGroupId();
+        intent.putExtra("groupId", groupId);
         startActivity(intent);
     }
 }

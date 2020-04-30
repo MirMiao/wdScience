@@ -2,10 +2,8 @@ package com.wd.tech.view.messageactivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.wd.tech.App;
 import com.wd.tech.R;
 import com.wd.tech.adapter.infromation.MyFriendListadapter;
