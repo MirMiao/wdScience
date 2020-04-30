@@ -1,8 +1,7 @@
-package com.wd.tech.view.fragment;
+package com.wd.tech.view.information;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -17,15 +16,12 @@ import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RsaCoder;
-import com.wd.tech.util.SpUtil;
 import com.wd.tech.view.activity.MainActivity;
-import com.wd.tech.view.main.MyHomePageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -92,7 +88,7 @@ public class LoginActivity extends BaseActivity<Presenter> implements IContract.
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_reghtReg:
-                startActivity(new Intent(LoginActivity.this,RegActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegActivity.class));
                 break;
             case R.id.bt_login:
                 //获取输入的内容

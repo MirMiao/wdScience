@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -27,9 +26,10 @@ import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
+import com.wd.tech.util.SpUtil;
 import com.wd.tech.view.fragment.CommunityFragment;
 import com.wd.tech.view.fragment.InformationFragment;
-import com.wd.tech.view.fragment.LoginActivity;
+import com.wd.tech.view.information.LoginActivity;
 import com.wd.tech.view.fragment.MessageFragment;
 
 import java.lang.reflect.Type;
@@ -94,6 +94,7 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
 
     @Override
     protected void initData() {
+
         try {
             //看是否已经登录
             SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
@@ -120,7 +121,6 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
             e.printStackTrace();
         }
     }
-
     @SuppressLint("ResourceAsColor")
     @Override
     protected void initView() {

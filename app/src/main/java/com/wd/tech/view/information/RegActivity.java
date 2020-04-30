@@ -1,7 +1,6 @@
-package com.wd.tech.view.fragment;
+package com.wd.tech.view.information;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +16,6 @@ import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RsaCoder;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -79,7 +77,7 @@ public class RegActivity extends BaseActivity<Presenter> implements IContract.IV
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_rightLogin:
-                startActivity(new Intent(RegActivity.this,LoginActivity.class));
+                startActivity(new Intent(RegActivity.this, LoginActivity.class));
                 break;
             case R.id.bt_register:
                 String name = tvName.getText().toString();

@@ -1,5 +1,6 @@
 package com.wd.tech.view.information;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -55,6 +56,15 @@ public class PlateActivity extends BaseActivity<Presenter> implements IContract.
             List<FindAllInfoPlate.ResultBean> result = ((FindAllInfoPlate) o).getResult();
             PlateAdapter plateAdapter = new PlateAdapter(PlateActivity.this, result);
             rvMenu.setAdapter(plateAdapter);
+            plateAdapter.setPlateOnClick(new PlateAdapter.PlateOnClick() {
+                @Override
+                public void onClick(int id) {
+                     //跳转到详情页面
+                    Intent intent = new Intent(PlateActivity.this,PlateInformationActivity.class);
+                    intent.putExtra("id",id);
+                    startActivity(intent);
+                }
+            });
         }
     }
 

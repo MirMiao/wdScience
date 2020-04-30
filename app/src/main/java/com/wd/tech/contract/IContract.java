@@ -72,6 +72,13 @@ public interface IContract {
         void getUserIntegralRecord(int page, int count,ModelCallBack modelCallBack);//查询用户积分明细
         void getSetUp(ModelCallBack modelCallBack);//设置页面（根据用户ID查询用户信息）
 
+        void addGreatRecor(int userId,String sessionId,int infoId,ModelCallBack modelCallBack);//点赞
+        void getInformationInfo(int id,ModelCallBack modelCallBack); //资讯详情
+        void getAllPingLun(int infoId,int page,int count,ModelCallBack modelCallBack); //查询资讯所有评论
+        void addInforComment(int userId,String sessionid,String content,int infoId,ModelCallBack modelCallBack);//添加资讯评论
+
+
+
         interface ModelCallBack{
             void success(Object o);
             void failur(Throwable throwable);
@@ -134,6 +141,10 @@ public interface IContract {
         void getUserIntegralRecord(int page, int count);//查询用户积分明细
         void getSetUp();//设置页面（根据用户ID查询用户信息）
 
+        void addGreatRecor(int userId,String sessionId,int infoId);//点赞
+        void getInformationInfo(int id); //资讯详情
+        void getAllPingLun(int infoId,int page,int count); //查询资讯所有评论
+        void addInforComment(int userId,String sessionid,String content,int infoId);//添加资讯评论
     }
     interface IView extends IBaseView {
         void success(Object o);

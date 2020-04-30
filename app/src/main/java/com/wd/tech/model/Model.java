@@ -1,5 +1,7 @@
 package com.wd.tech.model;
 
+import android.util.Log;
+
 import com.wd.tech.api.ApiService;
 import com.wd.tech.bean.beanMyHomePage.MyAllData;
 import com.wd.tech.bean.beanMyHomePage.MyFollowUserData;
@@ -11,9 +13,13 @@ import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
 import com.wd.tech.bean.beancommunity.MyPostData;
 import com.wd.tech.bean.beancommunity.ReleasepostData;
+import com.wd.tech.bean.informationentity.AddGreatRecordEntity;
+import com.wd.tech.bean.informationentity.AddInfoCommentEntity;
 import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
+import com.wd.tech.bean.informationentity.FindAllPingLunEntity;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
+import com.wd.tech.bean.informationentity.InformationInfosEntity;
 import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.bean.informationentity.RegEntity;
 import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
@@ -50,11 +56,9 @@ import com.wd.tech.bean.messagebean.UserAllGroupingBean;
 import com.wd.tech.bean.messagebean.UserExisisCrowdBean;
 import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.messagebean.UserFriendListBean;
-import com.wd.tech.bean.beancommunity.CommentaryData;
-import com.wd.tech.bean.beancommunity.CommunityData;
-import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.util.RetrofitUtil;
+import com.wd.tech.util.RetrofitUtil2;
 
 import java.io.File;
 
@@ -726,7 +730,8 @@ public class Model implements IContract.IModel {
     //展示首页数据列表
     @Override
     public void getInfoRecommendListData(int plateId, int page, int count, ModelCallBack modelCallBack) {
-           apiService.getInfoRecommendListData(plateId,page,count)
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+              .getInfoRecommendListData(plateId,page,count)
                    .subscribeOn(Schedulers.io())
                    .observeOn(AndroidSchedulers.mainThread())
                    .subscribe(new Consumer<InfoRecommendListEntity>() {
@@ -744,7 +749,8 @@ public class Model implements IContract.IModel {
 
     @Override
     public void getPlateData(ModelCallBack modelCallBack) {
-          apiService.getAllPlate()
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+                .getAllPlate()
                   .subscribeOn(Schedulers.io())
                   .observeOn(AndroidSchedulers.mainThread())
                   .subscribe(new Consumer<FindAllInfoPlate>() {
@@ -762,7 +768,8 @@ public class Model implements IContract.IModel {
 
     @Override
     public void serchByKeyWord(String title, int page, int count, ModelCallBack modelCallBack) {
-        apiService.serchByKeyWord(title,page,count)
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+                .serchByKeyWord(title,page,count)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<SerchInfoByKeyWordEntity>() {
@@ -820,7 +827,8 @@ public class Model implements IContract.IModel {
 
     @Override
     public void login(String phone, String pwd, ModelCallBack modelCallBack) {
-        apiService.login(phone,pwd)
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+                .login(phone,pwd)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<LoginEntity>() {
@@ -834,11 +842,12 @@ public class Model implements IContract.IModel {
                         modelCallBack.failur(throwable);
                     }
                 });
-    }
+          }
 
     @Override
     public void reg(String nickName, String phone, String pwd, ModelCallBack modelCallBack) {
-        apiService.reg(nickName,phone,pwd)
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+                .reg(nickName,phone,pwd)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<RegEntity>() {
@@ -963,6 +972,82 @@ public class Model implements IContract.IModel {
                         modelCallBack.failur(throwable);
                     }
                 });
+    }
+      //点赞
+    @Override
+    public void addGreatRecor(int userId, String sessionId, int infoId, ModelCallBack modelCallBack) {
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+                .addGreatRecord(userId,sessionId,infoId)
+                          .subscribeOn(Schedulers.io())
+                          .observeOn(AndroidSchedulers.mainThread())
+                           .subscribe(new Consumer<AddGreatRecordEntity>() {
+                               @Override
+                               public void accept(AddGreatRecordEntity addGreatRecordEntity) throws Exception {
+                                modelCallBack.success(addGreatRecordEntity);
+                               }
+                           }, new Consumer<Throwable>() {
+                               @Override
+                               public void accept(Throwable throwable) throws Exception {
+                                    modelCallBack.failur(throwable);
+                               }
+                           });
+        }
+
+    @Override
+    public void getInformationInfo(int id, ModelCallBack modelCallBack) {
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+                .getInformationInfo(id)
+                  .subscribeOn(Schedulers.io())
+                  .observeOn(AndroidSchedulers.mainThread())
+                   .subscribe(new Consumer<InformationInfosEntity>() {
+                       @Override
+                       public void accept(InformationInfosEntity informationInfosEntity) throws Exception {
+                        modelCallBack.success(informationInfosEntity);
+                       }
+                   }, new Consumer<Throwable>() {
+                       @Override
+                       public void accept(Throwable throwable) throws Exception {
+                            modelCallBack.failur(throwable);
+                       }
+                   });
+    }
+
+    @Override
+    public void getAllPingLun(int infoId, int page, int count, ModelCallBack modelCallBack) {
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+                .getAllPingLun(infoId,page,count)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<FindAllPingLunEntity>() {
+                        @Override
+                        public void accept(FindAllPingLunEntity findAllPingLun) throws Exception {
+                            modelCallBack.success(findAllPingLun);
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            modelCallBack.failur(throwable);
+                        }
+                    });
+    }
+    //添加资讯评论
+    @Override
+    public void addInforComment(int userId, String sessionid, String content, int infoId, ModelCallBack modelCallBack) {
+         RetrofitUtil2.getInstance().creatService(ApiService.class)
+                 .addinfoComment(userId,sessionid,content,infoId)
+                 .subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(new Consumer<AddInfoCommentEntity>() {
+                     @Override
+                     public void accept(AddInfoCommentEntity addInfoCommentEntity) throws Exception {
+                        modelCallBack.success(addInfoCommentEntity);
+                     }
+                 }, new Consumer<Throwable>() {
+                     @Override
+                     public void accept(Throwable throwable) throws Exception {
+                         modelCallBack.failur(throwable);
+                     }
+                 });
     }
 
 

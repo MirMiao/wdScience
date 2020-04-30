@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.wd.tech.R;
-import com.wd.tech.bean.informationentity.FindAllInfoPlate;
+import com.wd.tech.bean.informationentity.InformationInfosEntity;
 
 import java.util.List;
 
@@ -22,38 +22,39 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 时间 :2020/4/22  20:09
+ * 时间 :2020/4/27  20:28
  * 作者 :苗恒
  * 功能 :
  */
-public class PlateAdapter extends RecyclerView.Adapter<PlateAdapter.MyViewHolder> {
+public class TuiJianAdapter extends RecyclerView.Adapter<TuiJianAdapter.MyViewHolder> {
     Context context;
-    List<FindAllInfoPlate.ResultBean> result;
+    List<InformationInfosEntity.ResultBean.InformationListBean> informationList;
 
-    public PlateAdapter(Context context, List<FindAllInfoPlate.ResultBean> result) {
+
+    public TuiJianAdapter(Context context, List<InformationInfosEntity.ResultBean.InformationListBean> informationList) {
         this.context = context;
-        this.result = result;
+        this.informationList = informationList;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.item_plate_layout, null,false);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.item_tuijian_item, null);
         MyViewHolder myViewHolder = new MyViewHolder(inflate);
         return myViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Glide.with(context).load(result.get(position).getPic())
+        Glide.with(context).load(informationList.get(position).getThumbnail())
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(8)))
-                .into(holder.ivImages);
-        holder.tvName.setText(result.get(position).getName());
-        if (plateOnClick != null) {
+                .into(holder.ivIamge);
+                holder.tvTitle.setText(informationList.get(position).getTitle());
+        if (tuiJianOnclick != null) {
              holder.itemView.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
-                      plateOnClick.onClick(result.get(position).getId());
+                     tuiJianOnclick.onClick(informationList.get(position).getId());
                  }
              });
         }
@@ -61,27 +62,26 @@ public class PlateAdapter extends RecyclerView.Adapter<PlateAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return result.size();
+        return informationList.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.iv_images)
-        ImageView ivImages;
-        @BindView(R.id.tv_name)
-        TextView tvName;
-
+        @BindView(R.id.iv_iamge)
+        ImageView ivIamge;
+        @BindView(R.id.tv_title)
+        TextView tvTitle;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
     }
-    private PlateOnClick plateOnClick;
+    private TuiJianOnclick tuiJianOnclick;
 
-    public void setPlateOnClick(PlateOnClick plateOnClick) {
-        this.plateOnClick = plateOnClick;
+    public void setTuiJianOnclick(TuiJianOnclick tuiJianOnclick) {
+        this.tuiJianOnclick = tuiJianOnclick;
     }
 
-    public interface PlateOnClick{
+    public interface TuiJianOnclick{
         void onClick(int id);
     }
 }

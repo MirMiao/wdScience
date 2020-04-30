@@ -1,5 +1,6 @@
 package com.wd.tech.view.information;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -113,7 +114,18 @@ public class SerchActivity extends BaseActivity<Presenter> implements IContract.
             if(((SerchInfoByKeyWordEntity) o).getResult().size()>0){
             list.addAll(((SerchInfoByKeyWordEntity) o).getResult());
             SerchAdapter serchAdapter = new SerchAdapter(SerchActivity.this, list);
-            rvSerch.setAdapter(serchAdapter);}
+            rvSerch.setAdapter(serchAdapter);
+            serchAdapter.setSerchOnClick(new SerchAdapter.SerchOnClick() {
+                @Override
+                public void onClick(int id) {
+                    Intent intent = new Intent(SerchActivity.this, InformationInfoActivity.class);
+                    intent.putExtra("id",id);
+                    startActivity(intent);
+                }
+            });
+            }
+
+
             else{
                  if(i!=1){
                      Toast.makeText(this, "已经到底了哦亲", Toast.LENGTH_SHORT).show();

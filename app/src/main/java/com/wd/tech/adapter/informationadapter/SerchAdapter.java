@@ -34,7 +34,7 @@ public class SerchAdapter extends RecyclerView.Adapter<SerchAdapter.MyViewHolder
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.item_serch_layout, null);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.item_serch_layout, null,false);
         MyViewHolder myViewHolder = new MyViewHolder(inflate);
         return myViewHolder;
     }
@@ -47,6 +47,15 @@ public class SerchAdapter extends RecyclerView.Adapter<SerchAdapter.MyViewHolder
         holder.tvTime.setText(format);
         holder.tvTitle.setText(list.get(position).getTitle());
         holder.tvSource.setText(list.get(position).getSource());
+        if (serchOnClick != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    serchOnClick.onClick(list.get(position).getId());
+                }
+            });
+        }
+
     }
 
     @Override
@@ -67,5 +76,14 @@ public class SerchAdapter extends RecyclerView.Adapter<SerchAdapter.MyViewHolder
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+    private SerchOnClick serchOnClick;
+
+    public void setSerchOnClick(SerchOnClick serchOnClick) {
+        this.serchOnClick = serchOnClick;
+    }
+
+    public interface SerchOnClick{
+        void onClick(int id);
     }
 }

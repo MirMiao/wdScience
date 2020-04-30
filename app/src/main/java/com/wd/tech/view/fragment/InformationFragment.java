@@ -1,10 +1,14 @@
 package com.wd.tech.view.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -14,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -22,13 +28,21 @@ import com.stx.xhb.androidx.XBanner;
 import com.wd.tech.R;
 import com.wd.tech.adapter.informationadapter.InfoRecommendListAdapter;
 import com.wd.tech.base.BaseFragment;
+import com.wd.tech.bean.informationentity.AddGreatRecordEntity;
 import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
+import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
+import com.wd.tech.view.information.InformationInfoActivity;
 import com.wd.tech.view.information.PlateActivity;
 import com.wd.tech.view.information.SerchActivity;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +71,6 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
 
     @Override
     protected void initView(View inflate) {
-
         rvInformation.setLayoutManager(new LinearLayoutManager(getContext()));
         //设置允许为可上拉加载
         smartRefresh.setEnableLoadMore(true);
@@ -90,7 +103,6 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
         return new Presenter();
     }
 
-
     @Override
     protected void initData() {
         presenter.getBannerData(); //请求banner数据
@@ -121,6 +133,14 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
             list.addAll(o1.getResult());
             InfoRecommendListAdapter infoRecommendListAdapter = new InfoRecommendListAdapter(getContext(), list);
             rvInformation.setAdapter(infoRecommendListAdapter);
+            infoRecommendListAdapter.setOnItemClickListener(new InfoRecommendListAdapter.OnItemClickListener() {
+                @Override
+                public void onClick(int getInformationId) {
+                    Intent intent = new Intent(getContext(), InformationInfoActivity.class);
+                    intent.putExtra("id",getInformationId);
+                    startActivity(intent);
+                }
+            });
         }
     }
 
@@ -140,4 +160,6 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
                 break;
         }
     }
+
+
 }

@@ -4,14 +4,20 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.wd.tech.R;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,17 +41,35 @@ public class InfoRecommendListAdapter extends RecyclerView.Adapter<InfoRecommend
     @NonNull
     @Override
     public MyViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.item_inforrecommendlist_layout, null);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.item_informationlist_layout, null);
         MyViewholder myViewholder = new MyViewholder(inflate);
         return myViewholder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewholder holder, int position) {
-          holder.rvInformationInfo.setLayoutManager(new LinearLayoutManager(context));
-
-        InfoRecommendListAdapter2 infoRecommendListAdapter2 = new InfoRecommendListAdapter2(context, result);
-        holder.rvInformationInfo.setAdapter(infoRecommendListAdapter2);
+        Glide.with(context).load(result.get(position).getThumbnail())
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.placeholder)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(8)))
+                .into(holder.ivImage);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        long releaseTime = result.get(position).getReleaseTime();
+        String format = simpleDateFormat.format(releaseTime);
+        holder.tvTitle.setText(result.get(position).getTitle());
+        holder.tvSummary.setText(result.get(position).getSummary());
+        holder.tvTime.setText(format);
+        holder.tvSource.setText(result.get(position).getSource());
+        holder.tvAixinNum.setText(result.get(position).getCollection()+"");
+        holder.tvSharNum.setText(result.get(position).getShare()+"");
+        if( onItemClickListener !=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onClick(result.get(position).getId());
+                }
+            });
+        }
     }
 
     @Override
@@ -53,12 +77,37 @@ public class InfoRecommendListAdapter extends RecyclerView.Adapter<InfoRecommend
         return result.size();
     }
 
+
     class MyViewholder extends RecyclerView.ViewHolder {
-        @BindView(R.id.rv_InformationInfo)
-        RecyclerView rvInformationInfo;
+        @BindView(R.id.iv_image)
+        ImageView ivImage;
+        @BindView(R.id.tv_title)
+        TextView tvTitle;
+        @BindView(R.id.tv_summary)
+        TextView tvSummary;
+        @BindView(R.id.tv_source)
+        TextView tvSource;
+        @BindView(R.id.tv_time)
+        TextView tvTime;
+        @BindView(R.id.cb_aixin)
+        CheckBox cbAixin;
+        @BindView(R.id.tv_aixinNum)
+        TextView tvAixinNum;
+        @BindView(R.id.cb_shar)
+        CheckBox cbShar;
+        @BindView(R.id.tv_sharNum)
+        TextView tvSharNum;
         public MyViewholder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
+    private OnItemClickListener onItemClickListener;
+    public interface OnItemClickListener {
+        void onClick(int getInformationId);
+    }
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
 }

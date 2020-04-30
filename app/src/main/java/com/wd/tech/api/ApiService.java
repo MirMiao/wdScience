@@ -6,7 +6,11 @@ import com.wd.tech.bean.beanMyHomePage.MySysNoticeData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralRecordData;
 import com.wd.tech.bean.beancommunity.CommentData;
+import com.wd.tech.bean.informationentity.AddGreatRecordEntity;
+import com.wd.tech.bean.informationentity.AddInfoCommentEntity;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
+import com.wd.tech.bean.informationentity.FindAllPingLunEntity;
+import com.wd.tech.bean.informationentity.InformationInfosEntity;
 import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.bean.informationentity.RegEntity;
 import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
@@ -59,6 +63,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -252,5 +257,21 @@ public interface ApiService {
     @GET(Api.HomePage_UserInfoByUserId)
     Observable<MySetUpData> getSetUp();
 
+    //点赞
+    @FormUrlEncoded
+    @POST("information/verify/v1/addGreatRecord")
+    Observable<AddGreatRecordEntity> addGreatRecord(@Header("userId") int userid, @Header("sessionId")String sessionId, @Field("infoId") int infoId);
 
+     //资讯页面详情
+    @GET("information/v1/findInformationDetails")
+    Observable<InformationInfosEntity> getInformationInfo(@Query("id") int id);
+
+    //查询资讯评论列表
+    @GET("information/v1/findAllInfoCommentList")
+    Observable<FindAllPingLunEntity> getAllPingLun(@Query("infoId") int infoId, @Query("page") int page, @Query("count") int count);
+
+    //添加资讯评论
+    @FormUrlEncoded
+    @POST("information/verify/v1/addInfoComment")
+    Observable<AddInfoCommentEntity> addinfoComment(@Header("userId") int userid, @Header("sessionId")String sessionId,@Field("content") String content,@Field("infoId") int infoId);
 }

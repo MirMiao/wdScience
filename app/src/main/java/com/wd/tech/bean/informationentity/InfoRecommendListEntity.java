@@ -69,7 +69,8 @@ public class InfoRecommendListEntity {
         private int whetherAdvertising;
         private int whetherCollection;
         private int whetherPay;
-
+        public boolean isAnXinChecked;
+        public boolean isSharChecked;
         public int getCollection() {
             return collection;
         }

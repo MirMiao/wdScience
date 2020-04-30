@@ -758,4 +758,64 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
         });
     }
 
+    @Override
+    public void addGreatRecor(int  userId, String sessionId, int infoId) {
+        model.addGreatRecor(userId,sessionId,infoId,new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
+    @Override
+    public void getInformationInfo(int id) {
+        model.getInformationInfo(id,new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
+    @Override
+    public void getAllPingLun(int infoId, int page, int count) {
+        model.getAllPingLun(infoId,page,count,new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
+    @Override
+    public void addInforComment(int userId, String sessionid, String content, int infoId) {
+         model.addInforComment(userId, sessionid, content, infoId, new IContract.IModel.ModelCallBack() {
+             @Override
+             public void success(Object o) {
+                    getView().success(o);
+             }
+
+             @Override
+             public void failur(Throwable throwable) {
+                    getView().failur(throwable);
+             }
+         });
+    }
+
 }
