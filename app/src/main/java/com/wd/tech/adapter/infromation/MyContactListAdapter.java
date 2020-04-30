@@ -97,7 +97,8 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter implements 
             groupholder= (GroupViewHolder) view.getTag();
         }
         groupholder.group_name.setText(userfriendlistresult.get(i).getGroupName());
-        groupholder.group_count.setText(userfriendlistresult.get(i).getCurrentNumber()+"/10");
+        List<UserFriendListBean.ResultBean.FriendInfoListBean>   friendInfoList = userfriendlistresult.get(i).getFriendInfoList();
+        groupholder.group_count.setText(friendInfoList.size()+"/10");
         groupholder.group_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +126,7 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter implements 
         }
         List<UserFriendListBean.ResultBean.FriendInfoListBean>   friendInfoList = userfriendlistresult.get(i).getFriendInfoList();
         childholder.child_name.setText(friendInfoList.get(i1).getNickName());
-        childholder.child_remarkName.setText(friendInfoList.get(i1).getRemarkName());
+        childholder.child_remarkName.setText(friendInfoList.get(i1).getSignature());
         RetrofitUtil.getInstance().getRoundphoto(friendInfoList.get(i1).getHeadPic(),childholder.child_img);
         childholder.friend_remove.setOnClickListener(new View.OnClickListener() {
             @Override

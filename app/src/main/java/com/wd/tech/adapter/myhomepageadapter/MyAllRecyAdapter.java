@@ -56,7 +56,6 @@ public class MyAllRecyAdapter extends RecyclerView.Adapter<MyAllRecyAdapter.MyAl
 
     @Override
     public int getItemCount() {
-
         return list.size();
     }
 

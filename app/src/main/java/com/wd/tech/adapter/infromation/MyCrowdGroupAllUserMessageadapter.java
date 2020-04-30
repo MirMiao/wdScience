@@ -33,7 +33,7 @@ public class MyCrowdGroupAllUserMessageadapter extends RecyclerView.Adapter<Recy
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType==0){
-            View view= LayoutInflater.from(context).inflate(R.layout.crowdmember_item,parent,false);
+            View view= LayoutInflater.from(context).inflate(R.layout.crowdmember_item4,parent,false);
             MyzhuViewHolder  holder=new MyzhuViewHolder(view);
             return holder;
         }

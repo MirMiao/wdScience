@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.wd.tech">
 
     <application
@@ -10,13 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.main.MySetUpActivity"></activity>
+        <activity android:name=".view.main.MyUserTaskActivity"></activity>
+        <activity android:name=".view.main.MySetUpActivity" />
         <activity android:name=".view.main.MyUserIntegralActivity" />
         <activity android:name=".view.main.MySysNoticeActivity" />
         <activity android:name=".view.main.MyTieziActivity" />
         <activity android:name=".view.main.MyFollowUserActivity" />
         <activity android:name=".view.main.MyAllInfoCollectionActivity" />
-        <activity android:name=".view.main.MyHomePageActivity" />
         <activity android:name=".view.messageactivity.GroupSttingActivity" />
         <activity android:name=".view.messageactivity.FriendchatRecordActivity" />
         <activity android:name=".view.messageactivity.SelectGroupingActivity" />
@@ -39,20 +40,61 @@
         <activity android:name=".view.messageactivity.SetCrowdActivity" />
         <activity android:name=".view.information.PlateActivity" />
         <activity android:name=".view.information.SerchActivity" />
-        <activity android:name=".view.information.LoginActivity" />
-        <activity android:name=".view.information.RegActivity" />
+        <activity android:name=".view.fragment.LoginActivity" />
+        <activity android:name=".view.fragment.RegActivity" />
         <activity android:name=".view.communityactivity.PingLunActivity" />
         <activity android:name=".view.communityactivity.QuanbupinglunActivity" />
         <activity android:name=".view.communityactivity.MyPostActivity" />
-        <activity android:name=".view.information.InformationInfoActivity" />
-        <activity android:name=".view.information.PlateInformationActivity"/>
-        <activity android:name=".view.activity.MainActivity">
+        <activity android:name=".view.activity.MainActivity" android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 若您的业务中有使用极光富媒体功能，或者极光早上好功能，需要把此 Activity 的 exported 修改成 true 覆盖 jcenter 上的组件。 -->
+        <activity
+            android:name="cn.jpush.android.ui.PopWinActivity"
+            android:exported="true"
+            tools:node="replace"
+            android:theme="@style/MyDialogStyle">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="cn.jpush.android.ui.PopWinActivity" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </activity>
+
+        <!-- 若您的业务中有使用极光富媒体功能，或者极光早上好功能，需要把此 Activity 的 exported 修改成 true 覆盖 jcenter 上的组件。 -->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
+            tools:node="replace"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </activity>
+        <service android:name=".aurora.aurora"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service>
+        <receiver
+            android:name=".aurora.ChatReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+                <category android:name="com.wd.tech" />
+            </intent-filter>
+        </receiver>
     </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

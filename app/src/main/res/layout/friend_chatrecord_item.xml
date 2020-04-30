@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="#fff"
         >
         <TextView
             android:layout_width="match_parent"
@@ -23,7 +24,6 @@
             android:text="名称"
             android:id="@+id/time"
             android:gravity="center"
-            android:background="#fff"
             ></TextView>
         <TextView
             android:layout_width="match_parent"
@@ -32,7 +32,6 @@
             android:text="名称"
             android:id="@+id/content"
             android:gravity="center"
-            android:background="#fff"
             ></TextView>
     </LinearLayout>
 </LinearLayout>

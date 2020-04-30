@@ -12,8 +12,9 @@ import java.util.List;
  */
 public class UserFriendListBean implements Serializable {
 
+
     /**
-     * result : [{"black":1,"currentNumber":1,"customize":1,"friendInfoList":[{"friendUid":1389,"headPic":"http://mobile.bwstudent.com/images/tech/default/tech.jpg","nickName":"心心","remarkName":"心心","userName":"G3Yd0q13555278077","vipFlag":2}],"groupId":2972,"groupName":"我的好友"},{"black":2,"currentNumber":0,"customize":1,"friendInfoList":[],"groupId":2973,"groupName":"黑名单"},{"black":1,"currentNumber":0,"customize":2,"friendInfoList":[],"groupId":2983,"groupName":"八维"}]
+     * result : [{"black":1,"currentNumber":0,"customize":1,"friendInfoList":[{"friendUid":1389,"headPic":"http://mobile.bwstudent.com/images/tech/default/tech.jpg","nickName":"玉盏","remarkName":"心心","signature":"金戈峥嵘归 玉盏琉璃杯","userName":"G3Yd0q13555278077","vipFlag":2}],"groupId":2972,"groupName":"我的好友"},{"black":2,"currentNumber":0,"customize":1,"friendInfoList":[],"groupId":2973,"groupName":"黑名单"},{"black":1,"currentNumber":1,"customize":2,"friendInfoList":[{"friendUid":1400,"headPic":"http://mobile.bwstudent.com/images/tech/head_pic/2020-04-19/20200419193453.png","nickName":"宝贝","remarkName":"甜甜","signature":"傲雪霜冷尤清艳","userName":"NBPUuL13555278078","vipFlag":2}],"groupId":3062,"groupName":"宝贝"},{"black":1,"currentNumber":0,"customize":2,"friendInfoList":[],"groupId":3077,"groupName":"我的"},{"black":1,"currentNumber":1,"customize":2,"friendInfoList":[{"friendUid":1438,"headPic":"http://mobile.bwstudent.com/images/tech/default/tech.jpg","nickName":"二号","remarkName":"NPC二号","signature":"云焚梅念故人","userName":"Fo5KUk13845649932","vipFlag":2}],"groupId":3098,"groupName":"机器人"},{"black":1,"currentNumber":0,"customize":2,"friendInfoList":[],"groupId":3121,"groupName":"一号"}]
      * message : 查询成功
      * status : 0000
      */
@@ -49,9 +50,9 @@ public class UserFriendListBean implements Serializable {
     public static class ResultBean {
         /**
          * black : 1
-         * currentNumber : 1
+         * currentNumber : 0
          * customize : 1
-         * friendInfoList : [{"friendUid":1389,"headPic":"http://mobile.bwstudent.com/images/tech/default/tech.jpg","nickName":"心心","remarkName":"心心","userName":"G3Yd0q13555278077","vipFlag":2}]
+         * friendInfoList : [{"friendUid":1389,"headPic":"http://mobile.bwstudent.com/images/tech/default/tech.jpg","nickName":"玉盏","remarkName":"心心","signature":"金戈峥嵘归 玉盏琉璃杯","userName":"G3Yd0q13555278077","vipFlag":2}]
          * groupId : 2972
          * groupName : 我的好友
          */
@@ -115,8 +116,9 @@ public class UserFriendListBean implements Serializable {
             /**
              * friendUid : 1389
              * headPic : http://mobile.bwstudent.com/images/tech/default/tech.jpg
-             * nickName : 心心
+             * nickName : 玉盏
              * remarkName : 心心
+             * signature : 金戈峥嵘归 玉盏琉璃杯
              * userName : G3Yd0q13555278077
              * vipFlag : 2
              */
@@ -125,6 +127,7 @@ public class UserFriendListBean implements Serializable {
             private String headPic;
             private String nickName;
             private String remarkName;
+            private String signature;
             private String userName;
             private int vipFlag;
 
@@ -158,6 +161,14 @@ public class UserFriendListBean implements Serializable {
 
             public void setRemarkName(String remarkName) {
                 this.remarkName = remarkName;
+            }
+
+            public String getSignature() {
+                return signature;
+            }
+
+            public void setSignature(String signature) {
+                this.signature = signature;
             }
 
             public String getUserName() {

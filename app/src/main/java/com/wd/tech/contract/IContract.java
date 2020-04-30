@@ -49,6 +49,11 @@ public interface IContract {
       void  getCrowdGroupAllUserMessageBeandata(int groupId,ModelCallBack modelCallBack);//查询群组内所有用户信息
       void  getSendCrowdMessageBeandata(int groupId,String content,ModelCallBack modelCallBack);//发送群信息
       void  getCrowdChatContentBeandata(int groupId,int page,int count,ModelCallBack modelCallBack);//查询群聊天内容
+      void  getDeleteCrowdMemberBeandata(int groupId,int groupUserId,ModelCallBack modelCallBack);//移出群成员(管理员与群主才有的权限)
+      void  getAdjustCrowdMemberBeandata(int groupId,int groupUserId,int role,ModelCallBack modelCallBack);//调整群成员角色(群主才有的权限)
+      void  getApplyAddCrowdBeandata(int groupId,String remark,ModelCallBack modelCallBack);//申请进群
+      void  getAnviteAddCrowdBeandata(int groupId,int receiverUid,ModelCallBack modelCallBack);//邀请加群
+      void  getBatchAnviteAddCrowdBeandata(int groupId,String receiverUids,ModelCallBack modelCallBack);//批量邀请加群
 
 
         //社区
@@ -71,6 +76,7 @@ public interface IContract {
         void getUserIntegral(ModelCallBack modelCallBack);//查询用户积分
         void getUserIntegralRecord(int page, int count,ModelCallBack modelCallBack);//查询用户积分明细
         void getSetUp(ModelCallBack modelCallBack);//设置页面（根据用户ID查询用户信息）
+        void getUserTask(ModelCallBack modelCallBack);////查询用户任务列表
 
         void addGreatRecor(int userId,String sessionId,int infoId,ModelCallBack modelCallBack);//点赞
         void getInformationInfo(int id,ModelCallBack modelCallBack); //资讯详情
@@ -119,6 +125,11 @@ public interface IContract {
         void  getCrowdGroupAllUserMessageBeandata(int groupId);//查询群组内所有用户信息
         void  getSendCrowdMessageBeandata(int groupId,String content);//发送群信息
         void  getCrowdChatContentBeandata(int groupId,int page,int count);//查询群聊天内
+        void  getDeleteCrowdMemberBeandata(int groupId,int groupUserId);//移出群成员(管理员与群主才有的权限)
+        void  getAdjustCrowdMemberBeandata(int groupId,int groupUserId,int role);//调整群成员角色(群主才有的权限)
+        void  getApplyAddCrowdBeandata(int groupId,String remark);//申请进群
+        void  getAnviteAddCrowdBeandata(int groupId,int receiverUid);//邀请加群
+        void  getBatchAnviteAddCrowdBeandata(int groupId,String receiverUids);//批量邀请加群
         //社区
         void  getCommunitydata(int page, int count);//社区列表
         void  getCommentary(int communityId, int page, int count);//社区用户评论
@@ -140,6 +151,7 @@ public interface IContract {
         void getUserIntegral();//查询用户积分
         void getUserIntegralRecord(int page, int count);//查询用户积分明细
         void getSetUp();//设置页面（根据用户ID查询用户信息）
+        void getUserTask();////查询用户任务列表
 
         void addGreatRecor(int userId,String sessionId,int infoId);//点赞
         void getInformationInfo(int id); //资讯详情

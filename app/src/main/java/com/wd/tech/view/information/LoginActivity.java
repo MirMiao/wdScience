@@ -67,6 +67,12 @@ public class LoginActivity extends BaseActivity<Presenter> implements IContract.
                  Toast.makeText(this, ""+((LoginEntity) o).getMessage(), Toast.LENGTH_SHORT).show();
                  LoginEntity.ResultBean result = ((LoginEntity) o).getResult();
                  list.add(result);
+
+                 int userId = result.getUserId();
+                 String sessionId = result.getSessionId();
+                 SpUtil.saveInt("userid",userId);
+                 SpUtil.saveString("sesseion",sessionId);
+
                  SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
                  SharedPreferences.Editor edit = sp.edit();
                  Gson gson = new Gson();

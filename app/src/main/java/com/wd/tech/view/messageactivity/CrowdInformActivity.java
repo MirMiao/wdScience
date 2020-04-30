@@ -1,14 +1,10 @@
 package com.wd.tech.view.messageactivity;
-
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -22,22 +18,13 @@ import com.wd.tech.contract.IContract;
 import com.wd.tech.event.Eventstuast;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.TimeformatUtil;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
-
 //群通知
 public class CrowdInformActivity extends BaseActivity<Presenter> implements IContract.IView {
-
-
-    @BindView(R.id.time)
-    TextView time;
     @BindView(R.id.crowdinfrom_RecyclerView)
     RecyclerView crowdinfromRecyclerView;
     @BindView(R.id.refresh)
@@ -45,7 +32,7 @@ public class CrowdInformActivity extends BaseActivity<Presenter> implements ICon
     private List<CrowdInfromBean.ResultBean> crowdinfromresult;
     private MyCrowdInfromactadapter myCrowdInfromactadapter;
     private int noticeId;
-
+    private  int count=1;
     @Override
     protected Presenter initPresenter() {
         return new Presenter();
@@ -62,11 +49,17 @@ public class CrowdInformActivity extends BaseActivity<Presenter> implements ICon
         refresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                count++;
+                presenter.getCrowdInfromBeandata(1, count);
+                myCrowdInfromactadapter.loadmore(crowdinfromresult);
+                refresh.finishLoadMore();
             }
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                presenter.getCrowdInfromBeandata(1, 5);
+                count=1;
+                presenter.getCrowdInfromBeandata(1, count);
                 myCrowdInfromactadapter.update(crowdinfromresult);
+                refresh.finishRefresh();
             }
         });
     }
@@ -91,7 +84,6 @@ public class CrowdInformActivity extends BaseActivity<Presenter> implements ICon
             crowdinfromresult = ((CrowdInfromBean) o).getResult();
             myCrowdInfromactadapter = new MyCrowdInfromactadapter(crowdinfromresult, this);
             for (int i = 0; i < crowdinfromresult.size(); i++) {
-                time.setText(TimeformatUtil.gettime(crowdinfromresult.get(i).getNoticeTime()));
                 noticeId = crowdinfromresult.get(i).getNoticeId();
             }
             crowdinfromRecyclerView.setAdapter(myCrowdInfromactadapter);
@@ -100,6 +92,10 @@ public class CrowdInformActivity extends BaseActivity<Presenter> implements ICon
 
         if (o instanceof CheckCrowdApplyBean) {
             Toast.makeText(App.context, ((CheckCrowdApplyBean) o).getMessage(), Toast.LENGTH_LONG).show();
+            if (((CheckCrowdApplyBean) o).getStatus().equals("0000")){
+                presenter.getCrowdInfromBeandata(1, count);
+                myCrowdInfromactadapter.notifyDataSetChanged();
+            }
         }
     }
 

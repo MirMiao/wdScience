@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.wd.tech.MessageList;
 import com.wd.tech.R;
 import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
 import com.wd.tech.util.RetrofitUtil;
@@ -62,7 +64,16 @@ public class MyMessageListAdapter extends  RecyclerView.Adapter<MyMessageListAda
             }
         });
     }
-
+    public   void update( List<UserFriendInfromRecordBean.ResultBean> userfriendinfromrecordresult) {
+        this.userfriendinfromrecordresult.clear();
+        this.userfriendinfromrecordresult.addAll(userfriendinfromrecordresult);
+        notifyDataSetChanged();
+    }
+    //上拉加载
+    public  void loadmore(List<UserFriendInfromRecordBean.ResultBean> userfriendinfromrecordresult) {
+        this.userfriendinfromrecordresult.addAll(userfriendinfromrecordresult);
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return userfriendinfromrecordresult.size();

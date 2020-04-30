@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.wd.tech.MessageList;
 import com.wd.tech.R;
 import com.wd.tech.bean.messagebean.CrowdInfromBean;
 import com.wd.tech.util.TimeformatUtil;
@@ -61,8 +63,15 @@ public class MyCrowdInfromadapter  extends  RecyclerView.Adapter<MyCrowdInfromad
             }
         });
     }
-
-
+    public   void update(List<CrowdInfromBean.ResultBean> crowdinfromresult){
+        this.crowdinfromresult.clear();
+        this.crowdinfromresult.addAll(crowdinfromresult);
+        notifyDataSetChanged();
+    }
+    public   void loadmore(List<CrowdInfromBean.ResultBean> crowdinfromresult){
+        this.crowdinfromresult.addAll(crowdinfromresult);
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return crowdinfromresult.size();

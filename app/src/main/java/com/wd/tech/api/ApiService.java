@@ -5,6 +5,7 @@ import com.wd.tech.bean.beanMyHomePage.MySetUpData;
 import com.wd.tech.bean.beanMyHomePage.MySysNoticeData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralRecordData;
+import com.wd.tech.bean.beanMyHomePage.MyUserTaskData;
 import com.wd.tech.bean.beancommunity.CommentData;
 import com.wd.tech.bean.informationentity.AddGreatRecordEntity;
 import com.wd.tech.bean.informationentity.AddInfoCommentEntity;
@@ -15,10 +16,14 @@ import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.bean.informationentity.RegEntity;
 import com.wd.tech.bean.informationentity.SerchInfoByKeyWordEntity;
 import com.wd.tech.bean.messagebean.AddFriendBean;
+import com.wd.tech.bean.messagebean.AdjustCrowdMemberBean;
 import com.wd.tech.bean.messagebean.AlterCrowdGroupIntroBean;
 import com.wd.tech.bean.messagebean.AlterCrowdGroupNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendGroupingNameBean;
 import com.wd.tech.bean.messagebean.AlterFriendRemarkBean;
+import com.wd.tech.bean.messagebean.AnviteAddCrowdBean;
+import com.wd.tech.bean.messagebean.ApplyAddCrowdBean;
+import com.wd.tech.bean.messagebean.BatchAnviteAddCrowdBean;
 import com.wd.tech.bean.messagebean.CheckCrowdApplyBean;
 import com.wd.tech.bean.messagebean.CheckFriendApplyBean;
 import com.wd.tech.bean.messagebean.CrowGroupDetailMessageBean;
@@ -26,6 +31,7 @@ import com.wd.tech.bean.messagebean.CrowdChatContentBean;
 import com.wd.tech.bean.messagebean.CrowdGroupAllUserMessageBean;
 import com.wd.tech.bean.messagebean.CrowdInfromBean;
 import com.wd.tech.bean.messagebean.DeleteCrowdGroupBean;
+import com.wd.tech.bean.messagebean.DeleteCrowdMemberBean;
 import com.wd.tech.bean.messagebean.DeleteFriendBean;
 import com.wd.tech.bean.messagebean.DeleteFriendChatRrecordBean;
 import com.wd.tech.bean.messagebean.DeleteFriendGroupingBean;
@@ -59,6 +65,7 @@ import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -172,9 +179,9 @@ public interface ApiService {
     @DELETE(Api.DELETECROWDGROUP_URL)//解散群组
     Observable<DeleteCrowdGroupBean>getDeleteCrowdGroupBeandata(@Query("groupId") int groupId);
 
-    @POST(Api.UPLOADCROWDHEADPIC_URL)//上传群头像
     @Multipart
-    Observable<UploadCrowdHeadpicBean>getUploadCrowdHeadpicBeandata(@Field("groupId") int groupId, @Part MultipartBody.Part file);
+    @POST(Api.UPLOADCROWDHEADPIC_URL)//上传群头像
+    Observable<UploadCrowdHeadpicBean>getUploadCrowdHeadpicBeandata(@Part("groupId") RequestBody groupId, @Part MultipartBody.Part file);
 
     @DELETE(Api.AUITCROWD_URL)//退群
     Observable<QuitCrowdBean>getQuitCrowdBeandata(@Query("groupId") int groupId);
@@ -183,12 +190,30 @@ public interface ApiService {
     Observable<CrowdGroupAllUserMessageBean>getCrowdGroupAllUserMessageBeandata(@Query("groupId") int groupId);
 
     @POST(Api.SENDCROWDMESSAGE_URL)//发送群信息
-    @Multipart
+    @FormUrlEncoded
     Observable<SendCrowdMessageBean>getSendCrowdMessageBeandata(@Field("groupId") int groupId, @Field("content") String content);
 
     @GET(Api.CROWDCHATCONTENT_URL)//查询群聊天内容
     Observable<CrowdChatContentBean>getCrowdChatContentBeandata(@Query("groupId") int groupId, @Query("page")int page, @Query("count") int count);
 
+
+    @DELETE(Api.DELETECROWDMEMBER_URL)//移出群成员(管理员与群主才有的权限)
+    Observable<DeleteCrowdMemberBean>getDeleteCrowdMemberBeandata(@Query("groupId") int groupId, @Query("groupUserId") int groupUserId);
+
+    @PUT(Api.ADJUSTCROWDMEMBER_URL)//调整群成员角色(群主才有的权限)
+    Observable<AdjustCrowdMemberBean>getAdjustCrowdMemberBeandata(@Query("groupId") int groupId, @Query("groupUserId") int groupUserId, @Query("role") int role);
+
+    @POST(Api.APPLYADDCROWD_URL)//申请进群
+    @FormUrlEncoded
+    Observable<ApplyAddCrowdBean> getApplyAddCrowdBeandata(@Field("groupId") int groupId, @Field("remark") String remark);
+
+    @POST(Api.ANVITEADDCROWD_URL)//邀请加群
+    @FormUrlEncoded
+    Observable<AnviteAddCrowdBean> getAnviteAddCrowdBeandata(@Field("groupId") int groupId, @Field("receiverUid") int receiverUid);
+
+    @POST(Api.BATCHANVITEADDCROWD_URL)//批量邀请加群
+    @FormUrlEncoded
+    Observable<BatchAnviteAddCrowdBean> getBatchAnviteAddCrowdBeandata(@Field("groupId") int groupId, @Field("receiverUids") String receiverUids);
 
     //社区
     //社区列表
@@ -253,9 +278,12 @@ public interface ApiService {
     //查询用户积分明细
     @GET(Api.HomePage_UserIntegralRecord)
     Observable<MyUserIntegralRecordData> getUserIntegralRecord(@Query("page")int page, @Query("count")int count);
-
+    //根据用户ID查询用户信息(设置页面)
     @GET(Api.HomePage_UserInfoByUserId)
     Observable<MySetUpData> getSetUp();
+    //查询用户任务列表
+    @GET(Api.HomePage_UserTask)
+    Observable<MyUserTaskData> getUserTask();
 
     //点赞
     @FormUrlEncoded
