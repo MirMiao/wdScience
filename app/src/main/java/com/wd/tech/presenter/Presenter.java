@@ -908,4 +908,19 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
          });
     }
 
+    @Override
+    public void getUserSign() {
+        model.getUserSign(new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
 }

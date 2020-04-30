@@ -9,32 +9,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:id="@+id/user_rmingcheng"
+        android:id="@+id/user_mingcheng"
+        android:layout_gravity="center"
         />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="150dp"
-        >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/user_jifen"
+            android:layout_gravity="center"
+            android:layout_marginLeft="100dp"
+            android:textColor="@color/colorB"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/user_zhuangtai"
-            />
-    </LinearLayout>
-
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/user_leixing"
-        android:layout_marginLeft="100dp"
-        android:textSize="20dp"
+        android:id="@+id/user_chakan"
+        android:text="查看"
+        android:textColor="@color/colorB"
+        android:layout_marginLeft="150dp"
+        android:layout_gravity="center"
         />
 
 </LinearLayout>

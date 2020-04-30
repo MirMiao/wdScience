@@ -1,16 +1,20 @@
 package com.wd.tech.adapter.myhomepageadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wd.tech.R;
 import com.wd.tech.bean.beanMyHomePage.MyUserTaskResult;
+import com.wd.tech.view.activity.MainActivity;
 
 import java.util.List;
 
@@ -38,24 +42,27 @@ public class MyUserTaskRecyAdapter extends RecyclerView.Adapter<MyUserTaskRecyAd
         int status = myUserTaskResult.getStatus();
         int taskIntegral = myUserTaskResult.getTaskIntegral();
 
-        holder.userRmingcheng.setText(taskName);
-        holder.userJifen.setText(taskIntegral+"分");
-
-        switch (taskType){
-            case 1:
-                holder.userLeixing.setText("每日任务");
-                break;
-            case 2:
-                holder.userLeixing.setText("一次性任务");
-                break;
-        }
+        holder.userMingcheng.setText(taskName);
+        holder.userJifen.setText("+"+taskIntegral);
 
         switch (status){
             case 1:
-                holder.userZhuangtai.setText("已做");
+                holder.userChakan.setText("已做");
+                holder.userChakan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(context, "您已经做了任务了", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
             case 2:
-                holder.userZhuangtai.setText("未做");
+                holder.userChakan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(context, MainActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
                 break;
         }
 
@@ -67,16 +74,14 @@ public class MyUserTaskRecyAdapter extends RecyclerView.Adapter<MyUserTaskRecyAd
     }
 
     class MyUserTaskViewHolder extends RecyclerView.ViewHolder {
-        private TextView userRmingcheng;
+        private TextView userMingcheng;
         private TextView userJifen;
-        private TextView userZhuangtai;
-        private TextView userLeixing;
+        private Button userChakan;
         public MyUserTaskViewHolder(@NonNull View itemView) {
             super(itemView);
-            userRmingcheng = (TextView) itemView.findViewById(R.id.user_rmingcheng);
+            userMingcheng = (TextView) itemView.findViewById(R.id.user_mingcheng);
             userJifen = (TextView) itemView.findViewById(R.id.user_jifen);
-            userZhuangtai = (TextView) itemView.findViewById(R.id.user_zhuangtai);
-            userLeixing = (TextView) itemView.findViewById(R.id.user_leixing);
+            userChakan = (Button) itemView.findViewById(R.id.user_chakan);
         }
     }
 

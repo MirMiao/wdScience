@@ -5,6 +5,7 @@ import com.wd.tech.bean.beanMyHomePage.MySetUpData;
 import com.wd.tech.bean.beanMyHomePage.MySysNoticeData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralRecordData;
+import com.wd.tech.bean.beanMyHomePage.MyUserSignData;
 import com.wd.tech.bean.beanMyHomePage.MyUserTaskData;
 import com.wd.tech.bean.beancommunity.CommentData;
 import com.wd.tech.bean.informationentity.AddGreatRecordEntity;
@@ -284,6 +285,10 @@ public interface ApiService {
     //查询用户任务列表
     @GET(Api.HomePage_UserTask)
     Observable<MyUserTaskData> getUserTask();
+    //签到
+    @POST(Api.HomePage_userSign)
+    @FormUrlEncoded
+    Observable<MyUserSignData> getUserSign();
 
     //点赞
     @FormUrlEncoded

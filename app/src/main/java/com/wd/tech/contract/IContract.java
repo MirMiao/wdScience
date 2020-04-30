@@ -77,6 +77,7 @@ public interface IContract {
         void getUserIntegralRecord(int page, int count,ModelCallBack modelCallBack);//查询用户积分明细
         void getSetUp(ModelCallBack modelCallBack);//设置页面（根据用户ID查询用户信息）
         void getUserTask(ModelCallBack modelCallBack);////查询用户任务列表
+        void getUserSign(ModelCallBack modelCallBack);//签到
 
         void addGreatRecor(int userId,String sessionId,int infoId,ModelCallBack modelCallBack);//点赞
         void getInformationInfo(int id,ModelCallBack modelCallBack); //资讯详情
@@ -152,6 +153,7 @@ public interface IContract {
         void getUserIntegralRecord(int page, int count);//查询用户积分明细
         void getSetUp();//设置页面（根据用户ID查询用户信息）
         void getUserTask();////查询用户任务列表
+        void getUserSign();//签到
 
         void addGreatRecor(int userId,String sessionId,int infoId);//点赞
         void getInformationInfo(int id); //资讯详情
