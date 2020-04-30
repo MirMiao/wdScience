@@ -40,11 +40,13 @@
         <activity android:name=".view.messageactivity.SetCrowdActivity" />
         <activity android:name=".view.information.PlateActivity" />
         <activity android:name=".view.information.SerchActivity" />
-        <activity android:name=".view.fragment.LoginActivity" />
-        <activity android:name=".view.fragment.RegActivity" />
+        <activity android:name=".view.information.LoginActivity"></activity>
+        <activity android:name=".view.information.RegActivity"></activity>
         <activity android:name=".view.communityactivity.PingLunActivity" />
         <activity android:name=".view.communityactivity.QuanbupinglunActivity" />
         <activity android:name=".view.communityactivity.MyPostActivity" />
+        <activity android:name=".view.information.InformationInfoActivity"/>
+        <activity android:name=".view.information.PlateInformationActivity"/>
         <activity android:name=".view.activity.MainActivity" android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
