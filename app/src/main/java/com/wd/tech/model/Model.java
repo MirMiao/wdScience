@@ -7,6 +7,7 @@ import com.wd.tech.bean.beanMyHomePage.MySetUpData;
 import com.wd.tech.bean.beanMyHomePage.MySysNoticeData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralRecordData;
+import com.wd.tech.bean.beanMyHomePage.MyUserSignData;
 import com.wd.tech.bean.beanMyHomePage.MyUserTaskData;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
@@ -1068,6 +1069,24 @@ public class Model implements IContract.IModel {
                     @Override
                     public void accept(MyUserTaskData myUserTaskData) throws Exception {
                         modelCallBack.success(myUserTaskData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+    @Override
+    public void getUserSign(ModelCallBack modelCallBack) {
+        Observable<MyUserSignData> userSign = apiService.getUserSign();
+        userSign.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MyUserSignData>() {
+                    @Override
+                    public void accept(MyUserSignData myUserSignData) throws Exception {
+                        modelCallBack.success(myUserSignData);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

@@ -32,6 +32,7 @@ import com.wd.tech.view.fragment.LoginActivity;
 import com.wd.tech.view.fragment.MessageFragment;
 import com.wd.tech.view.main.MyAllInfoCollectionActivity;
 import com.wd.tech.view.main.MyFollowUserActivity;
+import com.wd.tech.view.main.MyQianDaoActivity;
 import com.wd.tech.view.main.MySetUpActivity;
 import com.wd.tech.view.main.MySysNoticeActivity;
 import com.wd.tech.view.main.MyTieziActivity;
@@ -318,6 +319,8 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
             case R.id.home_vip:
                 break;
             case R.id.home_qiandao:
+                Intent intent8=new Intent(MainActivity.this, MyQianDaoActivity.class);
+                startActivity(intent8);
                 break;
             case R.id.qu_shouchang:
                 Intent intent=new Intent(MainActivity.this, MyAllInfoCollectionActivity.class);
