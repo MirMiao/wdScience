@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.wd.tech.base.mvp.BasePresenter;
 import com.wd.tech.base.mvp.IBaseView;
-import com.wd.tech.view.fragment.LoginActivity;
+import com.wd.tech.view.information.LoginActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
