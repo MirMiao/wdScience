@@ -22,7 +22,6 @@ import com.wd.tech.R;
 import com.wd.tech.bean.messagebean.UserFriendListBean;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.view.messageactivity.FriendMessageActivity;
-import com.wd.tech.view.messageactivity.GroupSttingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,13 +98,6 @@ public class MyContactListAdapter  extends BaseExpandableListAdapter implements 
         groupholder.group_name.setText(userfriendlistresult.get(i).getGroupName());
         List<UserFriendListBean.ResultBean.FriendInfoListBean>   friendInfoList = userfriendlistresult.get(i).getFriendInfoList();
         groupholder.group_count.setText(friendInfoList.size()+"/10");
-        groupholder.group_name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentgsa=new Intent(context, GroupSttingActivity.class);
-                context.startActivity(intentgsa);
-            }
-        });
         return view;
     }
 

@@ -3,6 +3,8 @@ package com.wd.tech.view.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -23,6 +25,7 @@ import com.google.gson.reflect.TypeToken;
 import com.wd.tech.R;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.informationentity.LoginEntity;
+import com.wd.tech.bean.messagebean.WxloginBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RetrofitUtil;
@@ -112,7 +115,9 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
     ImageView quShezhi;
 
     private String string;
-
+   private List<LoginEntity.ResultBean> list;
+   private List<WxloginBean.ResultBean> listwx;
+    private Resources resources;
 
     @Override
     protected Presenter initPresenter() {
@@ -133,8 +138,14 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
             Gson gson = new Gson();
             Type type = new TypeToken<List<LoginEntity.ResultBean>>() {
             }.getType();
-            List<LoginEntity.ResultBean> list = gson.fromJson(userInfo, type);
-            if (list != null) {
+            list= gson.fromJson(userInfo, type);
+
+            SharedPreferences wxsp = getSharedPreferences("wxuser", MODE_PRIVATE);
+            String wxuserInfo = wxsp.getString("wxuserInfo", "");
+            Type typewx = new TypeToken<List<WxloginBean.ResultBean>>() {
+            }.getType();
+            listwx = gson.fromJson(wxuserInfo, typewx);
+            if (list != null||listwx!=null) {
                 llUser.setBackgroundColor(Color.WHITE);
                 ivToLogin.setVisibility(View.GONE);
                 tvLogin.setVisibility(View.GONE);
@@ -147,16 +158,38 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
                 ll7.setVisibility(View.VISIBLE);
                 ll8.setVisibility(View.VISIBLE);
                 ll9.setVisibility(View.VISIBLE);
-            }
+                }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        if (list!=null){
+            for (int i = 0; i < list.size(); i++) {
+                RetrofitUtil.getInstance().getRoundphoto(list.get(i).getHeadPic(),homeHeadpic);
+                homeName.setText(list.get(i).getNickName());
+                homeQianming.setText(list.get(i).getSignature());
+                if (list.get(i).getWhetherVip()==1){
+                    resources = getResources();
+                    homeVip.setImageBitmap(BitmapFactory.decodeResource(resources,R.drawable.vip));
+                }
+            }
+        }
+        if (listwx!=null) {
+            for (int i = 0; i < listwx.size(); i++) {
+                RetrofitUtil.getInstance().getRoundphoto(listwx.get(i).getHeadPic(), homeHeadpic);
+                homeName.setText(listwx.get(i).getNickName());
+                homeQianming.setText(listwx.get(i).getUserName());
+                if (listwx.get(i).getWhetherVip() == 1) {
+                    resources = getResources();
+                    homeVip.setImageBitmap(BitmapFactory.decodeResource(resources, R.drawable.vip));
+                }
+            }
         }
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
     protected void initView() {
-
         homeHeadpic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

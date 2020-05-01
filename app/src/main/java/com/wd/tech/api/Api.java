@@ -68,5 +68,6 @@ public interface Api {
     String HomePage_UserInfoByUserId="user/verify/v1/getUserInfoByUserId";//根据用户ID查询用户信息(设置页面)
     String HomePage_UserTask="user/verify/v1/findUserTaskList";//查询用户任务列表
     String HomePage_userSign="user/verify/v1/userSign";//签到
+    String WXlogin_url="user/v1/weChatLogin";//微信登录
 
 }
