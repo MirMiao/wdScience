@@ -139,12 +139,9 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
             Type type = new TypeToken<List<LoginEntity.ResultBean>>() {
             }.getType();
             list= gson.fromJson(userInfo, type);
-
-            SharedPreferences wxsp = getSharedPreferences("wxuser", MODE_PRIVATE);
-            String wxuserInfo = wxsp.getString("wxuserInfo", "");
             Type typewx = new TypeToken<List<WxloginBean.ResultBean>>() {
             }.getType();
-            listwx = gson.fromJson(wxuserInfo, typewx);
+            listwx = gson.fromJson(userInfo, typewx);
             if (list != null||listwx!=null) {
                 llUser.setBackgroundColor(Color.WHITE);
                 ivToLogin.setVisibility(View.GONE);
@@ -164,6 +161,7 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
         }
 
         if (list!=null){
+            listwx.removeAll(listwx);
             for (int i = 0; i < list.size(); i++) {
                 RetrofitUtil.getInstance().getRoundphoto(list.get(i).getHeadPic(),homeHeadpic);
                 homeName.setText(list.get(i).getNickName());
@@ -173,8 +171,10 @@ public class MainActivity extends BaseActivity<Presenter> implements IContract.I
                     homeVip.setImageBitmap(BitmapFactory.decodeResource(resources,R.drawable.vip));
                 }
             }
+
         }
         if (listwx!=null) {
+            list.removeAll(list);
             for (int i = 0; i < listwx.size(); i++) {
                 RetrofitUtil.getInstance().getRoundphoto(listwx.get(i).getHeadPic(), homeHeadpic);
                 homeName.setText(listwx.get(i).getNickName());

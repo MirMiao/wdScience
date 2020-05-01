@@ -93,11 +93,11 @@ public class WXEntryActivity  extends AppCompatActivity implements IWXAPIEventHa
                              SpUtil.saveString("sesseion", sessionId);
                              List<WxloginBean.ResultBean> list = new ArrayList<>();
                              list.add(result);
-                             SharedPreferences sp = getSharedPreferences("wxuser", MODE_PRIVATE);
+                             SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
                              SharedPreferences.Editor edit = sp.edit();
                              Gson gson = new Gson();
                              String s = gson.toJson(list);
-                             edit.putString("wxuserInfo", s).commit();
+                             edit.putString("userInfo", s).commit();
                              Intent  intent = new Intent(WXEntryActivity.this, MainActivity.class);
                              startActivity(intent);
 

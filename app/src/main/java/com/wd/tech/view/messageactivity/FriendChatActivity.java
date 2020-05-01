@@ -1,7 +1,15 @@
 package com.wd.tech.view.messageactivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -92,9 +100,38 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
             }
         });
     }
-
     @Override
     protected void initView() {
+        friendContent.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(friendContent.getText())){
+                    btnSend.setEnabled(true);//启用按钮
+                    Resources resources = getResources();
+                    Drawable drawable = resources.getDrawable(R.drawable.shapeb);
+                    btnSend.setTextColor(Color.WHITE);
+                    btnSend.setBackground(drawable);
+                }
+                else {
+                    btnSend.setEnabled(false);//不启用按钮
+                    Resources resources = getResources();
+                    Drawable drawable = resources.getDrawable(R.drawable.shapesend);
+                    btnSend.setTextColor(Color.parseColor("#C1C1C1"));
+                    btnSend.setBackground(drawable);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
     }
 
@@ -115,17 +152,19 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
                 break;
             case R.id.btn_send:
                 String infrommain = friendContent.getText().toString().trim();
-                try {
-                    //加密好友发送的信息
-                    String content = RsaCoder.encryptByPublicKey(infrommain);
-                    presenter.getSendMessageBeandata(userId, content);
-                    EventMeassage eventMeassage = new EventMeassage();
-                    eventMeassage.headpic = headPic1;
-                    eventMeassage.content = content;
-                    eventMeassage.name = nickName;
-                    EventBus.getDefault().postSticky(eventMeassage);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if(!TextUtils.isEmpty(friendContent.getText())){
+                    try {
+                        //加密好友发送的信息
+                        String content = RsaCoder.encryptByPublicKey(infrommain);
+                        presenter.getSendMessageBeandata(userId, content);
+                        EventMeassage eventMeassage = new EventMeassage();
+                        eventMeassage.headpic = headPic1;
+                        eventMeassage.content = content;
+                        eventMeassage.name = nickName;
+                        EventBus.getDefault().postSticky(eventMeassage);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
         }
@@ -159,10 +198,4 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

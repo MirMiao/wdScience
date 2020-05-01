@@ -73,32 +73,35 @@ public class Wxutil {
 
     //朋友圈
     public  static void   setfriend(String text, Bundle bundle){
-        // 初始化一个 WXTextObject 对象
-        WXTextObject textObj = new WXTextObject();
-        textObj.text = text;
+        if (isWeixinInstalled()) {
+            // 初始化一个 WXTextObject 对象
+            WXTextObject textObj = new WXTextObject();
+            textObj.text = text;
 
 // 用 WXTextObject 对象初始化一个 WXMediaMessage 对象
-        WXMediaMessage msg = new WXMediaMessage(textObj);
-        msg.description = text;
+            WXMediaMessage msg = new WXMediaMessage(textObj);
+            msg.description = text;
 
 // 构造一个Resp
-        GetMessageFromWX.Resp resp = new GetMessageFromWX.Resp();
+            GetMessageFromWX.Resp resp = new GetMessageFromWX.Resp();
 // 将req的transaction设置到resp对象中，其中bundle为微信传递过来的Intent所带的内容，通过getExtras()方法获取
-        resp.transaction = new GetMessageFromWX.Req(bundle).transaction;
-        resp.message = msg;
+            resp.transaction = new GetMessageFromWX.Req(bundle).transaction;
+            resp.message = msg;
 
 //调用api接口，发送数据到微信
-        api. sendResp (resp) ;
+            api.sendResp(resp);
 
-
+        }
     }
 
     public  static  void  add(){
-        // send oauth request
-        SendAuth.Req req = new SendAuth.Req();
-        req.scope = "snsapi_userinfo";
-        req.state = "wechat_sdk_demo_test";
-        api.sendReq(req);
+        if (isWeixinInstalled()) {
+            // send oauth request
+            SendAuth.Req req = new SendAuth.Req();
+            req.scope = "snsapi_userinfo";
+            req.state = "wechat_sdk_demo_test";
+            api.sendReq(req);
+        }
     }
 
 //判断是否安装微信

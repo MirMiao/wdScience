@@ -68,6 +68,10 @@
             android:textSize="12sp"
             android:layout_weight="1"
             android:id="@+id/crowd_content"
+            android:background="@drawable/shape"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:maxLines="1"
             ></EditText>
         <TextView
             android:layout_width="wrap_content"
@@ -76,6 +80,10 @@
             android:gravity="center"
             android:textSize="24sp"
             android:id="@+id/btn_send"
+            android:textColor="#C1C1C1"
+            android:enabled="false"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/shapesend"
             ></TextView>
     </LinearLayout>
 </LinearLayout>
