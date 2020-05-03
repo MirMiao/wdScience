@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,8 +54,6 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
     TextView btnSend;
     @BindView(R.id.friend_name)
     TextView friendName;
-    @BindView(R.id.refresh)
-    SmartRefreshLayout refresh;
     private int userId;
     private String nickName;
     private MyFriendChatDialogueRecordadapter myFriendChatDialogueRecordadapter;
@@ -83,32 +82,18 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
         remark1 = getIntent().getStringExtra("remark1");
         headPic = getIntent().getStringExtra("headPic");
         signature = getIntent().getStringExtra("signature");
-        friendName.setText(userName1);
+        friendName.setText(nickName);
         presenter.getFriendChatDialogueRecordBeandata(userId, 1, count);
-        refresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                count++;
-                presenter.getFriendChatDialogueRecordBeandata(userId, 1, count);
-                myFriendChatDialogueRecordadapter.loadmore(FriendChatDialogueRecordresult);
-                refresh.finishLoadMore();
-            }
 
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
-            }
-        });
     }
     @Override
     protected void initView() {
         friendContent.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
+              //EditText监听 如果为空 发送不可用 不可发送空格信息
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(friendContent.getText())){
@@ -181,7 +166,11 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
             }
             myFriendChatDialogueRecordadapter = new MyFriendChatDialogueRecordadapter(FriendChatDialogueRecordresult, this);
             friendchatRecyclerView.setAdapter(myFriendChatDialogueRecordadapter);
-            friendchatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            LinearLayoutManager layout=new LinearLayoutManager(this);
+            layout.setStackFromEnd(true);//列表再底部开始展示，反转后由上面开始展示
+            layout.setReverseLayout(true);//列表翻转
+            friendchatRecyclerView.setLayoutManager(layout);
+
         }
         if (o instanceof SendMessageBean) {
             if (((SendMessageBean) o).getStatus().equals("0000")) {

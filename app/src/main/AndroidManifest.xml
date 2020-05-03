@@ -22,7 +22,9 @@
         <activity android:name=".view.messageactivity.FriendchatRecordActivity" />
         <activity android:name=".view.messageactivity.SelectGroupingActivity" />
         <activity android:name=".view.messageactivity.CrowdHomePageActivity" />
-        <activity android:name=".view.messageactivity.CrowdChatActivity" />
+        <activity android:name=".view.messageactivity.CrowdChatActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            />
         <activity android:name=".view.messageactivity.SreachActivity" />
         <activity android:name=".view.messageactivity.AddFriendActivity" />
         <activity android:name=".view.messageactivity.AddCrowdActivity" />
@@ -34,9 +36,9 @@
         <activity android:name=".view.messageactivity.CrowdMemberActivity" />
         <activity android:name=".view.messageactivity.ChatSettingActivity" />
         <activity android:name=".view.messageactivity.FriendChatActivity"
-        android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-        android:configChanges="keyboardHidden|orientation|screenSize"
-        />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            >
+        </activity>
         <activity android:name=".view.messageactivity.ApplyAddCrowdActivity" />
         <activity android:name=".view.messageactivity.FriendInformActivity" />
         <activity android:name=".view.messageactivity.FriendMessageActivity" />

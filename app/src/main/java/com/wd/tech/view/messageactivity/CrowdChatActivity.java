@@ -48,8 +48,6 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
     TextView btnSend;
     @BindView(R.id.crowdchat_RecyclerView)
     RecyclerView crowdchatRecyclerView;
-    @BindView(R.id.refresh)
-    SmartRefreshLayout refresh;
     @BindView(R.id.groupname)
     TextView groupname;
     private MyCrowdChatContentadapter myCrowdChatContentadapter;
@@ -77,20 +75,6 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
         crowdhead = getIntent().getStringExtra("crowdhead");
         groupname.setText(groupname2);
         presenter.getCrowdChatContentBeandata(groupIdcc, 1, count);
-        refresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                count++;
-                presenter.getCrowdChatContentBeandata(groupIdcc, 1, count);
-                myCrowdChatContentadapter.loadmore(result);
-                refresh.finishLoadMore();
-            }
-
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
-            }
-        });
     }
 
     @Override
@@ -136,10 +120,12 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
     public void success(Object o) {
         if (o instanceof CrowdChatContentBean) {
             result = ((CrowdChatContentBean) o).getResult();
-
             myCrowdChatContentadapter = new MyCrowdChatContentadapter(result, this);
             crowdchatRecyclerView.setAdapter(myCrowdChatContentadapter);
-            crowdchatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            LinearLayoutManager layout=new LinearLayoutManager(this);
+            layout.setStackFromEnd(true);//列表再底部开始展示，反转后由上面开始展示
+            layout.setReverseLayout(true);//列表翻转
+            crowdchatRecyclerView.setLayoutManager(layout);
         }
         if (o instanceof SendCrowdMessageBean) {
             if (((SendCrowdMessageBean) o).getStatus().equals("0000")) {
