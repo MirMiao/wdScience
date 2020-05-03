@@ -92,7 +92,6 @@ public class PlateInformationActivity extends BaseActivity<Presenter> implements
             infoRecommendListAdapter.setOnItemClickListener(new InfoRecommendListAdapter.OnItemClickListener() {
                 @Override
                 public void onClick(int getInformationId) {
-                    //
                     Intent intent = new Intent(PlateInformationActivity.this, InformationInfoActivity.class);
                     intent.putExtra("id",getInformationId);
                     startActivity(intent);

@@ -42,6 +42,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -127,20 +128,19 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
                     tvXbannerHint.setText(result.get(position).getTitle());
                 }
             });
-
         } else if (o instanceof InfoRecommendListEntity) {
             InfoRecommendListEntity o1 = (InfoRecommendListEntity) o;
             list.addAll(o1.getResult());
             InfoRecommendListAdapter infoRecommendListAdapter = new InfoRecommendListAdapter(getContext(), list);
             rvInformation.setAdapter(infoRecommendListAdapter);
-            infoRecommendListAdapter.setOnItemClickListener(new InfoRecommendListAdapter.OnItemClickListener() {
-                @Override
-                public void onClick(int getInformationId) {
-                    Intent intent = new Intent(getContext(), InformationInfoActivity.class);
-                    intent.putExtra("id",getInformationId);
-                    startActivity(intent);
-                }
-            });
+             infoRecommendListAdapter.setOnItemClickListener(new InfoRecommendListAdapter.OnItemClickListener() {
+                 @Override
+                 public void onClick(int getInformationId) {
+                     Intent intent = new Intent(getContext(), InformationInfoActivity.class);
+                     intent.putExtra("id",getInformationId);
+                     startActivity(intent);
+                 }
+             });
         }
     }
 

@@ -83,6 +83,7 @@ public interface IContract {
         void getInformationInfo(int id,ModelCallBack modelCallBack); //资讯详情
         void getAllPingLun(int infoId,int page,int count,ModelCallBack modelCallBack); //查询资讯所有评论
         void addInforComment(int userId,String sessionid,String content,int infoId,ModelCallBack modelCallBack);//添加资讯评论
+        void infoPayByIntegral(int userId,String sessionId,int infoId,int integralCost,ModelCallBack modelCallBack); //积分兑换
 
 
 
@@ -159,6 +160,7 @@ public interface IContract {
         void getInformationInfo(int id); //资讯详情
         void getAllPingLun(int infoId,int page,int count); //查询资讯所有评论
         void addInforComment(int userId,String sessionid,String content,int infoId);//添加资讯评论
+        void infoPayByIntegral(int userId,String sessionId,int infoId,int integralCost); //积分兑换
     }
     interface IView extends IBaseView {
         void success(Object o);

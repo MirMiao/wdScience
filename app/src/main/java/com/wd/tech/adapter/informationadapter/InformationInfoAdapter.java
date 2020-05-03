@@ -86,15 +86,14 @@ public class InformationInfoAdapter extends RecyclerView.Adapter<InformationInfo
         Glide.with(context)
                 .load(result.getThumbnail())
                 .into(holder.tvImage);
-
-        //   holder.webContent.getSettings().setTextSize(WebSettings.TextSize.LARGER);
-
-        //  holder.webContent.setInitialScale(50);//这里一定要设复置，数值可以根据各人的需求而定，我制这里设置的是50%的缩放
-        // holder.webContent.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        //  holder.webContent.getSettings().setBuiltInZoomControls(true);// support zoom
-        //holder.webContent.getSettings().setUseWideViewPort(true);// 这个很关zd键
-        // holder.webContent.getSettings().setLoadWithOverviewMode(true);
-
+        if (infoPayByIntegralCallBack != null) {
+            holder.btShangweigoumai.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    infoPayByIntegralCallBack.getInfoId(result.getId());
+                }
+            });
+        }
 
     }
 
@@ -124,4 +123,13 @@ public class InformationInfoAdapter extends RecyclerView.Adapter<InformationInfo
             ButterKnife.bind(this, itemView);
         }
     }
+    private InfoPayByIntegralCallBack infoPayByIntegralCallBack;
+
+    public void setInfoPayByIntegralCallBack(InfoPayByIntegralCallBack infoPayByIntegralCallBack) {
+        this.infoPayByIntegralCallBack = infoPayByIntegralCallBack;
+    }
+
+    public interface InfoPayByIntegralCallBack{
+        void getInfoId(int id);
+  }
 }

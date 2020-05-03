@@ -45,11 +45,11 @@
               android:id="@+id/iv_shangweigoumai"
               android:layout_marginTop="@dimen/dp_10"
               android:visibility="gone"
+              android:layout_gravity="center"
               android:src="@drawable/shangweigoumai"
               android:layout_height="@dimen/dp_70"/>
           <Button
               android:layout_width="@dimen/dp_250"
-              android:layout_centerHorizontal="true"
               android:background="@drawable/nobuy_shape"
               android:text="尚未购买，付费再来阅读吧"
               android:layout_marginTop="@dimen/dp_10"
@@ -57,7 +57,7 @@
               android:textSize="@dimen/sp_16"
               android:textColor="#ffffff"
               android:id="@+id/bt_shangweigoumai"
-             android:layout_gravity="center_horizontal"
+             android:layout_gravity="center"
               android:layout_height="@dimen/dp_40"/>
 
 </LinearLayout>

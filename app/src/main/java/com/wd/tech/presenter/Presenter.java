@@ -907,6 +907,21 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
              }
          });
     }
+    //积分兑换
+    @Override
+    public void infoPayByIntegral(int userId, String sessionId, int infoId, int integralCost) {
+        model.infoPayByIntegral(userId, sessionId, infoId, integralCost, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
 
     @Override
     public void getUserSign() {

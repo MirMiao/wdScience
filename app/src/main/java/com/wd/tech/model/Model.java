@@ -18,6 +18,7 @@ import com.wd.tech.bean.informationentity.AddInfoCommentEntity;
 import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.FindAllPingLunEntity;
+import com.wd.tech.bean.informationentity.InfoPayByIntegralEntity;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 import com.wd.tech.bean.informationentity.InformationInfosEntity;
 import com.wd.tech.bean.informationentity.LoginEntity;
@@ -816,7 +817,8 @@ public class Model implements IContract.IModel {
 
     @Override
     public void getBannerData(ModelCallBack modelCallBack) {
-                apiService.getBannerData()
+                RetrofitUtil2.getInstance().creatService(ApiService.class)
+                        .getBannerData()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<BannerEntity>() {
@@ -834,7 +836,8 @@ public class Model implements IContract.IModel {
     //展示首页数据列表
     @Override
     public void getInfoRecommendListData(int plateId, int page, int count, ModelCallBack modelCallBack) {
-           apiService.getInfoRecommendListData(plateId,page,count)
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+                .getInfoRecommendListData(plateId,page,count)
                    .subscribeOn(Schedulers.io())
                    .observeOn(AndroidSchedulers.mainThread())
                    .subscribe(new Consumer<InfoRecommendListEntity>() {
@@ -852,7 +855,8 @@ public class Model implements IContract.IModel {
 
     @Override
     public void getPlateData(ModelCallBack modelCallBack) {
-          apiService.getAllPlate()
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+                .getAllPlate()
                   .subscribeOn(Schedulers.io())
                   .observeOn(AndroidSchedulers.mainThread())
                   .subscribe(new Consumer<FindAllInfoPlate>() {
@@ -870,7 +874,8 @@ public class Model implements IContract.IModel {
 
     @Override
     public void serchByKeyWord(String title, int page, int count, ModelCallBack modelCallBack) {
-        apiService.serchByKeyWord(title,page,count)
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+                .serchByKeyWord(title,page,count)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<SerchInfoByKeyWordEntity>() {
@@ -928,7 +933,8 @@ public class Model implements IContract.IModel {
 
     @Override
     public void login(String phone, String pwd, ModelCallBack modelCallBack) {
-        apiService.login(phone,pwd)
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+                .login(phone,pwd)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<LoginEntity>() {
@@ -946,7 +952,8 @@ public class Model implements IContract.IModel {
 
     @Override
     public void reg(String nickName, String phone, String pwd, ModelCallBack modelCallBack) {
-        apiService.reg(nickName,phone,pwd)
+        RetrofitUtil2.getInstance().creatService(ApiService.class)
+                .reg(nickName,phone,pwd)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<RegEntity>() {
@@ -1148,6 +1155,27 @@ public class Model implements IContract.IModel {
                      }
                  });
     }
+      //积分兑换
+    @Override
+    public void infoPayByIntegral(int userId, String sessionId, int infoId, int integralCost, ModelCallBack modelCallBack) {
+            RetrofitUtil2.getInstance().creatService(ApiService.class)
+                    .infoPayByIntegral(userId,sessionId,infoId,integralCost)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<InfoPayByIntegralEntity>() {
+                        @Override
+                        public void accept(InfoPayByIntegralEntity infoPayByIntegralEntity) throws Exception {
+                            modelCallBack.success(infoPayByIntegralEntity);
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            modelCallBack.failur(throwable);
+                        }
+                    });
+    }
+
+
     //查询用户任务列表
     @Override
     public void getUserTask(ModelCallBack modelCallBack) {

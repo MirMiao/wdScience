@@ -2,13 +2,20 @@ package com.wd.tech.view.information;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,11 +32,13 @@ import com.wd.tech.adapter.informationadapter.TuiJianAdapter;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.informationentity.AddInfoCommentEntity;
 import com.wd.tech.bean.informationentity.FindAllPingLunEntity;
+import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 import com.wd.tech.bean.informationentity.InformationInfosEntity;
 import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -96,8 +105,8 @@ public class InformationInfoActivity extends BaseActivity<Presenter> implements 
                     Toast.makeText(InformationInfoActivity.this, "评论内容不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (list != null) {
-                    presenter.addInforComment(list.get(0).getUserId(),list.get(0).getSessionId(),tv_pinglun, id);
+                if (InformationInfoActivity.this.list != null) {
+                    presenter.addInforComment(InformationInfoActivity.this.list.get(0).getUserId(), InformationInfoActivity.this.list.get(0).getSessionId(),tv_pinglun, id);
                 }else{
                     Toast.makeText(InformationInfoActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(InformationInfoActivity.this, LoginActivity.class);
@@ -157,6 +166,66 @@ public class InformationInfoActivity extends BaseActivity<Presenter> implements 
             if (((InformationInfosEntity) o).getResult() != null) {
                 InformationInfoAdapter informationInfoAdapter = new InformationInfoAdapter(InformationInfoActivity.this, ((InformationInfosEntity) o).getResult());
                 rvInformationInfo.setAdapter(informationInfoAdapter);
+                informationInfoAdapter.setInfoPayByIntegralCallBack(new InformationInfoAdapter.InfoPayByIntegralCallBack() {
+                    @Override
+                    public void getInfoId(int id) {
+                         //点击弹出一个puwindow
+                        View inflate = LayoutInflater.from(InformationInfoActivity.this).inflate(R.layout.pouwindow_layout, null);
+
+                        PopupWindow popupWindow = new PopupWindow(inflate, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        //popupWindow.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.c_6000000000)));
+                        popupWindow.setFocusable(true);// 取得焦点
+
+                        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+                        popupWindow.setOutsideTouchable(true);
+                        popupWindow.setAnimationStyle(R.style.PopAnimation);
+                        popupWindow.setTouchable(true);
+
+                        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                            @Override
+                            public void onDismiss() {
+                                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                                lp.alpha=1.0f;
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                getWindow().setAttributes(lp);
+                            }
+                        });
+                        popupWindow.showAtLocation(inflate, Gravity.BOTTOM, 0, 0);
+                        WindowManager.LayoutParams lp = getWindow().getAttributes();
+                        lp.alpha=0.3f;
+                        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                        getWindow().setAttributes(lp);
+
+                        TextView tv_duihuan = inflate.findViewById(R.id.tv_duihuan);
+                        TextView tv_kaitong = inflate.findViewById(R.id.tv_kaitong);
+                        ImageView iv_quxiao = inflate.findViewById(R.id.iv_quxiao);
+                        iv_quxiao.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                popupWindow.dismiss();
+                            }
+                        });
+                        tv_duihuan.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //跳转到兑换的页面
+                                Intent intent = new Intent(InformationInfoActivity.this, RedeemNowActivity.class);
+                                intent.putExtra("id",id);
+                                startActivity(intent);
+                            }
+                        });
+                        tv_kaitong.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(InformationInfoActivity.this, "开通", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+                    }
+                });
+
+
                 List<InformationInfosEntity.ResultBean.PlateBean> plate = ((InformationInfosEntity) o).getResult().getPlate();
                 if (plate != null) {
                     flowView.addTextView(plate);
