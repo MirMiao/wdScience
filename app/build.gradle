@@ -4,13 +4,13 @@ android {
     signingConfigs {
 
     debug {
-        storeFile file('E:\\wdScience\\app\\tech.keystore')
+        storeFile file('tech.keystore')
         storePassword '123456'
         keyAlias = 'tech'
         keyPassword '123456'
     }
         release {
-            storeFile file('E:\\wdScience\\app\\tech.keystore')
+            storeFile file('tech.keystore')
             storePassword '123456'
             keyAlias = 'tech'
             keyPassword '123456'
