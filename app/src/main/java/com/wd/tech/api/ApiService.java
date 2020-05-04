@@ -63,7 +63,6 @@ import com.wd.tech.bean.beancommunity.ReleasepostData;
 import java.io.File;
 import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
-import com.wd.tech.bean.messagebean.WxloginBean;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -308,10 +307,4 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("information/verify/v1/addInfoComment")
     Observable<AddInfoCommentEntity> addinfoComment(@Header("userId") int userid, @Header("sessionId")String sessionId,@Field("content") String content,@Field("infoId") int infoId);
-
-    //微信登录
-    @FormUrlEncoded
-    @POST(Api.WXlogin_url)
-    Observable<WxloginBean> getWxloginBeandata(@Field("code") String code);
-
 }

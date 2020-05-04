@@ -3,10 +3,6 @@ package com.wd.tech;
 import android.app.Application;
 import android.content.Context;
 
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.Logger;
-import com.wd.tech.wxapi.Wxutil;
-
 /**
  * @author 吴健
  * Class :1708A
@@ -21,7 +17,5 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         context=this;
-        Wxutil.regToWx(this);
-        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 }

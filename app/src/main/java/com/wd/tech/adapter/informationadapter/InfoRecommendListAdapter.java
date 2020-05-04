@@ -106,8 +106,8 @@ public class InfoRecommendListAdapter extends RecyclerView.Adapter<InfoRecommend
     public interface OnItemClickListener {
         void onClick(int getInformationId);
     }
+
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
-
 }
