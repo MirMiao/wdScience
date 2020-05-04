@@ -98,7 +98,7 @@ public class CrowdManageActivity extends BaseActivity<Presenter> implements ICon
                         .setHeight(150);
                 rightMenu.addMenuItem(modifyItem);
             }
-            if (crowdgroupallusermessageresult.get(viewType).getRole()!=3) {
+            if (crowdgroupallusermessageresult.get(viewType).getRole()==2) {
                 // 2 删除
                 SwipeMenuItem deleteItem = new SwipeMenuItem(CrowdManageActivity.this);
                 deleteItem.setText("移除")
@@ -126,7 +126,7 @@ public class CrowdManageActivity extends BaseActivity<Presenter> implements ICon
                         .setHeight(150);
                 rightMenu.addMenuItem(shezhiItem);
             }
-            if (crowdgroupallusermessageresult.get(viewType).getRole()!=3) {
+            if (crowdgroupallusermessageresult.get(viewType).getRole()==1) {
                 // 2 删除
                 SwipeMenuItem deleteItem = new SwipeMenuItem(CrowdManageActivity.this);
                 deleteItem.setText("移除")

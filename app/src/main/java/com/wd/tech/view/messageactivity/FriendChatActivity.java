@@ -1,9 +1,18 @@
 package com.wd.tech.view.messageactivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,8 +54,6 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
     TextView btnSend;
     @BindView(R.id.friend_name)
     TextView friendName;
-    @BindView(R.id.refresh)
-    SmartRefreshLayout refresh;
     private int userId;
     private String nickName;
     private MyFriendChatDialogueRecordadapter myFriendChatDialogueRecordadapter;
@@ -75,26 +82,41 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
         remark1 = getIntent().getStringExtra("remark1");
         headPic = getIntent().getStringExtra("headPic");
         signature = getIntent().getStringExtra("signature");
-        friendName.setText(userName1);
+        friendName.setText(nickName);
         presenter.getFriendChatDialogueRecordBeandata(userId, 1, count);
-        refresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+
+    }
+    @Override
+    protected void initView() {
+        friendContent.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                count++;
-                presenter.getFriendChatDialogueRecordBeandata(userId, 1, count);
-                myFriendChatDialogueRecordadapter.loadmore(FriendChatDialogueRecordresult);
-                refresh.finishLoadMore();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+              //EditText监听 如果为空 发送不可用 不可发送空格信息
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(friendContent.getText())){
+                    btnSend.setEnabled(true);//启用按钮
+                    Resources resources = getResources();
+                    Drawable drawable = resources.getDrawable(R.drawable.shapeb);
+                    btnSend.setTextColor(Color.WHITE);
+                    btnSend.setBackground(drawable);
+                }
+                else {
+                    btnSend.setEnabled(false);//不启用按钮
+                    Resources resources = getResources();
+                    Drawable drawable = resources.getDrawable(R.drawable.shapesend);
+                    btnSend.setTextColor(Color.parseColor("#C1C1C1"));
+                    btnSend.setBackground(drawable);
+                }
             }
 
             @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+            public void afterTextChanged(Editable s) {
 
             }
         });
-    }
-
-    @Override
-    protected void initView() {
 
     }
 
@@ -115,17 +137,19 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
                 break;
             case R.id.btn_send:
                 String infrommain = friendContent.getText().toString().trim();
-                try {
-                    //加密好友发送的信息
-                    String content = RsaCoder.encryptByPublicKey(infrommain);
-                    presenter.getSendMessageBeandata(userId, content);
-                    EventMeassage eventMeassage = new EventMeassage();
-                    eventMeassage.headpic = headPic1;
-                    eventMeassage.content = content;
-                    eventMeassage.name = nickName;
-                    EventBus.getDefault().postSticky(eventMeassage);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if(!TextUtils.isEmpty(friendContent.getText())){
+                    try {
+                        //加密好友发送的信息
+                        String content = RsaCoder.encryptByPublicKey(infrommain);
+                        presenter.getSendMessageBeandata(userId, content);
+                        EventMeassage eventMeassage = new EventMeassage();
+                        eventMeassage.headpic = headPic1;
+                        eventMeassage.content = content;
+                        eventMeassage.name = nickName;
+                        EventBus.getDefault().postSticky(eventMeassage);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
         }
@@ -142,7 +166,11 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
             }
             myFriendChatDialogueRecordadapter = new MyFriendChatDialogueRecordadapter(FriendChatDialogueRecordresult, this);
             friendchatRecyclerView.setAdapter(myFriendChatDialogueRecordadapter);
-            friendchatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            LinearLayoutManager layout=new LinearLayoutManager(this);
+            layout.setStackFromEnd(true);//列表再底部开始展示，反转后由上面开始展示
+            layout.setReverseLayout(true);//列表翻转
+            friendchatRecyclerView.setLayoutManager(layout);
+
         }
         if (o instanceof SendMessageBean) {
             if (((SendMessageBean) o).getStatus().equals("0000")) {
@@ -159,10 +187,4 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

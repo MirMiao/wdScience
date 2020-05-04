@@ -1,5 +1,6 @@
 package com.wd.tech.util;
 
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -8,6 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.orhanobut.logger.Logger;
 import com.wd.tech.App;
 import com.wd.tech.R;
 import com.wd.tech.api.Api;
@@ -39,11 +41,22 @@ public class RetrofitUtil {
     private Retrofit retrofit;
 
     private RetrofitUtil() {
-
+        HttpLoggingInterceptor httpLoggingInterceptor=new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(@NotNull String s) {
+                if(!TextUtils.isEmpty(s)){
+                    Logger.json(s);
+                }
+                else {
+                    Logger.d(s);
+                }
+            }
+        });
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(5, TimeUnit.SECONDS)
                 .writeTimeout(5, TimeUnit.SECONDS)
                 .readTimeout(5, TimeUnit.SECONDS)
+                .addInterceptor(httpLoggingInterceptor)
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .addInterceptor(new Interceptor() {
                     @NotNull
@@ -53,6 +66,8 @@ public class RetrofitUtil {
                      Request.Builder builder = request.newBuilder();
                         int userid = SpUtil.getInt("userid");
                         String sesseion = SpUtil.getString("sesseion");
+                        builder.addHeader("ak","0110010010000");
+                        builder.addHeader("Content-Type","application/x-www-form-urlencoded");
                         builder.addHeader("userId",userid+"");
                         builder.addHeader("sessionId",sesseion);
                      Request newrequest=builder.build();

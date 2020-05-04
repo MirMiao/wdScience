@@ -1,6 +1,12 @@
 package com.wd.tech.view.messageactivity;
 
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -42,8 +48,6 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
     TextView btnSend;
     @BindView(R.id.crowdchat_RecyclerView)
     RecyclerView crowdchatRecyclerView;
-    @BindView(R.id.refresh)
-    SmartRefreshLayout refresh;
     @BindView(R.id.groupname)
     TextView groupname;
     private MyCrowdChatContentadapter myCrowdChatContentadapter;
@@ -71,24 +75,40 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
         crowdhead = getIntent().getStringExtra("crowdhead");
         groupname.setText(groupname2);
         presenter.getCrowdChatContentBeandata(groupIdcc, 1, count);
-        refresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                count++;
-                presenter.getCrowdChatContentBeandata(groupIdcc, 1, count);
-                myCrowdChatContentadapter.loadmore(result);
-                refresh.finishLoadMore();
-            }
-
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
-            }
-        });
     }
 
     @Override
     protected void initView() {
+        crowdContent.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(crowdContent.getText())){
+                    btnSend.setEnabled(true);//启用按钮
+                    Resources resources = getResources();
+                    Drawable drawable = resources.getDrawable(R.drawable.shapeb);
+                    btnSend.setTextColor(Color.WHITE);
+                    btnSend.setBackground(drawable);
+                }
+                else {
+                    btnSend.setEnabled(false);//不启用按钮
+                    Resources resources = getResources();
+                    Drawable drawable = resources.getDrawable(R.drawable.shapesend);
+                    btnSend.setTextColor(Color.parseColor("#C1C1C1"));
+                    btnSend.setBackground(drawable);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
     }
 
@@ -100,10 +120,12 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
     public void success(Object o) {
         if (o instanceof CrowdChatContentBean) {
             result = ((CrowdChatContentBean) o).getResult();
-
             myCrowdChatContentadapter = new MyCrowdChatContentadapter(result, this);
             crowdchatRecyclerView.setAdapter(myCrowdChatContentadapter);
-            crowdchatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            LinearLayoutManager layout=new LinearLayoutManager(this);
+            layout.setStackFromEnd(true);//列表再底部开始展示，反转后由上面开始展示
+            layout.setReverseLayout(true);//列表翻转
+            crowdchatRecyclerView.setLayoutManager(layout);
         }
         if (o instanceof SendCrowdMessageBean) {
             if (((SendCrowdMessageBean) o).getStatus().equals("0000")) {
@@ -124,6 +146,7 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
         switch (view.getId()) {
             case R.id.btn_send:
                 String infrommain = crowdContent.getText().toString().trim();
+                if(!TextUtils.isEmpty(crowdContent.getText())) {
                     try {
                         //加密好友发送的信息
                         String content = RsaCoder.encryptByPublicKey(infrommain);
@@ -132,13 +155,14 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
                             EventMeassage eventMeassage = new EventMeassage();
                             eventMeassage.headpic = crowdhead;
                             eventMeassage.content = infrommain;
-                            eventMeassage.name=groupname2;
+                            eventMeassage.name = groupname2;
                             EventBus.getDefault().postSticky(eventMeassage);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                break;
+                    break;
+                }
         }
     }
 
