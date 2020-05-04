@@ -1,6 +1,21 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife' // butterkinf
 android {
+    signingConfigs {
+
+    debug {
+        storeFile file('tech.keystore')
+        storePassword '123456'
+        keyAlias = 'tech'
+        keyPassword '123456'
+    }
+        release {
+            storeFile file('tech.keystore')
+            storePassword '123456'
+            keyAlias = 'tech'
+            keyPassword '123456'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
@@ -27,6 +42,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+        }
+        debug {
+
+        signingConfig signingConfigs.release
         }
 
     }
@@ -80,5 +101,9 @@ dependencies {
 
     implementation 'cn.jiguang.sdk:jpush:3.6.0'  // 此处以JPush 3.6.0 版本为例。
     implementation 'cn.jiguang.sdk:jcore:2.3.4'  // 此处以JCore 2.3.4 版本为例。
+
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'//微信登录
+//logger
+    implementation 'com.orhanobut:logger:2.2.0'
 
 }

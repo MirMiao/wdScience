@@ -54,8 +54,6 @@ public interface IContract {
       void  getApplyAddCrowdBeandata(int groupId,String remark,ModelCallBack modelCallBack);//申请进群
       void  getAnviteAddCrowdBeandata(int groupId,int receiverUid,ModelCallBack modelCallBack);//邀请加群
       void  getBatchAnviteAddCrowdBeandata(int groupId,String receiverUids,ModelCallBack modelCallBack);//批量邀请加群
-
-
         //社区
         void  getCommunitydata(int page,int count,ModelCallBack modelCallBack);//社区列表
         void  getCommentary(int communityId,int page,int count,ModelCallBack modelCallBack);//社区用户评论
@@ -155,7 +153,6 @@ public interface IContract {
         void getSetUp();//设置页面（根据用户ID查询用户信息）
         void getUserTask();////查询用户任务列表
         void getUserSign();//签到
-
         void addGreatRecor(int userId,String sessionId,int infoId);//点赞
         void getInformationInfo(int id); //资讯详情
         void getAllPingLun(int infoId,int page,int count); //查询资讯所有评论
