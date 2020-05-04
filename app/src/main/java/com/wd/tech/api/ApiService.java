@@ -12,6 +12,7 @@ import com.wd.tech.bean.informationentity.AddGreatRecordEntity;
 import com.wd.tech.bean.informationentity.AddInfoCommentEntity;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.FindAllPingLunEntity;
+import com.wd.tech.bean.informationentity.InfoPayByIntegralEntity;
 import com.wd.tech.bean.informationentity.InformationInfosEntity;
 import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.bean.informationentity.RegEntity;
@@ -63,6 +64,7 @@ import com.wd.tech.bean.beancommunity.ReleasepostData;
 import java.io.File;
 import com.wd.tech.bean.informationentity.BannerEntity;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
+import com.wd.tech.bean.messagebean.WxloginBean;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -290,6 +292,11 @@ public interface ApiService {
     @FormUrlEncoded
     Observable<MyUserSignData> getUserSign();
 
+    @FormUrlEncoded
+    @POST("information/verify/v1/infoPayByIntegral")
+    Observable<InfoPayByIntegralEntity> infoPayByIntegral(@Header("userId") int userid, @Header("sessionId")String sessionId, @Field("infoId") int infoId, @Field("integralCost")int integralCost);
+
+
     //点赞
     @FormUrlEncoded
     @POST("information/verify/v1/addGreatRecord")
@@ -307,4 +314,10 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("information/verify/v1/addInfoComment")
     Observable<AddInfoCommentEntity> addinfoComment(@Header("userId") int userid, @Header("sessionId")String sessionId,@Field("content") String content,@Field("infoId") int infoId);
+
+    //微信登录
+    @FormUrlEncoded
+    @POST(Api.WXlogin_url)
+    Observable<WxloginBean> getWxloginBeandata(@Field("code") String code);
+
 }

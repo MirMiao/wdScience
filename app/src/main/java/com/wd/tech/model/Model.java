@@ -62,9 +62,7 @@ import com.wd.tech.bean.messagebean.UserAllGroupingBean;
 import com.wd.tech.bean.messagebean.UserExisisCrowdBean;
 import com.wd.tech.bean.messagebean.UserFriendInfromRecordBean;
 import com.wd.tech.bean.messagebean.UserFriendListBean;
-import com.wd.tech.bean.beancommunity.CommentaryData;
-import com.wd.tech.bean.beancommunity.CommunityData;
-import com.wd.tech.bean.informationentity.BannerEntity;
+import com.wd.tech.bean.messagebean.WxloginBean;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.util.RetrofitUtil2;
@@ -775,6 +773,7 @@ public class Model implements IContract.IModel {
 
 
 }
+
 
     //社区列表
     @Override
