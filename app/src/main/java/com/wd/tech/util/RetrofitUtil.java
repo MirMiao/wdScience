@@ -10,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import com.orhanobut.logger.Logger;
 import com.wd.tech.App;
 import com.wd.tech.R;
 import com.wd.tech.api.Api;

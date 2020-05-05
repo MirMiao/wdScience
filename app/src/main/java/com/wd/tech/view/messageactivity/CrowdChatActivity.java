@@ -4,6 +4,8 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -62,7 +64,20 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
     protected Presenter initPresenter() {
         return new Presenter();
     }
-
+    //在handler中接收Message
+    Handler handler=new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+        }
+    };
+    //创建一个线程，通过线程发送延迟消息，实现三秒刷新数据的效果
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            SendRequestWithOkhttp();       //发送请求
+            handler.postDelayed(this, 1000);//延迟发送消息，实现3秒一次发送数据
+        }
+    };
     @Override
     protected int bindLayoutId() {
         return R.layout.activity_crowd_chat;
@@ -74,9 +89,23 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
         groupname2 = getIntent().getStringExtra("groupname");
         crowdhead = getIntent().getStringExtra("crowdhead");
         groupname.setText(groupname2);
-        presenter.getCrowdChatContentBeandata(groupIdcc, 1, count);
-    }
 
+    }
+    //定义一个发送json请求数据的代码
+    public void SendRequestWithOkhttp() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Message message = handler.obtainMessage();
+                    handler.sendMessage(message);
+                    presenter.getCrowdChatContentBeandata(groupIdcc, 1, count);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
     @Override
     protected void initView() {
         crowdContent.addTextChangedListener(new TextWatcher() {
@@ -114,6 +143,7 @@ public class CrowdChatActivity extends BaseActivity<Presenter> implements IContr
 
     public void back(View view) {
         finish();
+        handler.removeCallbacks(runnable);
     }
 
     @Override
