@@ -58,6 +58,10 @@ public interface Api {
     String COMMUNITY_Comment="community/verify/v1/addCommunityComment";//社区评论
     String COMMUNITY_ReleasePost="community/verify/v1/releasePost";//发布帖子
     String COMMUNITY_MyPostById="community/verify/v1/findMyPostById";//我的帖子
+    String COMMUNITY_Deletepost="community/verify/v1/deletePost";//删除帖子
+    String COMMUNITY_addCommunityGreat="community/verify/v1/addCommunityGreat";//点赞
+    String COMMUNITY_cancelCommunityGreat="community/verify/v1/cancelCommunityGreat";//取消点赞
+    String COMMUNITY_userpost="community/verify/v1/findUserPostById";//查询用户发布的帖子
 
     //我的
     String HomePage_Allinfor="user/verify/v1/findAllInfoCollection";//我的收藏

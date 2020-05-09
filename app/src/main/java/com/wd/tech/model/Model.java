@@ -9,10 +9,15 @@ import com.wd.tech.bean.beanMyHomePage.MyUserIntegralData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralRecordData;
 import com.wd.tech.bean.beanMyHomePage.MyUserSignData;
 import com.wd.tech.bean.beanMyHomePage.MyUserTaskData;
+import com.wd.tech.bean.beancommunity.AddCommunityGreatData;
+import com.wd.tech.bean.beancommunity.CancelCommunityGreatData;
+import com.wd.tech.bean.beancommunity.CommentData;
 import com.wd.tech.bean.beancommunity.CommentaryData;
 import com.wd.tech.bean.beancommunity.CommunityData;
+import com.wd.tech.bean.beancommunity.DeletePostData;
 import com.wd.tech.bean.beancommunity.MyPostData;
 import com.wd.tech.bean.beancommunity.ReleasepostData;
+import com.wd.tech.bean.beancommunity.UserPostData;
 import com.wd.tech.bean.informationentity.AddGreatRecordEntity;
 import com.wd.tech.bean.informationentity.AddInfoCommentEntity;
 import com.wd.tech.bean.informationentity.BangDingFaceIdEntity;
@@ -796,6 +801,24 @@ public class Model implements IContract.IModel {
                 });
     }
 
+    @Override
+    public void getComment(int communityId, String content, ModelCallBack modelCallBack) {
+        Observable<CommentData> comment = apiService.getComment(communityId, content);
+        comment.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CommentData>() {
+                    @Override
+                    public void accept(CommentData commentData) throws Exception {
+                        modelCallBack.success(commentData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
 
     //社区用户评论
     @Override
@@ -901,7 +924,7 @@ public class Model implements IContract.IModel {
                 .subscribe(new Consumer<ReleasepostData>() {
                     @Override
                     public void accept(ReleasepostData releasepostData) throws Exception {
-                        modelCallBack.success(releasepost);
+                        modelCallBack.success(releasepostData);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -930,6 +953,79 @@ public class Model implements IContract.IModel {
                 });
     }
 
+    //删除帖子
+    @Override
+    public void getDeletedata(int communityId, ModelCallBack modelCallBack) {
+        Observable<DeletePostData> myDelete = apiService.getMyDelete(communityId);
+        myDelete.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<DeletePostData>() {
+                    @Override
+                    public void accept(DeletePostData deletePostData) throws Exception {
+                        modelCallBack.success(deletePostData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+
+    //点赞
+    @Override
+    public void getAddCommunityGreat(int userId, String sessionid, int communityId, ModelCallBack modelCallBack) {
+        Observable<AddCommunityGreatData> addCommunityGreat = apiService.getAddCommunityGreat(userId, sessionid, communityId);
+        addCommunityGreat.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<AddCommunityGreatData>() {
+                    @Override
+                    public void accept(AddCommunityGreatData addCommunityGreatData) throws Exception {
+                        modelCallBack.success(addCommunityGreatData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+    //取消点赞
+    @Override
+    public void getCancelCommunityGreat(int userId, String sessionid, int communityId, ModelCallBack modelCallBack) {
+        Observable<CancelCommunityGreatData> cancelCommunityGreat = apiService.getCancelCommunityGreat(userId, sessionid, communityId);
+        cancelCommunityGreat.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CancelCommunityGreatData>() {
+                    @Override
+                    public void accept(CancelCommunityGreatData cancelCommunityGreatData) throws Exception {
+                        modelCallBack.success(cancelCommunityGreatData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
+    //查询用户的帖子
+    @Override
+    public void getUserPost(int fromUid, int page, int count, ModelCallBack modelCallBack) {
+        Observable<UserPostData> userPost = apiService.getUserPost(fromUid, page, count);
+        userPost.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<UserPostData>() {
+                    @Override
+                    public void accept(UserPostData userPostData) throws Exception {
+                        modelCallBack.success(userPostData);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        modelCallBack.failur(throwable);
+                    }
+                });
+    }
 
 
     @Override

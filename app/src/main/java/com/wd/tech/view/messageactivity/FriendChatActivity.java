@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -64,6 +66,20 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
     private String signature;
     private String headPic1;
      private int count =5;
+    //在handler中接收Message
+    Handler handler=new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+        }
+    };
+    //创建一个线程，通过线程发送延迟消息，实现三秒刷新数据的效果
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            SendRequestWithOkhttp();       //发送请求
+            handler.postDelayed(this, 1000);//延迟发送消息，实现3秒一次发送数据
+        }
+    };
     @Override
     protected Presenter initPresenter() {
         return new Presenter();
@@ -83,9 +99,26 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
         headPic = getIntent().getStringExtra("headPic");
         signature = getIntent().getStringExtra("signature");
         friendName.setText(nickName);
-        presenter.getFriendChatDialogueRecordBeandata(userId, 1, count);
+        runnable.run();
+    }
+    //定义一个发送json请求数据的代码
+    public void SendRequestWithOkhttp() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+
+                    Message message = handler.obtainMessage();
+                    handler.sendMessage(message);
+                    presenter.getFriendChatDialogueRecordBeandata(userId, 1, count);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
     }
+
     @Override
     protected void initView() {
         friendContent.addTextChangedListener(new TextWatcher() {
@@ -122,6 +155,7 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
 
     public void back(View view) {
         finish();
+       handler.removeCallbacks(runnable);
     }
 
     @OnClick({R.id.btn_friendchatsetting, R.id.btn_send})
@@ -134,6 +168,7 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
                 intentcs.putExtra("remark2", remark1);
                 intentcs.putExtra("headPic", headPic);
                 startActivity(intentcs);
+                handler.removeCallbacks(runnable);
                 break;
             case R.id.btn_send:
                 String infrommain = friendContent.getText().toString().trim();

@@ -604,6 +604,22 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
             }
         });
     }
+    //社区评论
+    @Override
+    public void getComment(int communityId, String content) {
+        model.getComment(communityId, content, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
     //社区用户评论
     @Override
     public void getCommentary(int communityId, int page, int count) {
@@ -700,6 +716,67 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
     @Override
     public void getMyPostdata(int page, int count) {
         model.getMyPostdata(page, count, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+
+    //删除帖子
+    @Override
+    public void getDeletedata(int communityId) {
+        model.getDeletedata(communityId, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+    //点赞
+    @Override
+    public void getAddCommunityGreat(int userId, String sessionid, int communityId) {
+        model.getAddCommunityGreat(userId, sessionid, communityId, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+    //取消点赞
+    @Override
+    public void getCancelCommunityGreat(int userId, String sessionid, int communityId) {
+        model.getCancelCommunityGreat(userId, sessionid, communityId, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+    //查询用户的帖子
+    @Override
+    public void getUserPost(int fromUid, int page, int count) {
+        model.getUserPost(fromUid, page, count, new IContract.IModel.ModelCallBack() {
             @Override
             public void success(Object o) {
                 getView().success(o);

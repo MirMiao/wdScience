@@ -56,9 +56,14 @@ public interface IContract {
       void  getBatchAnviteAddCrowdBeandata(int groupId,String receiverUids,ModelCallBack modelCallBack);//批量邀请加群
         //社区
         void  getCommunitydata(int page,int count,ModelCallBack modelCallBack);//社区列表
+        void getComment(int communityId,String content,ModelCallBack modelCallBack);//社区评论
         void  getCommentary(int communityId,int page,int count,ModelCallBack modelCallBack);//社区用户评论
         void  getReleasepostdata(String content,File file,ModelCallBack modelCallBack);//发布帖子
         void  getMyPostdata(int page,int count,ModelCallBack modelCallBack);//我的帖子
+        void getDeletedata(int communityId,ModelCallBack modelCallBack);//删除帖子
+        void getAddCommunityGreat(int userId,String sessionid,int communityId,ModelCallBack modelCallBack);//点赞
+        void getCancelCommunityGreat(int userId,String sessionid,int communityId,ModelCallBack modelCallBack);//取消点赞
+        void getUserPost(int fromUid,int page, int count,ModelCallBack modelCallBack);//查询用户的帖子
 
         void getBannerData(ModelCallBack modelCallBack);//banner展示列表
         void getInfoRecommendListData(int userId,String sessionId,int plateId,int page,int count,ModelCallBack modelCallBack); //展示首页数据
@@ -136,9 +141,14 @@ public interface IContract {
         void  getBatchAnviteAddCrowdBeandata(int groupId,String receiverUids);//批量邀请加群
         //社区
         void  getCommunitydata(int page, int count);//社区列表
+        void getComment(int communityId,String content);//社区评论
         void  getCommentary(int communityId, int page, int count);//社区用户评论
         void  getReleasepostdata(String content, File file);//发布帖子
         void  getMyPostdata(int page, int count);//我的帖子
+        void getDeletedata(int communityId);//删除帖子
+        void getAddCommunityGreat(int userId,String sessionid,int communityId);//点赞
+        void getCancelCommunityGreat(int userId,String sessionid,int communityId);//取消点赞
+        void getUserPost(int fromUid,int page, int count);//查询用户的帖子
 
 
         void getBannerData();  //展示banner列表
