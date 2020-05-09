@@ -191,7 +191,7 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
         if(o instanceof AddGreatRecordEntity){
             Toast.makeText(getContext(),     ""+((AddGreatRecordEntity) o).getMessage(), Toast.LENGTH_SHORT).show();
             if("0000".equals(((AddGreatRecordEntity) o).getStatus())){
-
+                      presenter.getInfoRecommendListData(list1.get(0).getUserId(),list1.get(0).getSessionId(),1,1,5);
             }
 
         }

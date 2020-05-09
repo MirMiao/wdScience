@@ -74,10 +74,11 @@ public class InfoRecommendListAdapter extends RecyclerView.Adapter<InfoRecommend
             });
             int whetherCollection = result.get(position).getWhetherCollection();
             if (whetherCollection == 1) {
-
-                holder.cbAixin.setChecked(true);
+                Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.aixin_s);
+                holder.cbAixin.setImageBitmap(bitmap);
             } else if (whetherCollection == 2) {
-                holder.cbAixin.setChecked(false);
+                Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.aixin_n);
+                holder.cbAixin.setImageBitmap(bitmap);
             }
             if (aiXinClickListener != null) {
                 holder.cbAixin.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +98,7 @@ public class InfoRecommendListAdapter extends RecyclerView.Adapter<InfoRecommend
 
     class MyViewholder extends RecyclerView.ViewHolder {
         @BindView(R.id.cb_aixin)
-        CheckBox cbAixin;
+        ImageView cbAixin;
         @BindView(R.id.iv_image)
         ImageView ivImage;
         @BindView(R.id.tv_title)

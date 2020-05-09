@@ -63,9 +63,8 @@
                      android:id="@+id/tv_time"
                      android:layout_height="wrap_content"/>
              </LinearLayout>
-             <CheckBox
+             <ImageView
                  android:layout_width="@dimen/dp_20"
-                 android:drawableTop="@drawable/aixin"
                  android:layout_marginTop="@dimen/dp_10"
                  android:src="@drawable/aixin_n"
                  android:button="@null"
