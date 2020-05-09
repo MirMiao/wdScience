@@ -25,14 +25,13 @@ public class MyQianDaoActivity extends BaseActivity<Presenter> implements IContr
 
     @Override
     protected void initData() {
-
+        presenter.getUserSign();
     }
 
     @Override
     protected void initView() {
 
         qiandaoFenhui = (ImageView) findViewById(R.id.qiandao_fenhui);
-        qiandaoQian = (Button) findViewById(R.id.qiandao_qian);
 
         qiandaoFenhui.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,14 +40,6 @@ public class MyQianDaoActivity extends BaseActivity<Presenter> implements IContr
             }
         });
 
-        qiandaoQian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.getUserSign();
-                Toast.makeText(MyQianDaoActivity.this, "签到成功", Toast.LENGTH_SHORT).show();
-                qiandaoQian.setText("已签到");
-            }
-        });
 
     }
 

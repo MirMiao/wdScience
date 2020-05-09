@@ -1,4 +1,5 @@
 package com.wd.tech.view.communityactivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,9 +46,6 @@ public class QuanbupinglunActivity extends BaseActivity<Presenter> implements IC
         });
 
         recycommentary.setLayoutManager(new LinearLayoutManager(this));
-
-        presenter.getCommentary(1892,1,5);
-
     }
 
     @Override
@@ -71,6 +69,8 @@ public class QuanbupinglunActivity extends BaseActivity<Presenter> implements IC
         int id=communityEvent.id;
         headpic = communityEvent.headPic;
         name = communityEvent.nickName;
+        Log.d("comm",id+"");
+        presenter.getCommentary(id,1,5);
     }
 
     @Override

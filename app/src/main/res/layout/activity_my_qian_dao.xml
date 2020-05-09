@@ -25,24 +25,5 @@
             android:layout_marginLeft="170dp"
             />
     </LinearLayout>
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="签到"
-        android:background="@color/colorB"
-        android:textColor="@color/colorA"
-        android:layout_gravity="center"
-        android:id="@+id/qiandao_qian"
-        android:layout_marginTop="50dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2020年4月"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        />
-
-
 
 </LinearLayout>

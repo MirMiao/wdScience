@@ -10,10 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.wd.tech.Event;
 import com.wd.tech.R;
 import com.wd.tech.bean.beancommunity.MyPostResult;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.util.TimeformatUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -41,6 +44,7 @@ public class MyTieziRecyAdapter extends RecyclerView.Adapter<MyTieziRecyAdapter.
         String file = myPostResult.getFile();
         int praise = myPostResult.getPraise();
         long publishTime = myPostResult.getPublishTime();
+        int id = myPostResult.getId();
 
         holder.tieziContent.setText(content);
         RetrofitUtil instance = RetrofitUtil.getInstance();
@@ -50,7 +54,9 @@ public class MyTieziRecyAdapter extends RecyclerView.Adapter<MyTieziRecyAdapter.
         holder.tieziShan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Event event=new Event();
+                event.tieziid=id;
+                EventBus.getDefault().postSticky(event);
             }
         });
 

@@ -17,14 +17,20 @@ import com.wd.tech.bean.beancommunity.CommunityResult;
 import com.wd.tech.event.CommunityEvent;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.util.TimeformatUtil;
+import com.wd.tech.view.communityactivity.CommunityUserPostActivity;
 import com.wd.tech.view.communityactivity.PingLunActivity;
 import com.wd.tech.view.communityactivity.QuanbupinglunActivity;
+import com.wd.tech.view.communityactivity.UserpostEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 public class MyCommunityHomeRecyAdapter extends RecyclerView.Adapter<MyCommunityHomeRecyAdapter.MyCommunityHomeViewHolder> {
     private List<CommunityResult> list;
     private Context context;
+    private int sta=0;
+
     public MyCommunityHomeRecyAdapter(List<CommunityResult> list, Context context) {
         this.list = list;
         this.context = context;
@@ -50,6 +56,7 @@ public class MyCommunityHomeRecyAdapter extends RecyclerView.Adapter<MyCommunity
         long publishTime = communityResult.getPublishTime();
         String signature = communityResult.getSignature();
         int id = communityResult.getId();
+        int userId = communityResult.getUserId();
 
         RetrofitUtil instance = RetrofitUtil.getInstance();
         instance.getRoundphoto(headPic, holder.communitylistHeadim);
@@ -63,10 +70,34 @@ public class MyCommunityHomeRecyAdapter extends RecyclerView.Adapter<MyCommunity
         holder.communitylistPraise.setText(praise + "");
         holder.communitylistqianming.setText(signature);
 
+
+        holder.communitylistHeadim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, CommunityUserPostActivity.class);
+                UserpostEvent userpostEvent=new UserpostEvent();
+                userpostEvent.useid=userId;
+                EventBus.getDefault().postSticky(userpostEvent);
+                context.startActivity(intent);
+            }
+        });
+
+
         holder.communitylistZan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.communitylistZan.setImageResource(R.mipmap.community_zan2);
+                sta++;
+                if(mDianzan!=null){
+                    mDianzan.dianzan(sta,praise,id,holder.communitylistPraise);
+                }
+                if(sta%2==1){
+                    holder.communitylistZan.setImageResource(R.mipmap.community_zan2);
+                    holder.communitylistPraise.setText("1");
+                }else{
+                    holder.communitylistZan.setImageResource(R.mipmap.community_zan);
+                    holder.communitylistPraise.setText("0");
+                }
+
             }
         });
 
@@ -82,6 +113,7 @@ public class MyCommunityHomeRecyAdapter extends RecyclerView.Adapter<MyCommunity
                 communityEvent.id = id;
                 communityEvent.nickName = nickName;
                 communityEvent.headPic = headPic;
+                EventBus.getDefault().postSticky(communityEvent);
                 Intent intentqp = new Intent(context, QuanbupinglunActivity.class);
                 context.startActivity(intentqp);
             }
@@ -98,7 +130,9 @@ public class MyCommunityHomeRecyAdapter extends RecyclerView.Adapter<MyCommunity
         holder.communitylistPinglun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (mPinglun!=null){
+                    mPinglun.click(v,id);
+                }
             }
         });
 
@@ -143,5 +177,27 @@ public class MyCommunityHomeRecyAdapter extends RecyclerView.Adapter<MyCommunity
             quxieping = (ImageView) itemView.findViewById(R.id.quxieping);
         }
     }
+
+    private Dianzan mDianzan;
+
+    public void setDianzan(Dianzan dianzan) {
+        mDianzan = dianzan;
+    }
+
+    public interface Dianzan {
+
+        void dianzan(int st,int num, int id,TextView textView);
+    }
+
+    private Pinglun mPinglun;
+
+    public void setPinglun(Pinglun pinglun) {
+        mPinglun = pinglun;
+    }
+
+    public interface Pinglun {
+        void click(View view, int id);
+    }
+
 
 }

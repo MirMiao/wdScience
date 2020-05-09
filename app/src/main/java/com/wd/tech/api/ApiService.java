@@ -7,7 +7,11 @@ import com.wd.tech.bean.beanMyHomePage.MyUserIntegralData;
 import com.wd.tech.bean.beanMyHomePage.MyUserIntegralRecordData;
 import com.wd.tech.bean.beanMyHomePage.MyUserSignData;
 import com.wd.tech.bean.beanMyHomePage.MyUserTaskData;
+import com.wd.tech.bean.beancommunity.AddCommunityGreatData;
+import com.wd.tech.bean.beancommunity.CancelCommunityGreatData;
 import com.wd.tech.bean.beancommunity.CommentData;
+import com.wd.tech.bean.beancommunity.DeletePostData;
+import com.wd.tech.bean.beancommunity.UserPostData;
 import com.wd.tech.bean.informationentity.AddGreatRecordEntity;
 import com.wd.tech.bean.informationentity.AddInfoCommentEntity;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
@@ -218,15 +222,6 @@ public interface ApiService {
     @FormUrlEncoded
     Observable<BatchAnviteAddCrowdBean> getBatchAnviteAddCrowdBeandata(@Field("groupId") int groupId, @Field("receiverUids") String receiverUids);
 
-    //社区
-    //社区列表
-    @GET(Api.COMMUNITY_LIST)
-    Observable<CommunityData> getCommunitylist(@Query("page")int page, @Query("count")int count);
-    //社区用户评论
-    @GET(Api.COMMUNITY_Commentary)
-    Observable<CommentaryData> getCommentary(@Query("communityId")int communityId, @Query("page")int page, @Query("count")int count);
-
-
     //展示banner数据
     @GET("information/v1/bannerShow")
     Observable<BannerEntity> getBannerData();
@@ -242,6 +237,15 @@ public interface ApiService {
     //根据关键字模糊查询
     @GET("information/v1/findInformationByTitle")
     Observable<SerchInfoByKeyWordEntity> serchByKeyWord(@Query("title") String title,@Query("page") int page,@Query("count")int count);
+
+
+    //社区
+    //社区列表
+    @GET(Api.COMMUNITY_LIST)
+    Observable<CommunityData> getCommunitylist(@Query("page")int page, @Query("count")int count);
+    //社区用户评论
+    @GET(Api.COMMUNITY_Commentary)
+    Observable<CommentaryData> getCommentary(@Query("communityId")int communityId, @Query("page")int page, @Query("count")int count);
     //社区评论
     @POST(Api.COMMUNITY_Comment)
     @FormUrlEncoded
@@ -253,6 +257,18 @@ public interface ApiService {
     //我的帖子
     @GET(Api.COMMUNITY_MyPostById)
     Observable<MyPostData> getMyPostIdData(@Query("page")int page, @Query("count")int count);
+    //删除帖子
+    @DELETE(Api.COMMUNITY_Deletepost)
+    Observable<DeletePostData> getMyDelete(@Query("communityId") int communityId);
+    //点赞
+    @POST(Api.COMMUNITY_addCommunityGreat)
+    @FormUrlEncoded
+    Observable<AddCommunityGreatData> getAddCommunityGreat(@Header("userId") int userid, @Header("sessionId")String sessionId, @Field("communityId") int communityId);
+    //取消点赞
+    @DELETE(Api.COMMUNITY_cancelCommunityGreat)
+    Observable<CancelCommunityGreatData> getCancelCommunityGreat(@Query("userId") int userid, @Query("sessionId") String sessionId, @Query("communityId") int communityId);
+    @GET(Api.COMMUNITY_userpost)
+    Observable<UserPostData> getUserPost(@Query("fromUid") int fromUid, @Query("page") int page, @Query("count") int count);
 
 
 

@@ -10,9 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
-        <activity android:name=".view.main.MyUserTaskActivity"></activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".view.communityactivity.CommunityUserPostActivity"></activity>
+        <activity android:name=".view.main.MyUserTaskActivity" />
         <activity android:name=".view.main.MySetUpActivity" />
         <activity android:name=".view.main.MyUserIntegralActivity" />
         <activity android:name=".view.main.MySysNoticeActivity" />
@@ -22,9 +22,9 @@
         <activity android:name=".view.messageactivity.FriendchatRecordActivity" />
         <activity android:name=".view.messageactivity.SelectGroupingActivity" />
         <activity android:name=".view.messageactivity.CrowdHomePageActivity" />
-        <activity android:name=".view.messageactivity.CrowdChatActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            />
+        <activity
+            android:name=".view.messageactivity.CrowdChatActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".view.messageactivity.SreachActivity" />
         <activity android:name=".view.messageactivity.AddFriendActivity" />
         <activity android:name=".view.messageactivity.AddCrowdActivity" />
@@ -35,59 +35,81 @@
         <activity android:name=".view.messageactivity.CrowdManageActivity" />
         <activity android:name=".view.messageactivity.CrowdMemberActivity" />
         <activity android:name=".view.messageactivity.ChatSettingActivity" />
-        <activity android:name=".view.messageactivity.FriendChatActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            >
-        </activity>
+        <activity
+            android:name=".view.messageactivity.FriendChatActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity android:name=".view.messageactivity.ApplyAddCrowdActivity" />
         <activity android:name=".view.messageactivity.FriendInformActivity" />
         <activity android:name=".view.messageactivity.FriendMessageActivity" />
         <activity android:name=".view.messageactivity.SetCrowdActivity" />
         <activity android:name=".view.information.PlateActivity" />
         <activity android:name=".view.information.SerchActivity" />
-        <activity android:name=".view.information.LoginActivity"></activity>
-        <activity android:name=".view.information.RegActivity"></activity>
+        <activity android:name=".view.information.LoginActivity" />
+        <activity android:name=".view.information.RegActivity" />
         <activity android:name=".view.communityactivity.PingLunActivity" />
         <activity android:name=".view.communityactivity.QuanbupinglunActivity" />
         <activity android:name=".view.main.MyQianDaoActivity" />
         <activity android:name=".view.communityactivity.MyPostActivity" />
-        <activity android:name=".view.information.InformationInfoActivity"/>
-        <activity android:name=".view.information.PlateInformationActivity"/>
-        <activity android:name=".view.information.RedeemNowActivity"/>
-        <activity android:name=".view.activity.MainActivity" android:launchMode="singleTask">
+        <activity android:name=".view.information.InformationInfoActivity" />
+        <activity android:name=".view.information.PlateInformationActivity" />
+        <activity android:name=".view.information.RedeemNowActivity" />
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- 若您的业务中有使用极光富媒体功能，或者极光早上好功能，需要把此 Activity 的 exported 修改成 true 覆盖 jcenter 上的组件。 -->
+        </activity> <!-- 若您的业务中有使用极光富媒体功能，或者极光早上好功能，需要把此 Activity 的 exported 修改成 true 覆盖 jcenter 上的组件。 -->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
             android:exported="true"
-            tools:node="replace"
-            android:theme="@style/MyDialogStyle">
+            android:theme="@style/MyDialogStyle"
+            tools:node="replace">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="cn.jpush.android.ui.PopWinActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
                 <category android:name="${applicationId}" />
             </intent-filter>
-        </activity>
-
-        <!-- 若您的业务中有使用极光富媒体功能，或者极光早上好功能，需要把此 Activity 的 exported 修改成 true 覆盖 jcenter 上的组件。 -->
+        </activity> <!-- 若您的业务中有使用极光富媒体功能，或者极光早上好功能，需要把此 Activity 的 exported 修改成 true 覆盖 jcenter 上的组件。 -->
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
             android:configChanges="orientation|keyboardHidden"
             android:exported="true"
-            tools:node="replace"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@android:style/Theme.NoTitleBar"
+            tools:node="replace">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="${applicationId}" />
             </intent-filter>
         </activity>
-        <service android:name=".aurora.aurora"
+
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.wd.tech"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+
+        <receiver
+            android:name=".aurora.ChatReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+
+                <category android:name="com.wd.tech" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".aurora.aurora"
             android:enabled="true"
             android:exported="false"
             android:process=":pushcore">
@@ -95,29 +117,13 @@
                 <action android:name="cn.jiguang.user.service.action" />
             </intent-filter>
         </service>
-        <receiver
-            android:name=".aurora.ChatReceiver"
-            android:enabled="true"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
-                <category android:name="com.wd.tech" />
-            </intent-filter>
-        </receiver>
-        <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:exported="true"
-            android:taskAffinity="com.wd.tech"
-            android:launchMode="singleTask">
-        </activity>
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
