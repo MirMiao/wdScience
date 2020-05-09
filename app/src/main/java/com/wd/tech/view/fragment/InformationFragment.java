@@ -30,11 +30,13 @@ import com.wd.tech.adapter.informationadapter.InfoRecommendListAdapter;
 import com.wd.tech.base.BaseFragment;
 import com.wd.tech.bean.informationentity.AddGreatRecordEntity;
 import com.wd.tech.bean.informationentity.BannerEntity;
+import com.wd.tech.bean.informationentity.CancleGreatEntity;
 import com.wd.tech.bean.informationentity.InfoRecommendListEntity;
 import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.view.information.InformationInfoActivity;
+import com.wd.tech.view.information.LoginActivity;
 import com.wd.tech.view.information.PlateActivity;
 import com.wd.tech.view.information.SerchActivity;
 
@@ -65,6 +67,9 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
     @BindView(R.id.smartRefresh)
     SmartRefreshLayout smartRefresh;
     int i = 1;
+    private List<LoginEntity.ResultBean> list1;
+    private InfoRecommendListAdapter infoRecommendListAdapter;
+
     @Override
     protected int bindLayoutid() {
         return R.layout.fragment_information;
@@ -72,6 +77,16 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
 
     @Override
     protected void initView(View inflate) {
+        try {
+            SharedPreferences sp = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+            String userInfo = sp.getString("userInfo", "");
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<LoginEntity.ResultBean>>() {
+            }.getType();
+            list1 = gson.fromJson(userInfo, type);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         rvInformation.setLayoutManager(new LinearLayoutManager(getContext()));
         //设置允许为可上拉加载
         smartRefresh.setEnableLoadMore(true);
@@ -82,7 +97,11 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 i = 1;
                 list.clear();
-                presenter.getInfoRecommendListData(i, 1, 10);
+                if (list1 != null) {
+                    presenter.getInfoRecommendListData(list1.get(0).getUserId(),list1.get(0).getSessionId(),i, 1, 10);
+                }else{
+                    presenter.getInfoRecommendListData(0,"",i, 1, 10);
+                }
                 //刷新完毕
                 smartRefresh.finishRefresh();
             }
@@ -92,7 +111,11 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 i++;
-                presenter.getInfoRecommendListData(i, 1, 10);
+                if (list1 != null) {
+                    presenter.getInfoRecommendListData(list1.get(0).getUserId(),list1.get(0).getSessionId(),i, 1, 10);
+                }else{
+                    presenter.getInfoRecommendListData(0,"",i, 1, 10);
+                }
                 //加载完毕
                 smartRefresh.finishLoadMore();
             }
@@ -103,11 +126,15 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
     protected Presenter initPresenter() {
         return new Presenter();
     }
-
     @Override
     protected void initData() {
         presenter.getBannerData(); //请求banner数据
-        presenter.getInfoRecommendListData(i, 1, 10);
+        if (list1 != null) {
+            presenter.getInfoRecommendListData(list1.get(0).getUserId(),list1.get(0).getSessionId(),i, 1, 10);
+        }else{
+            presenter.getInfoRecommendListData(0,"",i, 1, 10);
+        }
+
     }
 
     @Override
@@ -131,7 +158,7 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
         } else if (o instanceof InfoRecommendListEntity) {
             InfoRecommendListEntity o1 = (InfoRecommendListEntity) o;
             list.addAll(o1.getResult());
-            InfoRecommendListAdapter infoRecommendListAdapter = new InfoRecommendListAdapter(getContext(), list);
+            infoRecommendListAdapter = new InfoRecommendListAdapter(getContext(), list);
             rvInformation.setAdapter(infoRecommendListAdapter);
              infoRecommendListAdapter.setOnItemClickListener(new InfoRecommendListAdapter.OnItemClickListener() {
                  @Override
@@ -141,6 +168,38 @@ public class InformationFragment extends BaseFragment<Presenter> implements ICon
                      startActivity(intent);
                  }
              });
+             infoRecommendListAdapter.setAiXinClickListener(new InfoRecommendListAdapter.AiXinClickListener() {
+                 @Override
+                 public void onClick(int id, int whetherCollection,int position) {
+                     if (list1 != null) {
+                        if(whetherCollection==1){
+                            //取消点赞
+                             presenter.cancleGreat(list1.get(0).getUserId(),list1.get(0).getSessionId(),id);
+                            // ((InfoRecommendListEntity) o).getResult().get(position).setWhetherCollection(1);
+                        }else if(whetherCollection==2){
+                            //点赞
+                            presenter.addGreatRecor(list1.get(0).getUserId(),list1.get(0).getSessionId(),id);
+                            //((InfoRecommendListEntity) o).getResult().get(position).setWhetherCollection(2);
+                     }
+                     }else{
+                         Toast.makeText(getContext(), "请先登录", Toast.LENGTH_SHORT).show();
+                         startActivity(new Intent(getContext(), LoginActivity.class));
+                     }
+                 }
+             });
+        }
+        if(o instanceof AddGreatRecordEntity){
+            Toast.makeText(getContext(),     ""+((AddGreatRecordEntity) o).getMessage(), Toast.LENGTH_SHORT).show();
+            if("0000".equals(((AddGreatRecordEntity) o).getStatus())){
+
+            }
+
+        }
+        if(o instanceof CancleGreatEntity){
+            Toast.makeText(getContext(),     ""+((CancleGreatEntity) o).getMessage(), Toast.LENGTH_SHORT).show();
+            if("0000".equals(((AddGreatRecordEntity) o).getStatus())){
+
+            }
         }
     }
 

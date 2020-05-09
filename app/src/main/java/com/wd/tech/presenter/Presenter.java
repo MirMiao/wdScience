@@ -636,8 +636,8 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
     }
 
     @Override
-    public void getInfoRecommendListData(int plateId, int page, int count) {
-        model.getInfoRecommendListData(plateId,page,count, new IContract.IModel.ModelCallBack() {
+    public void getInfoRecommendListData(int userId,String sessionId,int plateId, int page, int count) {
+        model.getInfoRecommendListData(userId,sessionId,plateId,page,count, new IContract.IModel.ModelCallBack() {
             @Override
             public void success(Object o) {
                 getView().success(o);
@@ -911,6 +911,36 @@ public class Presenter extends BasePresenter<Model, IContract.IView> implements 
     @Override
     public void infoPayByIntegral(int userId, String sessionId, int infoId, int integralCost) {
         model.infoPayByIntegral(userId, sessionId, infoId, integralCost, new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+  //取消点赞
+    @Override
+    public void cancleGreat(int userId, String sessionId, int infoId) {
+        model.cancleGreat(userId, sessionId, infoId,  new IContract.IModel.ModelCallBack() {
+            @Override
+            public void success(Object o) {
+                getView().success(o);
+            }
+
+            @Override
+            public void failur(Throwable throwable) {
+                getView().failur(throwable);
+            }
+        });
+    }
+    //绑定人脸id
+    @Override
+    public void bangdingFaceId(int userId, String sessionId) {
+        model.bangdingFaceId(userId, sessionId, new IContract.IModel.ModelCallBack() {
             @Override
             public void success(Object o) {
                 getView().success(o);

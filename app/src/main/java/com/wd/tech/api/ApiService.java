@@ -10,6 +10,8 @@ import com.wd.tech.bean.beanMyHomePage.MyUserTaskData;
 import com.wd.tech.bean.beancommunity.CommentData;
 import com.wd.tech.bean.informationentity.AddGreatRecordEntity;
 import com.wd.tech.bean.informationentity.AddInfoCommentEntity;
+import com.wd.tech.bean.informationentity.BangDingFaceIdEntity;
+import com.wd.tech.bean.informationentity.CancleGreatEntity;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.FindAllPingLunEntity;
 import com.wd.tech.bean.informationentity.InfoPayByIntegralEntity;
@@ -233,7 +235,7 @@ public interface ApiService {
 
     //展示首页数据
     @GET("information/v1/infoRecommendList")
-    Observable<InfoRecommendListEntity> getInfoRecommendListData(@Query("plateId") int plateId,@Query("page")int page,@Query("count")int count);
+    Observable<InfoRecommendListEntity> getInfoRecommendListData(@Header("userId") int userid, @Header("sessionId")String sessionId,@Query("plateId") int plateId,@Query("page")int page,@Query("count")int count);
 
     //展示点击菜单按钮展示数据
     @GET("information/v1/findAllInfoPlate")
@@ -309,6 +311,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("information/verify/v1/addInfoComment")
     Observable<AddInfoCommentEntity> addinfoComment(@Header("userId") int userid, @Header("sessionId")String sessionId,@Field("content") String content,@Field("infoId") int infoId);
+    //积分兑换
      @FormUrlEncoded
     @POST("information/verify/v1/infoPayByIntegral")
     Observable<InfoPayByIntegralEntity> infoPayByIntegral(@Header("userId") int userid, @Header("sessionId")String sessionId,@Field("infoId") int infoId,@Field("integralCost") int integralCost);
@@ -316,5 +319,13 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(Api.WXlogin_url)
     Observable<WxloginBean> getWxloginBeandata(@Field("code") String code);
+    //取消点赞
+
+    @DELETE("information/verify/v1/cancelGreat")
+    Observable<CancleGreatEntity> cancleGreat(@Header("userId") int userid, @Header("sessionId")String sessionId,@Query("infoId") int infoId);
+
+    //绑定人脸id
+    @PUT("user/verify/v1/bindingFaceId")
+    Observable<BangDingFaceIdEntity> bangdingFaceId(@Header("userId") int userid, @Header("sessionId")String sessionId);
 
 }

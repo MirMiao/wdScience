@@ -15,7 +15,9 @@ import com.wd.tech.bean.beancommunity.MyPostData;
 import com.wd.tech.bean.beancommunity.ReleasepostData;
 import com.wd.tech.bean.informationentity.AddGreatRecordEntity;
 import com.wd.tech.bean.informationentity.AddInfoCommentEntity;
+import com.wd.tech.bean.informationentity.BangDingFaceIdEntity;
 import com.wd.tech.bean.informationentity.BannerEntity;
+import com.wd.tech.bean.informationentity.CancleGreatEntity;
 import com.wd.tech.bean.informationentity.FindAllInfoPlate;
 import com.wd.tech.bean.informationentity.FindAllPingLunEntity;
 import com.wd.tech.bean.informationentity.InfoPayByIntegralEntity;
@@ -834,9 +836,9 @@ public class Model implements IContract.IModel {
     }
     //展示首页数据列表
     @Override
-    public void getInfoRecommendListData(int plateId, int page, int count, ModelCallBack modelCallBack) {
+    public void getInfoRecommendListData(int userId,String sessionId,int plateId, int page, int count, ModelCallBack modelCallBack) {
         RetrofitUtil2.getInstance().creatService(ApiService.class)
-                .getInfoRecommendListData(plateId,page,count)
+                .getInfoRecommendListData( userId,sessionId,plateId,page,count)
                    .subscribeOn(Schedulers.io())
                    .observeOn(AndroidSchedulers.mainThread())
                    .subscribe(new Consumer<InfoRecommendListEntity>() {
@@ -1170,6 +1172,44 @@ public class Model implements IContract.IModel {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
                             modelCallBack.failur(throwable);
+                        }
+                    });
+    }
+  //取消点赞
+    @Override
+    public void cancleGreat(int userId, String sessionId, int infoId, ModelCallBack modelCallBack) {
+         RetrofitUtil2.getInstance().creatService(ApiService.class)
+                 .cancleGreat(userId,sessionId,infoId)
+                 .subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(new Consumer<CancleGreatEntity>() {
+                     @Override
+                     public void accept(CancleGreatEntity cancleGreatEntity) throws Exception {
+                        modelCallBack.success(cancleGreatEntity);
+                     }
+                 }, new Consumer<Throwable>() {
+                     @Override
+                     public void accept(Throwable throwable) throws Exception {
+                            modelCallBack.failur(throwable);
+                     }
+                 });
+    }
+  //绑定人脸id
+    @Override
+    public void bangdingFaceId(int userId, String sessionId, ModelCallBack modelCallBack) {
+            RetrofitUtil2.getInstance().creatService(ApiService.class)
+                    .bangdingFaceId(userId,sessionId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<BangDingFaceIdEntity>() {
+                        @Override
+                        public void accept(BangDingFaceIdEntity bangDingFaceIdEntity) throws Exception {
+                            modelCallBack.success(bangDingFaceIdEntity);
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                                modelCallBack.failur(throwable);
                         }
                     });
     }

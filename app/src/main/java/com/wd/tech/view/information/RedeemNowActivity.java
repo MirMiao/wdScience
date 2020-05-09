@@ -92,7 +92,14 @@ public class RedeemNowActivity extends BaseActivity<Presenter> implements IContr
         btRightNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               presenter.infoPayByIntegral(list.get(0).getUserId(),list.get(0).getSessionId(), id,integralCost);
+                if (list != null) {
+                    presenter.infoPayByIntegral(list.get(0).getUserId(),list.get(0).getSessionId(), id,integralCost);
+
+                }else{
+                    Toast.makeText(RedeemNowActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RedeemNowActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

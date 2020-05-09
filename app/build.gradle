@@ -105,5 +105,12 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'//微信登录
 //logger
     implementation 'com.orhanobut:logger:2.2.0'
+    implementation project(path: ':arclibrary')
+
+       //人脸识别
+    implementation 'com.github.tyhjh:PermissionUtil:v1.0.5'
+    implementation 'com.github.tyhjh:picturePickUtil:v1.0.6'
+    implementation project(':arclibrary')
 
 }
+

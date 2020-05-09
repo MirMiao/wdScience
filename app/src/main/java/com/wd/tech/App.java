@@ -3,6 +3,7 @@ package com.wd.tech;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.arclibrary.builder.AcrFaceManagerBuilder;
 import com.wd.tech.wxapi.Wxutil;
 
 /**
@@ -20,5 +21,17 @@ public class App extends Application {
         super.onCreate();
         context=this;
         Wxutil.regToWx(this);
+        initArcFace();
     }
+    private void initArcFace() {
+        new AcrFaceManagerBuilder().setContext(this)
+                .setFreeSdkAppId(Constants.FREESDKAPPID)
+                .setFdSdkKey(Constants.FDSDKKEY)
+                .setFtSdkKey(Constants.FTSDKKEY)
+                .setFrSdkKey(Constants.FRSDKKEY)
+                .setLivenessAppId(Constants.LIVENESSAPPID)
+                .setLivenessSdkKey(Constants.LIVENESSSDKKEY)
+                .create();
+    }
+
 }

@@ -61,7 +61,7 @@ public interface IContract {
         void  getMyPostdata(int page,int count,ModelCallBack modelCallBack);//我的帖子
 
         void getBannerData(ModelCallBack modelCallBack);//banner展示列表
-        void getInfoRecommendListData(int plateId,int page,int count,ModelCallBack modelCallBack); //展示首页数据
+        void getInfoRecommendListData(int userId,String sessionId,int plateId,int page,int count,ModelCallBack modelCallBack); //展示首页数据
         void getPlateData(ModelCallBack modelCallBack);  //展示菜单
          void serchByKeyWord(String title,int page,int count,ModelCallBack modelCallBack); //根据关键字模糊查询
         void login(String phone,String pwd,ModelCallBack modelCallBack); //登陆
@@ -82,6 +82,10 @@ public interface IContract {
         void getAllPingLun(int infoId,int page,int count,ModelCallBack modelCallBack); //查询资讯所有评论
         void addInforComment(int userId,String sessionid,String content,int infoId,ModelCallBack modelCallBack);//添加资讯评论
         void infoPayByIntegral(int userId,String sessionId,int infoId,int integralCost,ModelCallBack modelCallBack); //积分兑换
+
+        void cancleGreat(int userId,String sessionId,int infoId,ModelCallBack modelCallBack); //取消点赞
+        void bangdingFaceId(int userId,String sessionId,ModelCallBack modelCallBack); //绑定人脸id
+
 
 
 
@@ -138,7 +142,7 @@ public interface IContract {
 
 
         void getBannerData();  //展示banner列表
-        void getInfoRecommendListData(int plateId,int page,int count);//展示首页数据
+        void getInfoRecommendListData(int userId,String sessionId,int plateId,int page,int count);//展示首页数据
         void getPlateData(); //展示菜单
         void serchByKeyWord(String title,int page,int count); //根据关键字模糊查询
         void login(String phone,String pwd); //登陆
@@ -158,6 +162,8 @@ public interface IContract {
         void getAllPingLun(int infoId,int page,int count); //查询资讯所有评论
         void addInforComment(int userId,String sessionid,String content,int infoId);//添加资讯评论
         void infoPayByIntegral(int userId,String sessionId,int infoId,int integralCost); //积分兑换
+        void cancleGreat(int userId,String sessionId,int infoId); //取消点赞
+        void bangdingFaceId(int userId,String sessionId); //绑定人脸id
     }
     interface IView extends IBaseView {
         void success(Object o);

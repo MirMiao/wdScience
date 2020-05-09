@@ -54,6 +54,7 @@
         <activity android:name=".view.information.InformationInfoActivity"/>
         <activity android:name=".view.information.PlateInformationActivity"/>
         <activity android:name=".view.information.RedeemNowActivity"/>
+        <activity android:name=".arc.LivenessActivity"/>
         <activity android:name=".view.activity.MainActivity" android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -119,5 +120,5 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
+    <uses-permission android:name="android.permission.CAMERA"/>
 </manifest>

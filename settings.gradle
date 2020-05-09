@@ -1,2 +1,2 @@
 rootProject.name='wdScience'
-include ':app'
+include ':app', ':arclibrary'

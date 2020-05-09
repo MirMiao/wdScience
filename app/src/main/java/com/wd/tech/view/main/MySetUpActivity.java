@@ -1,18 +1,29 @@
 package com.wd.tech.view.main;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.wd.tech.R;
+import com.wd.tech.arc.LivenessActivity;
 import com.wd.tech.base.BaseActivity;
 import com.wd.tech.bean.beanMyHomePage.MySetUpData;
 import com.wd.tech.bean.beanMyHomePage.MySetUpResult;
+import com.wd.tech.bean.informationentity.BangDingFaceIdEntity;
+import com.wd.tech.bean.informationentity.LoginEntity;
 import com.wd.tech.contract.IContract;
 import com.wd.tech.presenter.Presenter;
 import com.wd.tech.util.RetrofitUtil;
 import com.wd.tech.util.TimeformatUtil;
 import com.wd.tech.view.activity.MainActivity;
+import com.wd.tech.view.information.RegActivity;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class MySetUpActivity extends BaseActivity<Presenter> implements IContract.IView {
     private android.widget.ImageView setupFanhui;
@@ -37,7 +48,7 @@ public class MySetUpActivity extends BaseActivity<Presenter> implements IContrac
     private int whetherVip;
     private int whetherFaceId;
     private String signature;
-
+    private List<LoginEntity.ResultBean> list;
     @Override
     protected Presenter initPresenter() {
         return new Presenter();
@@ -55,7 +66,16 @@ public class MySetUpActivity extends BaseActivity<Presenter> implements IContrac
 
     @Override
     protected void initView() {
-
+        try {
+            SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
+            String userInfo = sp.getString("userInfo", "");
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<LoginEntity.ResultBean>>() {
+            }.getType();
+            list= gson.fromJson(userInfo, type);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         setupFanhui = (ImageView) findViewById(R.id.setup_fanhui);
         setupHeadpic = (ImageView) findViewById(R.id.setup_headpic);
         setupName = (TextView) findViewById(R.id.setup_name);
@@ -131,15 +151,29 @@ public class MySetUpActivity extends BaseActivity<Presenter> implements IContrac
             }
             switch (whetherFaceId){
                 case 1:
-                    setupFace.setText("是");
+                    setupFace.setText("已经绑定");
                     break;
                 case 2:
-                    setupFace.setText("否");
+                    setupFace.setText("立即绑定");
+                    setupFace.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (list != null) {
+                                LivenessActivity.flag = 1;
+                                startActivity(new Intent(MySetUpActivity.this, LivenessActivity.class));
+                                presenter.bangdingFaceId(list.get(0).getUserId(),list.get(0).getSessionId());
+                            }else{
+
+                            }
+                        }
+                    });
                     break;
             }
 
         }
-
+       if(o instanceof BangDingFaceIdEntity){
+           Toast.makeText(this, ""+((BangDingFaceIdEntity) o).getMessage(), Toast.LENGTH_SHORT).show();
+       }
     }
 
     @Override
