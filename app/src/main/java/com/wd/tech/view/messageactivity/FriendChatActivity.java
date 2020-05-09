@@ -168,6 +168,7 @@ public class FriendChatActivity extends BaseActivity<Presenter> implements ICont
                 intentcs.putExtra("remark2", remark1);
                 intentcs.putExtra("headPic", headPic);
                 startActivity(intentcs);
+                handler.removeCallbacks(runnable);
                 break;
             case R.id.btn_send:
                 String infrommain = friendContent.getText().toString().trim();
